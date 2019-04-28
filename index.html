@@ -4,9 +4,16 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- ///////////////////// Chamando o css dos graficos//////////////////-->
+        <link rel="stylesheet" type="text/css" href="css/css_graph.css">
+        <!-- ///////////////////// Chamando a biblioteca chart.js//////////////////-->
+        <script  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
         <title>UPOCKET</title>
     </head>
     <body>
+        <!-- ///////////////////// Chamando as consigurações que eu fiz no gráfico//////////////////-->
+        <script src="js/grafico.js"></script>  
+        <!-- ///////////////////// Cabeçalho//////////////////-->
         <header class="header">
             <div class="logo"><a href="index.html"><img src="" alt="Upocket Logo"></a></div>
             <div class="username">
@@ -24,6 +31,7 @@
                     <ul class="reports"><a href="about.html">Relatórios</a></ul>
                 </li>
             </nav>
+            <!-- ///////////////////// Bloco dos cards//////////////////-->
             <div id="main_box">
                 <section id="cards">
                     <div class="income">
@@ -36,13 +44,27 @@
                         <h3>Saldo</h3>
                     </div>
                 </section>
-                <section id="graphics">
-                    <div class="category_graphic">
-                        <h4>Despesas por Categorias</h4>
+                <!-- ///////////////////// Bloco com os gráficos//////////////////-->
+                <!-- ///////////////////// Div que engloba os blocos que englobam os dois gráficos//////////////////-->
+                <section class="blocografico">
+                    <!-- ///////////////////// Div individutal de cada bloco que contem um gráfico//////////////////-->
+                    <div class="bloco"> 
+                        <!-- ///////////////////// Descrição do Gráfico //////////////////-->
+                        <header id="descricao">
+                                Orçamento                
+                        </header>
+                        <!-- ///////////////////// Tag pai do Gráfico //////////////////-->
+                        <main >
+                            <!-- ///////////////////// Tag do gráfico Gráfico //////////////////-->
+                            <canvas id="linegraph"></canvas>
+                        </main>
                     </div>
-                    <div class="Budget_Linear_Graphic">
-                        <h4>Orçamentos Mensais</h4>
-                    </div>
+                    <div class="bloco" >
+                        <header id="descricao">
+                                    Categorias                
+                        </hearder> 
+                        <canvas id="pizzagraph"></canvas>
+                    </div>                                
                 </section>
             </div>
         </main>

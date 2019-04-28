@@ -1,0 +1,106 @@
+﻿/*-- ///////////////////// Zerando configurações ////////////////// */
+*{
+    margin:0;
+    padding:0;
+}
+/*-- ///////////////////// Configurando a section que contem os blocos ////////////////// */
+.blocografico{
+    padding:0;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    position:absolute;
+    width:100%;
+    height:100%;
+    background-color:red;
+}
+/*-- ///////////////////// Configurando os blocos que contem os gráficos ////////////////// */
+.blocografico .bloco{ 
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width:90%;
+    height:90%;
+    box-shadow: solid white 1px;
+    background-color:#7fdb4a;
+    border-radius: 30px;
+    margin:2% 4% 6% 2%;
+}
+#descricao{
+    border-radius: 30px 30px 0px 0px ;
+    width: 100%;
+    height: 10%;
+    text-align: center;
+    color:white;
+    background-color: black;
+}
+/*-- ///////////////////// Configurando a media para os blocos ////////////////// */
+@media screen and (min-width:768px){
+    .blocografico{
+        width:70%;
+        height:65%;
+        display:flex;
+        flex-direction: row;
+        align-items: center;
+        /* quebra pra uma nova linha*/
+        max-width:65%;
+        /* 0 para cima e baixo... auto para esquerda e direita*/
+        margin:0 auto;
+        background-color:red;
+    }
+    .blocografico div{ 
+        align-items: center;
+        display:flex;
+        flex-direction: row;
+        /* Faz a div crescer em proporção aos outros elementos*/
+        flex-grow: 1;
+        /* largura máxima dos elementos*/
+        flex-basis:43%;
+
+        width:90%;
+    }
+}
+/*-- ///////////////////// Configurando os canvas e gráficos ////////////////// */
+.blocografico .bloco main {
+    align-items: center;
+    width: 95%;
+    height: 90%;
+    margin: 5%;
+}
+.blocografico .bloco main #linegraph {
+    width: 100%;
+    height: 90%;
+}
+.blocografico .bloco #pizzagraph {
+    margin: 5%;
+    width: 90%;
+    height: 800%;
+}
+.blocografico .bloco .jj{
+    width: 100%;
+    height: 120%;
+}
+/*-- ///////////////////// Configurando medias para os gráficos ////////////////// */
+@media screen and (min-width:500px){
+    .blocografico .bloco main {
+        width: 90%;
+        height: 83%;
+    }
+    .blocografico .bloco #pizzagraph {
+        width: 90%;
+        height: 700%;
+    }
+}
+@media screen and (min-width:620px){
+    .blocografico .bloco main {
+        width: 95%;
+        height:82%;
+    }
+}
+@media screen and (min-width:772px){
+    .blocografico .bloco #pizzagraph {
+        margin-top: 15% ;
+        width: 90%;
+        height: 550%;
+    }
+}
