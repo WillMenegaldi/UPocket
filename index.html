@@ -4,64 +4,84 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <!-- ///////////////////// Chamando o css dos graficos//////////////////-->
         <link rel="stylesheet" type="text/css" href="css/css_graph.css">
-        <!-- ///////////////////// Chamando a biblioteca chart.js//////////////////-->
-        <script  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
-        <title>UPOCKET</title>
+        <link rel="stylesheet" type="text/css" href="css/cards.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+        <title>UPocket</title>
     </head>
     <body>
-        <!-- ///////////////////// Chamando as consigurações que eu fiz no gráfico//////////////////-->
         <script src="js/grafico.js"></script>  
-        <!-- ///////////////////// Cabeçalho//////////////////-->
         <header class="header">
             <div class="logo"><a href="index.html"><img src="" alt="Upocket Logo"></a></div>
             <div class="username">
-                <a href="perfil.html"><img src="" alt="user_photo"></a>
-                <a href="perfil.html">Nome Usuário</a>
+                <a href="#"><img src="" alt="Foto do Usuário"></a>
+                <a href="#">Nome Usuário</a>
             </div>
         </header>
         <main>
             <nav id="lateral_nav">
                 <li>
                     <ul class="dash"><a href=index.html>Dashboard</a></ul>
-                    <ul class="bills"><a href="perfil.html">Movimentações</a></ul>
-                    <ul class="historic"><a href="recursos.html">Histórico</a></ul>
-                    <ul class="budget"><a href="about.html">Orçamento</a></ul>
-                    <ul class="reports"><a href="about.html">Relatórios</a></ul>
+                    <ul class="bills"><a href="#">Movimentações</a></ul>
+                    <ul class="historic"><a href="#">Histórico</a></ul>
+                    <ul class="budgets"><a href="#">Orçamento</a></ul>
+                    <ul class="reports"><a href="#">Relatórios</a></ul>
                 </li>
             </nav>
-            <!-- ///////////////////// Bloco dos cards//////////////////-->
-            <div id="main_box">
-                <section id="cards">
-                    <div class="income">
-                        <h3>Receitas</h3>
+            <div class="main_box">
+                <section class="flex-container">
+                    <div class="flex-card cards income">
+                        <div class="card_title">
+                            <span id="title">
+                                <h3>RECEITAS</h3>
+                            </span>
+                            <span>
+                                <h1>R$ 00,00</h1>
+                            </span>
+                        </div>
+                        <div>
+                            <img id="card_icon" src="assets/money.png"></a>
+                        </div>
                     </div>
-                    <div class="expenses">
-                        <h3>Receitas</h3>
+                    <div class="cards budget flex-card">
+                        <div class="card_title">
+                            <span id="title">
+                                <h3>DESPESAS</h3>
+                            </span>
+                            <span>
+                                <h1>R$ 00,00</h1>
+                            </span>
+                        </div>
+                        <div>
+                            <img id="card_icon" src="assets/moneyless.png"></a>
+                        </div>
                     </div>
-                    <div class="balance">
-                        <h3>Saldo</h3>
-                    </div>
+                    <div class="cards balance flex-card">
+                            <div class="card_title">
+                                <span id="title">
+                                    <h3>SALDO_TOTAL</h3>
+                                </span>
+                                <span>
+                                    <h1>R$ 00,00</h1>
+                                </span>
+                            </div>
+                            <div>
+                                <img id="card_icon" src="assets/moneyless.png"></a>
+                            </div>
+                        </div>
                 </section>
-                <!-- ///////////////////// Bloco com os gráficos//////////////////-->
-                <!-- ///////////////////// Div que engloba os blocos que englobam os dois gráficos//////////////////-->
                 <section class="blocografico">
-                    <!-- ///////////////////// Div individutal de cada bloco que contem um gráfico//////////////////-->
                     <div class="bloco"> 
-                        <!-- ///////////////////// Descrição do Gráfico //////////////////-->
                         <header id="descricao">
-                                Orçamento                
+                            Orçamento                
                         </header>
-                        <!-- ///////////////////// Tag pai do Gráfico //////////////////-->
                         <main >
-                            <!-- ///////////////////// Tag do gráfico Gráfico //////////////////-->
                             <canvas id="linegraph"></canvas>
                         </main>
                     </div>
                     <div class="bloco" >
                         <header id="descricao">
-                                    Categorias                
+                            Categorias                
                         </hearder> 
                         <canvas id="pizzagraph"></canvas>
                     </div>                                

@@ -1,0 +1,55 @@
+.flex-container {
+    display: flex;
+    background-color: rgb(250, 250, 250);
+    justify-content: space-around;
+    height: 100px;
+    margin-bottom: 2%;
+}
+
+.flex-card {
+    display: flex;
+    flex-grow: 0;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+}
+
+.card_title {
+    flex-grow: 2;
+}
+
+#card_icon {
+    border-radius: 50%;
+    width: 50%;
+    margin: 4%; 
+    height: auto;
+    float: right;
+}
+
+.cards {
+    background-color: rgb(245, 245, 245);
+    padding-left: 2.5%;
+    border-radius: 20px;
+}
+
+.income {
+    color: green;
+    border: 1px solid green;
+    width: 20%;
+}
+
+#title {
+    color: rgb(150, 150, 150);
+    padding: 1%;
+}
+
+.budget {
+    color: red;
+    border: 1px solid red;
+    width: 20%;
+}
+
+.balance {
+    color: blue;
+    border: 1px solid blue;
+    width: 20%;
+}
