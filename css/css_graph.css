@@ -1,10 +1,9 @@
-﻿/*-- ///////////////////// Zerando configurações ////////////////// */
-*{
+﻿*{
     margin:0;
     padding:0;
 }
-/*-- ///////////////////// Configurando a section que contem os blocos ////////////////// */
-.blocografico{
+
+.blocografico {
     padding:0;
     display:flex;
     flex-direction: column;
@@ -12,55 +11,55 @@
     position:absolute;
     width:100%;
     height:100%;
-    background-color:red;
+    background-color: rgb(250, 250, 250);
 }
-/*-- ///////////////////// Configurando os blocos que contem os gráficos ////////////////// */
-.blocografico .bloco{ 
+
+.blocografico .bloco { 
     display:flex;
     flex-direction: column;
     align-items: center;
     width:90%;
     height:90%;
     box-shadow: solid white 1px;
-    background-color:#7fdb4a;
+    background-color: rgb(240, 240, 240);
     border-radius: 30px;
     margin:2% 4% 6% 2%;
 }
-#descricao{
+
+#descricao {
     border-radius: 30px 30px 0px 0px ;
+    padding-top: 4%;
+    font-size: 1.2em;
     width: 100%;
     height: 10%;
     text-align: center;
     color:white;
-    background-color: black;
+    background-color: rgb(100, 100, 100);
 }
-/*-- ///////////////////// Configurando a media para os blocos ////////////////// */
-@media screen and (min-width:768px){
+
+@media screen and (min-width:768px) {
     .blocografico{
         width:70%;
         height:65%;
         display:flex;
         flex-direction: row;
         align-items: center;
-        /* quebra pra uma nova linha*/
         max-width:65%;
-        /* 0 para cima e baixo... auto para esquerda e direita*/
         margin:0 auto;
-        background-color:red;
+        background-color: rgb(250, 250, 250);
     }
+
     .blocografico div{ 
         align-items: center;
         display:flex;
         flex-direction: row;
-        /* Faz a div crescer em proporção aos outros elementos*/
         flex-grow: 1;
-        /* largura máxima dos elementos*/
         flex-basis:43%;
 
         width:90%;
     }
 }
-/*-- ///////////////////// Configurando os canvas e gráficos ////////////////// */
+
 .blocografico .bloco main {
     align-items: center;
     width: 95%;
@@ -80,7 +79,7 @@
     width: 100%;
     height: 120%;
 }
-/*-- ///////////////////// Configurando medias para os gráficos ////////////////// */
+
 @media screen and (min-width:500px){
     .blocografico .bloco main {
         width: 90%;
