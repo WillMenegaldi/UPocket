@@ -1,0 +1,42 @@
+#lateral_nav{
+    display: flex;
+    flex-direction: column;
+}
+
+#home_icon{
+    width: 5%;
+    height: 5%;
+}
+
+.dash{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 13%;
+    margin-top: 25%;
+    margin-bottom: 10%;
+}
+.bills{
+    margin-left: 13%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+
+}
+.historic{
+    margin-left: 11%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+.budgets{
+    margin-left: 15%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+.reports{
+    margin-left: 13%;
+}
+
+#lateral_nav a{
+    text-decoration: none;
+    color: #e6e6e6;
+}
