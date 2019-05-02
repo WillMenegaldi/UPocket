@@ -3,7 +3,7 @@ main#flex-main{
     flex-direction: row; 
     width: 100%;
     height: 85%;
-    background:rgb(250, 250, 250);;
+    background:rgb(250, 250, 250);
 }
 
 .flex-container {
