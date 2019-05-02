@@ -16,8 +16,8 @@
     margin-top: 25%;
     margin-bottom: 10%;
 }
-.bills{
-    margin-left: 13%;
+.bills a{
+    margin-left: 11%;
     margin-top: 10%;
     margin-bottom: 10%;
 
@@ -39,4 +39,8 @@
 #lateral_nav a{
     text-decoration: none;
     color: #e6e6e6;
+}
+
+#lateral_nav img{
+    width: 60%;
 }
