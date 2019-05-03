@@ -14,7 +14,7 @@ function graphic()
                 fontColor: 'black',
                 fontFamily:'Tahoma',
                 fontSize: 12
-                }                    
+                }                 
             }
         },
         data: {
@@ -35,24 +35,27 @@ function graphic()
 
     });
     
-    let ctx=document.getElementById('pizzagraph').getContext('2d');
-    let graphP=new Chart(ctx,{
-        type:'pie',
+    let ctx = document.getElementById('pizzagraph').getContext('2d');
+
+    let graphP = new Chart(ctx,{
+        type:'doughnut',
         options: {
-            responsive:false ,
-                legend: {
-                    display: false
-                }
+            legend: {
+                display: false
+            },
+            responsive: false,
+            cutoutPercentage: 67
         },
         data:{
-            labels:['Alimentação', 'Roupas', 'Gasolina', 'Lazer', 'Escola'],    
+            labels:['Alimentação', 'Roupas', 'Gasolina', 'Lazer', 'Escola'],
             datasets:[
                 {
+                    borderWidth: 0.5,
                     label:'Categorias',
                     data: [2000, 1000, 1000, 1000, 400],
-                    backgroundColor:['#798899','#89a5c4','#8c092a','#099673','#847502']
+                    backgroundColor:['#006400','#89a5c4','#8c092a','#099673','#847502']
                 }
-            ], 
+            ]
         }
     });
 };
