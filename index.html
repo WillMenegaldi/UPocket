@@ -13,7 +13,7 @@
     <body>
         <script src="js/grafico.js"></script>  
         <header class="header">
-            <div class="logo"><a href="index.html"><img src="" alt="Upocket Logo"></a></div>
+            <div class="logo"><a href="index.html"><img src="assets/upocket2.png" alt="Upocket Logo"></a></div>
             <div class="username">
                 <a href="#"><img src="" alt="Foto do Usuário"></a>
                 <a href="#">Nome Usuário</a>
@@ -21,13 +21,15 @@
         </header>
         <main id="flex-main">
             <nav id="lateral_nav">
-                <li>
-                    <ul class="dash"><a href=index.html><img src="assets/home.png" alt="dash-icon"> Dashboard</a></ul>
-                    <ul class="bills"><a href="#"><img src="assets/circle.png" alt="bills-icon"> Movimentações</a></ul>
+            <!--
+                <ul>
+                    <li class="dash"><a href=index.html><img src="assets/home.png" alt="dash-icon"> Dashboard</a></ul>
+                    < class="bills"><a href="#"><img src="assets/circle.png" alt="bills-icon"> Movimentações</a></ul>
                     <ul class="historic"><a href="#"><img src="assets/historico.png" alt="historic-icon"> Histórico</a></ul>
                     <ul class="budgets"><a href="#"><img src="assets/orcamento.png" alt="budgets-icon"> Orçamento</a></ul>
                     <ul class="reports"><a href="#"> <img src="assets/relatorio.png" alt="reports-icon"> Relatórios</a></ul>
-                </li>
+                </ul>
+            -->
             </nav>
             <div class="main_box">
                 <section class="flex-container">
@@ -37,7 +39,7 @@
                                 <h3>RECEITAS</h3>
                             </span>
                             <span>
-                                <h1>R$ 00,00</h1>
+                                <h1>R$ 1.200,00</h1>
                             </span>
                         </div>
                         <div class="image-flex">
@@ -50,7 +52,7 @@
                                 <h3>DESPESAS</h3>
                             </span>
                             <span>
-                                <h1>R$ 00,00</h1>
+                                <h1>R$ 800,00</h1>
                             </span>
                         </div>
                         <div class="image-flex">
@@ -60,10 +62,10 @@
                     <div class="cards balance flex-card">
                             <div class="card_title">
                                 <span id="title">
-                                    <h3>SALDO_TOTAL</h3>
+                                    <h3>SALDO TOTAL</h3>
                                 </span>
                                 <span>
-                                    <h1>R$ 00,00</h1>
+                                    <h1>R$ 400,00</h1>
                                 </span>
                             </div>
                             <div class="image-flex">
@@ -76,9 +78,7 @@
                         <header id="descricao">
                             Orçamento                
                         </header>
-                        <main >
                             <canvas id="linegraph"></canvas>
-                        </main>
                     </div>
                     <div class="bloco" >
                         <header id="descricao">
