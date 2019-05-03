@@ -68,8 +68,8 @@
     .flex-container {
         display: flex;
         justify-content: space-around;
-        height: 30%;
         font-size: 1em;
+        height: 30%;
         flex-wrap: wrap-reverse;
     }
     .flex-card {
