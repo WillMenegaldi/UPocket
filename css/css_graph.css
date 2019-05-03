@@ -8,33 +8,50 @@ html{
     width: 100%;
 }
 
-header{
+header.header{
     height: 10%;
     background-color: rgb(230, 230, 230);
+    display: flex;
+    flex-direction:row;
 }
-
-main {
-    height: 88%;
+.header>div.logo{
+    width:20%;
+    height:100%;
+}
+.header>div.logo>a img{
+    width:100%;
+    height:100%;
+}
+main#flex-main{
+    display: flex; 
+    flex-direction: row; 
+    width: 100%;
+    height: 85%;
+    background:rgb(250, 250, 250);
 }
 body {
     height: 100%;
     width: 100%;
 }
-
 footer {
     height: 5%;
     color: white;
     background-color: rgb(10, 10, 10);
 }
+
+
+
+
+
+
 .blocografico {
     padding:0;
     display:flex;
     flex-direction: column;
     align-items:center;
     width:100%;
-    height:77%;
+    height:75.5%;
 }
-
 .blocografico .bloco { 
     display:flex;
     flex-direction: column;
@@ -50,7 +67,7 @@ footer {
 #descricao {
     border-radius: 30px 30px 0px 0px ;
     padding-top: 4%;
-    font-size: 1.2em;
+    font-size: 1.1em;
     width: 100%;
     height: 10%;
     text-align: center;
@@ -61,7 +78,7 @@ footer {
 @media screen and (min-width:768px) {    
     .blocografico{
         width: 100%;
-        height: 80%;
+        height: 77.5%;
         display:flex;
         flex-direction: row;
         align-items: center;
@@ -129,15 +146,3 @@ footer {
 
 
 
-.header{
-    display: flex;
-    flex-direction:row;
-}
-.header>div.logo{
-    width:20%;
-    height:100%;
-}
-.header>div.logo>a img{
-    width:100%;
-    height:100%;
-}
