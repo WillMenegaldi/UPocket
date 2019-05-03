@@ -2,28 +2,26 @@
     display: flex;
     justify-content: space-around;
     height: 20%;
-    margin-top:2%;
+    font-size: 0.75em;
+    flex-wrap: wrap-reverse;
 }
 .flex-card {
     display: flex;
     flex-grow: 0;
     justify-content: space-around;
-    flex-wrap: nowrap;
 }
 .card_title {
-    margin: 0 auto; 
+    margin: 5% auto; 
     height: 100%;
     width: 67%;
-    padding-left: 15%;
-    padding-top: 1%;
-    text-align: left;
+    text-align: center;
 
 }
 .flex-card>.image-flex {
     width: 30%;
     height: 100%;    
 }
-#card_icon {
+.card_icon {
     width: 80%;
     margin: 20% auto;
     height: 80%;
@@ -35,26 +33,170 @@
 }
 .cards {
     background-color: rgb(230, 230, 230);
-    border-radius: 20px;
-}
-.income {
-    color: green;
-    box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
-    width: 22.5%;
 }
 #title {
-    color: rgb(130, 130, 130);
-    padding: 1%;
+    color: rgb(80, 80, 80);
+}
+
+.display-imagem {
+    display: none;
+}
+
+.income {
+    color: green;
+    background-color: lightgreen;
+    box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
+    width: 50%;
+    height: 43%;
 }
 .budget {
     color: red;
+    background-color: lightcoral;
     box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
-    width: 22.5%;
+    width: 50%;
+    height: 43%;
 }
 .balance {
     color: blue;
+    background-color: lightblue;
     box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
-    width: 22.5%;
+    width: 100%;
+    height: 57%;
+}
+
+@media screen and (min-width:450px) {
+    .flex-container {
+        display: flex;
+        justify-content: space-around;
+        height: 30%;
+        font-size: 1em;
+        flex-wrap: wrap-reverse;
+    }
+    .flex-card {
+        display: flex;
+        flex-grow: 0;
+        justify-content: space-around;
+    }
+    .card_title {
+        margin: 5% auto; 
+        height: 100%;
+        width: 67%;
+        text-align: center;
+
+    }
+    .flex-card>.image-flex {
+        width: 30%;
+        height: 100%;    
+    }
+    .card_icon {
+        width: 80%;
+        margin: 20% auto;
+        height: 80%;
+    }
+    #lateral_nav {
+        height: 100%;
+        width: 12.5%;
+        background-color: rgb(50, 50, 50);
+    }
+    .cards {
+        background-color: rgb(230, 230, 230);
+    }
+    #title {
+        color: rgb(80, 80, 80);
+    }
+
+    .display-imagem {
+        display: none;
+    }
+
+    .income {
+        color: green;
+        background-color: lightgreen;
+        box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
+        width: 50%;
+        height: 43%;
+    }
+    .budget {
+        color: red;
+        background-color: lightcoral;
+        box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
+        width: 50%;
+        height: 43%;
+    }
+    .balance {
+        color: blue;
+        background-color: lightblue;
+        box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
+        width: 100%;
+        height: 57%;
+    }
+}
+
+@media screen and (min-width:770px) {
+    .flex-container {
+        display: flex;
+        justify-content: space-around;
+        height: 20%;
+        margin-top:2%;
+    }
+    .display-imagem {
+        display: flex;
+    }
+    .flex-card {
+        display: flex;
+        flex-grow: 0;
+        justify-content: space-around;
+        flex-wrap: nowrap;
+    }
+    .card_title {
+        margin: 0 auto; 
+        height: 100%;
+        width: 67%;
+        padding-left: 15%;
+        padding-top: 1%;
+        text-align: left;
+    
+    }
+    .flex-card>.image-flex {
+        width: 30%;
+        height: 100%;    
+    }
+    .card_icon {
+        width: 80%;
+        margin: 20% auto;
+        height: 80%;
+    }
+    #lateral_nav {
+        height: 100%;
+        width: 12.5%;
+        background-color: rgb(50, 50, 50);
+    }
+    .cards {
+        background-color: rgb(230, 230, 230);
+        border-radius: 20px;
+    }
+    #title {
+        color: rgb(130, 130, 130);
+        padding: 1%;
+    }
+    .income {
+        color: green;
+        box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
+        width: 22.5%;
+        height: 100%;
+    }
+    .budget {
+        color: red;
+        box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
+        width: 22.5%;
+        height: 100%;
+    }
+    .balance {
+        color: blue;
+        box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
+        width: 22.5%;
+        height: 100%;
+    }
 }
 section.flex-container{
     display: flex;
