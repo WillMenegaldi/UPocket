@@ -1,4 +1,4 @@
-﻿*{
+*{
     margin:0;
     padding:0;
 }
@@ -115,8 +115,6 @@ footer {
     }
 }
 
-
-
 @media screen and (min-width:460px){
 
     .blocografico .bloco main {
@@ -150,6 +148,3 @@ footer {
         height: 530%;
     }
 }
-
-
-
