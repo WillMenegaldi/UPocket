@@ -7,7 +7,7 @@
     align-items:center;
     width:100%;
     margin-top: 10%;
-    height:66%;
+    height:75%;
     justify-content: space-around;
 }
 .blocografico .bloco { 
@@ -36,14 +36,14 @@ div.bloco>#descricao {
     height: 100%;
 }
 .blocografico .bloco #linegraph {
-    margin:0 auto;
-    width: 100%;
-    height: 100%;
+    margin: 0 auto;
+    width: 80%;
+    height: 80%;
 }
 .blocografico .bloco #pizzagraph {
-    margin:10% auto;
+    margin: 10% auto;
     width: 100%;
-    height:780%;
+    height: 550%;
 }
 
 @media screen and (min-width:460px){
@@ -124,14 +124,14 @@ div.bloco>#descricao {
         align-items: center;
     }        
     .blocografico .bloco #linegraph {
-        margin:10% auto;
+        margin:7.5% auto;
         width: 80%;
-        height: 50%;
+        height: 90%;
     }
     .blocografico .bloco #pizzagraph {
-        margin-top:10%;
+        margin-top:9%;
         width: 90%;
-        height: 515%;
+        height: 500%;
         justify-content: space-around;
     }
 }
