@@ -13,7 +13,7 @@ function graphic()
                 labels: {
                 fontColor: 'black',
                 fontFamily:'Tahoma',
-                fontSize: 20
+                fontSize: 12
                 }                    
             }
         },
@@ -21,9 +21,9 @@ function graphic()
             labels: ['Alimentação', 'Roupas', 'Gasolina', 'Lazer', 'Escola'],
             datasets: [
                 {
-                    label: 'Orçamento',
                     data: [2000, 1000, 500, 9000, 1000, 400],
-                    borderColor:"#0c8e10",   
+                    borderColor:"#0c8e10",
+                    label: 'Orçamento',   
                 },
                 {
                     label:'Gastos',

@@ -9,9 +9,7 @@ main#flex-main{
 .flex-container {
     display: flex;
     justify-content: space-around;
-    height: 19%;
-    padding: 0.5%;
-    margin-bottom: 2%;
+    height: 20%;
 }
 
 .flex-card {
@@ -19,6 +17,7 @@ main#flex-main{
     flex-grow: 0;
     justify-content: space-around;
     flex-wrap: nowrap;
+    margin: 1%;
 }
 
 .card_title {
