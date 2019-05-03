@@ -32,9 +32,7 @@ footer {
     flex-direction: column;
     align-items:center;
     width:100%;
-    height:80%;
-    background: black;
-    height:100%;
+    height:80%
 }
 
 .blocografico .bloco { 
@@ -86,11 +84,13 @@ footer {
 
 }
 .blocografico .bloco main #linegraph {
+    margin:0 auto;
     margin-top:10%;
-    width: 100%;
+    width: 80%;
     height: 60%;
 }
 .blocografico .bloco #pizzagraph {
+    margin:0 auto;
     width: 100%;
     height:750%;
 }
@@ -122,7 +122,7 @@ footer {
 
     }
     .blocografico .bloco #pizzagraph {
-        margin-top: 15% ;
+        margin-top: 10% ;
         width: 88%;
         height: 550%;
     }
