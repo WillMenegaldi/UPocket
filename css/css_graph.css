@@ -44,11 +44,6 @@ footer {
     background-color: rgb(10, 10, 10);
 }
 
-
-
-
-
-/*Media Padrão*/
 .blocografico {
     padding:0;
     display:flex;
@@ -95,27 +90,6 @@ div.bloco>#descricao {
     height:780%;
 }
 
-
-
-
-@media screen and (min-width:768px) {    
-    .blocografico{
-        width: 100%;
-        height: 77.5%;
-        display:flex;
-        flex-direction: row;
-        align-items: center;
-        margin:0 auto;
-    }
-    .blocografico div{ 
-        align-items: center;
-        display:flex;
-        flex-direction: row; 
-        width:30%;
-        height:30%;
-    }
-}
-
 @media screen and (min-width:460px){
 
     .blocografico .bloco main {
@@ -131,6 +105,21 @@ div.bloco>#descricao {
 
 }
 @media screen and (min-width:770px){
+    .blocografico{
+        width: 100%;
+        height: 77.5%;
+        display:flex;
+        flex-direction: row;
+        align-items: center;
+        margin:0 auto;
+    }
+    .blocografico div{ 
+        align-items: center;
+        display:flex;
+        flex-direction: row; 
+        width:30%;
+        height:30%;
+    }
 
     .blocografico .bloco{
         width: 37%;
