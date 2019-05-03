@@ -1,7 +1,8 @@
 #lateral_nav{
     display: flex;
     flex-direction: column;
-    width: 12.5%
+    width: 12.5%;
+
 }
 
 #home_icon{

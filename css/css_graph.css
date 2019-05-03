@@ -14,7 +14,7 @@ header{
 }
 
 main {
-    height: 85%;
+    height: 88%;
 }
 body {
     height: 100%;
@@ -32,7 +32,7 @@ footer {
     flex-direction: column;
     align-items:center;
     width:100%;
-    height:80%
+    height:77%;
 }
 
 .blocografico .bloco { 
@@ -41,7 +41,6 @@ footer {
     align-items: center;
     width:70%;
     height:70%;
-
     border-radius: 30px;
     background-color: rgb(230, 230, 230);
     margin:2% 4% 6% 2%;
@@ -128,9 +127,7 @@ footer {
     }
 }
 
-.main_box{
-    width: 88%;
-}
+
 
 .header{
     display: flex;
