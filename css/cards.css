@@ -1,15 +1,10 @@
-main#flex-main{
-    display: flex; 
-    flex-direction: row; 
-    width: 100%;
-    height: 85%;
-    background:rgb(250, 250, 250);
-}
+
 
 .flex-container {
     display: flex;
     justify-content: space-around;
     height: 20%;
+    margin:2%;
 }
 
 .flex-card {
@@ -17,7 +12,6 @@ main#flex-main{
     flex-grow: 0;
     justify-content: space-around;
     flex-wrap: nowrap;
-    margin: 1%;
 }
 
 .card_title {
@@ -41,7 +35,7 @@ main#flex-main{
 
 #lateral_nav {
     height: 100%;
-    width: 12%;
+    width: 12.5%;
     background-color: rgb(50, 50, 50);
 }
 
@@ -53,7 +47,7 @@ main#flex-main{
 .income {
     color: green;
     box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
-    width: 20%;
+    width: 22.5%;
 }
 
 #title {
@@ -64,13 +58,13 @@ main#flex-main{
 .budget {
     color: red;
     box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
-    width: 20%;
+    width: 22.5%;
 }
 
 .balance {
     color: blue;
     box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
-    width: 20%;
+    width: 22.5%;
 }
 
 section.flex-container{
