@@ -1,0 +1,43 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+}
+body {
+    width: 100%;
+    height: 100%;
+}
+
+footer {
+    text-align: center;
+    height: 5%;
+    color: white;
+    background-color: rgb(10, 10, 10);
+}
+
+header.header {
+    height: 10%;
+    background-color: rgb(230, 230, 230);
+    display: flex;
+    flex-direction:row;
+}
+.header>div.logo {
+    width:20%;
+    height:100%;
+}
+.header>div.logo>a img {
+    width:100%;
+    height:100%;
+}
+
+main#flex-main {
+    display: flex; 
+    flex-direction: row; 
+    width: 100%;
+    height: 85%;
+    background:rgb(250, 250, 250);
+}

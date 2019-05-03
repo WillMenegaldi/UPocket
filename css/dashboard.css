@@ -1,16 +1,14 @@
-#lateral_nav{
+#lateral_nav {
     display: flex;
     flex-direction: column;
     width: 12.5%;
     height: 100%;
 }
-
-#home_icon{
+#home_icon {
     width: 5%;
     height: 5%;
 }
-
-.dash{
+.dash {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,31 +16,31 @@
     margin-top: 25%;
     margin-bottom: 10%;
 }
-.bills a{
+.bills a {
     margin-left: 11%;
     margin-top: 10%;
     margin-bottom: 10%;
 
 }
-.historic{
+.historic {
     margin-left: 11%;
     margin-top: 10%;
     margin-bottom: 10%;
 }
-.budgets{
+.budgets {
     margin-left: 15%;
     margin-top: 10%;
     margin-bottom: 10%;
 }
-.reports{
+.reports {
     margin-left: 13%;
 }
 
-#lateral_nav a{
+#lateral_nav a {
     text-decoration: none;
     color: #e6e6e6;
 }
 
-#lateral_nav img{
+#lateral_nav img {
     width: 60%;
 }
