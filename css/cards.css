@@ -38,7 +38,7 @@
     color: rgb(80, 80, 80);
 }
 
-.display-imagem {
+#display-imagem {
     display: none;
 }
 
@@ -68,7 +68,7 @@
     .flex-container {
         display: flex;
         justify-content: space-around;
-        font-size: 1em;
+        font-size: 0.9em;
         height: 30%;
         flex-wrap: wrap-reverse;
     }
@@ -78,7 +78,7 @@
         justify-content: space-around;
     }
     .card_title {
-        margin: 5% auto; 
+        margin: 10% auto 0; 
         height: 100%;
         width: 67%;
         text-align: center;
@@ -105,7 +105,7 @@
         color: rgb(80, 80, 80);
     }
 
-    .display-imagem {
+    #display-imagem {
         display: none;
     }
 
@@ -139,7 +139,7 @@
         height: 20%;
         margin-top:2%;
     }
-    .display-imagem {
+    #display-imagem {
         display: flex;
     }
     .flex-card {
@@ -152,7 +152,7 @@
         margin: 0 auto; 
         height: 100%;
         width: 67%;
-        padding-left: 15%;
+        padding-left: 10%;
         padding-top: 1%;
         text-align: left;
     
