@@ -15,6 +15,7 @@ function graphic()
             },
             legend: {
                 /*Setando visibilidade e colocando ele embaixo*/
+                display: false,
                 position:'bottom',
                 labels:{                    
                 /* Ativando o bloco de legenda e colocando como circulo*/
