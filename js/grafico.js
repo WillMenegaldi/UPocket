@@ -9,18 +9,27 @@ function graphic()
         type:'line',
         options :{
             responsive:false,
+            /* coloca-se os dois valores */
+            tooltips: {
+                mode: 'index'
+            },
             legend: {
-                labels: {
-                fontColor: 'black',
-                fontFamily:'Tahoma',
-                fontSize: 12
-                }                 
+                /*Setando visibilidade e colocando ele embaixo*/
+                display: true,
+                position:'bottom',
+                labels:{                    
+                /*  */
+                usePointStyle:true,
+                pointStyle:'circle'
+                }
             }
         },
         data: {
             labels: ['Alimentação', 'Roupas', 'Gasolina', 'Lazer', 'Escola'],
             datasets: [
-                {
+                {              
+                    /*Aumenta o tamanho da bolinha*/
+                    pointRadius:2,
                     data: [2000, 1000, 500, 9000, 1000, 400],
                     borderColor:"#0c8e10",
                     label: 'Orçamento',   

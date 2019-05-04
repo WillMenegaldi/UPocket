@@ -1,4 +1,4 @@
-#lateral_nav {
+ .nav_lateral{
     display: flex;
     flex-direction: column;
     width: 12.5%;
