@@ -7,7 +7,7 @@
     align-items:center;
     width:100%;
     margin-top: 10%;
-    height:75%;
+    height:77.5%;
     justify-content: space-around;
 }
 .blocografico .bloco { 
@@ -36,13 +36,12 @@ div.bloco>#descricao {
     height: 100%;
 }
 .blocografico .bloco #linegraph {
-    margin: 0 auto;
-    margin-top:2%;
-    width: 80%;
-    height: 80%;
+    margin: 2% auto 0;
+    width: 90%;
+    height: 98%;
 }
 .blocografico .bloco #pizzagraph {
-    margin: 10% auto;
+    margin: 10.5% auto;
     width: 100%;
     height: 550%;
 }
