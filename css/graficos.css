@@ -1,4 +1,4 @@
-﻿/* Até 1080px o comportamento é adequado desktop*/
+/* Até 1080px o comportamento é adequado desktop*/
 
 .blocografico {
     padding:0;
@@ -7,7 +7,7 @@
     align-items:center;
     width:100%;
     margin-top: 10%;
-    height:77.5%;
+    height:75%;
     justify-content: space-around;
 }
 .blocografico .bloco { 
@@ -37,24 +37,39 @@ div.bloco>#descricao {
 }
 .blocografico .bloco #linegraph {
     margin: 2% auto 0;
-    width: 90%;
+    width: 80%;
     height: 98%;
 }
 .blocografico .bloco #pizzagraph {
-    margin: 10.5% auto;
+    margin: 10% auto;
     width: 100%;
     height: 550%;
 }
 
-@media screen and (min-width:460px){
-
+@media screen and (min-width:450px){
+    .blocografico {
+        padding:0;
+        display:flex;
+        flex-direction: column;
+        align-items:center;
+        width:100%;
+        margin-top: 7.5%;
+        height:65.5%;
+        justify-content: space-around;
+    }
     .blocografico .bloco main {
         width: 90%;
         height: 83%;
     }
+    .blocografico .bloco #linegraph {
+        margin: 5% auto 0;
+        width: 80%;
+        height: 95%;
+    }
     .blocografico .bloco #pizzagraph {
-        width: 90%;
-        height: 700%;
+        margin: 3% auto 0 ;
+        width: 50%;
+        height: 550%;
     }
 }
 
@@ -82,7 +97,7 @@ div.bloco>#descricao {
     .blocografico .bloco #linegraph {
         margin:10% auto;
         width: 80%;
-        height: 50%;
+        height: 75%;
     }
     .blocografico .bloco #pizzagraph {
         margin-top:20%;
