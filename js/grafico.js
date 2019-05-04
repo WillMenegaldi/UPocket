@@ -18,7 +18,7 @@ function graphic()
                 display: true,
                 position:'bottom',
                 labels:{                    
-                /*  */
+                /* Ativando o bloco de legenda e colocando como circulo*/
                 usePointStyle:true,
                 pointStyle:'circle'
                 }
@@ -32,11 +32,14 @@ function graphic()
                     pointRadius:2,
                     data: [2000, 1000, 500, 9000, 1000, 400],
                     borderColor:"#0c8e10",
+                    /* Colocando cor de fundo*/
+                    backgroundColor:'rgba(32,130,19,0.5)',
                     label: 'Orçamento',   
                 },
                 {
                     label:'Gastos',
                     data: [2500, 100, 5000, 1000, 5000, 400],
+                    backgroundColor:'rgba(145,33,33,0.4)',
                     borderColor:"#991c09"
                 }                
             ]
