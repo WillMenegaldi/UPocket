@@ -1,5 +1,3 @@
-/* Até 1080px o comportamento é adequado desktop*/
-
 .blocografico {
     padding:0;
     display:flex;
@@ -36,9 +34,9 @@ div.bloco>#descricao {
     height: 100%;
 }
 .blocografico .bloco #linegraph {
-    margin: 2% auto 0;
-    width: 80%;
-    height: 98%;
+    margin: 2% auto 0 !important;
+    width: 95% !important;
+    height: 80% !important;
 }
 .blocografico .bloco #pizzagraph {
     margin: 10% auto;
@@ -62,9 +60,9 @@ div.bloco>#descricao {
         height: 83%;
     }
     .blocografico .bloco #linegraph {
-        margin: 5% auto 0;
-        width: 80%;
-        height: 95%;
+        margin: 5% auto 0 !important;
+        width: 80% !important;
+        height: 95% !important;
     }
     .blocografico .bloco #pizzagraph {
         margin: 3% auto 0 ;
@@ -95,9 +93,9 @@ div.bloco>#descricao {
         align-items: center;
     }        
     .blocografico .bloco #linegraph {
-        margin:10% auto;
-        width: 80%;
-        height: 75%;
+        margin:10% auto !important;
+        width: 80% !important;
+        height: 75% !important;
     }
     .blocografico .bloco #pizzagraph {
         margin-top:20%;
@@ -119,7 +117,7 @@ div.bloco>#descricao {
 @media screen and (min-width:1126px){
     .blocografico{
         width: 100%;
-        height: 78%;
+        height: 76%;
         display:flex;
         flex-direction: row;
         align-items: center;
@@ -139,10 +137,10 @@ div.bloco>#descricao {
         align-items: center;
     }        
     .blocografico .bloco #linegraph {
-        margin:2% auto;
+        margin:5% auto !important;
         margin-top: 6%;
-        width: 80%;
-        height: 70%;
+        width: 80% !important;
+        height: 70% !important;
     }
     .blocografico .bloco #pizzagraph {
         margin-top:9%;
