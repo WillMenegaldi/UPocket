@@ -43,22 +43,25 @@
 }
 
 .income {
-    color: green;
+    color: white;
     background-color: lightgreen;
+    background-image: linear-gradient(to bottom, lightgreen, #005000 180%);
     box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
     width: 50%;
     height: 43%;
 }
 .budget {
-    color: red;
+    color: white;
+    background-image: linear-gradient(to bottom, lightcoral, #980021 180%);
     background-color: lightcoral;
     box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
     width: 50%;
     height: 43%;
 }
 .balance {
-    color: blue;
+    color: white;
     background-color: lightblue;
+    background-image: linear-gradient(to bottom, lightblue, navy 180%);
     box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
     width: 100%;
     height: 57%;
@@ -78,7 +81,7 @@
         justify-content: space-around;
     }
     .card_title {
-        margin: 10% auto 0; 
+        margin: 3% auto 0; 
         height: 100%;
         width: 67%;
         text-align: center;
@@ -110,22 +113,25 @@
     }
 
     .income {
-        color: green;
+        color: white;
         background-color: lightgreen;
+        background-image: linear-gradient(to bottom, lightgreen, #005000 180%);
         box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
         width: 50%;
         height: 43%;
     }
     .budget {
-        color: red;
+        color: white;
+        background-image: linear-gradient(to bottom, lightcoral, #980021 180%);
         background-color: lightcoral;
         box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
         width: 50%;
         height: 43%;
     }
     .balance {
-        color: blue;
+        color: white;
         background-color: lightblue;
+        background-image: linear-gradient(to bottom, lightblue, navy 180%);
         box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
         width: 100%;
         height: 57%;
@@ -182,17 +188,20 @@
     .income {
         color: green;
         box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
+        background-image: none;
         width: 22.5%;
         height: 100%;
     }
     .budget {
         color: red;
+        background-image: none;
         box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
         width: 22.5%;
         height: 100%;
     }
     .balance {
         color: blue;
+        background-image: none;
         box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
         width: 22.5%;
         height: 100%;
@@ -208,20 +217,17 @@ section.flex-container{
         display: flex;
         justify-content: space-around;
         font-size: 0.9em;
-        height: 20%;
+        height: 18%;
         flex-wrap: wrap-reverse;
     }
     .flex-card {
         height: 50%;
     }
     .card_title {
-        
         margin: 0 auto; 
         height: 100%;
         width: 67%;
-        padding: 5%;
+        padding-top: 5%;
         text-align: center;
-    
     }   
-    
 }
