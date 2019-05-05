@@ -75,17 +75,7 @@ div.bloco>#descricao {
     .blocografico{
         width: 100%;
         height: 75.5%;
-        display:flex;
-        flex-direction: row;
-        align-items: center;
         margin:0 auto;
-    }
-    .blocografico div{ 
-        align-items: center;
-        display:flex;
-        flex-direction: row; 
-        width:30%;
-        height:30%;
     }
     .blocografico .bloco{
         width: 37%;
@@ -148,4 +138,33 @@ div.bloco>#descricao {
         height: 500%;
         justify-content: space-around;
     }
+}
+
+@media (min-width:450px) and (max-width:770px) {
+    .blocografico { 
+        margin-top:0;
+        align-items: center;
+        display:flex;
+        flex-direction: column; 
+        width: 100%;
+        height:80%;
+    }
+    .blocografico .bloco{
+        margin-top: 6%;
+        width: 75%;
+        height: 100%;
+        align-items: center;
+    }        
+    .blocografico .bloco #linegraph {
+        margin:5% auto !important;
+        width: 90% !important;
+        height: 70% !important;
+    }
+    .blocografico .bloco #pizzagraph {
+        margin:8% auto !important;
+        width: 100%;
+        height: 550%;
+        justify-content: space-around;
+    }
+
 }

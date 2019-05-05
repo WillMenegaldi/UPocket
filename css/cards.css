@@ -201,3 +201,27 @@
 section.flex-container{
     display: flex;
 }
+
+
+@media (min-width:450px) and (max-width:770px) {
+    .flex-container {
+        display: flex;
+        justify-content: space-around;
+        font-size: 0.9em;
+        height: 20%;
+        flex-wrap: wrap-reverse;
+    }
+    .flex-card {
+        height: 50%;
+    }
+    .card_title {
+        
+        margin: 0 auto; 
+        height: 100%;
+        width: 67%;
+        padding: 5%;
+        text-align: center;
+    
+    }   
+    
+}
