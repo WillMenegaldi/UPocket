@@ -34,7 +34,7 @@ function graphic()
                     usePointStyle:true,
                     fontSize: 1,
                     pointStyle:'circle',
-                    fontSize: (detectar_mobile() ? 7 : 102)
+                    fontSize: 7
                 }
             }
         },
