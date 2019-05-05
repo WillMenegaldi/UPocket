@@ -39,9 +39,9 @@ div.bloco>#descricao {
     height: 80% !important;
 }
 .blocografico .bloco #pizzagraph {
-    margin: 10% auto;
-    width: 100%;
-    height: 550%;
+    margin: 10% auto !important;
+    width: 100% !important;
+    height: 550% !important;
 }
 
 @media screen and (min-width:450px){
@@ -65,9 +65,9 @@ div.bloco>#descricao {
         height: 95% !important;
     }
     .blocografico .bloco #pizzagraph {
-        margin: 3% auto 0 ;
-        width: 50%;
-        height: 550%;
+        margin: 3% auto 0 !important;
+        width: 50% !important;
+        height: 550% !important;
     }
 }
 
@@ -90,9 +90,9 @@ div.bloco>#descricao {
         height: 55% !important;
     }
     .blocografico .bloco #pizzagraph {
-        margin-top:17%;
-        width: 100%;
-        height: 450%;
+        margin-top:17% !important;
+        width: 100% !important;
+        height: 450% !important;
     }
 }
 
@@ -101,9 +101,9 @@ div.bloco>#descricao {
         margin:13% auto !important;
     }
     .blocografico .bloco #pizzagraph {
-        margin-top:12%;
-        width: 90%;
-        height: 475%;
+        margin-top:12% !important;
+        width: 90% !important;
+        height: 475% !important;
         justify-content: space-around;
     }
 }
@@ -136,10 +136,10 @@ div.bloco>#descricao {
         height: 75% !important;
     }
     .blocografico .bloco #pizzagraph {
-        margin:0 auto;
-        margin-top:11%;
-        width: 90%;
-        height: 500%;
+        margin:0 auto !important;
+        margin-top:11% !important;
+        width: 90% !important;
+        height: 500% !important;
         justify-content: space-around;
     }
 }
@@ -160,14 +160,14 @@ div.bloco>#descricao {
         align-items: center;
     }        
     .blocografico .bloco #linegraph {
-        margin:5% auto !important;
+        margin: 5% auto !important;
         width: 90% !important;
         height: 70% !important;
     }
     .blocografico .bloco #pizzagraph {
-        margin:8% auto !important;
-        width: 100%;
-        height: 550%;
+        margin: 8% auto !important;
+        width: 100% !important;
+        height: 550% !important;
         justify-content: space-around;
     }
 
