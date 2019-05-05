@@ -13,14 +13,28 @@ function graphic()
             tooltips: {
                 mode: 'index'
             },
+            scales: {
+                yAxes: [{
+                  ticks: {
+                    fontSize: 8
+                  }
+                }],
+                xAxes: [{
+                  ticks: {
+                    fontSize: 7
+                  }
+                }]
+            },
             legend: {
                 /*Setando visibilidade e colocando ele embaixo*/
                 display: false,
                 position:'bottom',
                 labels:{                    
-                /* Ativando o bloco de legenda e colocando como circulo*/
-                usePointStyle:true,
-                pointStyle:'circle'
+                    /* Ativando o bloco de legenda e colocando como circulo*/
+                    usePointStyle:true,
+                    fontSize: 1,
+                    pointStyle:'circle',
+                    fontSize: (detectar_mobile() ? 7 : 102)
                 }
             }
         },
@@ -34,7 +48,7 @@ function graphic()
                     borderColor:"#0c8e10",
                     /* Colocando cor de fundo*/
                     backgroundColor:'rgba(32,130,19,0.5)',
-                    label: 'Orçamento',   
+                    label: 'Orçamento'
                 },
                 {
                     label:'Gastos',
@@ -46,7 +60,7 @@ function graphic()
         }
 
     });
-    
+
     let ctx = document.getElementById('pizzagraph').getContext('2d');
 
     let graphP = new Chart(ctx,{
