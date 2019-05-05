@@ -16,13 +16,14 @@ function graphic()
             scales: {
                 yAxes: [{
                   ticks: {
-                    fontSize: 8
+                    fontSize: 9
                   }
                 }],
                 xAxes: [{
-                  ticks: {
-                    fontSize: 7
-                  }
+                    ticks: {
+                        fontSize: 9
+                    }
+                 
                 }]
             },
             legend: {
@@ -34,7 +35,6 @@ function graphic()
                     usePointStyle:true,
                     fontSize: 1,
                     pointStyle:'circle',
-                    fontSize: 7
                 }
             }
         },

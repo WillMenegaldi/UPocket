@@ -60,3 +60,18 @@ main#flex-main {
         background:rgb(250, 250, 250);
     }
 }
+
+@media (min-width:450px) and (max-width:770px) {
+    main#flex-main { 
+        width: 100vw;
+        height: 250vh;
+    }
+    .main_box{
+        width: 100%;
+        height:100%;    
+    }
+    footer{
+        height: 8vh ;
+    }
+    
+}
