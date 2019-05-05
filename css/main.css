@@ -70,8 +70,16 @@ main#flex-main {
         width: 100%;
         height:100%;    
     }
+    .header{
+        background-color: rgb(10, 10, 10);
+    }
     footer{
         height: 8vh ;
     }
     
+}
+@media  (min-width:0px) and (max-width:450px){
+    .header{
+        background-color: rgb(10, 10, 10); 
+    }
 }

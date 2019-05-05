@@ -1,46 +1,52 @@
- .nav_lateral{
+
+.nav_lateral{
+    display: flex;
+    width: 10.5%;
+    box-shadow: 5px 5px 6px rgba(100, 100, 100, 0.5)
+}
+.section_dashboard{
     display: flex;
     flex-direction: column;
-    width: 12.5%;
-    height: 100%;
-}
-#home_icon {
-    width: 5%;
-    height: 5%;
-}
-.dash {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 13%;
-    margin-top: 25%;
-    margin-bottom: 10%;
-}
-.bills a {
-    margin-left: 11%;
-    margin-top: 10%;
-    margin-bottom: 10%;
-
-}
-.historic {
-    margin-left: 11%;
-    margin-top: 10%;
-    margin-bottom: 10%;
-}
-.budgets {
-    margin-left: 15%;
-    margin-top: 10%;
-    margin-bottom: 10%;
-}
-.reports {
-    margin-left: 13%;
+    justify-content: space-around;
+    text-align: center;
 }
 
-#lateral_nav a {
+.section_dashboard img{
+    width: 40%;
+}
+
+
+.nav_lateral a{
     text-decoration: none;
     color: #e6e6e6;
+    font-size: 1rem;
 }
 
-#lateral_nav img {
-    width: 60%;
+.nav_mobile{
+    display: none;
+}
+
+.mobile_menu{
+    display: none;
+}
+
+
+@media (max-width: 540px){
+    .logo{
+        display: none;
+    }
+    .username{
+        display: none;
+    }
+
+    .mobile_menu{
+        display: flex;
+        flex-direction: row;
+        align-content: space-around;
+        margin: auto;
+        margin-left: 2%;
+    }
+    .mobile_menu img{
+        width: 50%;
+    }
 }
