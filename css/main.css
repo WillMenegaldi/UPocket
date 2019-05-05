@@ -61,7 +61,7 @@ main#flex-main {
     }
 }
 
-@media (min-width:450px) and (max-width:770px) {
+@media (min-width:450px) and (max-width:700px) {
     main#flex-main { 
         width: 100vw;
         height: 250vh;
