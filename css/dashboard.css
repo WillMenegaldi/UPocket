@@ -50,3 +50,20 @@
         width: 50%;
     }
 }
+@media (min-width: 450px) and (max-width: 740px){
+    .logo{
+        display: none;
+    }
+    .username{
+        display: none;
+    }
+    .mobile_menu {
+        display: flex;
+        flex-direction: row;
+        align-content: space-around;
+        margin-left: 2%;
+    }
+    .mobile_menu img{
+        width: 17%;
+    }
+}
