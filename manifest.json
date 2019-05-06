@@ -1,7 +1,7 @@
 {
     "name": "UPocket",
     "short_name": "UPocket",
-    "start_url": ".",
+    "start_url": "https://upocket.azurewebsites.net/",
     "orientation": "portrait",
     "display": "standalone",
     "background_color": "#FAFAFA",
