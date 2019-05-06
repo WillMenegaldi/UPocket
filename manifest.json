@@ -1,0 +1,11 @@
+{
+    "name": "UPocket",
+    "short_name": "UPocket",
+    "start_url": ".",
+    "orientation": "portrait",
+    "display": "standalone",
+    "background_color": "#FAFAFA",
+    "theme_color": "#FAFAFA",
+    "description": "UPocket",
+    "icons": []
+}
