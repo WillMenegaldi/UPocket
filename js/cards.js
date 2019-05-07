@@ -22,9 +22,16 @@ document.querySelector("#add-despesa").addEventListener("click", function(){
     abreModal('despesa');
 });
 
+document.querySelector("#btn-close").addEventListener("click", function(){
+    fechaModal();
+});
 
 function abreModal(card) 
 {
+    var modal= document.getElementById('container-modal');
+    modal.style.display ='block';
+
+    
     if(card == 'receita') 
     {
         console.log("Card Receita");
@@ -35,5 +42,16 @@ function abreModal(card)
             cardReceita[i].style["color"] = 'navy';
         }
         */
+    }
+
+}
+
+function fechaModal(){
+    var modal= document.getElementById('container-modal');
+    modal.style.display='none';
+    window.onclick= function(){
+        if(event.target ==modal){
+            modal.style.display='none';
+        }
     }
 }

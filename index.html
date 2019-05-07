@@ -12,6 +12,7 @@
         <link rel="stylesheet" type="text/css" href="css/cards.css">
         <link rel="stylesheet" type="text/css" href="css/dashboard.css">
         <link rel="icon" href="assets/UPOCKET4.png">
+        <link rel="stylesheet" type="text/css" href="css/css_modal.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
         <title>UPocket</title>
     </head>
@@ -189,6 +190,22 @@
                 </a>
             </li>   
         </ul>
+
+        <div id="container-modal">
+            <div id="box-modal" >
+                <header class="header-box-modal">
+                        <span id="btn-close">&times;</span>                    
+                        <span class="header-box-modal-title"> Adicionar Conta</span>
+                </header>
+                <main class="main-box-modal">
+                    <form class="modal-form" method="POST" action="#">
+                        <input type="text" name="descricao">
+                        <button class="modal-form-submit" type="submit">Enviar</button>
+                    </form>
+    
+                </main>
+            </div>
+        </div>      
         <footer>
             UPocket 2019
         </footer>
