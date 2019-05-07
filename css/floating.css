@@ -1,0 +1,59 @@
+.float{
+	position:fixed;
+	width:65px;
+	height:65px;
+	bottom:40px;
+	right:12px;
+	background: linear-gradient(to bottom, #0000AA, #000060 100%);
+	color:#FFF;
+	border-radius:50%;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+	z-index:1000;
+}
+
+#add-despesa {
+    background: linear-gradient(to bottom, #B00000, #900000 70%);
+}
+
+ul{
+	position:fixed;
+	right:14px;
+	padding-bottom:20px;
+	bottom:80px;
+	z-index:100;
+}
+
+ul li{
+	list-style:none;
+	margin-bottom:15px;
+}
+
+ul li a {
+    background: linear-gradient(to bottom, #00B000, #009000 70%);
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+	width:60px;
+	height:60px;
+	display:block;
+}
+
+ul:hover{
+	visibility:visible!important;
+	opacity:1!important;
+}
+
+.my-float{
+	font-size:24px;
+	margin-top:18px;
+}
+
+a#menu-share + ul{
+  visibility: hidden;
+}
+
+a#menu-share:hover + ul{
+  visibility: visible;
+}
