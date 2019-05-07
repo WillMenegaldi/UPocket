@@ -110,7 +110,7 @@ div.bloco>#descricao {
 
 @media screen and (min-width:1126px){
     .blocografico{
-        width: 100%;
+        width: 95%;
         height: 76%;
         display:flex;
         flex-direction: row;

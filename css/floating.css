@@ -2,8 +2,8 @@
 	position:fixed;
 	width:65px;
 	height:65px;
-	bottom:40px;
-	right:12px;
+	bottom:48.5px;
+	right:17.5px;
 	background: linear-gradient(to bottom, #0000AA, #000060 100%);
 	color:#FFF;
 	border-radius:50%;
@@ -18,9 +18,9 @@
 
 ul{
 	position:fixed;
-	right:14px;
+	right:21px;
 	padding-bottom:20px;
-	bottom:80px;
+	bottom:90px;
 	z-index:100;
 }
 

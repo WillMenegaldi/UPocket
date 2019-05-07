@@ -2,6 +2,7 @@
     margin:0;
     padding:0;
 }
+
 html {
     height: 100vh;
     width: 100vw;
@@ -19,12 +20,12 @@ footer {
 
 .header {
     height: 7.5vh;
-    background-color: rgb(230, 230, 230);
+    background-color: rgb(150, 150, 150);
     display: flex;
     flex-direction:row;
 }
 .header>div.logo {
-    width:20%;
+    width: 16.75%;
     height:100%;
 }
 .header>div.logo>a img {
