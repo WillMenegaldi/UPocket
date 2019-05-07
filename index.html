@@ -8,6 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" type="text/css" href="css/main.css">
         <link rel="stylesheet" type="text/css" href="css/graficos.css">
+        <link rel="stylesheet" type="text/css" href="css/floating.css">
         <link rel="stylesheet" type="text/css" href="css/cards.css">
         <link rel="stylesheet" type="text/css" href="css/dashboard.css">
         <link rel="icon" href="assets/UPOCKET4.png">
@@ -15,7 +16,6 @@
         <title>UPocket</title>
     </head>
     <body>
-        <script src="js/grafico.js"></script>  
         <header class="header">
             <div class="logo"><a href="index.html"><img src="assets/upocket2.png" alt="Upocket Logo"></a></div>
             <div class="username">
@@ -23,39 +23,39 @@
                 <a href="#">Nome Usuário</a>
             </div>
             <div class="mobile_menu">
-                    <div class="mobile_logo">
-                        <a href="index.html">
-                            <img src="assets/UPOCKET4.png" alt="Upocket Logo">
+                <div class="mobile_logo">
+                    <a href="index.html">
+                        <img src="assets/UPOCKET4.png" alt="Upocket Logo">
+                    </a>
+                </div>
+                <div class="bills">
+                        <a href="#">
+                            <div class="bills_icon">
+                                <img src="assets/bills.png" alt="Movimentações">
+                            </div>
                         </a>
                     </div>
-                    <div class="bills">
-                            <a href="#">
-                                <div class="bills_icon">
-                                    <img src="assets/bills.png" alt="Movimentações">
-                                </div>
-                            </a>
-                        </div>
-                        <div class="historic">
-                            <a href="#">
-                                <div class="historic_icon">
-                                    <img src="assets/historico.png" alt="Histórico">
-                                </div>
-                            </a>
-                        </div>
-                        <div class="budgets">
-                            <a href="#">
-                                <div class="budgets_icon">
-                                    <img src="assets/orcamento.png" alt="Orçamento">
-                                </div>
-                            </a>
-                        </div>
-                        <div class="reports">
-                            <a href="#">
-                                <div class="reports_icon">
-                                    <img src="assets/relatorio.png" alt="Relatório">
-                                </div>
-                            </a>
-                        </div>
+                    <div class="historic">
+                        <a href="#">
+                            <div class="historic_icon">
+                                <img src="assets/historico.png" alt="Histórico">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="budgets">
+                        <a href="#">
+                            <div class="budgets_icon">
+                                <img src="assets/orcamento.png" alt="Orçamento">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="reports">
+                        <a href="#">
+                            <div class="reports_icon">
+                                <img src="assets/relatorio.png" alt="Relatório">
+                            </div>
+                        </a>
+                    </div>
             </div>
         </header>
         <main id="flex-main">
@@ -115,27 +115,27 @@
             </nav>
             <div class="main_box">
                 <section class="flex-container">
-                    <div class="flex-card cards income">
+                    <div id="income-card" class="flex-card cards income">
                         <div class="card_title">
-                            <span id="title">
-                                <h3>RECEITAS</h3>
-                            </span>
-                            <span>
-                                <h1>R$ 1.200,00</h1>
-                            </span>
+                            <div id="title">
+                                RECEITAS
+                            </div>
+                            <div>
+                                R$ 1.200,00
+                            </div>
                         </div>
                         <div id="display-imagem" class="image-flex">
                             <img class="card_icon" src="assets/money.png"></a>
                         </div>
                     </div>
-                    <div class="cards budget flex-card">
+                    <div id="budget-card" class="cards budget flex-card">
                         <div class="card_title">
-                            <span id="title">
-                                <h3>DESPESAS</h3>
-                            </span>
-                            <span>
-                                <h1>R$ 800,00</h1>
-                            </span>
+                            <div id="title">
+                                DESPESAS
+                            </div>
+                            <div>
+                                R$ 800,00
+                            </div>
                         </div>
                         <div id="display-imagem" class="image-flex">
                             <img class="card_icon" src="assets/money.png"></a>
@@ -143,26 +143,26 @@
                     </div>
                     <div class="cards balance flex-card">
                             <div class="card_title">
-                                <span id="title">
-                                    <h3>SALDO TOTAL</h3>
-                                </span>
-                                <span>
-                                    <h1>R$ 400,00</h1>
-                                </span>
+                                <div id="title">
+                                    SALDO TOTAL
+                                </div>
+                                <div>
+                                    R$ 400,00
+                                </div>
                             </div>
                             <div id="display-imagem" class="image-flex">
-                                <img class="card_icon" src="assets/money.png"></a>
+                                <img class="card_icon" src="assets/UPOCKET4.png"></a>
                             </div>
-                        </div>
+                    </div>
                 </section>
                 <section class="blocografico">
-                    <div class="bloco"> 
+                    <div id="grafico-linha" class="bloco"> 
                         <header id="descricao">
                             Orçamento                
                         </header>
                             <canvas id="linegraph"></canvas>
                     </div>
-                    <div class="bloco" >
+                    <div id="grafico-rosquinha" class="bloco" >
                         <header id="descricao">
                             Categorias                
                         </hearder> 
@@ -171,8 +171,28 @@
                 </section>
             </div>
         </main>
+        <a href="#" class="float" id="menu-share">
+            <i class="my-float"></i>
+            <img width="100%" height="100%" src="assets/add.png" alt="">
+        </a>
+        <ul>
+            <li>
+                <a id="add-receita" href="#">
+                    <i class="my-float"></i>
+                    <img width="100%" height="100%" src="assets/bills.png" alt="">
+                </a>
+            </li>
+            <li>
+                <a id="add-despesa" href="#">
+                    <i class="my-float"></i>
+                    <img width="100%" height="100%" src="assets/bills.png" alt="">
+                </a>
+            </li>   
+        </ul>
         <footer>
             UPocket 2019
         </footer>
+        <script src="js/cards.js"></script>
+        <script src="js/grafico.js"></script>
     </body>
 </html>
