@@ -19,8 +19,8 @@ footer {
 }
 
 .header {
-    height: 7.5vh;
-    background-color: rgb(150, 150, 150);
+    height: 8.5vh;
+    background: rgba(230, 230, 230, 0.1);
     display: flex;
     flex-direction:row;
 }

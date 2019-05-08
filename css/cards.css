@@ -23,7 +23,7 @@
 }
 .card_icon {
     width: 80%;
-    margin: 20% auto;
+    margin: 20% auto 0;
     height: 80%;
 }
 .lateral_nav {
@@ -93,7 +93,7 @@
     }
     .card_icon {
         width: 80%;
-        margin: 20% auto;
+        margin: 20% auto 0;
         height: 80%;
     }
     .nav_lateral {
@@ -168,9 +168,10 @@
         height: 100%;    
     }
     .card_icon {
-        width: 95%;
-        margin: 46% auto 0;
-        height: 66%;
+        width: 90%;
+        border-radius: 0px 0px 20px 0px;
+        margin: 50% auto 0;
+        height: 60%;
     }
     .nav_lateral {
         height: 100%;
@@ -187,21 +188,20 @@
     }
     .income {
         color: green;
-        box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
-        background-image: none;
+        background-image: linear-gradient(to bottom, rgb(240, 240, 240), #c0ffce 400%);
         width: 22.5%;
         height: 100%;
     }
     .budget {
         color: red;
-        background-image: none;
+        background-image: linear-gradient(to bottom, rgb(240, 240, 240), #ff8181 400%);
         box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
         width: 22.5%;
         height: 100%;
     }
     .balance {
         color: blue;
-        background-image: none;
+        background-image: linear-gradient(to bottom, rgb(240, 240, 240), #c0ceff 300%);
         box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
         width: 22.5%;
         height: 100%;

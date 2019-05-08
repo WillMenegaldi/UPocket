@@ -2,7 +2,6 @@
 .nav_lateral{
     display: flex;
     width: 10.5%;
-    box-shadow: 5px 5px 6px rgba(100, 100, 100, 0.5)
 }
 .section_dashboard{
     display: flex;
@@ -44,7 +43,7 @@
         flex-direction: row;
         align-content: space-around;
         margin: auto;
-        margin-left: 2%;
+        margin-left: 7.5%;
     }
     .mobile_menu img{
         width: 50%;
@@ -57,8 +56,10 @@
     .username{
         display: none;
     }
+
     .mobile_menu {
         display: flex;
+        margin: 0.75% auto 0;
         flex-direction: row;
         align-content: space-around;
         margin-left: 2%;
