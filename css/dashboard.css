@@ -1,4 +1,6 @@
-
+.header{
+    display: flex;
+}
 .nav_lateral{
     display: flex;
     width: 10.5%;
@@ -13,7 +15,17 @@
 .section_dashboard img{
     width: 40%;
 }
-
+.username{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    float: right;
+    margin: auto;
+    margin-left: 60%;
+}
+.username img{
+    width: 7%;
+}
 
 .nav_lateral a{
     text-decoration: none;
