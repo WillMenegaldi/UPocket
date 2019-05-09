@@ -126,7 +126,7 @@
                             </div>
                         </div>
                         <div id="display-imagem" class="image-flex">
-                            <img class="card_icon" src="assets/green-bag.png"></a>
+                            <img class="card_icon" src="assets/icon-green-bag.png"></a>
                         </div>
                     </div>
                     <div id="budget-card" class="cards budget flex-card">
@@ -139,7 +139,7 @@
                             </div>
                         </div>
                         <div id="display-imagem" class="image-flex">
-                            <img class="card_icon" src="assets/debt.png"></a>
+                            <img class="card_icon" src="assets/icon-debt.png"></a>
                         </div>
                     </div>
                     <div class="cards balance flex-card">
@@ -152,7 +152,7 @@
                                 </div>
                             </div>
                             <div id="display-imagem" class="image-flex">
-                                <img class="card_icon" src="assets/UPOCKET4.png"></a>
+                                <img class="card_icon" src="assets/icon-pocket.png"></a>
                             </div>
                     </div>
                 </section>
@@ -193,14 +193,27 @@
 
         <div id="container-modal">
             <div id="box-modal" >
-                <header class="header-box-modal">
+                <header id="header-box-modal">
                         <span id="btn-close">&times;</span>                    
-                        <span class="header-box-modal-title"> Adicionar Conta</span>
+                        <span id="header-box-modal-title"> Adicionar Despesas </span>
                 </header>
                 <main class="main-box-modal">
                     <form class="modal-form" method="POST" action="#">
-                        <input type="text" name="descricao">
-                        <button class="modal-form-submit" type="submit">Enviar</button>
+                        <input placeholder="Descrição da despesa:" class="modal-form-input" type="text" name="descricao">
+                        <div > 
+                            <input placeholder="Valor da despesa:" class="modal-form-input" type="number" name="descricao">
+                            <input placeholder="Data" class="modal-form-input" type="date" name="descricao">
+                        </div>                             
+                        
+
+                        <select name="categoria" id="modal-form-categoria">
+                            <option value="alimentacao"> Alimentação</option>                            
+                            <option value="transporte"> Transporte</option>                            
+                            <option value="lazer"> Lazer</option>                            
+                            <option value="estudos"> Estudos</option>                            
+                            <option value="roupas"> Roupas</option>                        </select>
+                        <input placeholder="Digite o nome da conta:" class="modal-form-input" type="text" name="descricao">
+                        <button id="modal-form-submit" type="submit">Enviar</button>
                     </form>
     
                 </main>

@@ -31,10 +31,34 @@ function abreModal(card)
     var modal= document.getElementById('container-modal');
     modal.style.display ='block';
 
+    var headerModal = document.getElementById("header-box-modal");
+    var categoriaModal=document.getElementById("modal-form-categoria");        
+    var enviarModal=document.getElementById("modal-form-submit");
+    var inputModal=document.getElementsByClassName("modal-form-input");
+    var headerTitle=document.getElementById('header-box-modal-title');
+
     
     if(card == 'receita') 
     {
         console.log("Card Receita");
+        
+        headerTitle.innerHTML='Adicionar Receita';
+        headerModal.style.backgroundColor='rgb(21, 76, 10)'; 
+        categoriaModal.style.backgroundColor='rgb(21, 76, 10)';
+        
+        categoriaModal.style.display='none';  
+        enviarModal.style.backgroundColor='rgb(21, 76, 10)';  
+          
+        /*Setando cor nos inputs*/
+        for(var i =0;i<=inputModal.length;i++){
+            inputModal[i].style["border-bottom"]='3px solid rgb(21, 76, 10)';
+            if(i==0){
+                inputModal[i].placeholder="Descrição da Receita:";  
+            }else if(i==1){
+                inputModal[i].placeholder="Valor da Receita:";  
+            }
+        }
+
         /*var cardReceita = document.getElementsByClassName('income');
 
         for(var i = 0; i < cardReceita.length; i++)
@@ -42,6 +66,24 @@ function abreModal(card)
             cardReceita[i].style["color"] = 'navy';
         }
         */
+    }else if(card == 'despesa'){
+        headerTitle.innerHTML='Adicionar Despesas';
+        
+        categoriaModal.style.display='block';
+        headerModal.style.backgroundColor='rgb(153, 36, 42)'; 
+        categoriaModal.style.backgroundColor='rgb(153, 36, 42)';  
+        enviarModal.style.backgroundColor='rgb(153, 36, 42)';    
+        /*Setando cor nos inputs*/
+        for(var i =0;i<=inputModal.length;i++){
+            inputModal[i].style["border-bottom"]='3px solid rgb(153, 36, 42)';
+            /*setando os placeholders*/
+            if(i==0){
+                inputModal[i].placeholder="Descrição da Despesa:";  
+            }else if(i==1){
+                inputModal[i].placeholder="Valor da Despesa:";  
+            }      
+        }
+        
     }
 
 }
