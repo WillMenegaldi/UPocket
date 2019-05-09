@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#FAFAFA" />
-    <link rel="manifest" href="manifest.json">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/graficos.css">
@@ -130,8 +128,7 @@
                         <div id="title">
                             RECEITAS
                         </div>
-                        <div>
-                            R$ 1.200,00
+                        <div id="valor-receita">
                         </div>
                     </div>
                     <div id="display-imagem" class="image-flex">
@@ -143,8 +140,7 @@
                         <div id="title">
                             DESPESAS
                         </div>
-                        <div>
-                            R$ 800,00
+                        <div id="valor-despesa">
                         </div>
                     </div>
                     <div id="display-imagem" class="image-flex">
@@ -157,8 +153,7 @@
                         <div id="title">
                             SALDO TOTAL
                         </div>
-                        <div>
-                            R$ 400,00
+                        <div id="valor-saldo">
                         </div>
                     </div>
                     <div id="display-imagem" class="image-flex">
@@ -208,21 +203,20 @@
                 </header>
                 <main class="main-box-modal">
                     <form class="modal-form" method="POST" action="#">
-                        <input placeholder="Descrição da despesa:" class="modal-form-input" type="text" name="descricao">
+                        <input placeholder="Descrição da despesa:" class="modal-form-input" type="text" name="name">
                         <div > 
-                            <input placeholder="Valor da despesa:" class="modal-form-input" type="number" name="descricao">
-                            <input placeholder="Data" class="modal-form-input" type="date" name="descricao">
+                            <input placeholder="Valor da despesa:" class="modal-form-input" type="number" name="value">
+                            <input placeholder="Data" class="modal-form-input" type="date" name="date">
                         </div>                             
-                        
-
-                        <select name="categoria" id="modal-form-categoria">
+                        <select name="categoria" id="modal-form-categoria" name="type" >
                             <option value="alimentacao"> Alimentação</option>                            
                             <option value="transporte"> Transporte</option>                            
                             <option value="lazer"> Lazer</option>                            
                             <option value="estudos"> Estudos</option>                            
-                            <option value="roupas"> Roupas</option>                        </select>
-                        <input placeholder="Digite o nome da conta:" class="modal-form-input" type="text" name="descricao">
-                        <button id="modal-form-submit" type="submit">Enviar</button>
+                            <option value="roupas"> Roupas</option>                        
+                        </select>
+                        <input placeholder="Digite o nome da conta:" class="modal-form-input" type="text" name="account">
+                        <button id="modal-form-submit" type="submit">Salvar</button>
                     </form>
     
                 </main>
