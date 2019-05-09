@@ -36,6 +36,51 @@ function insert(dataset)
     datasetMapping(dataset, database);
     limpaCampos(dataset);
     fechaModal();
+    atualizaCards();
+}
+
+function atualizaCards()
+{
+    var cardReceita = document.querySelector("#valor-receita");
+    var cardDespesa = document.querySelector("#valor-despesa");
+    var cardSaldo   = document.querySelector("#valor-saldo");
+    
+    database = JSON.parse(localStorage.UPocketDataBase);
+
+    setaCardReceitas(cardReceita, database);
+    setaCardDespesas(cardDespesa, database);
+    setaCardSaldoTotal(cardSaldo, cardReceita, cardDespesa);
+}
+
+function setaCardReceitas(card, db)
+{
+    let total = 0;
+    let receitas = db.filter(data => data.categoria == null);
+
+    for(var i = 0; i < receitas.length; i++)
+    {
+        total += receitas[i].valor;
+    }
+
+    card.innerHTML = total;
+}
+
+function setaCardDespesas(card, db)
+{
+    let total = 0;
+    let despesas = db.filter(data => data.categoria != null);
+
+    for(var i = 0; i < despesas.length; i++)
+    {
+        total += despesas[i].valor;
+    }
+
+    card.innerHTML = total;
+}
+
+function setaCardSaldoTotal(card, receitas, despesas)
+{
+    card.innerHTML = (parseInt(receitas.innerHTML) - parseInt(despesas.innerHTML)); 
 }
 
 function limpaCampos(campos)
@@ -48,12 +93,12 @@ function limpaCampos(campos)
 
 function datasetMapping(data, db)
 {
-    let dataset = JSON.stringify({
+    let dataset = {
         nome      : data[0].value,
-        valor     : data[1].value,
+        valor     : parseInt(data[1].value),
         data      : data[2].value,
         categoria : data[3].value || null
-    });
+    };
 
     db.push(dataset);
 
