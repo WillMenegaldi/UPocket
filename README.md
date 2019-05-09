@@ -1,2 +1,2 @@
 # UPocket
-Projeto TIS I - upocket.azurewebsites.net
+Projeto TIS I - https://upocket.azurewebsites.net
