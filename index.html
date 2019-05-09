@@ -204,14 +204,15 @@
                             <input required placeholder="Valor da despesa:" class="modal-form-input" type="number" name="value">
                             <input required placeholder="Data" class="modal-form-input" type="date" name="date">
                         </div>                             
-                        <select name="categoria" id="modal-form-categoria" name="type" >
+                        <select required name="categoria" id="modal-form-categoria" name="type" >
+                            <option value="" selected disabled hidden></option>
                             <option value="alimentacao"> Alimentação</option>                            
                             <option value="transporte"> Transporte</option>                            
                             <option value="lazer"> Lazer</option>                            
                             <option value="estudos"> Estudos</option>                            
                             <option value="roupas"> Roupas</option>                        
                         </select>
-                        <button id="modal-form-submit" type="submit">Salvar</button>
+                        <button id="modal-form-submit" type="button">Salvar</button>
                     </form>
     
                 </main>

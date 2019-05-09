@@ -11,8 +11,54 @@ document.querySelector("#btn-close").addEventListener("click", function(){
 });
 
 document.querySelector("#modal-form-submit").addEventListener("click", function(){
-    validaInsercao(document.querySelector("#modal-form-submit"));
+    insert(document.querySelector(".modal-form"));
 });
+
+function inicializaDB()
+{
+    let database = localStorage.getItem("UPocketDataBase");
+
+    if(!database)
+    {
+        database = [];
+    }
+    else
+    {
+        database = JSON.parse(database);
+    }
+
+    return database;
+}
+
+function insert(dataset)
+{
+    let database = inicializaDB();
+    datasetMapping(dataset, database);
+    limpaCampos(dataset);
+    fechaModal();
+}
+
+function limpaCampos(campos)
+{
+    campos[0].value = null;
+    campos[1].value = null;
+    campos[2].value = null;
+    campos[3].value = null;
+}
+
+function datasetMapping(data, db)
+{
+    let dataset = JSON.stringify({
+        nome      : data[0].value,
+        valor     : data[1].value,
+        data      : data[2].value,
+        categoria : data[3].value || null
+    });
+
+    db.push(dataset);
+
+    localStorage.setItem("UPocketDataBase", JSON.stringify(db));
+}
 
 function abreModal(card) 
 {
@@ -25,7 +71,6 @@ function abreModal(card)
     var enviarModal     = document.getElementById("modal-form-submit");
     var inputModal      = document.getElementsByClassName("modal-form-input");
     var headerTitle     = document.getElementById('header-box-modal-title');
-
     
     if(card == 'receita') 
     {
@@ -50,8 +95,7 @@ function abreModal(card)
     }
     else if(card == 'despesa')
     {
-        headerTitle.innerHTML='Adicionar Despesas';
-        
+        headerTitle.innerHTML                = 'Adicionar Despesas';        
         categoriaModal.style.display         = 'block';
         headerModal.style.backgroundColor    = 'rgb(153, 36, 42)'; 
         categoriaModal.style.backgroundColor = 'rgb(153, 36, 42)';  
