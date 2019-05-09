@@ -29,7 +29,7 @@ ul li{
 	margin-bottom:15px;
 }
 
-ul li a {
+ul li{
     background: linear-gradient(to bottom, #00B000, #009000 70%);
 	color:#FFF;
 	border-radius:50px;
@@ -38,6 +38,7 @@ ul li a {
 	width:60px;
 	height:60px;
 	display:block;
+	cursor:pointer;
 }
 
 ul:hover{

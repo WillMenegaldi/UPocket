@@ -157,7 +157,7 @@
                         </div>
                     </div>
                     <div id="display-imagem" class="image-flex">
-                        <img class="card_icon" src="assets/UPOCKET4.png"></a>
+                        <img class="card_icon" src="assets/UPOCKET3.png"></a>
                     </div>
                 </div>
             </section>
@@ -182,17 +182,13 @@
         <img width="100%" height="100%" src="assets/add.png" alt="">
     </a>
     <ul>
-        <li>
-            <a id="add-receita" href="#">
+        <li id="add-receita">
                 <i class="my-float"></i>
                 <img width="70%" height="70%" src="assets/green-bag.png" alt="">
-            </a>
         </li>
-        <li>
-            <a id="add-despesa" href="#">
+        <li id="add-despesa">
                 <i class="my-float"></i>
                 <img width="70%" height="70%" src="assets/debt.png" alt="">
-            </a>
         </li>
     </ul>
         <div id="container-modal">
@@ -202,11 +198,11 @@
                         <span id="header-box-modal-title"> Adicionar Despesas </span>
                 </header>
                 <main class="main-box-modal">
-                    <form class="modal-form" method="POST" action="#">
-                        <input placeholder="Descrição da despesa:" class="modal-form-input" type="text" name="name">
+                    <form class="modal-form" >
+                        <input required placeholder="Descrição da despesa:" class="modal-form-input" type="text" name="name">
                         <div > 
-                            <input placeholder="Valor da despesa:" class="modal-form-input" type="number" name="value">
-                            <input placeholder="Data" class="modal-form-input" type="date" name="date">
+                            <input required placeholder="Valor da despesa:" class="modal-form-input" type="number" name="value">
+                            <input required placeholder="Data" class="modal-form-input" type="date" name="date">
                         </div>                             
                         <select name="categoria" id="modal-form-categoria" name="type" >
                             <option value="alimentacao"> Alimentação</option>                            
@@ -215,7 +211,7 @@
                             <option value="estudos"> Estudos</option>                            
                             <option value="roupas"> Roupas</option>                        
                         </select>
-                        <input placeholder="Digite o nome da conta:" class="modal-form-input" type="text" name="account">
+                        <input required placeholder="Digite o nome da conta:" class="modal-form-input" type="text" name="account">
                         <button id="modal-form-submit" type="submit">Salvar</button>
                     </form>
     
