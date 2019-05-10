@@ -1,3 +1,7 @@
+
+/*Setando ao iniciar */
+window.addEventListener('load',atualizaCards );
+
 document.querySelector("#add-despesa").addEventListener("click", function(){
     abreModal('despesa');
 });

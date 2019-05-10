@@ -20,10 +20,12 @@
     box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
 }
 div.bloco>#descricao {
+    letter-spacing: .8px;
+    padding-top:2%;
     border-radius: 30px 30px 0px 0px ;
-    font-size: 1.1em;
+    font-size: 1.3em;
     width: 100%;
-    height: 13%;
+    height: 11.5%;
     text-align: center;
     color:white;
     background-color: rgb(50, 50, 50);
@@ -131,10 +133,11 @@ div.bloco>#descricao {
         align-items: center;
     }        
     .blocografico .bloco #linegraph {
-        margin:5% auto !important;
+        margin:2% auto !important;
         width: 79% !important;
-        height: 75% !important;
+        height: 73% !important;
     }
+    
     .blocografico .bloco #pizzagraph {
         margin:0 auto !important;
         margin-top:11% !important;

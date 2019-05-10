@@ -24,13 +24,14 @@ footer {
     display: flex;
     flex-direction:row;
 }
-.header>div.logo {
-    width: 16.75%;
+.header>div.logo {    
+    padding-top:.5%;
+    width: 100%;
     height:100%;
 }
 .header>div.logo>a img {
-    width:100%;
-    height:100%;
+    width:30%;
+    height:80%;
 }
 main#flex-main {
     display: flex; 
@@ -39,6 +40,34 @@ main#flex-main {
     height: 125vh;
     background:rgb(250, 250, 250);
 }
+.box-user{  
+    display:flex;
+    flex-direction:row;  
+    width:45%;
+    height:100%;
+}
+.box-username{
+    text-decoration: none;
+    padding:5%;
+    color:rgb(50, 50, 50,.5);
+}
+.box-username a{
+    text-decoration: none;
+    padding:5%;
+    font-size:1.5em;
+    color:rgb(10, 10, 10,.5);
+}
+
+.box-user>div{
+    width: 100%;
+    height:100%;
+}
+.box-user>div img{
+    margin-top:4%;
+    width: 50%;
+    height:80%;
+}
+
 
 .main_box {
     width: 100%;

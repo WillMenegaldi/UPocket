@@ -1,4 +1,3 @@
-
 .flex-container {
     display: flex;
     justify-content: space-around;
@@ -7,15 +6,19 @@
     flex-wrap: wrap-reverse;
 }
 .flex-card {
+    padding:0;
     display: flex;
     flex-grow: 0;
     justify-content: space-around;
 }
 .card_title {
-    margin: 5% auto 0;
-    width: 67%;
+    margin:0;
+    width: 60%;
     text-align: center;
-
+}
+.cards-values{
+    padding:5%;
+    font-size:2em;
 }
 .flex-card>.image-flex {
     width: 30%;
@@ -35,6 +38,9 @@
     background-color: rgb(230, 230, 230);
 }
 #title {
+    margin-top:3%;
+    width:100%;
+    font-size:1.5em;
     color: rgb(80, 80, 80);
 }
 
@@ -184,7 +190,16 @@
     }
     #title {
         color: rgb(130, 130, 130);
-        padding: 1%;
+        margin:0;
+        width:90%;
+        border-bottom: 1px solid rgb(50, 50,50,.5);
+        margin-top:7%;
+        font-size:1.5em;
+        color: rgb(80, 80, 80);
+    }
+    .cards-values{
+        padding:10%;
+        font-size:2em;
     }
     .income {
         color: green;
