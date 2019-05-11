@@ -34,6 +34,7 @@ function inicializaDB()
     return database;
 }
 
+
 function insert(dataset)
 {
     let database = inicializaDB();
@@ -60,12 +61,10 @@ function setaCardReceitas(card, db)
 {
     let total = 0;
     let receitas = db.filter(data => data.categoria == null);
-
     for(var i = 0; i < receitas.length; i++)
     {
         total += receitas[i].valor;
     }
-
     card.innerHTML = total;
 }
 

@@ -78,7 +78,7 @@ function graphic()
                 {
                     borderWidth: 0.5,
                     label:'Categorias',
-                    data: [2000, 1000, 1000, 1000, 400],
+                    data: [total, 0, 0, 0, 0],
                     backgroundColor:['#006400','#89a5c4','#8c092a','#099673','#847502']
                 }
             ]
