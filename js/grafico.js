@@ -1,5 +1,78 @@
 window.addEventListener('load', graphic);
 
+var BD = inicializaDB();/*<-------inicializa database na variavel BD*/
+var totalAlimentacao = gastoAlimentacao();
+var totalGasolina = gastoGasolina();
+var totalEscola = gastoEscola();
+var totalRoupas = gastoRoupas();
+var totalLazer = gastoLazer();
+
+function inicializaDB() /*<---------Função que inicializa o banco de dados*/ {
+    let bancoDados = localStorage.getItem("UPocketDataBase");
+    if (!bancoDados) {
+        bancoDados = [];
+    }
+    else {
+        bancoDados = JSON.parse(bancoDados);
+    }
+    return bancoDados;
+}
+
+
+function gastoAlimentacao() {
+    database = JSON.parse(localStorage.UPocketDataBase);
+    db = database;
+    var soma = 0
+    for (x = 0; x < db.length; x++) {
+        var database = db[x].categoria == "alimentacao" && db[x].valor;
+        soma += database;
+    }
+    return soma;
+}
+
+function gastoGasolina() {
+    database = JSON.parse(localStorage.UPocketDataBase);
+    db = database;
+    var soma = 0
+    for (x = 0; x < db.length; x++) {
+        var database = db[x].categoria == "transporte" && db[x].valor;
+        soma += database;
+    }
+    return soma;
+}
+
+function gastoRoupas() {
+    database = JSON.parse(localStorage.UPocketDataBase);
+    db = database;
+    var soma = 0
+    for (x = 0; x < db.length; x++) {
+        var database = db[x].categoria == "roupas" && db[x].valor;
+        soma += database;
+    }
+    return soma;
+}
+function gastoLazer() {
+    database = JSON.parse(localStorage.UPocketDataBase);
+    db = database;
+    var soma = 0
+    for (x = 0; x < db.length; x++) {
+        var database = db[x].categoria == "lazer" && db[x].valor;
+        soma += database;
+    }
+    return soma;
+}
+
+function gastoEscola() {
+    database = JSON.parse(localStorage.UPocketDataBase);
+    db = database;
+    var soma = 0
+    for (x = 0; x < db.length; x++) {
+        var database = db[x].categoria == "estudos" && db[x].valor;
+        soma += database;
+        console.log(database);
+    }
+    return soma;
+}
 function graphic()
 {
     let ctx ;
@@ -15,21 +88,21 @@ function insertGraficoLinhas( ctx )
             type:'line',
             options :{
                 responsive:false,
+
                 /* coloca-se os dois valores */
                 tooltips: {
                     mode: 'index'
                 },
                 scales: {
                     yAxes: [{
-                      ticks: {
-                        fontSize: 9
-                      }
+                        ticks: {
+                            fontSize: 9
+                        }
                     }],
                     xAxes: [{
                         ticks: {
                             fontSize: 9
                         }
-                     
                     }]
                 },
                 legend: {
@@ -87,7 +160,7 @@ function insertGraficoPizza( ctx )
                     {
                         borderWidth: 0.5,
                         label:'Categorias',
-                        data: [2000, 1000, 1000, 1000, 400],
+                        data: [totalAlimentacao, totalRoupas, totalGasolina, totalLazer, totalEscola],
                         backgroundColor:['#006400','#89a5c4','#8c092a','#099673','#847502']
                     }
                 ]
@@ -103,8 +176,6 @@ document.querySelector('#grafico-rosquinha').addEventListener("click",function()
 document.querySelector("#btn-close-graph").addEventListener("click", function(){
     fechaModalGraph();
 });
-
-
 /*Abrindo e fechando o modal gráfico*/
 function abreModalGrafico()
 {    
@@ -141,7 +212,4 @@ function fechaModalGraph()
         }
     }
 }
-
-
-
 
