@@ -181,33 +181,56 @@ function insertBoxCategorias(){
     $('#categorias-lat').html(''); 
     for(var i = 0; i < 5 ; i++){
         var nomeCategoria;
-        var valorCategoria;
+        var valorCategoria; 
+        var valorTotal;
+        var percentualCategoria;       
+        var detalheCor;
+
         if(i==0)
         {
-            nomeCategoria         =  "Estudos";
-            valorCategoria        =  totalEscola;     
+            nomeCategoria         =  "Alimentação";
+            valorCategoria        =  totalAlimentacao;     
         }else if(i==1)
         {            
-            nomeCategoria         =  "Alimentação";
-            valorCategoria        =  totalAlimentacao;  
+            nomeCategoria         =  "Vestuário";
+            valorCategoria        =  totalRoupas;  
         }else if(i==2)
         {            
-            nomeCategoria         =  "Lazer";
-            valorCategoria        =  totalLazer; 
-        }else if(i==3)
-        {           
-            nomeCategoria         =  "Vestuário";
-            valorCategoria        =  totalRoupas; 
-        }else if(i==4)
-        {           
             nomeCategoria         =  "Transporte";
             valorCategoria        =  totalGasolina; 
+        }else if(i==3)
+        {           
+            nomeCategoria         =  "Lazer";
+            valorCategoria        =  totalLazer; 
+        }else if(i==4)
+        {           
+            nomeCategoria         =  "Escola";
+            valorCategoria        =  totalEscola; 
         }
+        valorTotal               =  (totalRoupas+totalAlimentacao+totalEscola+totalGasolina+totalLazer).toFixed(2);
+        percentualCategoria       =  ((valorCategoria/valorTotal)*100).toFixed(2);        
+        $( '#categorias-lat' ).append( '<div class="box-categoria">  <section class="box-categoria-img"></section><section class="box-categoria-txt">   <div class="box-categoria-info"> <div id="nome-categoria">'+nomeCategoria+'</div> <div id="valor-categoria">'+valorCategoria.toFixed(2)+'</div ></div>  <div class="box-categoria-info percentual"><div>Percentual</div> <div id="percent-categoria">'+percentualCategoria+'% </div></div> </section></div>' );     
+        
+        detalheCor                =  document.getElementsByClassName('box-categoria-img');
 
-        var imagem                =  '<img width="70%" height="80%" src="assets/icon-green-bag.png" alt="">';
-        var valorTotal            =  (totalRoupas+totalAlimentacao+totalEscola+totalGasolina+totalLazer).toFixed(2);
-        var percentualCategoria   =  ((valorCategoria/valorTotal)*100).toFixed(2);        
-        $( '#categorias-lat' ).append( '<div class="box-categoria">  <section class="box-categoria-img">'+imagem+'</section><section class="box-categoria-txt">   <div class="box-categoria-info"> <div id="nome-categoria">'+nomeCategoria+'</div> <div id="valor-categoria">'+valorCategoria.toFixed(2)+'</div ></div>  <div class="box-categoria-info percentual"><div>Percentual</div> <div id="percent-categoria">'+percentualCategoria+'% </div></div> </section></div>' );     
+
+        if(i==0)
+        {
+            detalheCor[i].style["background"]='#006400';
+              
+        }else if(i==1)
+        {            
+            detalheCor[i].style["background"]='#89a5c4';
+        }else if(i==2)
+        {            
+            detalheCor[i].style["background"]='#8c092a';
+        }else if(i==3)
+        {           
+            detalheCor[i].style["background"]='#099673';
+        }else if(i==4)
+        {           
+            detalheCor[i].style["background"]='#847502';
+        }
     }
 }
 
