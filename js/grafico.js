@@ -155,7 +155,7 @@ function insertGraficoPizza( ctx )
                 cutoutPercentage: 67
             },
             data:{
-                labels:['Alimentação', 'Roupas', 'Gasolina', 'Lazer', 'Escola'],
+                labels:['Alimentação', 'Vestuário' , 'Transporte', 'Lazer', 'Escola'],
                 datasets:[
                     {
                         borderWidth: 0.5,
@@ -176,6 +176,41 @@ document.querySelector('#grafico-rosquinha').addEventListener("click",function()
 document.querySelector("#btn-close-graph").addEventListener("click", function(){
     fechaModalGraph();
 });
+function insertBoxCategorias(){
+    
+    $('#categorias-lat').html(''); 
+    for(var i = 0; i < 5 ; i++){
+        var nomeCategoria;
+        var valorCategoria;
+        if(i==0)
+        {
+            nomeCategoria         =  "Estudos";
+            valorCategoria        =  totalEscola;     
+        }else if(i==1)
+        {            
+            nomeCategoria         =  "Alimentação";
+            valorCategoria        =  totalAlimentacao;  
+        }else if(i==2)
+        {            
+            nomeCategoria         =  "Lazer";
+            valorCategoria        =  totalLazer; 
+        }else if(i==3)
+        {           
+            nomeCategoria         =  "Vestuário";
+            valorCategoria        =  totalRoupas; 
+        }else if(i==4)
+        {           
+            nomeCategoria         =  "Transporte";
+            valorCategoria        =  totalGasolina; 
+        }
+
+        var imagem                =  '<img width="70%" height="80%" src="assets/icon-green-bag.png" alt="">';
+        var valorTotal            =  (totalRoupas+totalAlimentacao+totalEscola+totalGasolina+totalLazer).toFixed(2);
+        var percentualCategoria   =  ((valorCategoria/valorTotal)*100).toFixed(2);        
+        $( '#categorias-lat' ).append( '<div class="box-categoria">  <section class="box-categoria-img">'+imagem+'</section><section class="box-categoria-txt">   <div class="box-categoria-info"> <div id="nome-categoria">'+nomeCategoria+'</div> <div id="valor-categoria">'+valorCategoria.toFixed(2)+'</div ></div>  <div class="box-categoria-info percentual"><div>Percentual</div> <div id="percent-categoria">'+percentualCategoria+'% </div></div> </section></div>' );     
+    }
+}
+
 /*Abrindo e fechando o modal gráfico*/
 function abreModalGrafico()
 {    
@@ -185,18 +220,8 @@ function abreModalGrafico()
 
     insertGraficoPizza(ctx);
 
-    /* Setando os boxs das categorias de acordo com a quantidade*/    
-    $('#categorias-lat').html('');   
-    for(var i = 0; i <= 3 ; i++){
-        var nomeCategoria         =  'Alimentação';
-        var imagem                =  '<img width="70%" height="80%" src="assets/icon-green-bag.png" alt="">';
-        var nomeCategoria         =  'Alimentação';
-        var valorCategoria        =  3000;
-        var valorTotal            =  5000;
-        var percentualCategoria   =  (valorCategoria/valorTotal)*100;
-        
-        $( '#categorias-lat' ).append( '<div class="box-categoria">  <section class="box-categoria-img">'+imagem+'</section><section class="box-categoria-txt">   <div class="box-categoria-info"> <div id="nome-categoria">'+nomeCategoria+'</div> <div id="valor-categoria">'+valorCategoria+'</div ></div>  <div class="box-categoria-info percentual"><div>Percentual</div> <div id="percent-categoria">'+percentualCategoria+'% </div></div> </section></div>' );     
-    }   
+    /* Setando os boxs das categorias de acordo com a quantidade*/  
+    insertBoxCategorias();   
 }
 
 function fechaModalGraph()
