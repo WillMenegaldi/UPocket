@@ -13,6 +13,7 @@
     <link rel="icon" href="assets/UPOCKET4.png">
     <link rel="stylesheet" type="text/css" href="css/css_modal.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
     <title>UPocket</title>
 </head>
 
@@ -172,7 +173,7 @@
                     </header>
                     <canvas id="linegraph"></canvas>
                 </div>
-                <div id="grafico-rosquinha" class="bloco">
+                <div id="grafico-rosquinha" class="bloco" title="Clique aqui para mais detalhes!">
                     <header id="descricao">
                         Categorias
                         </hearder>
@@ -221,7 +222,30 @@
     
                 </main>
             </div>
-        </div>      
+        </div>
+        
+        <div id="container-modal-graph">
+            <div id="box-modal">
+                <header id="header-box-modal">
+                        <span id="btn-close-graph">&times;</span>                    
+                        <span id="header-box-modal-title">Detalhamento </span>
+                </header>
+                <main class="main-box-modal graph">
+                    <section class="grafico-lateral">
+                        <canvas id="pizzagraph2"></canvas>
+                    </section>                   
+
+                    <section class="categorias-lateral" id="categorias-lat">
+                        
+
+                    </section>
+                    
+                            
+                </main>
+            </div>
+
+        </div> 
+     
         <footer>
             UPocket 2019
         </footer>
