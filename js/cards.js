@@ -49,6 +49,18 @@ function insert(dataset)
     fechaModal();
     atualizaCards();
 }
+function atualizaGrafico()
+{
+    var cardReceita = document.querySelector("#valor-receita");
+    var cardDespesa = document.querySelector("#valor-despesa");
+    var cardSaldo   = document.querySelector("#valor-saldo");
+    
+    database = JSON.parse(localStorage.UPocketDataBase);
+
+    setaCardReceitas(cardReceita, database);
+    setaCardDespesas(cardDespesa, database);
+    setaCardSaldoTotal(cardSaldo, cardReceita, cardDespesa);
+}
 
 function atualizaCards()
 {
@@ -71,7 +83,7 @@ function setaCardReceitas(card, db)
     {
         total += receitas[i].valor;
     }
-    card.innerHTML = total;
+    card.innerHTML = total.toFixed(2);
 }
 
 function setaCardDespesas(card, db)
@@ -83,13 +95,12 @@ function setaCardDespesas(card, db)
     {
         total += despesas[i].valor;
     }
-
-    card.innerHTML = total;
+    card.innerHTML = total.toFixed(2);
 }
 
 function setaCardSaldoTotal(card, receitas, despesas)
 {
-    card.innerHTML = (parseInt(receitas.innerHTML) - parseInt(despesas.innerHTML)); 
+    card.innerHTML = (parseInt(receitas.innerHTML) - parseInt(despesas.innerHTML)).toFixed(2); 
 }
 
 function limpaCampos(campos)
@@ -189,14 +200,5 @@ function fechaModal()
             modalGraph.style.display='none';
         }
 
-    }
-}
-function abreModalGrafico(){
-    var modalGraph = document.getElementById('container-modal-graph');
-    modalGraph.style.display='block';
-
-    /* Setando os boxs das categorias*/
-    for(var i = 0; i<=3 ;i++){
-        $('#categorias-lat').append( '<div class="box-categoria"> <section class="box-categoria-img"></section><section class="box-categoria-txt">   <div class="box-categoria-info"> <div id="nome-categoria"></div> <div id="valor-categoria"></div ></div>  <div class="box-categoria-info"><div ></div> <div id="percent-categoria"></div></div> </section></div>');
     }
 }
