@@ -18,6 +18,12 @@ document.querySelector("#modal-form-submit").addEventListener("click", function(
     insert(document.querySelector(".modal-form"));
 });
 
+document.querySelector('#grafico-rosquinha').addEventListener("click",function(){
+    abreModalGrafico();
+});
+
+
+
 function inicializaDB()
 {
     let database = localStorage.getItem("UPocketDataBase");
@@ -168,14 +174,29 @@ function abreModal(card)
 function fechaModal()
 {
     var modal = document.getElementById('container-modal');
+    var modalGraph=document.getElementById('container-modal-graph');
     
     modal.style.display = 'none';
-    
+    modalGraph.style.display='none';
     window.onclick = function()
     {
         if(event.target == modal)
         {
             modal.style.display = 'none';
         }
+        else if(event.target == modalGraph)
+        {
+            modalGraph.style.display='none';
+        }
+
+    }
+}
+function abreModalGrafico(){
+    var modalGraph = document.getElementById('container-modal-graph');
+    modalGraph.style.display='block';
+
+    /* Setando os boxs das categorias*/
+    for(var i = 0; i<=3 ;i++){
+        $('#categorias-lat').append( '<div class="box-categoria"> <section class="box-categoria-img"></section><section class="box-categoria-txt">   <div class="box-categoria-info"> <div id="nome-categoria"></div> <div id="valor-categoria"></div ></div>  <div class="box-categoria-info"><div ></div> <div id="percent-categoria"></div></div> </section></div>');
     }
 }
