@@ -186,23 +186,23 @@ function insertBoxCategorias(){
         var percentualCategoria;       
         var detalheCor;
 
-        if(i==0)
+        if( i == 0 )
         {
             nomeCategoria         =  "Alimentação";
             valorCategoria        =  totalAlimentacao;     
-        }else if(i==1)
+        }else if( i == 1 )
         {            
             nomeCategoria         =  "Vestuário";
             valorCategoria        =  totalRoupas;  
-        }else if(i==2)
+        }else if( i == 2 )
         {            
             nomeCategoria         =  "Transporte";
             valorCategoria        =  totalGasolina; 
-        }else if(i==3)
+        }else if( i == 3 )
         {           
             nomeCategoria         =  "Lazer";
             valorCategoria        =  totalLazer; 
-        }else if(i==4)
+        }else if( i == 4 )
         {           
             nomeCategoria         =  "Escola";
             valorCategoria        =  totalEscola; 
@@ -214,22 +214,22 @@ function insertBoxCategorias(){
         detalheCor                =  document.getElementsByClassName('box-categoria-img');
 
 
-        if(i==0)
+        if( i == 0 )
         {
-            detalheCor[i].style["background"]='#006400';
+            detalheCor[ i ].style["background"]  =  '#006400';
               
-        }else if(i==1)
+        }else if( i == 1 )
         {            
-            detalheCor[i].style["background"]='#89a5c4';
-        }else if(i==2)
+            detalheCor[ i ].style["background"]  =  '#89a5c4';
+        }else if( i == 2 )
         {            
-            detalheCor[i].style["background"]='#8c092a';
-        }else if(i==3)
+            detalheCor[ i ].style["background"]  =  '#8c092a';
+        }else if( i == 3 )
         {           
-            detalheCor[i].style["background"]='#099673';
-        }else if(i==4)
+            detalheCor[ i ].style["background"]  =  '#099673';
+        }else if( i == 4 )
         {           
-            detalheCor[i].style["background"]='#847502';
+            detalheCor[ i ].style["background"]  =  '#847502';
         }
     }
 }
