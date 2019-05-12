@@ -69,7 +69,6 @@ function gastoEscola() {
     for (x = 0; x < db.length; x++) {
         var database = db[x].categoria == "estudos" && db[x].valor;
         soma += database;
-        console.log(database);
     }
     return soma;
 }
@@ -145,7 +144,7 @@ function graphic() {
             cutoutPercentage: 67
         },
         data: {
-            labels: ['Alimentação', 'Roupas', 'Gasolina', 'Lazer', 'Escola'],
+            labels: ['Alimentação', 'Roupas', 'Transporte', 'Lazer', 'Escola'],
             datasets: [
                 {
                     borderWidth: 0.5,
