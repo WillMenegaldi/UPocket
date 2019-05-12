@@ -155,9 +155,12 @@ select{
     height:15%;
 }
 .box-categoria-img{
-    height: 100%;
-    width:20%;
-    border-right:2px solid rgba(30, 30, 30, .5);
+    margin:1%;
+    height: 80%;
+    width:9%;
+    border-right:3px solid rgba(30, 30, 30, .5);
+    box-shadow: 2px 4px 5px rgba(30, 30, 30, .5);
+    border-radius:100%;
 }
 .box-categoria-txt{
     display:flex;
@@ -206,9 +209,4 @@ select{
 }
 .box-categoria-info.percentual{
     font-size: .8em;
-}
-.box-categoria-img>img{
-    margin-left:15%;
-    margin-top:5%;
-
 }
