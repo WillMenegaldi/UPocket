@@ -1,5 +1,13 @@
-window.addEventListener('load', atualizaCards);
 window.addEventListener('load', atualizaGrafico);
+window.addEventListener('load', atualizaCards);
+
+document.querySelector('#grafico-rosquinha').addEventListener("click",function(){
+    abreModalGrafico();
+});
+
+document.querySelector("#btn-close-graph").addEventListener("click", function(){
+    fechaModalGraph();
+});
 
 document.querySelector("#add-despesa").addEventListener("click", function(){
     abreModal('despesa');
@@ -21,62 +29,24 @@ document.querySelector('#grafico-rosquinha').addEventListener("click",function()
     abreModalGrafico();
 });
 
-document.querySelector("#btn-close-graph").addEventListener("click", function(){
-    fechaModalGraph();
-});
+var database = inicializaDB();
 
 function inicializaDB()
 {
     let database = localStorage.getItem("UPocketDataBase");
 
-    if(!database)
-    {
-        database = [];
-    }
-    else
-    {
-        database = JSON.parse(database);
-    }
+    database = !database ? [] : JSON.parse(database);
 
     return database;
 }
 
 function insert(dataset)
 {
-    let database = inicializaDB();
     datasetMapping(dataset, database);
-    limpaCampos(dataset);    
+    limpaCampos(dataset);
     fechaModal();
     atualizaCards();
     atualizaGrafico();
-}
-
-function atualizaGrafico()
-{
-    let database = inicializaDB();
-    
-    data = [];
-    
-    data.push(retornaTotalCategoria(database, "alimentacao"));
-    data.push(retornaTotalCategoria(database, "transporte"));
-    data.push(retornaTotalCategoria(database, "roupas"));
-    data.push(retornaTotalCategoria(database, "educacao"));
-    data.push(retornaTotalCategoria(database, "lazer"));
-
-    graphic(data);
-}
-
-function retornaTotalCategoria(db, categoria) {
-
-    let soma = 0
-    
-    for (x = 0; x < db.length; x++) 
-    {
-        var database = db[x].categoria == categoria && db[x].valor;
-        soma += database;
-    }
-    
-    return soma;
 }
 
 function atualizaCards()
@@ -85,11 +55,15 @@ function atualizaCards()
     var cardDespesa = document.querySelector("#valor-despesa");
     var cardSaldo   = document.querySelector("#valor-saldo");
     
-    database = inicializaDB();
-
     setaCardReceitas(cardReceita, database);
     setaCardDespesas(cardDespesa, database);
     setaCardSaldoTotal(cardSaldo, cardReceita, cardDespesa);
+}
+
+function atualizaGrafico()
+{
+    data = retornaDados();
+    preencheGraficos(data);
 }
 
 function setaCardReceitas(card, db)
@@ -216,21 +190,48 @@ function fechaModal()
         {
             modalGraph.style.display='none';
         }
-
     }
 }
 
-function graphic(data)
+function retornaDados()
+{   
+    data = [];
+    
+    data.push(retornaTotalCategoria(database, "alimentacao"));
+    data.push(retornaTotalCategoria(database, "transporte"));
+    data.push(retornaTotalCategoria(database, "roupas"));
+    data.push(retornaTotalCategoria(database, "educacao"));
+    data.push(retornaTotalCategoria(database, "lazer"));
+
+    return data;
+}
+
+function retornaTotalCategoria(db, categoria) 
 {
-    let ctx ;
+    let soma = 0
     
-    ctx = document.getElementById('linegraph').getContext('2d'); 
-    insertGraficoLinhas( ctx );       
+    for (x = 0; x < db.length; x++) 
+    {
+        var database = db[x].categoria == categoria && db[x].valor;
+        soma += database;
+    }
     
-    context = document.getElementById('pizzagraph').getContext('2d');
-    insertGraficoPizza(context, data);
-};
-function insertGraficoLinhas( ctx )
+    return soma;
+}
+
+function preencheGraficos(data)
+{
+    let graficoLinha;
+    let graficoCategoria;
+
+    graficoLinha = document.getElementById('linegraph').getContext('2d');
+    controiGraficoOrcamento(graficoLinha);
+    
+    graficoCategoria = document.getElementById('pizzagraph').getContext('2d');
+    constroiGraficoCategoria(graficoCategoria, data);
+}
+
+function controiGraficoOrcamento( ctx )
 {
     let graph = new Chart( ctx ,
         {
@@ -285,118 +286,123 @@ function insertGraficoLinhas( ctx )
         return graph;
 }
 
-function insertGraficoPizza(ctx, datasetGraphic)
-{    
-    let graph = new Chart( ctx , 
-        {
-            type:'doughnut',
-            options: {
-                legend: {
-                    display: false
-                },
-                responsive: false,
-                cutoutPercentage: 67
-            },
-            data:{
-                labels:['Alimentação', 'Vestuário' , 'Transporte', 'Lazer', 'Educacao'],
-                datasets:[
-                    {
-                        borderWidth: 0.5,
-                        label:'Categorias',
-                        data: datasetGraphic,
-                        backgroundColor:['#006400','#89a5c4','#8c092a','#099673','#847502']
-                    }
-                ]
+function constroiGraficoCategoria(context, dadosGrafico)
+{
+    let settings = {
+        legend: {
+            display: false
+        },
+        responsive: false,
+        cutoutPercentage: 67
+    };
+
+    let dados = {
+        labels:['Alimentação', 'Transporte', 'Roupas', 'Educação', 'Lazer'],
+        datasets:[
+            {
+                borderWidth: 0.5,
+                label:'Categorias',
+                data: dadosGrafico,
+                backgroundColor:['#006600','#cc00cc','#dd0000','#f4c430','#0000bb']
             }
-        });
-    return graph;
+        ]
+    };
+
+    let grafico = new Chart(context, 
+    { 
+        type:'doughnut',
+        options: settings,
+        data: dados
+    });
+
+    return grafico;
 }
 
-function insertBoxCategorias(){
-    
-    $('#categorias-lat').html(''); 
-    for(var i = 0; i < 5 ; i++){
+function insertBoxCategorias(data)
+{    
+    $('#categorias-lat').html('');
+
+    for(var i = 0; i < 5 ; i++)
+    {
+        
         var nomeCategoria;
         var valorCategoria; 
         var valorTotal;
         var percentualCategoria;       
         var detalheCor;
-        let database;
-        
-        
-        database           = inicializaDB();
 
-    
         if( i == 0 )
         {
             nomeCategoria  = "Alimentação";
-            valorCategoria = retornaTotalCategoria(database, "alimentacao");
+            valorCategoria = data[0];     
         }
         else if( i == 1 )
         {            
-            nomeCategoria   = "Vestuário";
-            valorCategoria  = retornaTotalCategoria(database, "roupas");
+            nomeCategoria  = "Transporte";
+            valorCategoria = data[1];  
         }
         else if( i == 2 )
         {            
-            nomeCategoria   = "Transporte";
-            valorCategoria  = retornaTotalCategoria(database, "transporte");
+            nomeCategoria  = "Roupas";
+            valorCategoria = data[2]; 
         }
         else if( i == 3 )
         {           
-            nomeCategoria   = "Lazer";
-            valorCategoria  = retornaTotalCategoria(database, "lazer");
+            nomeCategoria  = "Educação";
+            valorCategoria = data[3]; 
         }
         else if( i == 4 )
         {           
-            nomeCategoria   = "Educacao";
-            valorCategoria  = retornaTotalCategoria(database, "educacao");
+            nomeCategoria  = "Lazer";
+            valorCategoria = data[4]; 
         }
         
-        valorTotal          = (retornaTotalCategoria(database, "alimentacao")+retornaTotalCategoria(database, "roupas")+retornaTotalCategoria(database, "transporte")+retornaTotalCategoria(database, "lazer")+retornaTotalCategoria(database, "educacao")).toFixed(2);
-        percentualCategoria = ((valorCategoria/valorTotal)*100).toFixed(2);        
-        
+        valorTotal          = (data[0]+data[1]+data[2]+data[3]+data[4]).toFixed(2);
+        percentualCategoria = ((valorCategoria/valorTotal)*100).toFixed(2);    
+
         $( '#categorias-lat' ).append( '<div class="box-categoria">  <section class="box-categoria-img"></section><section class="box-categoria-txt">   <div class="box-categoria-info"> <div id="nome-categoria">'+nomeCategoria+'</div> <div id="valor-categoria">'+valorCategoria.toFixed(2)+'</div ></div>  <div class="box-categoria-info percentual"><div>Percentual</div> <div id="percent-categoria">'+percentualCategoria+'% </div></div> </section></div>' );     
         
-        detalheCor =  document.getElementsByClassName('box-categoria-img');
+        detalheCor = document.getElementsByClassName('box-categoria-img');
 
-        if(i == 0)
+        if( i == 0 )
         {
-            detalheCor[ i ].style["background"] = '#006400';
+            detalheCor[ i ].style["background"] = '#006600';
         }
-        else if(i == 1)
+        else if( i == 1 )
         {            
-            detalheCor[ i ].style["background"] = '#89a5c4';
+            detalheCor[ i ].style["background"] = '#cc00cc';
         }
-        else if(i == 2)
+        else if( i == 2 )
         {            
-            detalheCor[ i ].style["background"] = '#8c092a';
+            detalheCor[ i ].style["background"] = '#dd0000';
         }
-        else if(i == 3)
+        else if( i == 3 )
         {           
-            detalheCor[ i ].style["background"] = '#099673';
+            detalheCor[ i ].style["background"] = '#f4c430';
         }
-        else if(i == 4)
+        else if( i == 4 )
         {           
-            detalheCor[ i ].style["background"] = '#847502';
+            detalheCor[ i ].style["background"] = '#0000bb';
         }
     }
 }
 
 function abreModalGrafico()
 {    
-    let ctx                   = document.getElementById('pizzagraph2').getContext('2d');
-    var modalGraph            = document.getElementById('container-modal-graph');  
-    modalGraph.style.display  = 'block';
+    let ctx                  = document.getElementById('pizzagraph2').getContext('2d');
+    var modalGraph           = document.getElementById('container-modal-graph');  
+    modalGraph.style.display = 'block';
 
-    insertGraficoPizza(ctx);
-    insertBoxCategorias();
+    data = retornaDados();
+
+    constroiGraficoCategoria(ctx, data);
+    insertBoxCategorias(data);   
 }
 
 function fechaModalGraph()
 {
-    var modalGraph            = document.getElementById('container-modal-graph');
-    modalGraph.style.display  = 'none';
+    var modalGraph           = document.getElementById('container-modal-graph');
+    modalGraph.style.display = 'none';
 
     window.onclick = function()
     {
@@ -405,5 +411,4 @@ function fechaModalGraph()
             modalGraph.style.display = 'none';
         }
     }
-    graphic();
 }
