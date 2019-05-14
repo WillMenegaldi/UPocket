@@ -171,6 +171,8 @@ function abreModal(card)
             }      
         }
     }
+    
+    inputModal[2].value = new Date().toISOString().slice(0,10);
 }
 
 function fechaModal()
