@@ -322,73 +322,51 @@ function insertBoxCategorias(data)
 {    
     $('#categorias-lat').html('');
 
-    for(var i = 0; i < 5 ; i++)
+    let categorias = [
+        {
+            nomeCategoria  : "Alimentação",
+            valorCategoria : data[0],
+            cor: '#006600'
+        },
+        {            
+            nomeCategoria  : "Transporte",
+            valorCategoria : data[1],
+            cor: '#cc00cc'
+        },
+        {            
+            nomeCategoria  : "Roupas",
+            valorCategoria : data[2],
+            cor: '#dd0000'
+        },
+        {           
+            nomeCategoria  : "Educação",
+            valorCategoria : data[3],
+            cor: '#f4c430'
+        },
+        {              
+            nomeCategoria  : "Lazer",
+            valorCategoria : data[4],
+            cor: '#0000bb'
+        }
+    ]
+
+    let j = 0;
+    
+    for(var i = 0; i < categorias.length; i++)
     {
-        
-        var nomeCategoria;
-        var valorCategoria; 
-        var valorTotal;
-        var percentualCategoria;       
-        var detalheCor;
+        if(categorias[i].valorCategoria != 0 )
+        {
+            let detalheCor;
+            let valorTotal = (data[0]+data[1]+data[2]+data[3]+data[4]).toFixed(2);
+            let percentualCategoria = ((categorias[i].valorCategoria/valorTotal)*100).toFixed(2);    
 
-        if( i == 0 )
-        {
-            nomeCategoria  = "Alimentação";
-            valorCategoria = data[0];     
-        }
-        else if( i == 1 )
-        {            
-            nomeCategoria  = "Transporte";
-            valorCategoria = data[1];  
-        }
-        else if( i == 2 )
-        {            
-            nomeCategoria  = "Roupas";
-            valorCategoria = data[2]; 
-        }
-        else if( i == 3 )
-        {           
-            nomeCategoria  = "Educação";
-            valorCategoria = data[3]; 
-        }
-        else if( i == 4 )
-        {           
-            nomeCategoria  = "Lazer";
-            valorCategoria = data[4]; 
-        }
-        
-        valorTotal          = (data[0]+data[1]+data[2]+data[3]+data[4]).toFixed(2);
-        percentualCategoria = ((valorCategoria/valorTotal)*100).toFixed(2);    
-        if( valorCategoria != 0 )
-        {
-            $( '#categorias-lat' ).append( '<div class="box-categoria">  <section class="box-categoria-img"></section><section class="box-categoria-txt">   <div class="box-categoria-info"> <div id="nome-categoria">'+nomeCategoria+'</div> <div id="valor-categoria">'+valorCategoria.toFixed(2)+'</div ></div>  <div class="box-categoria-info percentual"><div>Percentual</div> <div id="percent-categoria">'+percentualCategoria+'% </div></div> </section></div>' );     
-        }
-        
-        detalheCor = document.getElementsByClassName('box-categoria-img');
-
-        if( i == 0 )
-        {
-            detalheCor[ i ].style["background"] = '#006600';
-        }
-        else if( i == 1 )
-        {            
-            detalheCor[ i ].style["background"] = '#cc00cc';
-        }
-        else if( i == 2 )
-        {            
-            detalheCor[ i ].style["background"] = '#dd0000';
-        }
-        else if( i == 3 )
-        {           
-            detalheCor[ i ].style["background"] = '#f4c430';
-        }
-        else if( i == 4 )
-        {           
-            detalheCor[ i ].style["background"] = '#0000bb';
+            $( '#categorias-lat' ).append( '<div class="box-categoria">  <section class="box-categoria-img"></section><section class="box-categoria-txt">   <div class="box-categoria-info"> <div id="nome-categoria">'+categorias[i].nomeCategoria+'</div> <div id="valor-categoria">'+categorias[i].valorCategoria.toFixed(2)+'</div > </div>  <div class="box-categoria-info percentual"><div>Percentual</div> <div id="percent-categoria">'+percentualCategoria+'% </div></div> </section></div>' );
+            detalheCor = document.getElementsByClassName('box-categoria-img');
+            detalheCor[j].style["background"] = categorias[i].cor;
+            j++;
         }
     }
 }
-
 function abreModalGrafico()
 {    
     let ctx                  = document.getElementById('pizzagraph2').getContext('2d');
