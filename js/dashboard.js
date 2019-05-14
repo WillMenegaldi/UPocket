@@ -1,5 +1,5 @@
-window.addEventListener('load', atualizaGrafico);
 window.addEventListener('load', atualizaCards);
+window.addEventListener('load', atualizaGrafico);
 
 document.querySelector('#grafico-rosquinha').addEventListener("click",function(){
     abreModalGrafico();
