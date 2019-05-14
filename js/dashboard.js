@@ -74,7 +74,7 @@ function setaCardReceitas(card, db)
     {
         total += receitas[i].valor;
     }
-    card.innerHTML = total.toFixed(2);
+    card.innerHTML = total.toFixed(2).replace(".",",");
 }
 
 function setaCardDespesas(card, db)
@@ -86,12 +86,12 @@ function setaCardDespesas(card, db)
     {
         total += despesas[i].valor;
     }
-    card.innerHTML = total.toFixed(2);
+    card.innerHTML = total.toFixed(2).replace(".",",");
 }
 
 function setaCardSaldoTotal(card, receitas, despesas)
 {
-    card.innerHTML = (parseInt(receitas.innerHTML) - parseInt(despesas.innerHTML)).toFixed(2); 
+    card.innerHTML = (parseInt(receitas.innerHTML) - parseInt(despesas.innerHTML)).toFixed(2).replace(".",","); 
 }
 
 function limpaCampos(campos)
