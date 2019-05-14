@@ -359,8 +359,10 @@ function insertBoxCategorias(data)
         
         valorTotal          = (data[0]+data[1]+data[2]+data[3]+data[4]).toFixed(2);
         percentualCategoria = ((valorCategoria/valorTotal)*100).toFixed(2);    
-
-        $( '#categorias-lat' ).append( '<div class="box-categoria">  <section class="box-categoria-img"></section><section class="box-categoria-txt">   <div class="box-categoria-info"> <div id="nome-categoria">'+nomeCategoria+'</div> <div id="valor-categoria">'+valorCategoria.toFixed(2)+'</div ></div>  <div class="box-categoria-info percentual"><div>Percentual</div> <div id="percent-categoria">'+percentualCategoria+'% </div></div> </section></div>' );     
+        if( valorCategoria != 0 )
+        {
+            $( '#categorias-lat' ).append( '<div class="box-categoria">  <section class="box-categoria-img"></section><section class="box-categoria-txt">   <div class="box-categoria-info"> <div id="nome-categoria">'+nomeCategoria+'</div> <div id="valor-categoria">'+valorCategoria.toFixed(2)+'</div ></div>  <div class="box-categoria-info percentual"><div>Percentual</div> <div id="percent-categoria">'+percentualCategoria+'% </div></div> </section></div>' );     
+        }
         
         detalheCor = document.getElementsByClassName('box-categoria-img');
 

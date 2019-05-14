@@ -17,7 +17,8 @@
     text-align: center;
 }
 .cards-values{
-    padding:5%;
+    width:100%;
+    padding:2%;
     font-size:2em;
 }
 .flex-card>.image-flex {
@@ -73,6 +74,12 @@
     height: 57%;
 }
 
+@media screen and (max-width:400px) {
+    .cards-values{
+        margin-top:3%;
+        font-size:1.5em;
+    }
+}
 @media screen and (min-width:450px) {
     .flex-container {
         display: flex;

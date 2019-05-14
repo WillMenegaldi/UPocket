@@ -1,13 +1,4 @@
-﻿html{
-    margin: 0px;
-    padding:0px;    
-    border:0;
-}
-body{
-    width:100%;
-    height:100%;
-}
-
+﻿/* modal */
 #container-modal , #container-modal-graph{
     display:none;/*esconde o modal*/
     position:fixed;
@@ -68,7 +59,7 @@ body{
 }
 
 
-/*Formulário*/
+/*Modal Formulário*/
 .modal-form{
     width:90%;
     height:90%;
@@ -138,7 +129,6 @@ select{
     width:46%;
 }
 #box-modal>main.graph{
-    padding:2%;
     display:flex;
 }
 #container-modal-graph>#box-modal{
@@ -182,7 +172,6 @@ select{
     margin:.5%;
     width:98%;
     height:85%;
-
 }
 .box-categoria-info>:nth-child(1){  
     width:70%;
@@ -209,4 +198,133 @@ select{
 }
 .box-categoria-info.percentual{
     font-size: .8em;
+}
+
+
+/* Medias querys cards*/
+@media screen and (max-width:321px){
+    #header-box-modal-title{
+        font-size: 0.5em;
+    }
+}
+@media screen and (max-width:450px){
+    #box-modal{
+        width:90%;
+        height:70%;
+        margin:20% auto;
+    }
+    #header-box-modal-title{
+        font-size: 0.8em;
+    }
+    .modal-form{
+        width:100%;
+        height:80%;
+        margin:0% auto;
+        display:flex;
+        flex-direction:column;
+        align-items: center;
+    }
+    .modal-form-input{ 
+        background: rgb(230, 230,230);
+        height: 15%;
+        width:90%;
+        margin:12% auto;
+        border:none;
+        box-sizing:border-box;
+    }
+    #modal-form-submit{  
+        border-radius: 3x 3px 3px 3px; 
+        border:none;
+        width:30%;
+        height:20%;
+        color:white;
+        font-weight: bold;
+        cursor:pointer;  
+    }
+    select{
+        margin-top:10%;
+        width:90%;
+        border-radius: 4px;
+        box-sizing: border-box;
+        color:white;
+        font-weight: bold;
+        background: rgba(104, 6, 11,0.8);
+    }
+
+}
+/* Medias querys modal gráficos*/
+@media screen and (max-width:321px){
+    #pizzagraph2{
+        margin:0% auto;
+        width: 20%;
+        height:30%;
+    }
+    .box-categoria-info>#valor-categoria{
+        font-size: 1em;
+    }
+}
+@media screen and (max-width:450px){
+    .main-box-modal.graph{
+        width:100%;
+        height:100%;
+        display:flex;
+        flex-direction: column;
+        margin:0px;
+        padding:0px;
+    }
+    .categorias-lateral{
+        margin:0px;
+        padding:0px;
+        height:100%;
+        width:100%;
+    }
+    .grafico-lateral{
+        margin:0px;
+        padding:0px;
+        height:30%;
+        width:100%;
+    }
+    .box-categoria{
+        margin:5% auto;
+        border-radius: 10px 10px 10px 10px;
+        border:.5px solid rgba(30, 30, 30, .5);
+        box-sizing:border-box;
+        width:94%;
+        height:18%;
+    }
+    .box-categoria-img{
+        margin:4%;
+        height: 55%;
+        width:10%;
+    }
+    .box-categoria-txt{
+        display:flex;
+        flex-direction:column;
+        padding:.4%;
+        font-size:1.3em;
+        height: 92%;
+        width:80%;
+    }
+    .box-categoria-info>:nth-child(1){  
+        width:70%;
+        text-align: start;
+    }
+    .box-categoria-info>:nth-child(2){  
+        width:30%;
+        text-align: end;
+    }
+    
+    /*Gráfico modal*/
+
+    #pizzagraph2{
+        margin:2% auto;
+        width: 85%;
+        height:60%;
+    }
+    .box-categoria-info>#nome-categoria{
+        font-weight: bold;
+    }
+    .box-categoria-info.percentual{
+        font-size: .8em;
+    }
 }
