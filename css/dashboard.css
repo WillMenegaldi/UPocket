@@ -58,17 +58,13 @@
         margin-left: 7.5%;
     }
     .mobile_menu img{
-        width: 50%;
+        width: 56%;
     }
 }
 @media (min-width: 450px) and (max-width: 740px){
     .logo{
         display: none;
     }
-    .username{
-        display: none;
-    }
-
     .mobile_menu {
         display: flex;
         margin: 0.75% auto 0;

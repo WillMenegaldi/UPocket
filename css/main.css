@@ -48,7 +48,7 @@ main#flex-main {
 }
 .box-username{
     text-decoration: none;
-    padding:5%;
+    padding-top: 4.8%;
     color:rgb(50, 50, 50,.5);
 }
 .box-username a{
@@ -64,7 +64,7 @@ main#flex-main {
 }
 .box-user>div img{
     margin-top:4%;
-    width: 50%;
+    width: 38%;
     height:80%;
 }
 
@@ -108,8 +108,11 @@ main#flex-main {
     }
     
 }
-@media  (min-width:0px) and (max-width:750px){
+@media  (min-width:0px) and (max-width:700px){
     .header{
         background-color: rgb(10, 10, 10); 
+    }
+    .box-user, .box-username img{
+        display: none;
     }
 }
