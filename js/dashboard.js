@@ -42,11 +42,14 @@ function inicializaDB()
 
 function insert(dataset)
 {
-    datasetMapping(dataset, database);
-    limpaCampos(dataset);
-    fechaModal();
-    atualizaCards();
-    atualizaGrafico();
+    let valido = datasetMapping(dataset, database);
+    if(valido)
+    {
+        limpaCampos(dataset);
+        fechaModal();
+        atualizaCards();
+        atualizaGrafico();
+    }
 }
 
 function atualizaCards()
@@ -99,27 +102,59 @@ function limpaCampos(campos)
     campos[0].value = null;
     campos[1].value = null;
     campos[2].value = null;
-    campos[3].value = null;
 }
 
 function datasetMapping(data, db)
 {
-    let dataset = {
-        nome      : data[0].value,
-        valor     : parseInt(data[1].value),
-        data      : data[2].value,
-        categoria : data[3].value || null
-    };
+    let valor = validaInsercao(data);
 
-    db.push(dataset);
+    if(valor)
+    {
+        let dataset = {
+            nome      : data[0].value,
+            valor     : parseInt(data[1].value),
+            data      : data[2].value,
+            categoria : data[3].value || null
+        };
+    
+        db.push(dataset);
+    
+        localStorage.setItem("UPocketDataBase", JSON.stringify(db));
 
-    localStorage.setItem("UPocketDataBase", JSON.stringify(db));
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+function validaInsercao(data)
+{
+    let valor = parseInt(data[1].value);
+
+    if(data[0].value && data[1].value && data[2].value && data[3].value)
+    {
+        if(valor <= 0)
+        {
+            alert("Deve ser inserido um valor válido.");
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    else
+    {
+        alert("Todos os campos devem ser preenchidos.");
+        return false;
+    }
 }
 
 function abreModal(card) 
 {
     var modal = document.getElementById('container-modal');
-    
     modal.style.display = 'block';
 
     var headerModal     = document.getElementById("header-box-modal");
@@ -171,7 +206,8 @@ function abreModal(card)
             }      
         }
     }
-    
+    inputModal[0].value = null;
+    inputModal[1].value = null;
     inputModal[2].value = new Date().toISOString().slice(0,10);
 }
 
