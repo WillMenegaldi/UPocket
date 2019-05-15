@@ -65,8 +65,61 @@ function atualizaCards()
 
 function atualizaGrafico()
 {
-    data = retornaDados();
-    preencheGraficos(data);
+    let data = retornaDados();
+    let total = 0;
+    
+    let despesas = database.filter(data => data.categoria != null);
+
+    for(var i = 0; i < despesas.length; i++)
+    {
+        total += despesas[i].valor;
+    }
+
+    if(total == 0)
+    {
+        montaGraficoVazio();
+        graficoLinha = document.getElementById('linegraph').getContext('2d');
+        controiGraficoOrcamento(graficoLinha);
+    }
+    else
+    {
+        preencheGraficos(data);
+    }
+}
+
+function montaGraficoVazio()
+{
+    let context = document.getElementById('pizzagraph').getContext('2d');
+    let settings = {
+        onHover: false,
+        legend: {
+            display: true,
+            position:'bottom'
+        },
+        responsive: false,
+        cutoutPercentage: 67
+    };
+
+    let dados = {
+        labels: ["Sem Dados"],
+        datasets:[
+            {
+                borderWidth: 0,
+                label: [""],
+                data: [1],
+                backgroundColor:['#BBB']
+            }
+        ]
+    };
+
+    let grafico = new Chart(context, 
+    { 
+        type:'doughnut',
+        options: settings,
+        data: dados
+    });
+
+    return grafico;
 }
 
 function setaCardReceitas(card, db)
