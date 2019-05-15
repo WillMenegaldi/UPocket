@@ -94,7 +94,7 @@ function setaCardDespesas(card, db)
 
 function setaCardSaldoTotal(card, receitas, despesas)
 {
-    card.innerHTML = (parseInt(receitas.innerHTML) - parseInt(despesas.innerHTML)).toFixed(2).replace(".",","); 
+    card.innerHTML = (parseFloat(receitas.innerHTML) - parseFloat(despesas.innerHTML)).toFixed(2).replace(".",","); 
 }
 
 function limpaCampos(campos)
@@ -102,6 +102,7 @@ function limpaCampos(campos)
     campos[0].value = null;
     campos[1].value = null;
     campos[2].value = null;
+    campos[3].value = null;
 }
 
 function datasetMapping(data, db)
@@ -112,7 +113,7 @@ function datasetMapping(data, db)
     {
         let dataset = {
             nome      : data[0].value,
-            valor     : parseInt(data[1].value),
+            valor     : parseFloat(data[1].value),
             data      : data[2].value,
             categoria : parseInt(data[3].value) || null
         };
@@ -131,9 +132,9 @@ function datasetMapping(data, db)
 
 function validaInsercao(data)
 {
-    let valor = parseInt(data[1].value);
+    let valor = parseFloat(data[1].value);
 
-    if(data[0].value && data[1].value && data[2].value && data[3].value)
+    if(data[0].value && data[1].value && data[2].value)
     {
         if(valor <= 0)
         {
@@ -168,7 +169,8 @@ function abreModal(card)
         headerTitle.innerHTML                = 'Adicionar Receita';
         headerModal.style.backgroundColor    = 'rgb(21, 76, 10)'; 
         categoriaModal.style.backgroundColor = 'rgb(21, 76, 10)';
-        categoriaModal.style.display         = 'none';  
+        categoriaModal.style.display         = 'none';
+        categoriaModal.value                 = null;
         enviarModal.style.backgroundColor    = 'rgb(21, 76, 10)';  
           
         for(var i = 0; i < inputModal.length; i++)
@@ -184,12 +186,14 @@ function abreModal(card)
             }
         }
     }
+    
     else if(card == 'despesa')
     {
         headerTitle.innerHTML                = 'Adicionar Despesas';        
         categoriaModal.style.display         = 'block';
         headerModal.style.backgroundColor    = 'rgb(153, 36, 42)'; 
-        categoriaModal.style.backgroundColor = 'rgb(153, 36, 42)';  
+        categoriaModal.style.backgroundColor = 'rgb(153, 36, 42)';
+        categoriaModal.value                 = 1;
         enviarModal.style.backgroundColor    = 'rgb(153, 36, 42)';
 
         for(var i = 0; i < inputModal.length; i++)
