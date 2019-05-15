@@ -114,7 +114,7 @@ function datasetMapping(data, db)
             nome      : data[0].value,
             valor     : parseInt(data[1].value),
             data      : data[2].value,
-            categoria : data[3].value || null
+            categoria : parseInt(data[3].value) || null
         };
     
         db.push(dataset);
@@ -235,11 +235,11 @@ function retornaDados()
 {   
     data = [];
     
-    data.push(retornaTotalCategoria(database, "alimentacao"));
-    data.push(retornaTotalCategoria(database, "transporte"));
-    data.push(retornaTotalCategoria(database, "roupas"));
-    data.push(retornaTotalCategoria(database, "educacao"));
-    data.push(retornaTotalCategoria(database, "lazer"));
+    data.push(retornaTotalCategoria(database, 1));
+    data.push(retornaTotalCategoria(database, 2));
+    data.push(retornaTotalCategoria(database, 3));
+    data.push(retornaTotalCategoria(database, 4));
+    data.push(retornaTotalCategoria(database, 5));
 
     return data;
 }
