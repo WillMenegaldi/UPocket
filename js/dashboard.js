@@ -25,10 +25,6 @@ document.querySelector("#modal-form-submit").addEventListener("click", function(
     insert(document.querySelector(".modal-form"));
 });
 
-document.querySelector('#grafico-rosquinha').addEventListener("click",function(){
-    abreModalGrafico();
-});
-
 var database = inicializaDB();
 
 function inicializaDB()
@@ -91,13 +87,15 @@ function montaGraficoVazio()
 {
     let context = document.getElementById('pizzagraph').getContext('2d');
     let settings = {
-        onHover: false,
+        tooltips: {
+            enabled: false
+        },
         legend: {
             display: true,
             position:'bottom'
         },
         responsive: false,
-        cutoutPercentage: 67
+        cutoutPercentage: 68
     };
 
     let dados = {
@@ -388,7 +386,7 @@ function constroiGraficoCategoria(context, dadosGrafico)
             display: false
         },
         responsive: false,
-        cutoutPercentage: 67
+        cutoutPercentage: 68
     };
 
     let dados = {
@@ -403,14 +401,14 @@ function constroiGraficoCategoria(context, dadosGrafico)
         ]
     };
 
-    let grafico = new Chart(context, 
+    let graficoDespesas = new Chart(context, 
     { 
         type:'doughnut',
         options: settings,
         data: dados
     });
 
-    return grafico;
+    return graficoDespesas;
 }
 
 function insertBoxCategorias(data)
@@ -464,19 +462,35 @@ function insertBoxCategorias(data)
 }
 function abreModalGrafico()
 {    
-    let ctx                  = document.getElementById('pizzagraph2').getContext('2d');
-    var modalGraph           = document.getElementById('container-modal-graph');  
-    modalGraph.style.display = 'block';
+    let ctx        = document.getElementById('pizzagraph2').getContext('2d');
+    let modalGraph = document.getElementById('container-modal-graph');
+    
+    let data = retornaDados();
+    let total = 0;
+    
+    let despesas = database.filter(x => x.categoria != null);
 
-    data = retornaDados();
+    for(var i = 0; i < despesas.length; i++)
+    {
+        total += despesas[i].valor;
+    }
 
-    constroiGraficoCategoria(ctx, data);
-    insertBoxCategorias(data);   
+    if(total == 0)
+    {
+        alert('Não há dados a serem detalhados.');
+    }
+    else
+    {  
+        modalGraph.style.display = 'block';
+
+        constroiGraficoCategoria(ctx, data);
+        insertBoxCategorias(data);
+    }
 }
 
 function fechaModalGraph()
 {
-    var modalGraph           = document.getElementById('container-modal-graph');
+    let modalGraph           = document.getElementById('container-modal-graph');
     modalGraph.style.display = 'none';
 
     window.onclick = function()
