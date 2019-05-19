@@ -1,9 +1,7 @@
-.header{
-    display: flex;
-}
 .nav_lateral{
     display: flex;
-    width: 10.5%;
+    width: 10.5%;    
+    box-shadow: 6px 0px 5px rgba(100, 100, 100, 0.3);
 }
 .section_dashboard{
     display: flex;
@@ -49,7 +47,6 @@
     .username{
         display: none;
     }
-
     .mobile_menu{
         display: flex;
         flex-direction: row;

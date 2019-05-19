@@ -1,3 +1,4 @@
+
 .float{
 	position:fixed;
 	width:65px;
@@ -25,12 +26,9 @@ ul{
 }
 
 ul li{
+	background: linear-gradient(to bottom, #00B000, #009000 70%);
 	list-style:none;
 	margin-bottom:15px;
-}
-
-ul li{
-    background: linear-gradient(to bottom, #00B000, #009000 70%);
 	color:#FFF;
 	border-radius:50px;
 	text-align:center;
@@ -38,23 +36,81 @@ ul li{
 	width:60px;
 	height:60px;
 	display:block;
-	cursor:pointer;
+	cursor:pointer;	      
+	opacity:.6!important;
 }
 
+/*Mantém a visibilidade*/
 ul:hover{
-	visibility:visible!important;
-	opacity:1!important;
+    visibility:visible!important;
 }
+
 
 .my-float{
 	font-size:24px;
 	margin-top:18px;
 }
 
-a#menu-share + ul{
-  visibility: hidden;
+a#menu-share:hover + ul{   
+		visibility: visible;
+}
+/*Ajustando a lentidão individual*/
+a#menu-share:hover + ul>li:nth-child(1){	
+	animation-name: subir2;
+	animation-duration: .6s;	
+}
+a#menu-share:hover + ul>li:nth-child(2){
+	animation-name: subir1;
+	animation-duration: .6s;	
 }
 
-a#menu-share:hover + ul{
-  visibility: visible;
+/*Colocando visibilidade ao passar o mouse*/
+ul>li:nth-child(1):hover,ul>li:nth-child(2):hover{ 	      
+	opacity:1!important;			
 }
+
+
+/*Esconde os lis */
+a#menu-share + ul{
+	visibility: hidden;
+}
+
+@keyframes subir1{
+	0%{
+		transform: translateY(70px);
+	} 
+	100%{
+			transform: translateY(0px);
+	}   
+}
+@keyframes subir2{
+	0%{
+		transform: translateY(40px);
+	} 
+	100%{
+			transform: translateY(0px);
+	}   
+}
+@keyframes descer{
+	0%{
+		transform: translateY(0px);
+	} 
+	100%{
+			transform: translateY(70px);
+			
+			visibility: hidden; 
+	}   
+}
+/*
+@keyframes bounce {
+    0%,20%,60%,100%{
+        transform: translateY(0px)
+    }
+    40%{
+        transform: translateY(-20px)
+    }
+    80%{
+        transform: translateY(-10px)
+    } 
+}
+*/
