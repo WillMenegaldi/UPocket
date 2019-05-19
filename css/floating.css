@@ -1,49 +1,11 @@
-.float{
-	position:fixed;
-	width:65px;
-	height:65px;
-	bottom:48.5px;
-	right:17.5px;
-	background: linear-gradient(to bottom, #0000AA, #000060 100%);
-	color:#FFF;
-	border-radius:50%;
-	text-align:center;
-	box-shadow: 2px 2px 3px #999;
-	z-index:1000;
-}
-
-#add-despesa {
-    background: linear-gradient(to bottom, #B00000, #900000 70%);
-}
-
-ul{
-	position:fixed;
-	right:21px;
-	padding-bottom:20px;
-	bottom:90px;
-	z-index:100;
-}
-
-ul li{
-	list-style:none;
-	margin-bottom:15px;
-}
-
-ul li{
-    background: linear-gradient(to bottom, #00B000, #009000 70%);
-	color:#FFF;
-	border-radius:50px;
-	text-align:center;
-	box-shadow: 2px 2px 3px #999;
-	width:60px;
-	height:60px;
-	display:block;
-	cursor:pointer;
-}
 
 ul:hover{
-	visibility:visible!important;
-	opacity:1!important;
+    visibility:visible!important;
+}
+a#menu-share:hover + ul>li:hover{     
+    animation-name: subir;
+    animation-duration: 1s;    
+	opacity:1!important;    
 }
 
 .my-float{
@@ -52,9 +14,24 @@ ul:hover{
 }
 
 a#menu-share + ul{
-  visibility: hidden;
+    visibility: hidden;     
+	opacity:.5;
 }
 
-a#menu-share:hover + ul{
-  visibility: visible;
+a#menu-share:hover + ul{   
+    animation-name: subir;
+    animation-duration: 1s;
+    
+    visibility: visible;
+}
+@keyframes subir{
+    20%{
+        transform: translateY(-10);
+
+    }
+    60%{
+        
+        transform: translateY(-15);
+        
+    }
 }

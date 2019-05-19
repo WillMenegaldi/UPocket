@@ -1,4 +1,8 @@
 ﻿/* modal */
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
 #container-modal , #container-modal-graph{
     display:none;/*esconde o modal*/
     position:fixed;
@@ -10,12 +14,9 @@
     overflow: auto; /*Possibilita o scroll*/
     background:rgba(0, 0, 0, .5);
     animation-name: animatetop;
-    animation-duration: 0.50s   
+    animation-duration: 0.50s;   
 }
-@keyframes animatetop {
-    from {top: -300px; opacity: 0}
-    to {top: 0; opacity: 1}
-  }
+
 #box-modal{
     background:rgb(230, 230,230);
     border-radius: 20px;
@@ -79,18 +80,38 @@
 }
 #modal-form-submit{
     padding:1%;    
-    border-radius: 3x 3px 3px 3px; 
+    border-radius:5px;
+    line-height: 24px; 
     border:none;
-    width:15%;
+    box-sizing:border-box;
+    width:12%;
     height:10%;
     margin:15%;
     color:white;
     font-weight: bold;
-    cursor:pointer;  
+    cursor:pointer; 
+    transition: all 400ms ease;
+    position:relative;
 }
+/*
+@keyframes bounce {
+    0%,20%,60%,100%{
+        transform: translateY(0px)
+    }
+    40%{
+        transform: translateY(-20px)
+    }
+    80%{
+        transform: translateY(-10px)
+    }
+ 
+}
+*/
 #modal-form-submit:hover{
-    background: rgb(104, 6, 11);
+    animation-name:bounce;
+    animation-duration: 1s;
 }
+
 .modal-form>div{
     height: 8%;
     width:85%;
@@ -105,7 +126,7 @@
 }
 .modal-form>div>.modal-form-input:nth-child(2){    
     height: 100%;
-    width: 50%;
+    width: 100%;
 }
 select{
     margin-top:5%;

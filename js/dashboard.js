@@ -223,7 +223,7 @@ function abreModal(card)
         categoriaModal.style.display         = 'none';
         categoriaModal.value                 = null;
         enviarModal.style.backgroundColor    = 'rgb(21, 76, 10)';  
-          
+
         for(var i = 0; i < inputModal.length; i++)
         {
             inputModal[i].style["border-bottom"] = '3px solid rgb(21, 76, 10)';
