@@ -1,10 +1,13 @@
 .nav_lateral{
     display: flex;
-    width: 10.5%;
+    width: 10.5%;    
+    box-shadow: 6px 0px 5px rgba(100, 100, 100, 0.3);
 }
 .section_dashboard{
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
 }
 
 .section_dashboard img{
@@ -44,7 +47,6 @@
     .username{
         display: none;
     }
-
     .mobile_menu{
         display: flex;
         flex-direction: row;

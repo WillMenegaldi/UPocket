@@ -52,11 +52,11 @@
     font-size: 1.5em;
     float:right;
     font-weight: bold;
-    color:#aaa;
+    color:#000;
 }
-#btn-close,#btn-close-graph:hover,#btn-close,#btn-close-graph::after{
+#btn-close:hover,#btn-close-graph:hover{
     cursor:pointer;/*Aparece a luva ao inves da seta*/
-    color:black;
+    color:#aaa;
 }
 
 
