@@ -125,8 +125,9 @@ select{
     width:50%;
 }
 .grafico-lateral{
-    height:98%;
+    height:100%;
     width:46%;
+
 }
 #box-modal>main.graph{
     display:flex;
@@ -189,7 +190,7 @@ select{
     width:99%;
 }
 #pizzagraph2{
-    margin-top:5%;
+    margin-top: 13%;
     width: 100%;
     height:65%;
 }
@@ -318,8 +319,8 @@ select{
 
     #pizzagraph2{
         margin:2% auto;
-        width: 85%;
-        height:60%;
+        width: 60%;
+        height: 70%;
     }
     .box-categoria-info>#nome-categoria{
         font-weight: bold;
