@@ -90,23 +90,7 @@
     color:white;
     font-weight: bold;
     cursor:pointer; 
-    transition: all 400ms ease;
-    position:relative;
 }
-/*
-@keyframes bounce {
-    0%,20%,60%,100%{
-        transform: translateY(0px)
-    }
-    40%{
-        transform: translateY(-20px)
-    }
-    80%{
-        transform: translateY(-10px)
-    }
- 
-}
-*/
 #modal-form-submit:hover{
     animation-name:bounce;
     animation-duration: 1s;

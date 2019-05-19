@@ -1,37 +1,116 @@
 
+.float{
+	position:fixed;
+	width:65px;
+	height:65px;
+	bottom:48.5px;
+	right:17.5px;
+	background: linear-gradient(to bottom, #0000AA, #000060 100%);
+	color:#FFF;
+	border-radius:50%;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+	z-index:1000;
+}
+
+#add-despesa {
+    background: linear-gradient(to bottom, #B00000, #900000 70%);
+}
+
+ul{
+	position:fixed;
+	right:21px;
+	padding-bottom:20px;
+	bottom:90px;
+	z-index:100;
+}
+
+ul li{
+	background: linear-gradient(to bottom, #00B000, #009000 70%);
+	list-style:none;
+	margin-bottom:15px;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+	width:60px;
+	height:60px;
+	display:block;
+	cursor:pointer;	      
+	opacity:.6!important;
+}
+
+/*Mantém a visibilidade*/
 ul:hover{
     visibility:visible!important;
 }
-a#menu-share:hover + ul>li:hover{     
-    animation-name: subir;
-    animation-duration: 1s;    
-	opacity:1!important;    
-}
+
 
 .my-float{
 	font-size:24px;
 	margin-top:18px;
 }
 
-a#menu-share + ul{
-    visibility: hidden;     
-	opacity:.5;
-}
-
 a#menu-share:hover + ul{   
-    animation-name: subir;
-    animation-duration: 1s;
-    
-    visibility: visible;
+		visibility: visible;
 }
-@keyframes subir{
-    20%{
-        transform: translateY(-10);
+/*Ajustando a lentidão individual*/
+a#menu-share:hover + ul>li:nth-child(1){	
+	animation-name: subir2;
+	animation-duration: .6s;	
+}
+a#menu-share:hover + ul>li:nth-child(2){
+	animation-name: subir1;
+	animation-duration: .6s;	
+}
 
-    }
-    60%{
-        
-        transform: translateY(-15);
-        
-    }
+/*Colocando visibilidade ao passar o mouse*/
+ul>li:nth-child(1):hover,ul>li:nth-child(2):hover{ 	      
+	opacity:1!important;			
 }
+
+
+/*Esconde os lis */
+a#menu-share + ul{
+	visibility: hidden;
+}
+
+@keyframes subir1{
+	0%{
+		transform: translateY(70px);
+	} 
+	100%{
+			transform: translateY(0px);
+	}   
+}
+@keyframes subir2{
+	0%{
+		transform: translateY(40px);
+	} 
+	100%{
+			transform: translateY(0px);
+	}   
+}
+@keyframes descer{
+	0%{
+		transform: translateY(0px);
+	} 
+	100%{
+			transform: translateY(70px);
+			
+			visibility: hidden; 
+	}   
+}
+/*
+@keyframes bounce {
+    0%,20%,60%,100%{
+        transform: translateY(0px)
+    }
+    40%{
+        transform: translateY(-20px)
+    }
+    80%{
+        transform: translateY(-10px)
+    } 
+}
+*/
