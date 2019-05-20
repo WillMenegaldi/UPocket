@@ -1,24 +1,23 @@
-﻿/* modal */
-@keyframes animatetop {
+﻿@keyframes animatetop {
     from {top: -300px; opacity: 0}
     to {top: 0; opacity: 1}
 }
 #container-modal , #container-modal-graph{
-    display:none;/*esconde o modal*/
-    position:fixed;
+    display: none;
+    position: fixed;
     left: 0;
     top: 0;
     z-index:1200;
     width:100vw;
     height:100vh;
-    overflow: auto; /*Possibilita o scroll*/
-    background:rgba(0, 0, 0, .5);
+    overflow: auto;
+    background:rgba(0, 0, 0, .75);
     animation-name: animatetop;
     animation-duration: 0.50s;   
 }
 
 #box-modal{
-    background:rgb(230, 230,230);
+    background:rgb(250, 250, 250);
     border-radius: 20px;
     width:60%;
     height:75%;
@@ -32,14 +31,14 @@
     padding-top: 1.8%;
     padding-left:1%;
     text-align: left;
-    color:rgb(230, 230,230);
+    color:rgb(250, 250, 250);
     font-size: 2em; 
 }
 
 #header-box-modal-title{
-    color:rgb(230, 230,230);
+    color:rgb(250, 250, 250);
     margin-left: 2%;
-    font-size: 1.2em;
+    font-size: 1.1em;
 }
 .main-box-modal{
     border-radius: 0px 0px 20px 20px; 
@@ -52,27 +51,25 @@
     font-size: 1.5em;
     float:right;
     font-weight: bold;
-    color:#000;
+    color:rgb(250, 250, 250);
 }
 #btn-close:hover,#btn-close-graph:hover{
-    cursor:pointer;/*Aparece a luva ao inves da seta*/
+    cursor: pointer;
     color:#aaa;
 }
 
-
-/*Modal Formulário*/
 .modal-form{
-    width:90%;
-    height:90%;
-    margin:5% auto;
+    width:100%;
+    height:95%;
+    margin:7% auto 0;
     display:flex;
     flex-direction:column;
     align-items: center;
 }
 .modal-form-input{ 
-    background: rgb(230, 230,230);
+    background: rgb(250, 250, 250);
     height: 10%;
-    width:85%;
+    width: 85%;
     margin-bottom: 10%;
     border:none;
     padding:2%;    
@@ -123,37 +120,33 @@ select{
     background: rgba(104, 6, 11,0.8);
 }
 
-/*modal grafico*/
-
 .categorias-lateral{
-    height:98%;
-    width:50%;
+    margin-top: 4%;
+    height:80%;
+    width:48%;
 }
 .grafico-lateral{
     height:100%;
-    width:46%;
-
+    width:50%;
 }
 #box-modal>main.graph{
     display:flex;
 }
 #container-modal-graph>#box-modal{
-    width:90%;
+    width:66%;
 }
 .box-categoria{
-    margin:2% auto;
+    margin: 3% auto;
     display: flex;
     flex-direction:row;
-    border-radius: 10px 10px 10px 10px;
-    border:.5px solid rgba(30, 30, 30, .5);
     box-sizing:border-box;
     width:100%;
     height:15%;
 }
 .box-categoria-img{
-    margin:1%;
-    height: 80%;
-    width:9%;
+    margin:0.75%;
+    height: 75%;
+    width:8%;
     border-right:3px solid rgba(30, 30, 30, .5);
     box-shadow: 2px 4px 5px rgba(30, 30, 30, .5);
     border-radius:100%;
@@ -162,9 +155,9 @@ select{
     display:flex;
     flex-direction:column;
     padding:.4%;
-    font-size:1.3em;
-    height: 92%;
-    width:80%;
+    font-size:1.1em;
+    height: 75%;
+    width: 60%;
 }
 .box-categoria-info{    
     width:100%;
@@ -173,8 +166,8 @@ select{
     height:100%;
 }
 .box-categoria-info>div{  
-    color:rgba(20, 20, 20, .9);
-    letter-spacing: 1px;
+    color:rgba(50, 50, 50, .9);
+    letter-spacing: 2px;
     margin:.5%;
     width:98%;
     height:85%;
@@ -188,26 +181,23 @@ select{
     text-align: end;
 }
 
-/*Gráfico modal*/
 #container-modal-graph>#box-modal>#header-box-modal{
-    background: rgba(7, 5, 87, 0.8);
+    background: rgba(179, 0, 0, 0.9);
     padding-left:1%;
     width:99%;
 }
 #pizzagraph2{
-    margin-top: 13%;
+    margin-top: 20%;
     width: 100%;
-    height:65%;
+    height:55%;
 }
 .box-categoria-info>#nome-categoria{
     font-weight: bold;
 }
 .box-categoria-info.percentual{
-    font-size: .8em;
+    font-size: .7em;
 }
 
-
-/* Medias querys cards*/
 @media screen and (max-width:321px){
     #header-box-modal-title{
         font-size: 0.5em;
@@ -232,7 +222,7 @@ select{
     }
     .modal-form-input{ 
         background: rgb(230, 230,230);
-        height: 15%;
+        height: 12%;
         width:90%;
         margin:12% auto;
         border:none;
@@ -258,7 +248,7 @@ select{
     }
 
 }
-/* Medias querys modal gráficos*/
+
 @media screen and (max-width:321px){
     #pizzagraph2{
         margin:0% auto;
