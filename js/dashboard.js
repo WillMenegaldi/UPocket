@@ -222,7 +222,7 @@ function abreModal(card)
         categoriaModal.style.backgroundColor = 'rgb(21, 76, 10)';
         categoriaModal.style.display         = 'none';
         categoriaModal.value                 = null;
-        enviarModal.style.backgroundColor    = 'rgb(21, 76, 10)';  
+        enviarModal.style.backgroundColor    = 'rgb(21, 76, 10)';
 
         for(var i = 0; i < inputModal.length; i++)
         {

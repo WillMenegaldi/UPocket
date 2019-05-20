@@ -19,7 +19,7 @@
 #box-modal{
     background:rgb(250, 250, 250);
     border-radius: 20px;
-    width:60%;
+    width:50%;
     height:75%;
     margin:5% auto;
 }
@@ -55,13 +55,13 @@
 }
 #btn-close:hover,#btn-close-graph:hover{
     cursor: pointer;
-    color:#aaa;
+    color:#000;
 }
 
 .modal-form{
     width:100%;
     height:95%;
-    margin:7% auto 0;
+    margin:5% auto 0;
     display:flex;
     flex-direction:column;
     align-items: center;
@@ -83,7 +83,7 @@
     box-sizing:border-box;
     width:12%;
     height:10%;
-    margin:15%;
+    margin:7.5%;
     color:white;
     font-weight: bold;
     cursor:pointer; 
@@ -112,7 +112,7 @@
 select{
     margin-top:5%;
     width:85%;
-    padding:2%;
+    padding:1.5%;
     border-radius: 4px;
     box-sizing: border-box;
     color:white;
