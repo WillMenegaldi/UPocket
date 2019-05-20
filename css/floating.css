@@ -57,11 +57,11 @@ a#menu-share:hover + ul{
 /*Ajustando a lentidão individual*/
 a#menu-share:hover + ul>li:nth-child(1){	
 	animation-name: subir2;
-	animation-duration: .6s;	
+	animation-duration: .4s;	
 }
 a#menu-share:hover + ul>li:nth-child(2){
 	animation-name: subir1;
-	animation-duration: .6s;	
+	animation-duration: .2s;	
 }
 
 /*Colocando visibilidade ao passar o mouse*/
@@ -73,6 +73,7 @@ ul>li:nth-child(1):hover,ul>li:nth-child(2):hover{
 /*Esconde os lis */
 a#menu-share + ul{
 	visibility: hidden;
+	animation-name: descer;
 }
 
 @keyframes subir1{
@@ -96,21 +97,8 @@ a#menu-share + ul{
 		transform: translateY(0px);
 	} 
 	100%{
-			transform: translateY(70px);
-			
+			transform: translateY(70px);			
 			visibility: hidden; 
+			opacity: 0;
 	}   
 }
-/*
-@keyframes bounce {
-    0%,20%,60%,100%{
-        transform: translateY(0px)
-    }
-    40%{
-        transform: translateY(-20px)
-    }
-    80%{
-        transform: translateY(-10px)
-    } 
-}
-*/

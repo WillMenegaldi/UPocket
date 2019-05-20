@@ -1,7 +1,6 @@
 .nav_lateral{
     display: flex;
-    width: 10.5%;    
-    box-shadow: 6px 0px 5px rgba(100, 100, 100, 0.3);
+    width: 10.5%;
 }
 .section_dashboard{
     display: flex;
