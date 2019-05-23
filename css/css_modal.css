@@ -11,7 +11,7 @@
     width:100vw;
     height:100vh;
     overflow: auto;
-    background:rgba(0, 0, 0, .75);
+    background:rgba(0, 0, 0, .85);
     animation-name: animatetop;
     animation-duration: 0.50s;   
 }
@@ -121,22 +121,22 @@ select{
 }
 
 .categorias-lateral{
-    margin-top: 4%;
+    margin-top: 5.6%;
     height:80%;
-    width:48%;
+    width:60%;
 }
 .grafico-lateral{
     height:100%;
-    width:50%;
+    width:67%;
 }
 #box-modal>main.graph{
     display:flex;
 }
 #container-modal-graph>#box-modal{
-    width:66%;
+    width:62%;
 }
 .box-categoria{
-    margin: 3% auto;
+    margin: 2.5% auto;
     display: flex;
     flex-direction:row;
     box-sizing:border-box;
@@ -144,11 +144,11 @@ select{
     height:15%;
 }
 .box-categoria-img{
-    margin:0.75%;
-    height: 75%;
-    width:8%;
-    border-right:3px solid rgba(30, 30, 30, .5);
-    box-shadow: 2px 4px 5px rgba(30, 30, 30, .5);
+    margin:1% 3%;
+    height: 60%;
+    width:6.5%;
+    border-right:2px solid rgba(30, 30, 30, .5);
+    box-shadow: 1.5px 3px 4px rgba(30, 30, 30, .5);
     border-radius:100%;
 }
 .box-categoria-txt{
@@ -166,18 +166,18 @@ select{
     height:100%;
 }
 .box-categoria-info>div{  
-    color:rgba(50, 50, 50, .9);
+    color:rgb(120, 120, 120);
     letter-spacing: 2px;
     margin:.5%;
     width:98%;
     height:85%;
 }
 .box-categoria-info>:nth-child(1){  
-    width:70%;
+    width:75%;
     text-align: start;
-}
+} 
 .box-categoria-info>:nth-child(2){  
-    width:30%;
+    width:80%;
     text-align: end;
 }
 
@@ -187,7 +187,7 @@ select{
     width:99%;
 }
 #pizzagraph2{
-    margin-top: 20%;
+    margin-top: 18%;
     width: 100%;
     height:55%;
 }

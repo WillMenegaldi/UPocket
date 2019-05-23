@@ -453,7 +453,7 @@ function insertBoxCategorias(data)
             let valorTotal = (data[0]+data[1]+data[2]+data[3]+data[4]).toFixed(2);
             let percentualCategoria = ((categorias[i].valorCategoria/valorTotal)*100).toFixed(2);    
 
-            $( '#categorias-lat' ).append( '<div class="box-categoria">  <section class="box-categoria-img"></section><section class="box-categoria-txt">   <div class="box-categoria-info"> <div id="nome-categoria">'+categorias[i].nomeCategoria+'</div> <div id="valor-categoria">'+categorias[i].valorCategoria.toFixed(2)+'</div > </div>  <div class="box-categoria-info percentual"><div>Percentual</div> <div id="percent-categoria">'+percentualCategoria+'% </div></div> </section></div>' );
+            $( '#categorias-lat' ).append( '<div class="box-categoria">  <section class="box-categoria-img"></section><section class="box-categoria-txt">   <div class="box-categoria-info"> <div id="nome-categoria">'+categorias[i].nomeCategoria+'</div> <div id="valor-categoria">'+'R$' + categorias[i].valorCategoria.toFixed(2)+'</div > </div>  <div class="box-categoria-info percentual"><div>Percentual</div> <div id="percent-categoria">'+percentualCategoria+'% </div></div> </section></div>' );
             detalheCor = document.getElementsByClassName('box-categoria-img');
             detalheCor[j].style["background"] = categorias[i].cor;
             j++;
