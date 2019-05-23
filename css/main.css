@@ -14,15 +14,14 @@ body {
 }
 footer {
     text-align: center;
-    height: 5vh;
+    height: 3vh;
     color: white;
     background-color: rgb(10, 10, 10);
 }
 
-.header {    
-    box-shadow: 0px 4px 5px rgba(100, 100, 100, 0.4);
+.header {
+    box-shadow: 0px 4px 5px rgba(30, 30, 30, 0.4);
     height: 8.5vh;
-    background: rgba(230, 230, 230, 0.1);
     display: flex;
     flex-direction:row;
     position: relative;
@@ -33,8 +32,8 @@ footer {
     height:100%;
 }
 .header>div.logo>a img {
-    width:30%;
-    height:80%;
+    width:18%;
+    height:70%;
 }
 main#flex-main {
     display: flex; 
@@ -46,7 +45,7 @@ main#flex-main {
 .box-user{  
     display:flex;
     flex-direction:row;  
-    width:45%;
+    width:30%;
     height:100%;
 }
 .box-username{
@@ -57,7 +56,7 @@ main#flex-main {
 .box-username a{
     text-decoration: none;
     padding:5%;
-    font-size:1.5em;
+    font-size:1.25em;
     color:rgb(10, 10, 10,.5);
 }
 
@@ -66,11 +65,10 @@ main#flex-main {
     height:100%;
 }
 .box-user>div img{
-    margin-top:4%;
-    width: 38%;
-    height:80%;
+    margin-top:4.5%;
+    width: 30%;
+    height:70%;
 }
-
 
 .main_box {
     width: 100%;
@@ -80,8 +78,8 @@ main#flex-main {
 
 @media screen and (min-width:770px) {
     .header {
-        height: 10vh;
-        background-color: rgb(230, 230, 230);
+        height: 8.5vh;
+        background-color: rgb(243, 243, 243);
         display: flex;
         flex-direction:row;
     }
@@ -89,8 +87,8 @@ main#flex-main {
     main#flex-main {
         display: flex; 
         flex-direction: row; 
-        width: 100vw;
-        height: 85vh;
+        width: 98.8vw;
+        height: 88.45vh;
         background:rgba(250, 250, 250,0.0);
     }
 }
@@ -107,7 +105,7 @@ main#flex-main {
     .header{
         background-color: rgb(10, 10, 10);
     }
-    footer{
+    footer {
         height: 8vh ;
     }
     

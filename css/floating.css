@@ -36,8 +36,7 @@ ul li{
 	width:60px;
 	height:60px;
 	display:block;
-	cursor:pointer;	      
-	opacity:.6!important;
+	cursor:pointer;
 }
 
 /*Mantém a visibilidade*/
@@ -61,12 +60,12 @@ a#menu-share:hover + ul>li:nth-child(1){
 }
 a#menu-share:hover + ul>li:nth-child(2){
 	animation-name: subir1;
-	animation-duration: .2s;	
+	animation-duration: .2s;
 }
 
 /*Colocando visibilidade ao passar o mouse*/
 ul>li:nth-child(1):hover,ul>li:nth-child(2):hover{ 	      
-	opacity:1!important;			
+	opacity:.88!important;		
 }
 
 

@@ -1,6 +1,6 @@
 .nav_lateral{
     display: flex;
-    width: 10.5%;
+    width: 9vw;
 }
 .section_dashboard{
     display: flex;
@@ -27,7 +27,7 @@
 .nav_lateral a{
     text-decoration: none;
     color: #e6e6e6;
-    font-size: 1rem;
+    font-size: 0.85rem;
 }
 
 .nav_mobile{
