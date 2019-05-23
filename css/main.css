@@ -18,7 +18,6 @@ footer {
     color: white;
     background-color: rgb(10, 10, 10);
 }
-
 .header {
     box-shadow: 0px 4px 5px rgba(30, 30, 30, 0.4);
     height: 8.5vh;
@@ -59,7 +58,6 @@ main#flex-main {
     font-size:1.25em;
     color:rgb(10, 10, 10,.5);
 }
-
 .box-user>div{
     width: 100%;
     height:100%;
@@ -69,10 +67,9 @@ main#flex-main {
     width: 30%;
     height:70%;
 }
-
 .main_box {
     width: 100%;
-    height: 100%;    
+    height: 86.5vh;
     background:rgba(250, 250, 250,0.0);
 }
 
@@ -87,8 +84,8 @@ main#flex-main {
     main#flex-main {
         display: flex; 
         flex-direction: row; 
-        width: 98.8vw;
-        height: 88.45vh;
+        width: 100vw;
+        height: 88.5vh;
         background:rgba(250, 250, 250,0.0);
     }
 }

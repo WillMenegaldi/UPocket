@@ -16,7 +16,7 @@
     height:40%;
     border-radius: 30px;
     background: linear-gradient(to bottom, rgb(245, 245, 245), #f1ceb0 300%);
-    margin:0% 0% 6% 0%;
+    margin:0;
     box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
 }
 div.bloco>#descricao {
@@ -113,12 +113,11 @@ div.bloco>#descricao {
 @media screen and (min-width:1126px){
     .blocografico{
         width: 95%;
-        height: 76%;
+        height: 75%;
         display:flex;
         flex-direction: row;
         align-items: center;
         margin:0 auto;
-        margin-top: 1.5%;
     }
     .blocografico div{ 
         align-items: center;
@@ -128,21 +127,21 @@ div.bloco>#descricao {
         height:30%;
     }
     .blocografico .bloco{
-        width: 37%;
-        height: 68%;
+        width: 35%;
+        height: 72%;
         align-items: center;
     }        
     .blocografico .bloco #linegraph {
-        margin:2% auto !important;
-        width: 79% !important;
-        height: 73% !important;
+        margin:6% auto 0 !important;
+        width: 85% !important;
+        height: 72% !important;
     }
     
     .blocografico .bloco #pizzagraph {
         margin:0 auto !important;
-        margin-top:11% !important;
-        width: 90% !important;
-        height: 500% !important;
+        margin-top:8.5% !important;
+        width: 100% !important;
+        height: 600% !important;
         justify-content: space-around;
     }
 }
