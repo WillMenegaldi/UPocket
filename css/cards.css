@@ -111,9 +111,10 @@ section.flex-container{
         height: 80%;
     }
     .nav_lateral {
+        /*nao e esse*/
         height: 100%;
         width: 12.5%;
-        background-color: rgb(50, 50, 50);
+        background-color: rgb(77, 122, 127);
     }
     .cards {
         background-color: rgb(230, 230, 230);
@@ -191,7 +192,7 @@ section.flex-container{
     .nav_lateral {
         height: 100%;
         width: 12.5%;
-        background-color: rgb(50, 50, 50);
+        background-color: rgb(50, 80, 80);
     }
     .cards {
         background-color: rgb(230, 230, 230);
@@ -207,25 +208,25 @@ section.flex-container{
         color: rgb(80, 80, 80);
     }
     .cards-values{
-        padding:10%;
-        font-size:1.8em;
+        padding-top:10%;
+        font-size:1.9em;
     }
     .income {
         color: green;
-        background-image: linear-gradient(to bottom, rgb(240, 240, 240), #c0ffce 400%);
+        background-image: linear-gradient(to bottom, rgb(245, 245, 245), #c0ffce 400%);
         width: 25%;
         height: 100%;
     }
     .budget {
         color: red;
-        background-image: linear-gradient(to bottom, rgb(240, 240, 240), #ff8181 400%);
+        background-image: linear-gradient(to bottom, rgb(245, 245, 245), #ff8181 400%);
         box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
         width: 25%;
         height: 100%;
     }
     .balance {
         color: blue;
-        background-image: linear-gradient(to bottom, rgb(240, 240, 240), #c0ceff 300%);
+        background-image: linear-gradient(to bottom, rgb(245, 245, 245), #c0ceff 300%);
         box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
         width: 25%;
         height: 100%;

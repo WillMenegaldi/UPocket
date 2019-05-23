@@ -16,7 +16,7 @@ footer {
     text-align: center;
     height: 3vh;
     color: white;
-    background-color: rgb(10, 10, 10);
+    background-color: rgb(00, 20, 20);
 }
 .header {
     box-shadow: 0px 4px 5px rgba(30, 30, 30, 0.4);
@@ -69,14 +69,19 @@ main#flex-main {
 }
 .main_box {
     width: 100%;
-    height: 86.5vh;
+    height: 125vh;
     background:rgba(250, 250, 250,0.0);
 }
 
 @media screen and (min-width:770px) {
+    .main_box {
+        width: 100%;
+        height: 86.5vh;
+        background:rgba(250, 250, 250,0.0);
+    }
     .header {
         height: 8.5vh;
-        background-color: rgb(243, 243, 243);
+        background-color: rgba(50, 80, 80, 0.1);
         display: flex;
         flex-direction:row;
     }
@@ -89,7 +94,6 @@ main#flex-main {
         background:rgba(250, 250, 250,0.0);
     }
 }
-
 @media (min-width:450px) and (max-width:700px) {
     main#flex-main { 
         width: 100vw;
