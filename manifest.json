@@ -1,0 +1,22 @@
+{   
+    "dir" : "ltr",
+    "lang" : "pt-BR",
+    "name" : "UPocket",
+    "scope" : "/",
+    "display" : "standalone",
+    "start_url" : "https://upocket.azurewebsites.net/",
+    "short_name" : "UPocket",
+    "theme_color" : "transparent",
+    "description" : "",
+    "orientation" : "landscape",
+    "background_color" : "transparent",
+    "related_applications" : [],
+    "prefer_related_applications" : false,
+    "generated" : true,
+    "icons" : [
+        {
+            "src": "https://upocket.azurewebsites.net/assets/UPOCKET4.png",
+            "sizes": "512x512"
+        }
+    ]
+}
