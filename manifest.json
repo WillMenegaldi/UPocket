@@ -8,7 +8,7 @@
     "short_name" : "UPocket",
     "theme_color" : "transparent",
     "description" : "",
-    "orientation" : "landscape",
+    "orientation" : "portrait",
     "background_color" : "transparent",
     "related_applications" : [],
     "prefer_related_applications" : false,
