@@ -25,16 +25,9 @@ document.querySelector("#modal-form-submit").addEventListener("click", function(
     insert(document.querySelector(".modal-form"));
 });
 
-document.querySelector("#mes-anterior").addEventListener("click", function(){
-    mostraMes(1);
-});
-document.querySelector("#mes-posterior").addEventListener("click", function(){
-    mostraMes(2);
-});
-// var que armazena o mês atual como default, e o selecionado
-var mes         =   new Date().getMonth()+1;
-
-var database    =   inicializaDB();
+var database = inicializaDB();
+var mes = new Date().getMonth()+1;
+console.log(mes);
 function inicializaDB()
 {
     let database = localStorage.getItem("UPocketDataBase");
@@ -128,85 +121,81 @@ function montaGraficoVazio()
 
     return grafico;
 }
+var retroceder = document.getElementById('mes-anterior');
+var mesSelecionado=document.getElementById('mes-selecionado');
+var avancar = document.getElementById('mes-posterior');
+var mes ;
 
-
-function mostraMes( botao ){
-    
-    var mesSelecionado  =   document.getElementById('mes-selecionado');
-    let meses           =   [ '','Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
-    if( botao == 1 )
-    {
-        mes             =   mesAtual(meses) - 1;        
-        if(mes>0){
-            mesSelecionado.innerHTML = meses[mes];
-            atualizaCards();
-            atualizaGrafico();
-            if( mes == 1 )
-            {
-                document.querySelector("#mes-anterior").style.color     =   'rgb(30,30,30,.6)';  
-            }else
-            {
-                document.querySelector("#mes-anterior").style.color     =   'rgba(10,10,10,.9)'; 
-            }
-        }
-    }else 
-    {
-        mes = mesAtual(meses)+1;
-        if( mes <= 12 )
-        {
-            mesSelecionado.innerHTML = meses[mes];            
-            atualizaCards();
-            atualizaGrafico();
-            if(mes==12){
-                document.querySelector("#mes-posterior").style.color    =   'rgba(30,30,30,.6)';  
-            }else
-            {
-                document.querySelector("#mes-posterior").style.color    =   'rgba(10,10,10,.9)'; 
-            }
-        }
+retroceder.addEventListener('click',function(){
+    let meses =[ 'Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+    mes = mesAtual(meses)-1;
+    //alert(pMes);
+    if(mes>=0){
+        mesSelecionado.innerHTML = meses[mes];
+        
+        atualizaCards();
+        atualizaGrafico();
+    }else{
+        retroceder.style.color = 'rgba(30,30,30,.6)';                        
     }
-}
-// checando qual mes está o h2 de destaque
-function mesAtual( meses )
-{
-    let selected  =  document.querySelector("#mes-selecionado");
-    for( let i = 1 ; i < meses.length ; i++ )
-    { 
-        if( selected.innerHTML == meses[i] )
+
+});
+
+avancar.addEventListener('click',function(){
+    let meses =[ 'Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+    mes = mesAtual(meses)+1;
+    //alert(pMes);
+    if(mes<12){
+        mesSelecionado.innerHTML = meses[mes];
+        
+        atualizaCards();
+        atualizaGrafico();
+    }else{
+        avancar.style.color = 'rgba(30,30,30,.6)';                        
+    }
+
+});
+
+function mesAtual(meses){
+    for(let i=0;i<meses.length;i++){   
+        if(mesSelecionado.innerHTML == meses[i])
         {            
             return i;
         }
     }
 }
-//Filtro o array anterior de acordo com o mes desejado
-function checkData( dados , mes ){
-    return dados.filter( dados => dados.data.split("-")[1] == mes );
+
+// var month = new Date('AAAA-MM-DD'); mes = month.getMonth();
+function checkData(dados,mes){
+    //Filtro o array anterior de acordo com o mes desejado
+    return dados.filter( dados => dados.data.split("-")[1] == mes);
 }
+
 
 function setaCardReceitas(card, db)
 {
     let total = 0;
-    let receitas    =   db.filter(data => data.categoria == null );
-    receitas        =   checkData(receitas,mes);
+    let receitas = db.filter(data => data.categoria == null );
+    receitas = checkData(receitas,mes);
 
-    for(var i = 0; i <  receitas.length; i++)
+    for(var i = 0; i < receitas.length; i++)
     {
-            total   +=  receitas[i].valor;
+            total += receitas[i].valor;
     }
-    card.innerHTML  =   total.toFixed(2).replace(".",",");
+    card.innerHTML = total.toFixed(2).replace(".",",");
 }
 
 function setaCardDespesas(card, db)
 {
     let total = 0;
-    let despesas    =   db.filter(data => data.categoria != null);
-    despesas        =   checkData(despesas,mes);
+    let despesas = db.filter(data => data.categoria != null);
+    despesas = checkData(despesas,mes);
 
-    for(var i = 0; i <  despesas.length; i++)
+    for(var i = 0; i < despesas.length; i++)
     {
-        total       +=  despesas[i].valor;
+        total += despesas[i].valor;
     }
-    card.innerHTML  =   total.toFixed(2).replace(".",",");
+    card.innerHTML = total.toFixed(2).replace(".",",");
 }
 
 function setaCardSaldoTotal(card, receitas, despesas)
