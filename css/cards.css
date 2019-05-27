@@ -184,7 +184,7 @@ section.flex-container{
     .flex-container {
         display: flex;
         justify-content: space-around;
-        height: 22%;
+        height: 18%;
         margin-top:3%;
         width: 94%;
         padding: 0 3%;
@@ -201,7 +201,7 @@ section.flex-container{
     .card_title {
         margin: 0 auto; 
         height: 100%;
-        width: 67%;
+        width: 80%;
         padding-left: 10%;
         padding-top: 1%;
         text-align: left;
@@ -212,10 +212,10 @@ section.flex-container{
         height: 100%;    
     }
     .card_icon {
-        width: 90%;
+        width: 80%;
         border-radius: 0px 0px 20px 0px;
         margin: 50% auto 0;
-        height: 60%;
+        height: 55%;
     }
     .nav_lateral {
         height: 100%;
