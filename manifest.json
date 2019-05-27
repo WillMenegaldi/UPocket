@@ -1,5 +1,5 @@
 {   
-    "dir" : "ltr",
+    "dir" : "rtl",
     "lang" : "pt-BR",
     "name" : "UPocket",
     "scope" : "/",
@@ -9,7 +9,7 @@
     "theme_color" : "transparent",
     "description" : "",
     "orientation" : "portrait",
-    "background_color" : "transparent",
+    "background_color" : "#002828",
     "related_applications" : [],
     "prefer_related_applications" : false,
     "generated" : true,
