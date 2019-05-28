@@ -16,7 +16,7 @@
     "prefer_related_applications" : false,
     "icons" : [
         {
-            "src": "https://upocket.azurewebsites.net/assets/UPOCKET4.png",
+            "src": "https://upocket.azurewebsites.net/assets/UPOCKET4.webp",
             "sizes": "512x512"
         }
     ]
