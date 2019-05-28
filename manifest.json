@@ -1,4 +1,6 @@
 {   
+    "manifest_version": 2,
+    "version": "1.0",
     "dir" : "rtl",
     "lang" : "pt-BR",
     "name" : "UPocket",
@@ -12,7 +14,6 @@
     "background_color" : "#002828",
     "related_applications" : [],
     "prefer_related_applications" : false,
-    "generated" : true,
     "icons" : [
         {
             "src": "https://upocket.azurewebsites.net/assets/UPOCKET4.png",
