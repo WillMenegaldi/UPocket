@@ -533,6 +533,10 @@ function abreModalGrafico() {
         insertBoxCategorias(data);
     }
 }
+function abreModalGraficoLinha(){
+    let modalGraph = document.getElementById('container-modal-graph-line');
+    modalGraph.style.display = 'block';
+}
 
 function fechaModalGraph() {
     let modalGraph = document.getElementById('container-modal-graph');
