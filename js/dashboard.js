@@ -28,6 +28,10 @@ document.querySelector("#modal-form-submit").addEventListener("click", function 
     insert(document.querySelector(".modal-form"));
 });
 
+document.querySelector("#modal-orcamento-form-submit").addEventListener("click", function () {
+    //insert(document.querySelector(".orcamento-modal-form"));<--criar metodo
+})
+
 document.querySelector("#mes-anterior").addEventListener("click", function () {
     mostraMes(1);
 });
@@ -56,7 +60,7 @@ function inicializaDB() {
 }
 
 function insert(dataset) {
-    let valido = datasetMapping(dataset, database);
+    let valido = datasetMapping(dataset);
     if (valido) {
         limpaCampos(dataset);
         fechaModal();
@@ -210,7 +214,7 @@ function limpaCampos(campos) {
     campos[3].value = null;
 }
 
-function datasetMapping(data, db) {
+function datasetMapping(data) {
     let valor = validaInsercao(data);
 
     if (valor) {
@@ -221,9 +225,9 @@ function datasetMapping(data, db) {
             categoria: parseInt(data[3].value) || null
         };
 
-        db.push(dataset);
+        database.push(dataset);
 
-        localStorage.setItem("UPocketDataBase", JSON.stringify(db));
+        localStorage.setItem("UPocketDataBase", JSON.stringify(database));
 
         return true;
     }
@@ -356,7 +360,7 @@ function redirectPara(pagina, db) {//Lê os dados  do Ls e deixa os separados pa
     let categoria = '';
     if (pagina == 'in-movimentacoes') {//caso clique em receita
         dados = dados.filter(data => data.categoria == null);
-        for(i=0;i<dados.length;i++){
+        for (i=0;i<dados.length;i++){
             nome = dados[i].nome;
             valor = dados[i].valor;
             data = dados[i].data;
@@ -370,9 +374,11 @@ function redirectPara(pagina, db) {//Lê os dados  do Ls e deixa os separados pa
             categoria = dador[i].categoria;
             data = dados[i].data;
         }
+        window.location.href="#";
     }
     else if (pagina == 'orcamento') {
-        abreModalGraficoLinha()
+        window.location.href="orcamento.html";
+        //document.getElementById("add-orcamento").addEventListener('onclick',  abreModalOrcamento())
     };
 }
 
@@ -541,7 +547,7 @@ function abreModalGrafico() {
         insertBoxCategorias(data);
     }
 }
-function abreModalGraficoLinha(){
+function abreModalOrcamento(){
     let modalGraph = document.getElementById('container-modal-graph-line');
     modalGraph.style.display = 'block';
 }
