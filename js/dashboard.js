@@ -20,6 +20,9 @@ document.querySelector("#add-receita").addEventListener("click", function () {
 document.querySelector("#btn-close").addEventListener("click", function () {
     fechaModal();
 });
+document.querySelector("#btn-close-line-graph").addEventListener("click", function(){
+    fechaModal();
+});
 
 document.querySelector("#modal-form-submit").addEventListener("click", function () {
     insert(document.querySelector(".modal-form"));
@@ -303,15 +306,20 @@ function abreModal(card) {
 function fechaModal() {
     var modal = document.getElementById('container-modal');
     var modalGraph = document.getElementById('container-modal-graph');
+    var modalGraphLine = document.getElementById('container-modal-graph-line');
 
     modal.style.display = 'none';
     modalGraph.style.display = 'none';
+    modalGraphLine.style.display = 'none'
     window.onclick = function () {
         if (event.target == modal) {
             modal.style.display = 'none';
         }
         else if (event.target == modalGraph) {
             modalGraph.style.display = 'none';
+        }
+        else if (event.targe == modalGraphLine){
+            modalGraphLine.style.display = 'none';
         }
     }
 }
@@ -340,7 +348,7 @@ function retornaTotalCategoria(db, categoria) {
     return soma;
 }
 
-function redirectPara(pagina,db) {//Lê os dados  do Ls e deixa os separados para serem exibidos posteriormente
+function redirectPara(pagina, db) {//Lê os dados  do Ls e deixa os separados para serem exibidos posteriormente
     let dados = db;
     let nome = '';
     let valor = '';
@@ -533,6 +541,10 @@ function abreModalGrafico() {
         insertBoxCategorias(data);
     }
 }
+function abreModalGraficoLinha(){
+    let modalGraph = document.getElementById('container-modal-graph-line');
+    modalGraph.style.display = 'block';
+}
 
 function fechaModalGraph() {
     let modalGraph = document.getElementById('container-modal-graph');
@@ -541,6 +553,16 @@ function fechaModalGraph() {
     window.onclick = function () {
         if (event.target == modalGraph) {
             modalGraph.style.display = 'none';
+        }
+    }
+}
+function fechaModalLineGraph(){
+    let modalLineGraph = document.getElementById('container-modal-graph');
+    modalLineGraph.style.display = 'none';
+
+    window.onclick = function(){
+        if (event.taget == modalLineGraph) {
+            modalLineGraph.style.display = 'none';
         }
     }
 }
