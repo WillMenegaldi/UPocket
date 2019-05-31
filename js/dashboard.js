@@ -29,7 +29,7 @@ document.querySelector("#modal-form-submit").addEventListener("click", function 
 });
 
 document.querySelector("#modal-orcamento-form-submit").addEventListener("click", function () {
-    //insert(document.querySelector(".orcamento-modal-form"));<--criar metodo
+    insertbudgets(document.querySelector(".orcamento-modal-form"));
 })
 
 document.querySelector("#mes-anterior").addEventListener("click", function () {
@@ -66,6 +66,14 @@ function insert(dataset) {
         fechaModal();
         atualizaCards();
         atualizaGrafico();
+    }
+}
+
+function insertbudgets(dataset) {
+    let valido = budgetsMapping(dataset);
+    if (valido) {
+        anulaCampos(dataset);
+        fechaModalLineGraph();
     }
 }
 
@@ -236,6 +244,27 @@ function datasetMapping(data) {
     }
 }
 
+function budgetsMapping(data) {
+    let valor = validaInsercao(data);
+
+    if (valor) {
+        let dataset = {
+            orcamento: data[0].value,
+            data: parseFloat(data[1].value),
+            categoria: parseInt(data[2].value)
+        };
+    
+    database.push(dataset);
+
+    localStorage.setItem("UPocketDataBase", JSON.stringify(database));
+
+    return true;
+    }
+    else {
+        return false;
+    }
+}
+
 function validaInsercao(data) {
     let valor = parseFloat(data[1].value);
 
@@ -378,7 +407,7 @@ function redirectPara(pagina, db) {//Lê os dados  do Ls e deixa os separados pa
     }
     else if (pagina == 'orcamento') {
         window.location.href="orcamento.html";
-        //document.getElementById("add-orcamento").addEventListener('onclick',  abreModalOrcamento())
+        document.querySelector("#add-orcamento").addEventListener('onclick',  abreModalOrcamento())
     };
 }
 
@@ -550,6 +579,7 @@ function abreModalGrafico() {
 function abreModalOrcamento(){
     let modalGraph = document.getElementById('container-modal-graph-line');
     modalGraph.style.display = 'block';
+    exibeSemOrcamento();
 }
 
 function fechaModalGraph() {
@@ -570,5 +600,27 @@ function fechaModalLineGraph(){
         if (event.taget == modalLineGraph) {
             modalLineGraph.style.display = 'none';
         }
+    }
+}
+
+function exibeSemOrcamento(){
+    if(data.categoria[1]){
+        document.getElementById("orcmnt-alimentacao").outerHTML = "";
+    }
+
+    if(data.categoria[2]){
+        document.getElementById("orcmnt-transporte").outerHTML = "";
+    }
+    
+    if(data.categoria[3]){
+        document.getElementById("orcmnt-vestuario").outerHTML = "";
+    }
+
+    if(data.categoria[4]){
+        document.getElementById("orcmnt-educacao").outerHTML = "";
+    }
+    
+    if(data.categoria[5]){
+        document.getElementById("orcmnt-lazer").outerHTML = "";
     }
 }
