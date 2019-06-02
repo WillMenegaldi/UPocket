@@ -40,7 +40,7 @@ document.querySelector('#budget-card', database).addEventListener("click", funct
 document.querySelector('#grafico-linha').addEventListener("click", function () {
     redirectPara('orcamento');
 })
-// var que armazena o mês atual como default, e o selecionado
+
 var mes = new Date().getMonth() + 1;
 
 var database = inicializaDB();
@@ -160,7 +160,7 @@ function mostraMes(botao) {
         }
     }
 }
-// checando qual mes está o h2 de destaque
+
 function mesAtual(meses) {
     let selected = document.querySelector("#mes-selecionado");
     for (let i = 1; i < meses.length; i++) {
@@ -169,7 +169,7 @@ function mesAtual(meses) {
         }
     }
 }
-//Filtro o array anterior de acordo com o mes desejado
+
 function checkData(dados, mes) {
     return dados.filter(dados => dados.data.split("-")[1] == mes);
 }
@@ -340,30 +340,34 @@ function retornaTotalCategoria(db, categoria) {
     return soma;
 }
 
-function redirectPara(pagina,db) {//Lê os dados  do Ls e deixa os separados para serem exibidos posteriormente
+function redirectPara(pagina,db) {
     let dados = db;
-    let nome = '';
-    let valor = '';
-    let data = '';
-    let categoria = '';
-    if (pagina == 'in-movimentacoes') {//caso clique em receita
+
+    if (pagina == 'in-movimentacoes') 
+    {
         dados = dados.filter(data => data.categoria == null);
-        for(i=0;i<dados.length;i++){
+        
+        for(i = 0; i < dados.length; i++)
+        {
             nome = dados[i].nome;
             valor = dados[i].valor;
             data = dados[i].data;
         }
     }
-    else if (pagina == 'out-movimentacoes') {//caso clique em despesa
+    else if (pagina == 'out-movimentacoes') 
+    {
         dados = dados.filter(data => data.categoria == !null);
-        for(i=0;i<dados.length;i++){
+    
+        for(i = 0; i < dados.length; i++)
+        {
             nome = dados[i].nome;
             valor = dados[i].valor;
             categoria = dador[i].categoria;
             data = dados[i].data;
         }
     }
-    else if (pagina == 'orcamento') {
+    else if (pagina == 'orcamento') 
+    {
         abreModalGraficoLinha()
     };
 }
@@ -510,6 +514,7 @@ function insertBoxCategorias(data) {
         }
     }
 }
+
 function abreModalGrafico() {
     let ctx = document.getElementById('pizzagraph2').getContext('2d');
     let modalGraph = document.getElementById('container-modal-graph');
@@ -543,4 +548,13 @@ function fechaModalGraph() {
             modalGraph.style.display = 'none';
         }
     }
+}
+
+function abreModalOrcamento(card) {
+    var modal = document.getElementById('orcamento-modal');
+    modal.style.display = 'block';
+    
+    inputModal[0].value = null;
+    inputModal[1].value = null;
+    inputModal[2].value = new Date().toISOString().slice(0, 10);
 }

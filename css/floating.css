@@ -13,6 +13,10 @@
 	z-index:1000;
 }
 
+#add-orcamento {
+	cursor: pointer;
+}
+
 #add-despesa {
     background: linear-gradient(to bottom, #B00000, #900000 70%);
 }
