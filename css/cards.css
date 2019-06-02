@@ -103,6 +103,10 @@ section.flex-container{
 }
 
 @media screen and (max-width:400px) {
+    
+    .indice-mes{
+        margin:3% auto;
+    }
     .cards-values{
         margin-top:3%;
         font-size:1.5em;
@@ -260,6 +264,7 @@ section.flex-container{
     }
 }
 @media (min-width:450px) and (max-width:700px) {
+
     .flex-container {
         display: flex;
         justify-content: space-around;
