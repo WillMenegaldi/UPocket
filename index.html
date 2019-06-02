@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="Description" content="UPocket">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <meta name="apple-mobile-web-app-status-bar-style" content="#002828">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-touch-fullscreen" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="#002828">
-        <meta name="theme-color" content="#002828">
-        <link rel="stylesheet" type="text/css" href="css/main.css">
-        <link rel="stylesheet" type="text/css" href="css/graficos.css">
-        <link rel="stylesheet" type="text/css" href="css/floating.css">
-        <link rel="stylesheet" type="text/css" href="css/cards.css">
-        <link rel="stylesheet" type="text/css" href="css/dashboard.css">
-        <link rel="stylesheet" type="text/css" href="css/css_modal.css">
-        <link rel="manifest" href="/manifest.json">
-        <link rel="icon" href="assets/UPOCKET4.webp">
-        <link rel="apple-touch-icon" sizes="180x180" href="assets/icon-iphone.webp">
-        <link rel="apple-touch-startup-image" href="assets/UPOCKET4.webp">
-        <script src="libs/jquery-min.js"></script>
-        <script src="libs/chartjs-min.js"></script>
-        <title>UPocket</title>
-    </head>
-    <body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="Description" content="UPocket">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#002828">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="#002828">
+    <meta name="theme-color" content="#002828">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/graficos.css">
+    <link rel="stylesheet" type="text/css" href="css/floating.css">
+    <link rel="stylesheet" type="text/css" href="css/cards.css">
+    <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="css/css_modal.css">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="assets/UPOCKET4.webp">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icon-iphone.webp">
+    <link rel="apple-touch-startup-image" href="assets/UPOCKET4.webp">
+    <script src="libs/jquery-min.js"></script>
+    <script src="libs/chartjs-min.js"></script>
+    <title>UPocket</title>
+</head>
+
+<body>
     <header class="header">
         <div class="logo">
             <a href="index.html"><img src="assets/upocket2.webp" alt="Upocket Logo"></a>
         </div>
         <div class="box-user">
-            <div class="box-username"> 
+            <div class="box-username">
                 <a href="#">Nome usuário </a>
             </div>
             <div>
                 <a href="#"><img src="assets/profile.webp" alt="Foto do Usuário"></a>
-            </div>            
+            </div>
         </div>
         <div class="mobile_menu">
             <div class="mobile_logo">
@@ -143,8 +145,10 @@
             </section>
         </nav>
         <div class="main_box">
-            <section class="indice-mes"> 
-                <h1 id="mes-anterior"><</h1> <h3 id="mes-selecionado">Maio</h3> <h1 id="mes-posterior">></h1>  
+            <section class="indice-mes">
+                <h1 id="mes-anterior">
+                    <</h1> <h3 id="mes-selecionado">Maio</h3>
+                        <h1 id="mes-posterior">></h1>
             </section>
 
             <section class="flex-container">
@@ -153,7 +157,7 @@
                         <div id="title">
                             RECEITAS
                         </div>
-                        <div class="cards-values" >
+                        <div class="cards-values">
                             <span>R$ </span><span id="valor-receita">00</span>
                         </div>
                     </div>
@@ -166,8 +170,8 @@
                         <div id="title">
                             DESPESAS
                         </div>
-                        <div class="cards-values" >
-                                <span>R$ </span><span id="valor-despesa">00</span>
+                        <div class="cards-values">
+                            <span>R$ </span><span id="valor-despesa">00</span>
                         </div>
                     </div>
                     <div id="display-imagem" class="image-flex">
@@ -180,8 +184,8 @@
                         <div id="title">
                             SALDO TOTAL
                         </div>
-                        <div class="cards-values" >
-                                <span>R$ </span><span id="valor-saldo">00</span>
+                        <div class="cards-values">
+                            <span>R$ </span><span id="valor-saldo">00</span>
                         </div>
                     </div>
                     <div id="display-imagem" class="image-flex">
@@ -214,72 +218,101 @@
     </a>
     <ul>
         <li id="add-receita">
-                <i class="my-float"></i>
-                <img width="70%" height="70%" src="assets/add-recept.webp" alt="">
+            <i class="my-float"></i>
+            <img width="70%" height="70%" src="assets/add-recept.webp" alt="">
         </li>
         <li id="add-despesa">
-                <i class="my-float"></i>
-                <img width="70%" height="70%" src="assets/add-debt.webp" alt="">
+            <i class="my-float"></i>
+            <img width="70%" height="70%" src="assets/add-debt.webp" alt="">
         </li>
     </ul>
-        <div id="container-modal">
-            <div id="box-modal" >
-                <header id="header-box-modal">
-                        <span id="btn-close">&times;</span>                    
-                        <span id="header-box-modal-title"> Adicionar Despesas </span>
-                </header>
-                <main class="main-box-modal">
-                    <form class="modal-form" >
-                        <input required placeholder="Descrição da despesa:" class="modal-form-input" type="text" name="name">
-                        <div> 
-                            <input required placeholder="Valor da despesa:" class="modal-form-input" type="number" name="value">
-                            <input required placeholder="Data" class="modal-form-input" type="date" name="date">
-                        </div>                             
-                        <select required name="categoria" id="modal-form-categoria" name="type" >
-                            <option value="1"> Alimentação</option>
-                            <option value="2"> Transporte</option>
-                            <option value="3"> Vestuário</option>
-                            <option value="4"> Educação</option>
-                            <option value="5"> Lazer</option>
-                        </select>
-                        <button id="modal-form-submit" type="button">Salvar</button>
-                    </form>
-                </main>
-            </div>
+    <div id="container-modal">
+        <div id="box-modal">
+            <header id="header-box-modal">
+                <span id="btn-close">&times;</span>
+                <span id="header-box-modal-title"> Adicionar Despesas </span>
+            </header>
+            <main class="main-box-modal">
+                <form class="modal-form">
+                    <input required placeholder="Descrição da despesa:" class="modal-form-input" type="text"
+                        name="name">
+                    <div>
+                        <input required placeholder="Valor da despesa:" class="modal-form-input" type="number"
+                            name="value">
+                        <input required placeholder="Data" class="modal-form-input" type="date" name="date">
+                    </div>
+                    <select required name="categoria" id="modal-form-categoria" name="type">
+                        <option value="1"> Alimentação</option>
+                        <option value="2"> Transporte</option>
+                        <option value="3"> Vestuário</option>
+                        <option value="4"> Educação</option>
+                        <option value="5"> Lazer</option>
+                    </select>
+                    <button id="modal-form-submit" type="button">Salvar</button>
+                </form>
+            </main>
         </div>
-        <div id="container-modal-graph">
-            <div id="box-modal">
-                <header id="header-box-modal">
-                        <span id="btn-close-graph">&times;</span>                    
-                        <span id="header-box-modal-title">Detalhamento de Despesas por Categoria </span>
-                </header>
-                <main class="main-box-modal graph">
-                    <section class="grafico-lateral">
-                        <canvas id="pizzagraph2"></canvas>
-                    </section>
-                    <section class="categorias-lateral" id="categorias-lat">
-                    </section>          
-                </main>
-            </div>
-        </div> 
-        <footer>
-            UPocket 2019
-        </footer>
-        <script src="js/dashboard.js"></script>
-        <script>
-            if ("serviceWorker" in navigator) {
-                if (navigator.serviceWorker.controller) {
-                    console.log("[PWA Builder] active service worker found, no need to register");
-                } else {
-                    navigator.serviceWorker
+    </div>
+<!--Modal adicionar receitas-->
+    <div id="container-modal-graph-line">
+        <div id="box-modal-linha">
+            <header>
+                <span id="btn-close-line-graph">&times;</span>
+                <span id="header-box-modal-linha">Maio de 2019</span>
+            </header>
+            <main class="box-modal-orcamento">
+                <form class="orcamento-modal-form">
+                    <div>
+                        <input required placeholder="Valor do orçamento:" class="modal-form-input" type="number"
+                            name="orcamento" style="border-bottom: 3px solid rgb(36, 38, 153);">
+                    </div>
+                    <select required name="categoria" id="modal-form-categoria-orcamento" name="type">
+                        <option id="orcmnt-alimentacao" value="1"> Alimentação</option>
+                        <option id="orcmnt-transporte" value="2"> Transporte</option>
+                        <option id="orcmnt-vestuario" value="3"> Vestuário</option>
+                        <option id="orcmnt-educacao" value="4"> Educação</option>
+                        <option id="orcmnt-lazer" value="5"> Lazer</option>
+                    </select>
+                    <button id="modal-orcamento-form-submit" type="button">Salvar</button>
+                </form>
+            </main>
+        </div>
+    </div>
+<!--Fim modal adicionar receitas-->
+    <div id="container-modal-graph">
+        <div id="box-modal">
+            <header id="header-box-modal">
+                <span id="btn-close-graph">&times;</span>
+                <span id="header-box-modal-title">Detalhamento de Despesas por Categoria </span>
+            </header>
+            <main class="main-box-modal graph">
+                <section class="grafico-lateral">
+                    <canvas id="pizzagraph2"></canvas>
+                </section>
+                <section class="categorias-lateral" id="categorias-lat">
+                </section>
+            </main>
+        </div>
+    </div>
+    <footer>
+        UPocket 2019
+    </footer>
+    <script src="js/dashboard.js"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            if (navigator.serviceWorker.controller) {
+                console.log("[PWA Builder] active service worker found, no need to register");
+            } else {
+                navigator.serviceWorker
                     .register("pwabuilder-sw.js", {
                         scope: "./"
                     })
                     .then(function (reg) {
                         console.log("[PWA Builder] Service worker has been registered for scope: " + reg.scope);
                     });
-                }
             }
-        </script>
-    </body>
+        }
+    </script>
+</body>
+
 </html>
