@@ -1,4 +1,8 @@
 
+document.querySelector("#add-orcamento").addEventListener('click', function(){
+    orcamentoModal();
+})
+
 document.querySelector("#modal-orcamento-form-submit").addEventListener("click", function () {
     insertbudgets(document.querySelector(".orcamento-modal-form"));
 });
