@@ -1,22 +1,21 @@
 .indice-mes{
-    width:80%;
+    width:70%;
     padding:2%;
     margin:0 auto;
     height:1%;
     display:flex;
     flex-direction: row;
     align-items:center;
-    justify-content:center; 
-    border-bottom:1px solid black;   
+    justify-content:center;  
 }
-.indice-mes>h1{
+.indice-mes>span{
     width:20%;
     padding:0 10%;
     font-size:3em;
     color:rgba(10,10,10,.9);
 }
-.indice-mes>h1:hover{
-    color:rgba(30,30,30,.6);
+.indice-mes>span:hover{
+    opacity: .8;
     cursor:pointer;
 }
 
@@ -104,6 +103,10 @@ section.flex-container{
 }
 
 @media screen and (max-width:400px) {
+    
+    .indice-mes{
+        margin:3% auto;
+    }
     .cards-values{
         margin-top:3%;
         font-size:1.5em;
@@ -261,6 +264,7 @@ section.flex-container{
     }
 }
 @media (min-width:450px) and (max-width:700px) {
+
     .flex-container {
         display: flex;
         justify-content: space-around;

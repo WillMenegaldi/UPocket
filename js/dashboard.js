@@ -1,5 +1,6 @@
 window.addEventListener('load', atualizaCards);
 window.addEventListener('load', atualizaGrafico);
+window.addEventListener('load', mostrarMesAtual);
 
 document.querySelector('#grafico-rosquinha').addEventListener("click", function () {
     abreModalGrafico();
@@ -17,7 +18,11 @@ document.querySelector("#add-receita").addEventListener("click", function () {
     abreModal('receita');
 });
 
+
 document.querySelector("#btn-close").addEventListener("click", function () {
+    fechaModal();
+});
+document.querySelector("#btn-close-line-graph").addEventListener("click", function(){
     fechaModal();
 });
 
@@ -25,11 +30,12 @@ document.querySelector("#modal-form-submit").addEventListener("click", function 
     insert(document.querySelector(".modal-form"));
 });
 
+
 document.querySelector("#mes-anterior").addEventListener("click", function () {
-    mostraMes(1);
+    selecionarMes(1);
 });
 document.querySelector("#mes-posterior").addEventListener("click", function () {
-    mostraMes(2);
+    selecionarMes(2);
 });
 document.querySelector('#income-card').addEventListener("click", function () {
     redirectPara('in-movimentacoes', database);
@@ -44,6 +50,7 @@ document.querySelector('#grafico-linha').addEventListener("click", function () {
 var mes = new Date().getMonth() + 1;
 
 var database = inicializaDB();
+
 function inicializaDB() {
     let database = localStorage.getItem("UPocketDataBase");
 
@@ -53,7 +60,7 @@ function inicializaDB() {
 }
 
 function insert(dataset) {
-    let valido = datasetMapping(dataset, database);
+    let valido = datasetMapping(dataset);
     if (valido) {
         limpaCampos(dataset);
         fechaModal();
@@ -61,6 +68,7 @@ function insert(dataset) {
         atualizaGrafico();
     }
 }
+
 
 function atualizaCards() {
     var cardReceita = document.querySelector("#valor-receita");
@@ -76,8 +84,7 @@ function atualizaGrafico() {
     let data = retornaDados();
     let total = 0;
 
-    let despesas = database.filter(data => data.categoria != null);
-    despesas = checkData(despesas, mes);
+    let despesas = database.filter(data => data.categoria != null && data.data.split("-")[1] == mes);
 
     for (var i = 0; i < despesas.length; i++) {
         total += despesas[i].valor;
@@ -129,33 +136,44 @@ function montaGraficoVazio() {
     return grafico;
 }
 
+function mostrarMesAtual(){
+    let meses = ['', 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
-function mostraMes(botao) {
+    document.getElementById('mes-anterior').innerHTML = `<img src="assets/button-mes+.png" alt="">`;
+    document.getElementById('mes-posterior').innerHTML = `<img src="assets/button-mes-.png" alt="">`;
+    document.getElementById('mes-selecionado').innerHTML = meses[mes];    
+}
 
+function selecionarMes(botao) {
     var mesSelecionado = document.getElementById('mes-selecionado');
     let meses = ['', 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+    let mesDash ;
+    for (let i = 1; i < meses.length; i++) {
+        if (mesSelecionado.innerHTML == meses[i]) {
+            mesDash = i;
+        }
+    }    
     if (botao == 1) {
-        mes = mesAtual(meses) - 1;
+        mes = mesDash - 1;
         if (mes > 0) {
             mesSelecionado.innerHTML = meses[mes];
-            atualizaCards();
-            atualizaGrafico();
             if (mes == 1) {
-                document.querySelector("#mes-anterior").style.color = 'rgb(30,30,30,.6)';
+                document.getElementById('mes-anterior').innerHTML = `<img src="assets/button-mes-white.png" alt="">`;            
             } else {
-                document.querySelector("#mes-anterior").style.color = 'rgba(10,10,10,.9)';
+                document.getElementById('mes-anterior').innerHTML = `<img src="assets/button-mes+.png" alt="">`;
+                document.getElementById('mes-posterior').innerHTML = `<img src="assets/button-mes-.png" alt="">`;
+
             }
         }
     } else {
-        mes = mesAtual(meses) + 1;
+        mes = mesDash + 1;
         if (mes <= 12) {
             mesSelecionado.innerHTML = meses[mes];
-            atualizaCards();
-            atualizaGrafico();
             if (mes == 12) {
-                document.querySelector("#mes-posterior").style.color = 'rgba(30,30,30,.6)';
+                document.getElementById('mes-posterior').innerHTML = `<img src="assets/button-mes+white.png" alt="">`;
             } else {
-                document.querySelector("#mes-posterior").style.color = 'rgba(10,10,10,.9)';
+                document.getElementById('mes-anterior').innerHTML = `<img src="assets/button-mes+.png" alt="">`;
+                document.getElementById('mes-posterior').innerHTML = `<img src="assets/button-mes-.png" alt="">`;
             }
         }
     }
@@ -172,12 +190,11 @@ function mesAtual(meses) {
 
 function checkData(dados, mes) {
     return dados.filter(dados => dados.data.split("-")[1] == mes);
-}
+}    
 
-function setaCardReceitas(card, db) {
+function setaCardReceitas(card) {
     let total = 0;
-    let receitas = db.filter(data => data.categoria == null);
-    receitas = checkData(receitas, mes);
+    let receitas = database.filter(data => data.categoria == null && data.data.split("-")[1] == mes);
 
     for (var i = 0; i < receitas.length; i++) {
         total += receitas[i].valor;
@@ -185,10 +202,9 @@ function setaCardReceitas(card, db) {
     card.innerHTML = total.toFixed(2).replace(".", ",");
 }
 
-function setaCardDespesas(card, db) {
+function setaCardDespesas(card) {
     let total = 0;
-    let despesas = db.filter(data => data.categoria != null);
-    despesas = checkData(despesas, mes);
+    let despesas = database.filter(data => data.categoria != null && data.data.split("-")[1] == mes);
 
     for (var i = 0; i < despesas.length; i++) {
         total += despesas[i].valor;
@@ -207,7 +223,7 @@ function limpaCampos(campos) {
     campos[3].value = null;
 }
 
-function datasetMapping(data, db) {
+function datasetMapping(data) {
     let valor = validaInsercao(data);
 
     if (valor) {
@@ -215,14 +231,36 @@ function datasetMapping(data, db) {
             nome: data[0].value,
             valor: parseFloat(data[1].value),
             data: data[2].value,
-            categoria: parseInt(data[3].value) || null
+            categoria: parseInt(data[3].value) || null,
+            tipo: "receitas/despesas"
         };
 
-        db.push(dataset);
+        database.push(dataset);
 
-        localStorage.setItem("UPocketDataBase", JSON.stringify(db));
+        localStorage.setItem("UPocketDataBase", JSON.stringify(database));
 
         return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function budgetsMapping(data) {
+    let valor = validaInsercao(data);
+
+    if (valor) {
+        let dataset = {
+            orcamento: data[0].value,
+            data: parseFloat(data[1].value),
+            categoria: parseInt(data[2].value)
+        };
+    
+    database.push(dataset);
+
+    localStorage.setItem("UPocketDataBase", JSON.stringify(database));
+
+    return true;
     }
     else {
         return false;
@@ -303,9 +341,11 @@ function abreModal(card) {
 function fechaModal() {
     var modal = document.getElementById('container-modal');
     var modalGraph = document.getElementById('container-modal-graph');
+    var modalGraphLine = document.getElementById('container-modal-graph-line');
 
     modal.style.display = 'none';
     modalGraph.style.display = 'none';
+    modalGraphLine.style.display = 'none'
     window.onclick = function () {
         if (event.target == modal) {
             modal.style.display = 'none';
@@ -330,7 +370,7 @@ function retornaDados() {
 
 function retornaTotalCategoria(db, categoria) {
     let soma = 0
-    db = checkData(db, mes);
+    db = db.filter(data =>  data.data.split("-")[1] == mes);
 
     for (x = 0; x < db.length; x++) {
         var database = db[x].categoria == categoria && db[x].valor;
@@ -340,15 +380,13 @@ function retornaTotalCategoria(db, categoria) {
     return soma;
 }
 
-function redirectPara(pagina,db) {
+function redirectPara(pagina, db) {
     let dados = db;
 
     if (pagina == 'in-movimentacoes') 
     {
         dados = dados.filter(data => data.categoria == null);
-        
-        for(i = 0; i < dados.length; i++)
-        {
+        for (i=0;i<dados.length;i++){
             nome = dados[i].nome;
             valor = dados[i].valor;
             data = dados[i].data;
@@ -365,10 +403,10 @@ function redirectPara(pagina,db) {
             categoria = dador[i].categoria;
             data = dados[i].data;
         }
+        window.location.href="#";
     }
-    else if (pagina == 'orcamento') 
-    {
-        abreModalGraficoLinha()
+    else if (pagina == 'orcamento') {
+        window.location.href="orcamento.html";
     };
 }
 
@@ -382,6 +420,76 @@ function preencheGraficos(data) {
     graficoCategoria = document.getElementById('pizzagraph').getContext('2d');
     constroiGraficoCategoria(graficoCategoria, data);
 }
+
+
+function dadosOrçamento(tipo){
+    let categorias = ['Alimentação', 'Transporte' , 'Vestuário', 'Educacao' , 'Lazer'];
+    var array = [
+        {
+            categoria:1,
+            valor:100,
+            mes:'2019-06-01'
+        },
+        {
+            categoria:2,
+            valor:100,
+            mes:'2019-06-01'
+        },
+        {
+            categoria:3,
+            valor:300,
+            mes:'2019-06-01'
+        },
+        {
+            categoria:4,
+            valor:40,
+            mes:'2019-06-01'
+        },
+        {
+            categoria:5,
+            valor:100,
+            mes:'2019-04-01'
+        }
+
+    ];      
+    let orçamentos = array.filter(data => data.mes.split("-")[1] == mes ); 
+    orçamentos     = orçamentos.filter(data => data.valor != 0 ); 
+    despesas       = retornaDados(); 
+    let arrayOrçamento  = [0,0,0,0,0]; 
+    let vetor      = []; 
+    let indices    = []; 
+
+    
+    for(let i = 0; i < orçamentos.length; i++)
+    { 
+        arrayOrçamento[orçamentos[i].categoria - 1] = orçamentos[i].valor;
+    }
+    for(let i = 0; i< 5; i++)
+    { 
+        if(arrayOrçamento[i] != 0 || despesas[i] != 0 ){
+            indices[i] = i;
+        }
+    }    
+    indices = indices.filter(data => data != null);   
+
+    for(let i = 0 ; i < indices.length; i++ )
+    { 
+        if(tipo == 1)
+        { 
+            vetor[i] = categorias[indices[i]];
+        }
+        else if(tipo == 2)
+        { 
+            vetor[i] = arrayOrçamento[indices[i]];
+        }
+        else if(tipo == 3)
+        { 
+            vetor[i] = despesas[indices[i]];
+        }   
+    }     
+    return vetor;
+}
+
 
 function controiGraficoOrcamento(ctx) {
     let graph = new Chart(ctx,
@@ -415,18 +523,18 @@ function controiGraficoOrcamento(ctx) {
                 }
             },
             data: {
-                labels: ['Alimentação', 'Roupas', 'Gasolina', 'Lazer', 'Educacao'],
+                labels: dadosOrçamento(1),
                 datasets: [
                     {
                         pointRadius: 2,
-                        data: [2000, 1000, 500, 9000, 1000, 400],
+                        data: dadosOrçamento(2),
                         borderColor: "#0c8e10",
                         backgroundColor: 'rgba(32,130,19,0.5)',
                         label: 'Orçamento'
                     },
                     {
                         label: 'Gastos',
-                        data: [2500, 100, 5000, 1000, 5000, 400],
+                        data: dadosOrçamento(3),
                         backgroundColor: 'rgba(145,33,33,0.4)',
                         borderColor: "#991c09"
                     }
@@ -548,13 +656,4 @@ function fechaModalGraph() {
             modalGraph.style.display = 'none';
         }
     }
-}
-
-function abreModalOrcamento(card) {
-    var modal = document.getElementById('orcamento-modal');
-    modal.style.display = 'block';
-    
-    inputModal[0].value = null;
-    inputModal[1].value = null;
-    inputModal[2].value = new Date().toISOString().slice(0, 10);
 }
