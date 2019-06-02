@@ -28,12 +28,12 @@
 </head>
 
 <body>
-    <button id="add-orcamento">asdsad</button>
+    <button id="add-orcamento" onclick="orcamentoModal()">asdsad</button>
     <div id="container-modal-graph-line">
         <div id="box-modal-linha">
             <header>
                 <span id="btn-close-line-graph">&times;</span>
-                <span id="header-box-modal-linha">Maio de 2019</span>
+                <span id="header-box-modal-linha"></span>
             </header>
             <main class="box-modal-orcamento">
                 <form class="orcamento-modal-form">
@@ -42,6 +42,7 @@
                             name="orcamento" style="border-bottom: 3px solid rgb(36, 38, 153);">
                     </div>
                     <select required name="categoria" id="modal-form-categoria-orcamento" name="type">
+                        <option value="0" id="orcmnt-default">Selecione uma categoria</option>
                         <option id="orcmnt-alimentacao" value="1"> Alimentação</option>
                         <option id="orcmnt-transporte" value="2"> Transporte</option>
                         <option id="orcmnt-vestuario" value="3"> Vestuário</option>
@@ -53,7 +54,7 @@
             </main>
         </div>
     </div>
-    <script src="js/dashboard.js"></script>
+    <script src="js/orcamento.js"></script>
 </body>
 
 </html>

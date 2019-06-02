@@ -17,6 +17,7 @@ document.querySelector("#add-receita").addEventListener("click", function () {
     abreModal('receita');
 });
 
+
 document.querySelector("#btn-close").addEventListener("click", function () {
     fechaModal();
 });
@@ -28,9 +29,6 @@ document.querySelector("#modal-form-submit").addEventListener("click", function 
     insert(document.querySelector(".modal-form"));
 });
 
-document.querySelector("#modal-orcamento-form-submit").addEventListener("click", function () {
-    insertbudgets(document.querySelector(".orcamento-modal-form"));
-})
 
 document.querySelector("#mes-anterior").addEventListener("click", function () {
     mostraMes(1);
@@ -69,13 +67,6 @@ function insert(dataset) {
     }
 }
 
-function insertbudgets(dataset) {
-    let valido = budgetsMapping(dataset);
-    if (valido) {
-        anulaCampos(dataset);
-        fechaModalLineGraph();
-    }
-}
 
 function atualizaCards() {
     var cardReceita = document.querySelector("#valor-receita");
@@ -230,7 +221,8 @@ function datasetMapping(data) {
             nome: data[0].value,
             valor: parseFloat(data[1].value),
             data: data[2].value,
-            categoria: parseInt(data[3].value) || null
+            categoria: parseInt(data[3].value) || null,
+            tipo: "receitas/despesas"
         };
 
         database.push(dataset);
@@ -407,7 +399,6 @@ function redirectPara(pagina, db) {//Lê os dados  do Ls e deixa os separados pa
     }
     else if (pagina == 'orcamento') {
         window.location.href="orcamento.html";
-        document.querySelector("#add-orcamento").addEventListener('onclick',  abreModalOrcamento())
     };
 }
 
@@ -576,11 +567,7 @@ function abreModalGrafico() {
         insertBoxCategorias(data);
     }
 }
-function abreModalOrcamento(){
-    let modalGraph = document.getElementById('container-modal-graph-line');
-    modalGraph.style.display = 'block';
-    exibeSemOrcamento();
-}
+
 
 function fechaModalGraph() {
     let modalGraph = document.getElementById('container-modal-graph');
@@ -592,35 +579,4 @@ function fechaModalGraph() {
         }
     }
 }
-function fechaModalLineGraph(){
-    let modalLineGraph = document.getElementById('container-modal-graph');
-    modalLineGraph.style.display = 'none';
 
-    window.onclick = function(){
-        if (event.taget == modalLineGraph) {
-            modalLineGraph.style.display = 'none';
-        }
-    }
-}
-
-function exibeSemOrcamento(){
-    if(data.categoria[1]){
-        document.getElementById("orcmnt-alimentacao").outerHTML = "";
-    }
-
-    if(data.categoria[2]){
-        document.getElementById("orcmnt-transporte").outerHTML = "";
-    }
-    
-    if(data.categoria[3]){
-        document.getElementById("orcmnt-vestuario").outerHTML = "";
-    }
-
-    if(data.categoria[4]){
-        document.getElementById("orcmnt-educacao").outerHTML = "";
-    }
-    
-    if(data.categoria[5]){
-        document.getElementById("orcmnt-lazer").outerHTML = "";
-    }
-}
