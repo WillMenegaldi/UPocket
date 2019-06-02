@@ -1,5 +1,6 @@
 window.addEventListener('load', atualizaCards);
 window.addEventListener('load', atualizaGrafico);
+window.addEventListener('load', mostrarMesAtual);
 
 document.querySelector('#grafico-rosquinha').addEventListener("click", function () {
     abreModalGrafico();
@@ -26,10 +27,10 @@ document.querySelector("#modal-form-submit").addEventListener("click", function 
 });
 
 document.querySelector("#mes-anterior").addEventListener("click", function () {
-    mostraMes(1);
+    selecionarMes(1);
 });
 document.querySelector("#mes-posterior").addEventListener("click", function () {
-    mostraMes(2);
+    selecionarMes(2);
 });
 document.querySelector('#income-card').addEventListener("click", function () {
     redirectPara('in-movimentacoes', database);
@@ -44,6 +45,7 @@ document.querySelector('#grafico-linha').addEventListener("click", function () {
 var mes = new Date().getMonth() + 1;
 
 var database = inicializaDB();
+
 function inicializaDB() {
     let database = localStorage.getItem("UPocketDataBase");
 
@@ -76,8 +78,7 @@ function atualizaGrafico() {
     let data = retornaDados();
     let total = 0;
 
-    let despesas = database.filter(data => data.categoria != null);
-    despesas = checkData(despesas, mes);
+    let despesas = database.filter(data => data.categoria != null && data.data.split("-")[1] == mes);
 
     for (var i = 0; i < despesas.length; i++) {
         total += despesas[i].valor;
@@ -129,17 +130,25 @@ function montaGraficoVazio() {
     return grafico;
 }
 
+function mostrarMesAtual(){
+    let mesSelecionado = document.getElementById('mes-selecionado');
+    let meses = ['', 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+    mesSelecionado.innerHTML = meses[mes];
+}
 
-function mostraMes(botao) {
-
+function selecionarMes(botao) {
     var mesSelecionado = document.getElementById('mes-selecionado');
     let meses = ['', 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+    let mesDash ;
+    for (let i = 1; i < meses.length; i++) {
+        if (mesSelecionado.innerHTML == meses[i]) {
+            mesDash = i;
+        }
+    }    
     if (botao == 1) {
-        mes = mesAtual(meses) - 1;
+        mes = mesDash - 1;
         if (mes > 0) {
             mesSelecionado.innerHTML = meses[mes];
-            atualizaCards();
-            atualizaGrafico();
             if (mes == 1) {
                 document.querySelector("#mes-anterior").style.color = 'rgb(30,30,30,.6)';
             } else {
@@ -147,37 +156,24 @@ function mostraMes(botao) {
             }
         }
     } else {
-        mes = mesAtual(meses) + 1;
+        mes = mesDash + 1;
         if (mes <= 12) {
             mesSelecionado.innerHTML = meses[mes];
-            atualizaCards();
-            atualizaGrafico();
             if (mes == 12) {
                 document.querySelector("#mes-posterior").style.color = 'rgba(30,30,30,.6)';
             } else {
                 document.querySelector("#mes-posterior").style.color = 'rgba(10,10,10,.9)';
             }
         }
-    }
-}
-// checando qual mes está o h2 de destaque
-function mesAtual(meses) {
-    let selected = document.querySelector("#mes-selecionado");
-    for (let i = 1; i < meses.length; i++) {
-        if (selected.innerHTML == meses[i]) {
-            return i;
-        }
-    }
-}
-//Filtro o array anterior de acordo com o mes desejado
-function checkData(dados, mes) {
-    return dados.filter(dados => dados.data.split("-")[1] == mes);
+    }    
+    atualizaCards();
+    atualizaGrafico();
 }
 
-function setaCardReceitas(card, db) {
+
+function setaCardReceitas(card) {
     let total = 0;
-    let receitas = db.filter(data => data.categoria == null);
-    receitas = checkData(receitas, mes);
+    let receitas = database.filter(data => data.categoria == null && data.data.split("-")[1] == mes);
 
     for (var i = 0; i < receitas.length; i++) {
         total += receitas[i].valor;
@@ -185,10 +181,9 @@ function setaCardReceitas(card, db) {
     card.innerHTML = total.toFixed(2).replace(".", ",");
 }
 
-function setaCardDespesas(card, db) {
+function setaCardDespesas(card) {
     let total = 0;
-    let despesas = db.filter(data => data.categoria != null);
-    despesas = checkData(despesas, mes);
+    let despesas = database.filter(data => data.categoria != null && data.data.split("-")[1] == mes);
 
     for (var i = 0; i < despesas.length; i++) {
         total += despesas[i].valor;
@@ -330,7 +325,7 @@ function retornaDados() {
 
 function retornaTotalCategoria(db, categoria) {
     let soma = 0
-    db = checkData(db, mes);
+    db = db.filter(data =>  data.data.split("-")[1] == mes);
 
     for (x = 0; x < db.length; x++) {
         var database = db[x].categoria == categoria && db[x].valor;
@@ -379,6 +374,76 @@ function preencheGraficos(data) {
     constroiGraficoCategoria(graficoCategoria, data);
 }
 
+
+function dadosOrçamento(tipo){
+    let categorias = ['Alimentação', 'Transporte' , 'Vestuário', 'Educacao' , 'Lazer'];
+    var array = [
+        {
+            categoria:1,
+            valor:100,
+            mes:'2019-06-01'
+        },
+        {
+            categoria:2,
+            valor:100,
+            mes:'2019-02-01'
+        },
+        {
+            categoria:3,
+            valor:300,
+            mes:'2019-06-01'
+        },
+        {
+            categoria:4,
+            valor:40,
+            mes:'2019-06-01'
+        },
+        {
+            categoria:5,
+            valor:100,
+            mes:'2019-04-01'
+        }
+
+    ];      
+    let orçamentos = array.filter(data => data.mes.split("-")[1] == mes ); 
+    orçamentos     = orçamentos.filter(data => data.valor != 0 ); 
+    despesas       = retornaDados(); 
+    let arrayOrçamento  = [0,0,0,0,0]; 
+    let vetor      = []; 
+    let indices    = []; 
+
+    
+    for(let i = 0; i < orçamentos.length; i++)
+    { 
+        arrayOrçamento[orçamentos[i].categoria - 1] = orçamentos[i].valor;
+    }
+    for(let i = 0; i< 5; i++)
+    { 
+        if(arrayOrçamento[i] != 0 || despesas[i] != 0 ){
+            indices[i] = i;
+        }
+    }    
+    indices = indices.filter(data => data != null);   
+
+    for(let i = 0 ; i < indices.length; i++ )
+    { 
+        if(tipo == 1)
+        { 
+            vetor[i] = categorias[indices[i]];
+        }
+        else if(tipo == 2)
+        { 
+            vetor[i] = arrayOrçamento[indices[i]];
+        }
+        else if(tipo == 3)
+        { 
+            vetor[i] = despesas[indices[i]];
+        }   
+    }     
+    return vetor;
+}
+
+
 function controiGraficoOrcamento(ctx) {
     let graph = new Chart(ctx,
         {
@@ -411,18 +476,18 @@ function controiGraficoOrcamento(ctx) {
                 }
             },
             data: {
-                labels: ['Alimentação', 'Roupas', 'Gasolina', 'Lazer', 'Educacao'],
+                labels: dadosOrçamento(1),
                 datasets: [
                     {
                         pointRadius: 2,
-                        data: [2000, 1000, 500, 9000, 1000, 400],
+                        data: dadosOrçamento(2),
                         borderColor: "#0c8e10",
                         backgroundColor: 'rgba(32,130,19,0.5)',
                         label: 'Orçamento'
                     },
                     {
                         label: 'Gastos',
-                        data: [2500, 100, 5000, 1000, 5000, 400],
+                        data: dadosOrçamento(3),
                         backgroundColor: 'rgba(145,33,33,0.4)',
                         borderColor: "#991c09"
                     }
