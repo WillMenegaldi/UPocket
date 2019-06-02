@@ -2,7 +2,7 @@
     from {top: -300px; opacity: 0}
     to {top: 0; opacity: 1}
 }
-#container-modal , #container-modal-graph{
+#container-modal , #container-modal-graph, #container-modal-graph-line{
     display: none;
     position: fixed;
     left: 0;
@@ -16,15 +16,14 @@
     animation-duration: 0.50s;   
 }
 
-#box-modal{
+#box-modal, #box-modal-linha{
     background:rgb(250, 250, 250);
     border-radius: 20px;
     width:50%;
     height:75%;
     margin:5% auto;
 }
-#header-box-modal{
-    box-shadow: 1px 1px 3px rgba(50,50,50,0.5);
+#header-box-modal, #box-modal-linha>header{
     border-radius: 20px 20px 0px 0px;
     width:99%;
     height:12%;
@@ -35,30 +34,30 @@
     font-size: 2em; 
 }
 
-#header-box-modal-title{
+#header-box-modal-linha{
     color:rgb(250, 250, 250);
     margin-left: 2%;
     font-size: 1.1em;
 }
-.main-box-modal{
+.main-box-modal, .box-modal-orcamento{
     border-radius: 0px 0px 20px 20px; 
     width:100%;
     height:85%;
 }
 
-#btn-close,#btn-close-graph{
+#btn-close,#btn-close-line-graph{
     margin-right:3%;
     font-size: 1.5em;
     float:right;
     font-weight: bold;
     color:rgb(250, 250, 250);
 }
-#btn-close:hover,#btn-close-graph:hover{
+#btn-close:hover,#btn-close-line-graph:hover{
     cursor: pointer;
     color:#000;
 }
 
-.modal-form{
+.modal-form, .orcamento-modal-form{
     width:100%;
     height:95%;
     margin:5% auto 0;
@@ -75,7 +74,7 @@
     padding:2%;    
     box-sizing:border-box;
 }
-#modal-form-submit{
+#modal-form-submit, button#modal-orcamento-form-submit{
     padding:1%;    
     border-radius:5px;
     line-height: 24px; 
@@ -88,7 +87,7 @@
     font-weight: bold;
     cursor:pointer; 
 }
-#modal-form-submit:hover{
+#modal-form-submit:hover, #modal-orcamento-form-submit:hover{
     animation-name:bounce;
     animation-duration: 1s;
 }
@@ -119,6 +118,12 @@ select{
     font-weight: bold;
     background: rgba(104, 6, 11,0.8);
 }
+select#modal-form-categoria-orcamento{
+    margin-top: 0;
+    margin-bottom: 10%;
+    background: rgba(3, 12, 93, 0.8);
+}
+
 
 .categorias-lateral{
     margin-top: 5.6%;
@@ -132,7 +137,7 @@ select{
 #box-modal>main.graph{
     display:flex;
 }
-#container-modal-graph>#box-modal{
+#container-modal-graph>#box-modal, #container-modal-graph-lin>#box-modal-linha{
     width:62%;
 }
 .box-categoria{
@@ -185,6 +190,12 @@ select{
     background: rgba(179, 0, 0, 0.9);
     padding-left:1%;
     width:99%;
+}
+#container-modal-graph-line>#box-modal-linha>header{
+    background: rgb(53, 53, 128);
+}
+#box-modal-linha{
+    width: 50%;
 }
 #pizzagraph2{
     margin-top: 18%;

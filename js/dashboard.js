@@ -18,13 +18,18 @@ document.querySelector("#add-receita").addEventListener("click", function () {
     abreModal('receita');
 });
 
+
 document.querySelector("#btn-close").addEventListener("click", function () {
+    fechaModal();
+});
+document.querySelector("#btn-close-line-graph").addEventListener("click", function(){
     fechaModal();
 });
 
 document.querySelector("#modal-form-submit").addEventListener("click", function () {
     insert(document.querySelector(".modal-form"));
 });
+
 
 document.querySelector("#mes-anterior").addEventListener("click", function () {
     selecionarMes(1);
@@ -55,7 +60,7 @@ function inicializaDB() {
 }
 
 function insert(dataset) {
-    let valido = datasetMapping(dataset, database);
+    let valido = datasetMapping(dataset);
     if (valido) {
         limpaCampos(dataset);
         fechaModal();
@@ -63,6 +68,7 @@ function insert(dataset) {
         atualizaGrafico();
     }
 }
+
 
 function atualizaCards() {
     var cardReceita = document.querySelector("#valor-receita");
@@ -207,7 +213,7 @@ function limpaCampos(campos) {
     campos[3].value = null;
 }
 
-function datasetMapping(data, db) {
+function datasetMapping(data) {
     let valor = validaInsercao(data);
 
     if (valor) {
@@ -215,14 +221,36 @@ function datasetMapping(data, db) {
             nome: data[0].value,
             valor: parseFloat(data[1].value),
             data: data[2].value,
-            categoria: parseInt(data[3].value) || null
+            categoria: parseInt(data[3].value) || null,
+            tipo: "receitas/despesas"
         };
 
-        db.push(dataset);
+        database.push(dataset);
 
-        localStorage.setItem("UPocketDataBase", JSON.stringify(db));
+        localStorage.setItem("UPocketDataBase", JSON.stringify(database));
 
         return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function budgetsMapping(data) {
+    let valor = validaInsercao(data);
+
+    if (valor) {
+        let dataset = {
+            orcamento: data[0].value,
+            data: parseFloat(data[1].value),
+            categoria: parseInt(data[2].value)
+        };
+    
+    database.push(dataset);
+
+    localStorage.setItem("UPocketDataBase", JSON.stringify(database));
+
+    return true;
     }
     else {
         return false;
@@ -303,9 +331,11 @@ function abreModal(card) {
 function fechaModal() {
     var modal = document.getElementById('container-modal');
     var modalGraph = document.getElementById('container-modal-graph');
+    var modalGraphLine = document.getElementById('container-modal-graph-line');
 
     modal.style.display = 'none';
     modalGraph.style.display = 'none';
+    modalGraphLine.style.display = 'none'
     window.onclick = function () {
         if (event.target == modal) {
             modal.style.display = 'none';
@@ -340,7 +370,7 @@ function retornaTotalCategoria(db, categoria) {
     return soma;
 }
 
-function redirectPara(pagina,db) {//Lê os dados  do Ls e deixa os separados para serem exibidos posteriormente
+function redirectPara(pagina, db) {//Lê os dados  do Ls e deixa os separados para serem exibidos posteriormente
     let dados = db;
     let nome = '';
     let valor = '';
@@ -348,7 +378,7 @@ function redirectPara(pagina,db) {//Lê os dados  do Ls e deixa os separados par
     let categoria = '';
     if (pagina == 'in-movimentacoes') {//caso clique em receita
         dados = dados.filter(data => data.categoria == null);
-        for(i=0;i<dados.length;i++){
+        for (i=0;i<dados.length;i++){
             nome = dados[i].nome;
             valor = dados[i].valor;
             data = dados[i].data;
@@ -362,9 +392,10 @@ function redirectPara(pagina,db) {//Lê os dados  do Ls e deixa os separados par
             categoria = dador[i].categoria;
             data = dados[i].data;
         }
+        window.location.href="#";
     }
     else if (pagina == 'orcamento') {
-        abreModalGraficoLinha()
+        window.location.href="orcamento.html";
     };
 }
 
@@ -604,6 +635,7 @@ function abreModalGrafico() {
     }
 }
 
+
 function fechaModalGraph() {
     let modalGraph = document.getElementById('container-modal-graph');
     modalGraph.style.display = 'none';
@@ -614,3 +646,4 @@ function fechaModalGraph() {
         }
     }
 }
+
