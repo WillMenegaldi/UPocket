@@ -343,9 +343,6 @@ function fechaModal() {
         else if (event.target == modalGraph) {
             modalGraph.style.display = 'none';
         }
-        else if (event.targe == modalGraphLine){
-            modalGraphLine.style.display = 'none';
-        }
     }
 }
 
