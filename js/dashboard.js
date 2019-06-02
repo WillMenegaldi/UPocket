@@ -46,7 +46,7 @@ document.querySelector('#budget-card', database).addEventListener("click", funct
 document.querySelector('#grafico-linha').addEventListener("click", function () {
     redirectPara('orcamento');
 })
-// var que armazena o mês atual como default, e o selecionado
+
 var mes = new Date().getMonth() + 1;
 
 var database = inicializaDB();
@@ -176,11 +176,21 @@ function selecionarMes(botao) {
                 document.getElementById('mes-posterior').innerHTML = `<img src="assets/button-mes-.png" alt="">`;
             }
         }
-    }    
-    atualizaCards();
-    atualizaGrafico();
+    }
 }
 
+function mesAtual(meses) {
+    let selected = document.querySelector("#mes-selecionado");
+    for (let i = 1; i < meses.length; i++) {
+        if (selected.innerHTML == meses[i]) {
+            return i;
+        }
+    }
+}
+
+function checkData(dados, mes) {
+    return dados.filter(dados => dados.data.split("-")[1] == mes);
+}    
 
 function setaCardReceitas(card) {
     let total = 0;
@@ -370,13 +380,11 @@ function retornaTotalCategoria(db, categoria) {
     return soma;
 }
 
-function redirectPara(pagina, db) {//Lê os dados  do Ls e deixa os separados para serem exibidos posteriormente
+function redirectPara(pagina, db) {
     let dados = db;
-    let nome = '';
-    let valor = '';
-    let data = '';
-    let categoria = '';
-    if (pagina == 'in-movimentacoes') {//caso clique em receita
+
+    if (pagina == 'in-movimentacoes') 
+    {
         dados = dados.filter(data => data.categoria == null);
         for (i=0;i<dados.length;i++){
             nome = dados[i].nome;
@@ -384,9 +392,12 @@ function redirectPara(pagina, db) {//Lê os dados  do Ls e deixa os separados pa
             data = dados[i].data;
         }
     }
-    else if (pagina == 'out-movimentacoes') {//caso clique em despesa
+    else if (pagina == 'out-movimentacoes') 
+    {
         dados = dados.filter(data => data.categoria == !null);
-        for(i=0;i<dados.length;i++){
+    
+        for(i = 0; i < dados.length; i++)
+        {
             nome = dados[i].nome;
             valor = dados[i].valor;
             categoria = dador[i].categoria;
@@ -611,6 +622,7 @@ function insertBoxCategorias(data) {
         }
     }
 }
+
 function abreModalGrafico() {
     let ctx = document.getElementById('pizzagraph2').getContext('2d');
     let modalGraph = document.getElementById('container-modal-graph');
@@ -635,7 +647,6 @@ function abreModalGrafico() {
     }
 }
 
-
 function fechaModalGraph() {
     let modalGraph = document.getElementById('container-modal-graph');
     modalGraph.style.display = 'none';
@@ -646,4 +657,3 @@ function fechaModalGraph() {
         }
     }
 }
-
