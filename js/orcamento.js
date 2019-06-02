@@ -56,11 +56,12 @@ function anulaCampos(campos) {
 
 function budgetsMapping(data) {
     let valor = validaInsercao(data);
-
+    let mes = mesOrcamento();
     if (valor) {
         let dataset = {
             orcamento: parseFloat(data[0].value),
             categoria: parseInt(data[1].value),
+            mes: mes,
             tipo: "orcamento"
         };
 
@@ -93,13 +94,10 @@ function exibeSemOrcamento() {
             }
         }
     }
-    console.log(categoria);
     if (categoria[1]) {
-        console.log(categoria[1]);
         if (check[0] == 0) {
             document.getElementById("orcmnt-alimentacao").style.display = 'none';
             document.getElementById("orcmnt-alimentacao").innerHTML = 'Selecione uma categoria';
-            console.log(check);
             check[0] = 1;
         }
     }
@@ -133,6 +131,7 @@ function exibeSemOrcamento() {
         }
     }
 }
+
 function validaInsercao(data) {
     let valor = parseFloat(data[0].value);
 
@@ -155,9 +154,15 @@ function validaInsercao(data) {
     }
 }
 
+function mesOrcamento(){
+    let calendario = new Date();
+    let mes = {};
+    mes = calendario.getMonth();
+    return mes;
+}
+
 function mesExtenso() {
     let calendario = new Date();
-    let mesSelecionado = 'abc';
     let mes = calendario.getMonth();
     let ano = calendario.getFullYear();
     let nomeMes = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];

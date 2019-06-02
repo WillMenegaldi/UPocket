@@ -28,19 +28,17 @@
 </head>
 
 <body>
-    <button id="add-orcamento"">adicionar orçamento</button>
+    <button id="add-orcamento">adicionar orçamento</button>
     <div id="container-modal-graph-line">
         <div id="box-modal-linha">
             <header>
                 <span id="btn-close-line-graph">&times;</span>
-                <span id="header-box-modal-linha"></span>
+                <span id="header-box-modal-linha">Mês</span>
             </header>
             <main class="box-modal-orcamento">
                 <form class="orcamento-modal-form">
-                    <div>
-                        <input required placeholder="Valor do orçamento:" class="modal-form-input" type="number"
-                            name="orcamento" style="border-bottom: 3px solid rgb(36, 38, 153);">
-                    </div>
+                    <input required placeholder="Valor do orçamento:" class="modal-form-input" type="number"
+                        name="orcamento" style="border-bottom: 3px solid rgb(36, 38, 153);">
                     <select required name="categoria" id="modal-form-categoria-orcamento" name="type">
                         <option value="0" id="orcmnt-default">Selecione uma categoria</option>
                         <option id="orcmnt-alimentacao" value="1"> Alimentação</option>
@@ -49,11 +47,13 @@
                         <option id="orcmnt-educacao" value="4"> Educação</option>
                         <option id="orcmnt-lazer" value="5"> Lazer</option>
                     </select>
-                    <button id="modal-orcamento-form-submit" type="button">Salvar</button>
+                    <button id="modal-orcamento-form-submit" type="button"
+                        style="background-color: rgb(53, 53, 128)">Salvar</button>
                 </form>
             </main>
         </div>
     </div>
+    <script src="js/dashboard.js"></script>
     <script src="js/orcamento.js"></script>
 </body>
 
