@@ -137,9 +137,11 @@ function montaGraficoVazio() {
 }
 
 function mostrarMesAtual(){
-    let mesSelecionado = document.getElementById('mes-selecionado');
     let meses = ['', 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-    mesSelecionado.innerHTML = meses[mes];
+
+    document.getElementById('mes-anterior').innerHTML = `<img src="assets/button-mes+.png" alt="">`;
+    document.getElementById('mes-posterior').innerHTML = `<img src="assets/button-mes-.png" alt="">`;
+    document.getElementById('mes-selecionado').innerHTML = meses[mes];    
 }
 
 function selecionarMes(botao) {
@@ -156,9 +158,11 @@ function selecionarMes(botao) {
         if (mes > 0) {
             mesSelecionado.innerHTML = meses[mes];
             if (mes == 1) {
-                document.querySelector("#mes-anterior").style.color = 'rgb(30,30,30,.6)';
+                document.getElementById('mes-anterior').innerHTML = `<img src="assets/button-mes-white.png" alt="">`;            
             } else {
-                document.querySelector("#mes-anterior").style.color = 'rgba(10,10,10,.9)';
+                document.getElementById('mes-anterior').innerHTML = `<img src="assets/button-mes+.png" alt="">`;
+                document.getElementById('mes-posterior').innerHTML = `<img src="assets/button-mes-.png" alt="">`;
+
             }
         }
     } else {
@@ -166,9 +170,10 @@ function selecionarMes(botao) {
         if (mes <= 12) {
             mesSelecionado.innerHTML = meses[mes];
             if (mes == 12) {
-                document.querySelector("#mes-posterior").style.color = 'rgba(30,30,30,.6)';
+                document.getElementById('mes-posterior').innerHTML = `<img src="assets/button-mes+white.png" alt="">`;
             } else {
-                document.querySelector("#mes-posterior").style.color = 'rgba(10,10,10,.9)';
+                document.getElementById('mes-anterior').innerHTML = `<img src="assets/button-mes+.png" alt="">`;
+                document.getElementById('mes-posterior').innerHTML = `<img src="assets/button-mes-.png" alt="">`;
             }
         }
     }    
@@ -417,7 +422,7 @@ function dadosOrçamento(tipo){
         {
             categoria:2,
             valor:100,
-            mes:'2019-02-01'
+            mes:'2019-06-01'
         },
         {
             categoria:3,
