@@ -98,18 +98,20 @@ function budgetsMapping(data) {
 }
 
 function exibeSemOrcamento() {
-    let existeOrcamento = [];
+    let orcamentos = [];
     let qntd = 0;
     let check = [0, 0, 0, 0, 0];
     let categoria = [];
+
     for (i = 0; i < database.length; i++) {
-            existeOrcamento[qntd] = database[i];
+            orcamentos[qntd] = database[i];
             qntd += 1;
     }
+    
     for (i = 0; i < qntd; i++) {
         for (j = 1; j < 6; j++) {
-            if (existeOrcamento[i].categoria == j) {
-                categoria[j] = existeOrcamento[i].categoria;
+            if (orcamentos[i].categoria == j) {
+                categoria[j] = orcamentos[i].categoria;
             }
         }
     }
@@ -175,7 +177,7 @@ function validaInsercao(data) {
 
 function mesOrcamento(){
     let calendario = new Date();
-    let mes = {};
+    let mes = 0;
     mes = calendario.getMonth();
     return mes;
 }
