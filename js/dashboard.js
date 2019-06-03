@@ -232,7 +232,6 @@ function datasetMapping(data) {
             valor: parseFloat(data[1].value),
             data: data[2].value,
             categoria: parseInt(data[3].value) || null,
-            tipo: "receitas/despesas"
         };
 
         database.push(dataset);
