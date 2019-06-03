@@ -15,7 +15,7 @@ document.querySelector("#btn-close-line-graph").addEventListener("click", functi
 var database = inicializaDB();
 
 function inicializaDB() {
-    let database = localStorage.getItem("UPocketDataBase");
+    let database = localStorage.getItem("BudgetDataBase");
 
     database = !database ? [] : JSON.parse(database);
 
@@ -81,7 +81,7 @@ function budgetsMapping(data) {
     let mes = mesOrcamento();
     if (valor) {
         let dataset = {
-            orcamento: parseFloat(data[0].value),
+            valor: parseFloat(data[0].value),
             categoria: parseInt(data[1].value),
             mes: mes,
             tipo: "orcamento"
@@ -89,7 +89,7 @@ function budgetsMapping(data) {
 
         database.push(dataset);
 
-        localStorage.setItem("UPocketDataBase", JSON.stringify(database));
+        localStorage.setItem("BudgetDataBase", JSON.stringify(database));
 
         return true;
     }
