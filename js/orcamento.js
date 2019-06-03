@@ -15,7 +15,7 @@ document.querySelector("#btn-close-line-graph").addEventListener("click", functi
 var database = inicializaDB();
 
 function inicializaDB() {
-    let database = localStorage.getItem("BudgetDataBase");
+    let database = localStorage.getItem("BudgetsDataBase");
 
     database = !database ? [] : JSON.parse(database);
 
@@ -84,12 +84,11 @@ function budgetsMapping(data) {
             valor: parseFloat(data[0].value),
             categoria: parseInt(data[1].value),
             mes: mes,
-            tipo: "orcamento"
         };
 
         database.push(dataset);
 
-        localStorage.setItem("BudgetDataBase", JSON.stringify(database));
+        localStorage.setItem("BudgetsDataBase", JSON.stringify(database));
 
         return true;
     }
@@ -104,10 +103,8 @@ function exibeSemOrcamento() {
     let check = [0, 0, 0, 0, 0];
     let categoria = [];
     for (i = 0; i < database.length; i++) {
-        if (database[i].tipo == "orcamento") {
             existeOrcamento[qntd] = database[i];
             qntd += 1;
-        }
     }
     for (i = 0; i < qntd; i++) {
         for (j = 1; j < 6; j++) {
