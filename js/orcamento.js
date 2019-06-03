@@ -15,7 +15,7 @@ document.querySelector("#btn-close-line-graph").addEventListener("click", functi
 var database = inicializaDB();
 
 function inicializaDB() {
-    let database = localStorage.getItem("UPocketDataBase");
+    let database = localStorage.getItem("BudgetsDataBase");
 
     database = !database ? [] : JSON.parse(database);
 
@@ -81,15 +81,14 @@ function budgetsMapping(data) {
     let mes = mesOrcamento();
     if (valor) {
         let dataset = {
-            orcamento: parseFloat(data[0].value),
+            valor: parseFloat(data[0].value),
             categoria: parseInt(data[1].value),
             mes: mes,
-            tipo: "orcamento"
         };
 
         database.push(dataset);
 
-        localStorage.setItem("UPocketDataBase", JSON.stringify(database));
+        localStorage.setItem("BudgetsDataBase", JSON.stringify(database));
 
         return true;
     }
@@ -99,20 +98,20 @@ function budgetsMapping(data) {
 }
 
 function exibeSemOrcamento() {
-    let existeOrcamento = [];
+    let orcamentos = [];
     let qntd = 0;
     let check = [0, 0, 0, 0, 0];
     let categoria = [];
+
     for (i = 0; i < database.length; i++) {
-        if (database[i].tipo == "orcamento") {
-            existeOrcamento[qntd] = database[i];
+            orcamentos[qntd] = database[i];
             qntd += 1;
-        }
     }
+    
     for (i = 0; i < qntd; i++) {
         for (j = 1; j < 6; j++) {
-            if (existeOrcamento[i].categoria == j) {
-                categoria[j] = existeOrcamento[i].categoria;
+            if (orcamentos[i].categoria == j) {
+                categoria[j] = orcamentos[i].categoria;
             }
         }
     }
@@ -178,7 +177,7 @@ function validaInsercao(data) {
 
 function mesOrcamento(){
     let calendario = new Date();
-    let mes = {};
+    let mes = 0;
     mes = calendario.getMonth();
     return mes;
 }
