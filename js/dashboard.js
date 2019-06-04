@@ -177,6 +177,9 @@ function selecionarMes(botao) {
             }
         }
     }
+    
+    atualizaCards();
+    atualizaGrafico();
 }
 
 function mesAtual(meses) {
@@ -420,38 +423,16 @@ function preencheGraficos(data) {
     constroiGraficoCategoria(graficoCategoria, data);
 }
 
+function pegaDadosOrçamento(){ 
+    let db = localStorage.getItem("BudgetsDataBase");
+    db = !db ? [] : JSON.parse(db);    
+    return db;
+}
 
-function dadosOrçamento(tipo){
+function dadosOrçamento(tipo){ 
     let categorias = ['Alimentação', 'Transporte' , 'Vestuário', 'Educacao' , 'Lazer'];
-    var array = [
-        {
-            categoria:1,
-            valor:100,
-            mes:'2019-06-01'
-        },
-        {
-            categoria:2,
-            valor:100,
-            mes:'2019-06-01'
-        },
-        {
-            categoria:3,
-            valor:300,
-            mes:'2019-06-01'
-        },
-        {
-            categoria:4,
-            valor:40,
-            mes:'2019-06-01'
-        },
-        {
-            categoria:5,
-            valor:100,
-            mes:'2019-04-01'
-        }
-
-    ];      
-    let orçamentos = array.filter(data => data.mes.split("-")[1] == mes ); 
+  
+    let orçamentos = pegaDadosOrçamento().filter(data => data.mes == mes ); 
     orçamentos     = orçamentos.filter(data => data.valor != 0 ); 
     despesas       = retornaDados(); 
     let arrayOrçamento  = [0,0,0,0,0]; 

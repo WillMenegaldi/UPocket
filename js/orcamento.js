@@ -178,7 +178,7 @@ function validaInsercao(data) {
 function mesOrcamento(){
     let calendario = new Date();
     let mes = 0;
-    mes = calendario.getMonth();
+    mes = calendario.getMonth() +1;
     return mes;
 }
 
