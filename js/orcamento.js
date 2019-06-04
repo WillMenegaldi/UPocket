@@ -1,4 +1,5 @@
 window.addEventListener('load', listarOrcamentos);
+window.addEventListener('load', mostrarMesAtual);
 
 document.querySelector("#add-orcamento").addEventListener('click', function(){
     orcamentoModal();
@@ -12,36 +13,84 @@ document.querySelector("#btn-close-line-graph").addEventListener("click", functi
     fechaModalLineGraph();
 });
 
-var database = inicializaDB();
+document.querySelector("#mes-anterior").addEventListener("click", function () {
+    selecionarMes(1);
+});
+document.querySelector("#mes-posterior").addEventListener("click", function () {
+    selecionarMes(2);
+});
 
-function inicializaDB() {
-    let database = localStorage.getItem("BudgetsDataBase");
+var mes = new Date().getMonth() + 1;
+var orcamentosDataBase = inicializaDB();
+var database = inicializaDashboardDB();
+
+function inicializaDashboardDB() {
+    let database = localStorage.getItem("UPocketDataBase");
 
     database = !database ? [] : JSON.parse(database);
 
     return database;
 }
 
-function listarOrcamentos() {
-    $('#orcamento-lat').html('');
+function inicializaDB() {
+    let orcamentosDataBase = localStorage.getItem("BudgetsDataBase");
+    orcamentosDataBase = !orcamentosDataBase ? [] : JSON.parse(orcamentosDataBase);
+    
+    return orcamentosDataBase;
+}
 
-    let orcamentos = [
-        {
-            categoria: "Alimentação",
-            orcamento: 1
-        },
-        {
-            categoria: "Transporte",
-            orcamento: 2
-        },
-        {
-            categoria: "Roupas",
-            orcamento: 3
+function mostrarMesAtual(){
+    let meses = ['', 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
+    document.getElementById('mes-anterior').innerHTML = `<img src="assets/button-mes+.png" alt="">`;
+    document.getElementById('mes-posterior').innerHTML = `<img src="assets/button-mes-.png" alt="">`;
+    document.getElementById('mes-selecionado').innerHTML = meses[mes];    
+}
+
+function selecionarMes(botao) {
+    var mesSelecionado = document.getElementById('mes-selecionado');
+    let meses = ['', 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+    let mesDash ;
+    for (let i = 1; i < meses.length; i++) {
+        if (mesSelecionado.innerHTML == meses[i]) {
+            mesDash = i;
         }
-    ]
+    }    
+    if (botao == 1) {
+        mes = mesDash - 1;
+        if (mes > 0) {
+            mesSelecionado.innerHTML = meses[mes];
+            if (mes == 1) {
+                document.getElementById('mes-anterior').innerHTML = `<img src="assets/button-mes-white.png" alt="">`;            
+            } else {
+                document.getElementById('mes-anterior').innerHTML = `<img src="assets/button-mes+.png" alt="">`;
+                document.getElementById('mes-posterior').innerHTML = `<img src="assets/button-mes-.png" alt="">`;
 
-    for (var i = 0; i < orcamentos.length; i++) {
-        $('#orcamento-lat').append('<div> <section> <div style="display: flex; flex-direction: row"> <div>' + orcamentos[i].categoria + '</div> <div>' + 'R$' + orcamentos[i].orcamento.toFixed(2) + '</div > </div> </section> </div>');
+            }
+        }
+    } else {
+        mes = mesDash + 1;
+        if (mes <= 12) {
+            mesSelecionado.innerHTML = meses[mes];
+            if (mes == 12) {
+                document.getElementById('mes-posterior').innerHTML = `<img src="assets/button-mes+white.png" alt="">`;
+            } else {
+                document.getElementById('mes-anterior').innerHTML = `<img src="assets/button-mes+.png" alt="">`;
+                document.getElementById('mes-posterior').innerHTML = `<img src="assets/button-mes-.png" alt="">`;
+            }
+        }
+    }
+
+    listarOrcamentos();
+}
+
+function listarOrcamentos() {
+    let orcamentoMensal = orcamentosDataBase.filter(orcamento => orcamento.mes == mes);
+    
+    $('#orcamento-lat').html('');
+    
+    for (var i = 0; i < orcamentoMensal.length; i++) {
+        $('#orcamento-lat').append('<div> <section> <div style="display: flex; flex-direction: row"> <div>' + orcamentoMensal[i].idCategoria + '</div> <div>' + 'R$' + orcamentoMensal[i].valor.toFixed(2) + '</div > </div> </section> </div>');
     }
 }
 
@@ -57,9 +106,9 @@ function insertbudgets(dataset) {
     if (valido) {
         fechaModalLineGraph();
         anulaCampos(dataset);
+        listarOrcamentos();
     }
 }
-
 
 function fechaModalLineGraph() {
     let modalLineGraph = document.getElementById('container-modal-graph-line');
@@ -78,17 +127,17 @@ function anulaCampos(campos) {
 
 function budgetsMapping(data) {
     let valor = validaInsercao(data);
-    let mes = mesOrcamento();
+    let mes = mesOrcamento() + 1;
     if (valor) {
         let dataset = {
             valor: parseFloat(data[0].value),
-            categoria: parseInt(data[1].value),
+            idCategoria: parseInt(data[1].value),
             mes: mes,
         };
 
-        database.push(dataset);
+        orcamentosDataBase.push(dataset);
 
-        localStorage.setItem("BudgetsDataBase", JSON.stringify(database));
+        localStorage.setItem("BudgetsDataBase", JSON.stringify(orcamentosDataBase));
 
         return true;
     }
@@ -103,15 +152,15 @@ function exibeSemOrcamento() {
     let check = [0, 0, 0, 0, 0];
     let categoria = [];
 
-    for (i = 0; i < database.length; i++) {
-            orcamentos[qntd] = database[i];
+    for (i = 0; i < orcamentosDataBase.length; i++) {
+            orcamentos[qntd] = orcamentosDataBase[i];
             qntd += 1;
     }
     
     for (i = 0; i < qntd; i++) {
         for (j = 1; j < 6; j++) {
-            if (orcamentos[i].categoria == j) {
-                categoria[j] = orcamentos[i].categoria;
+            if (orcamentos[i].idCategoria == j) {
+                categoria[j] = orcamentos[i].idCategoria;
             }
         }
     }
