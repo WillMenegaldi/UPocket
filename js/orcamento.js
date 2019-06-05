@@ -125,7 +125,6 @@ function listarOrcamentos() {
 }
 
 function orcamentoModal() {
-    mesExtenso();
     exibeSemOrcamento();
     let modalGraph = document.getElementById('container-modal-graph-line');
     modalGraph.style.display = 'block';
@@ -260,49 +259,4 @@ function mesOrcamento(){
     let mes = 0;
     mes = calendario.getMonth();
     return mes;
-}
-
-function mesExtenso() {
-    let calendario = new Date();
-    let mes = calendario.getMonth();
-    let ano = calendario.getFullYear();
-    let nomeMes = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-    switch (mes) {
-        case 0:
-            document.getElementById('header-box-modal-linha').innerHTML = nomeMes[0] + ' ' + "de" + ' ' + ano;
-            break;
-        case 1:
-            document.getElementById('header-box-modal-linha').innerHTML = nomeMes[1] + ' ' + "de" + ' ' + ano;
-            break;
-        case 2:
-            document.getElementById('header-box-modal-linha').innerHTML = nomeMes[2] + ' ' + "de" + ' ' + ano;
-            break;
-        case 3:
-            document.getElementById('header-box-modal-linha').innerHTML = nomeMes[3] + ' ' + "de" + ' ' + ano;
-            break;
-        case 4:
-            document.getElementById('header-box-modal-linha').innerHTML = nomeMes[4] + ' ' + "de" + ' ' + ano;
-            break;
-        case 5:
-            document.getElementById('header-box-modal-linha').innerHTML = nomeMes[5] + ' ' + "de" + ' ' + ano;
-            break;
-        case 6:
-            document.getElementById('header-box-modal-linha').innerHTML = nomeMes[6] + ' ' + "de" + ' ' + ano;
-            break;
-        case 7:
-            document.getElementById('header-box-modal-linha').innerHTML = nomeMes[7] + ' ' + "de" + ' ' + ano;
-            break;
-        case 8:
-            document.getElementById('header-box-modal-linha').innerHTML = nomeMes[8] + ' ' + "de" + ' ' + ano;
-            break;
-        case 9:
-            document.getElementById('header-box-modal-linha').innerHTML = nomeMes[9] + ' ' + "de" + ' ' + ano;
-            break;
-        case 10:
-            document.getElementById('header-box-modal-linha').innerHTML = nomeMes[10] + ' ' + "de" + ' ' + ano;
-            break;
-        case 11:
-            document.getElementById('header-box-modal-linha').innerHTML = nomeMes[11] + ' ' + "de" + ' ' + ano;
-            break;
-    }
 }
