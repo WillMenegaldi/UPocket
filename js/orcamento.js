@@ -1,5 +1,6 @@
 window.addEventListener('load', listarOrcamentos);
 window.addEventListener('load', mostrarMesAtual);
+window.addEventListener('load', preencheCards);
 
 document.querySelector("#add-orcamento").addEventListener('click', function(){
     orcamentoModal();
@@ -24,6 +25,35 @@ var mes = new Date().getMonth() + 1;
 var orcamentosDataBase = inicializaDB();
 var database = inicializaDashboardDB();
 
+function preencheCards()
+{
+    let totalOrcamento  = 0;
+    let totalReceita    = 0;
+    let receitaMensal   = 0;
+    let orcamentoMensal = 0;
+
+    let cardReceita = document.querySelector("#orcamento-title-receita");
+    let cardDespesa = document.querySelector("#orcamento-title-despesa");
+    let cardSaldo   = document.querySelector("#orcamento-title-saldo");
+
+    receitaMensal = database.filter(data => data.categoria == null && data.data.split("-")[1] == mes);
+    orcamentoMensal = orcamentosDataBase.filter(orcamento => orcamento.mes == mes);
+
+    for(let i = 0; i < receitaMensal.length; i++)
+    {
+        totalReceita += receitaMensal[i].valor;
+    }
+
+    for(let i = 0; i < orcamentoMensal.length; i++)
+    {
+        totalOrcamento += orcamentoMensal[i].valor;
+    }
+
+    cardReceita.innerHTML = 'R$ ' + totalReceita + ',00';
+    cardDespesa.innerHTML = 'R$ ' + totalOrcamento + ',00';
+    cardSaldo.innerHTML = 'R$ ' + (receitaMensal - totalOrcamento) + ',00';
+}
+
 function inicializaDashboardDB() {
     let database = localStorage.getItem("UPocketDataBase");
 
@@ -35,7 +65,7 @@ function inicializaDashboardDB() {
 function inicializaDB() {
     let orcamentosDataBase = localStorage.getItem("BudgetsDataBase");
     orcamentosDataBase = !orcamentosDataBase ? [] : JSON.parse(orcamentosDataBase);
-    
+
     return orcamentosDataBase;
 }
 
@@ -80,8 +110,8 @@ function selecionarMes(botao) {
             }
         }
     }
-
     listarOrcamentos();
+    preencheCards();
 }
 
 function listarOrcamentos() {
@@ -107,6 +137,7 @@ function insertbudgets(dataset) {
         fechaModalLineGraph();
         anulaCampos(dataset);
         listarOrcamentos();
+        preencheCards();
     }
 }
 
