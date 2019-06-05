@@ -90,7 +90,7 @@ function listarOrcamentos() {
     $('#orcamento-lat').html('');
     
     for (var i = 0; i < orcamentoMensal.length; i++) {
-        $('#orcamento-lat').append('<div> <section> <div style="display: flex; flex-direction: row"> <div>' + orcamentoMensal[i].idCategoria + '</div> <div>' + 'R$' + orcamentoMensal[i].valor.toFixed(2) + '</div > </div> </section> </div>');
+        $('#orcamento-lat').append('<div> <section id="lista-orcamento"> <div id="orcamentos" style="display: flex; flex-direction: row"> <div id="categoria-orcamento">' + orcamentoMensal[i].idCategoria + '</div> <div id="valor-orcamento">' + 'R$' + orcamentoMensal[i].valor.toFixed(2) + '</div > </div> </section> </div>');
     }
 }
 

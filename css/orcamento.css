@@ -18,6 +18,13 @@
 .header-pagina {
     height: 10%;
     width: 100%;
+    background-color: rgb(53, 53, 128);
+    color: rgb(235, 235, 235);
+    font-size: 1.5em;
+    text-align: center;
+}
+.header-title{
+    margin: 1%;
 }
 
 .header-lista {
@@ -25,6 +32,9 @@
     height: 5%;
     width: 90%;
     padding: 5% 5% 0%;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
 }
 
 .header-mes {
@@ -66,16 +76,22 @@
 .lista-orcamento {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     border-radius: 20px;
     background: lightcyan;
     width: 80%;
     height: 80%;
     margin: auto;
+    font-size: 1.25em;
 }
 
 .valores-orcamento{
     height:100%;
     width:100%;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    margin: 1%;
 }
 
 
@@ -103,4 +119,14 @@
 
 #orcamento-lat {
     border-radius: 0 0 20px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#orcamentos{
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }

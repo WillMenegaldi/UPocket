@@ -24,6 +24,7 @@
     width:50%;
     padding:0 10%;
     font-size:1.5em;
+    text-align: center;
 }
 .flex-container {
     display: flex;
