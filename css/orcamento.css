@@ -18,6 +18,13 @@
 .header-pagina {
     height: 10%;
     width: 100%;
+    background-color: rgb(53, 53, 128);
+    color: rgb(235, 235, 235);
+    font-size: 1.5em;
+    text-align: center;
+}
+.header-title{
+    margin: 1%;
 }
 
 .header-lista {
@@ -25,6 +32,19 @@
     height: 5%;
     width: 90%;
     padding: 5% 5% 0%;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+}
+
+.header-topicos{
+    border-radius: 20px 20px 0 0;
+    height: 5%;
+    width: 90%;
+    padding: 5% 5% 0%;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
 }
 
 .header-mes {
@@ -56,26 +76,35 @@
 
 .cards-orcamento {
     display: flex;
-    background: lightskyblue;
+    background-image: linear-gradient(45deg, #b5b5b5, #93a6e21c);
     flex-direction: column;
     width: 80%;
     height: 20%;
     margin: 0 auto;
+    border-radius: 10px;
 }
 
 .lista-orcamento {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     border-radius: 20px;
-    background: lightcyan;
+    background: #e6e6e6;
     width: 80%;
     height: 80%;
     margin: auto;
+    box-shadow: 4px 6px 9px 0px rgba(20,20,20, 0.5);
+    font-size: 1.25em;
+    color: #424242;
 }
+
 
 .valores-orcamento{
     height:100%;
-    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    margin: 1%;
 }
 
 .orcamento-card-title {
@@ -102,4 +131,37 @@
 
 #orcamento-lat {
     border-radius: 0 0 20px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#orcamentos{
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-radius: 10px;
+}
+
+progress::-webkit-progress-bar {
+    background: black;
+    border-radius: 50px;
+    padding: 2px;
+}
+
+#box-progresso{
+    width: 15%;
+    background-color: #ddd;
+    height: 0.5em;
+    margin: 1% 0;
+}
+
+#barra-progresso{
+    width: 1%;
+    height: 100%;
+    background-color: #4CAF50;
+    text-align: center;
+    line-height: 32px;
+    color: black;
 }
