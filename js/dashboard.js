@@ -137,8 +137,8 @@ function montaGraficoVazio() {
 function mostrarMesAtual(){
     let meses = ['', 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
-    document.getElementById('mes-anterior').innerHTML = `<img src="assets/button-mes+.png" alt="">`;
-    document.getElementById('mes-posterior').innerHTML = `<img src="assets/button-mes-.png" alt="">`;
+    document.getElementById('mes-anterior').innerHTML = `<img src="assets/back-black-button.png" alt="">`;
+    document.getElementById('mes-posterior').innerHTML = `<img src="assets/front-black-button.png" alt="">`;
     document.getElementById('mes-selecionado').innerHTML = meses[mes];    
 }
 
@@ -156,10 +156,10 @@ function selecionarMes(botao) {
         if (mes > 0) {
             mesSelecionado.innerHTML = meses[mes];
             if (mes == 1) {
-                document.getElementById('mes-anterior').innerHTML = `<img src="assets/button-mes-white.png" alt="">`;            
+                document.getElementById('mes-anterior').innerHTML = `<img src="assets/assets/front-white-button" alt="">`;            
             } else {
-                document.getElementById('mes-anterior').innerHTML = `<img src="assets/button-mes+.png" alt="">`;
-                document.getElementById('mes-posterior').innerHTML = `<img src="assets/button-mes-.png" alt="">`;
+                document.getElementById('mes-anterior').innerHTML = `<img src="assets/back-black-button.png" alt="">`;
+                document.getElementById('mes-posterior').innerHTML = `<img src="assets/front-black-button.png" alt="">`;
 
             }
         }
@@ -168,10 +168,10 @@ function selecionarMes(botao) {
         if (mes <= 12) {
             mesSelecionado.innerHTML = meses[mes];
             if (mes == 12) {
-                document.getElementById('mes-posterior').innerHTML = `<img src="assets/button-mes+white.png" alt="">`;
+                document.getElementById('mes-posterior').innerHTML = `<img src="assets/front-white-button" alt="">`;
             } else {
-                document.getElementById('mes-anterior').innerHTML = `<img src="assets/button-mes+.png" alt="">`;
-                document.getElementById('mes-posterior').innerHTML = `<img src="assets/button-mes-.png" alt="">`;
+                document.getElementById('mes-anterior').innerHTML = `<img src="assets/back-black-button.png" alt="">`;
+                document.getElementById('mes-posterior').innerHTML = `<img src="assets/front-black-button.png" alt="">`;
             }
         }
     }
