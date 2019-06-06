@@ -127,9 +127,19 @@ function listarOrcamentos() {
 }
 
 function orcamentoModal() {
-    exibeSemOrcamento();
-    let modalGraph = document.getElementById('container-modal-graph-line');
-    modalGraph.style.display = 'block';
+    let categoriasInseridas =  orcamentosDataBase.filter( data => data.mes == mes);
+
+    if(categoriasInseridas.length == 5)
+    {
+        alert("Todos os orçamentos referentes à este mês foram inseridos!");
+        return false;
+    }else
+    {        
+        exibeSemOrcamento();
+        let modalGraph = document.getElementById('container-modal-graph-line');
+        modalGraph.style.display = 'block';
+    }
+   
 };
 
 function insertbudgets(dataset) {
@@ -159,7 +169,6 @@ function anulaCampos(campos) {
 
 function budgetsMapping(data) {
     let valor = validaInsercao(data);
-    let mes = mesOrcamento() + 1;
     if (valor) {
         let dataset = {
             valor: parseFloat(data[0].value),
@@ -190,10 +199,12 @@ function exibeSemOrcamento() {
         `<option id="orcmnt-educacao"    value="4"> Educação    </option>`,
         `<option id="orcmnt-lazer"       value="5"> Lazer       </option>`];
 
-    if(categoriasInseridas.length > 0){
+        console.log(categoriasInseridas);
+
+        if(categoriasInseridas.length > 0){
         for(let i = 0; i < categoriasInseridas.length; i++)
         {                 
-            arrayOrcamento[orcamentosDataBase[i].idCategoria-1] = orcamentosDataBase[i].idCategoria;                
+            arrayOrcamento[categoriasInseridas[i].idCategoria-1] = orcamentosDataBase[i].idCategoria;                
         }
     }
     if( arrayOrcamento.filter( data => data != 0).length == 5 ){
@@ -215,9 +226,6 @@ function validaInsercao(data) {
     if (data[0].value <= 0)
     {
         alert("O valor do orçamento deve ser preenchido corretamente!");
-        return false;
-    }else if(categoriasInseridas.length == 5){
-        alert("Todos os orçamentos foram inseridos!");
         return false;
     }else
     {
