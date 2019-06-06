@@ -158,6 +158,17 @@ progress::-webkit-progress-bar {
     margin: 1% 0;
 }
 
+.barra{
+    width: 1%;
+    height: 100%;
+    background: #6cf596;
+    text-align: center;
+    line-height: 32px;
+    color: black;
+    max-width: 100%;
+}
+
+
 #barra-progresso0{
     width: 1%;
     height: 100%;

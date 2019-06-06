@@ -123,7 +123,26 @@ function listarOrcamentos() {
     $('#orcamento-lat').html('');
     
     for (var i = 0; i < orcamentoMensal.length; i++) {
-        $('#orcamento-lat').append('<div> <section id="lista-orcamento"> <div id="orcamentos" style="display: flex; flex-direction: row"> <div id="categoria-orcamento">' + catToString[orcamentoMensal[i].idCategoria] + '</div> <div id="valor-orcamento">' + 'R$' + orcamentoMensal[i].valor.toFixed(2) + '</div> <div id="box-progresso"><div id="barra-progresso'+id+'" class"barra"><script>progressBar()</script></div></div></div></div>  </section> </div>');
+        $('#orcamento-lat').append(
+            `<div> 
+                <section id="lista-orcamento"> 
+                    <div id="orcamentos" style="display: flex; flex-direction: row"> 
+                        <div id="categoria-orcamento">
+                            ${catToString[orcamentoMensal[i].idCategoria]} 
+                        </div> 
+                        <div id="valor-orcamento">
+                            R$ ${orcamentoMensal[i].valor.toFixed(2)} 
+                        </div> 
+                        <div id="box-progresso">
+                            <div id="barra-progresso${id}">
+                                <script>progressBar()
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </section> 
+            </div>`
+            );
         id++;
     }
 }
@@ -249,14 +268,19 @@ function progressBar(){
     let progresso = 0;
     let id = 0;
 
-    for(i=0; i<orcamentos.length; i++){
+    let orcamentoMensal = orcamentos.filter(x => x.mes == mes);
+
+    for(i=0; i<orcamentoMensal.length; i++){
+
+        let categoriaDespesa = despesas.filter(x => x.categoria == orcamentoMensal[i].idCategoria);
+        categoriaDespesa = categoriaDespesa.filter(x => x.data.split("-")[1]  == mes);
+
+        console.log(categoriaDespesa);
         
-        let categoriaOrcamento = despesas.filter(x => x.categoria == orcamentos[i].idCategoria);
-        
-        for(j=0; j<categoriaOrcamento.length; j++)
+        for(j=0; j<categoriaDespesa.length; j++)
         {
-            orcamento = orcamentos[i].valor;
-            progresso += (categoriaOrcamento[j].valor*100)/(orcamento);
+            orcamento = orcamentoMensal[i].valor;
+            progresso += (categoriaDespesa[j].valor*100)/(orcamento);
         }
         let barra = ('barra-progresso'+ id).toString();
 
@@ -268,6 +292,7 @@ function progressBar(){
         }
 
         document.getElementById(barra).style.width = progresso+'%';
+        
         progresso = 0;
         id++;
     }

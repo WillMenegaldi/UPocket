@@ -433,14 +433,14 @@ function dadosOrçamento(tipo){
     let orçamentos = receberDadosOrcamento().filter(data => data.mes == mes ); 
     orçamentos     = orçamentos.filter(data => data.valor != 0 ); 
     despesas       = retornaDados(); 
+    
     let arrayOrçamento  = [0,0,0,0,0]; 
     let vetor      = []; 
     let indices    = []; 
 
-    
     for(let i = 0; i < orçamentos.length; i++)
     { 
-        arrayOrçamento[orçamentos[i].categoria - 1] = orçamentos[i].valor;
+        arrayOrçamento[orçamentos[i].idCategoria - 1] = orçamentos[i].valor;
     }
     for(let i = 0; i< 5; i++)
     { 
@@ -533,7 +533,7 @@ function constroiGraficoCategoria(context, dadosGrafico) {
     };
 
     let dados = {
-        labels: ['Alimentação', 'Transporte', 'Roupas', 'Educação', 'Lazer'],
+        labels: ['Alimentação', 'Transporte', 'Vestuário', 'Educação', 'Lazer'],
         datasets: [
             {
                 borderWidth: 0.5,
