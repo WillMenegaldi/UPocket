@@ -257,7 +257,6 @@ function progressBar(){
             document.getElementById('barra-progresso').style.backgroundImage = 'linear-gradient(to-right, #6cf596,#efe946, #ff000094)';
         }
         document.getElementById('barra-progresso').style.width = progresso+'%';
-
         progresso = 0;
     }
 }
