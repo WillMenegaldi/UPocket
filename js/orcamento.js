@@ -195,7 +195,7 @@ function exibeSemOrcamento() {
         }
     }
     if( arrayOrcamento.filter( data => data != 0).length == 5 ){
-        vetorSelect += `<option  value="0" hidden > Todas as categorias foram preenchidas </option>` ;
+        vetorSelect += `<option  value="0" hidden > Todos os orçamentos foram inseridos! </option>` ;
     }else{
         for(let i = 0; i < arrayOrcamento.length; i++){        
             if(arrayOrcamento[i] != " " ){
@@ -209,24 +209,18 @@ function exibeSemOrcamento() {
 }
 
 function validaInsercao(data) {
-    let valor = parseFloat(data[0].value);
-
-    if (data[0].value && data[1].value > 0) {
-        if (valor <= 0) {
-            alert("Deve ser inserido um valor válido.");
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
-    else if (data[1].value == 0) {
-        alert("Por favor insira uma categoria");
+    let categoriasInseridas =  orcamentosDataBase.filter( data => data.mes == mes);
+    if (data[0].value <= 0)
+    {
+        alert("O valor do orçamento deve ser preenchido corretamente!");
         return false;
-    }
-    else if (valor <= 0) {
-        alert("O valor do orçamento deve ser preenchido");
+    }else if(categoriasInseridas.length == 5){
+        alert("Todos os orçamentos foram inseridos!");
         return false;
+    }else
+    {
+        let valor = parseFloat(data[0].value); 
+        return true;
     }
 }
 
