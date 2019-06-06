@@ -158,7 +158,7 @@ progress::-webkit-progress-bar {
     margin: 1% 0;
 }
 
-#barra-progresso{
+#barra-progresso0{
     width: 1%;
     height: 100%;
     background: #6cf596;
@@ -168,13 +168,52 @@ progress::-webkit-progress-bar {
     max-width: 100%;
 }
 
+#barra-progresso1{
+    width: 1%;
+    height: 100%;
+    background: #6cf596;
+    text-align: center;
+    line-height: 32px;
+    color: black;
+    max-width: 100%;
+}
+
+#barra-progresso2{
+    width: 1%;
+    height: 100%;
+    background: #6cf596;
+    text-align: center;
+    line-height: 32px;
+    color: black;
+    max-width: 100%;
+}
+
+#barra-progresso3{
+    width: 1%;
+    height: 100%;
+    background: #6cf596;
+    text-align: center;
+    line-height: 32px;
+    color: black;
+    max-width: 100%;
+}
+
+#barra-progresso4{
+    width: 1%;
+    height: 100%;
+    background: #6cf596;
+    text-align: center;
+    line-height: 32px;
+    color: black;
+    max-width: 100%;
+}
 #receita-mensal{
-    background-image: linear-gradient(to bottom, rgb(245, 245, 245), #c0ffce 400%);
+    background: lightgreen;
 }
 
 #despesas-planejadas{
-    background-image: linear-gradient(to bottom, rgb(245, 245, 245), #ff8181 400%);
+    background: lightcoral;
 }
 #saldo-total{
-    background-image: linear-gradient(to bottom, rgb(245, 245, 245), #c0ceff 300%);
+    background: lightblue;
 }

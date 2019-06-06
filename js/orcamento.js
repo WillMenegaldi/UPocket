@@ -118,11 +118,13 @@ function selecionarMes(botao) {
 function listarOrcamentos() {
     let orcamentoMensal = orcamentosDataBase.filter(orcamento => orcamento.mes == mes);
     let catToString = ['','Alimentação','Transporte','Vestuário','Educação','Lazer'];
+    let id = 0;
     
     $('#orcamento-lat').html('');
     
     for (var i = 0; i < orcamentoMensal.length; i++) {
-        $('#orcamento-lat').append('<div> <section id="lista-orcamento"> <div id="orcamentos" style="display: flex; flex-direction: row"> <div id="categoria-orcamento">' + catToString[orcamentoMensal[i].idCategoria] + '</div> <div id="valor-orcamento">' + 'R$' + orcamentoMensal[i].valor.toFixed(2) + '</div> <div id="box-progresso"><div id="barra-progresso"><script>progressBar()</script></div></div></div></div>  </section> </div>');
+        $('#orcamento-lat').append('<div> <section id="lista-orcamento"> <div id="orcamentos" style="display: flex; flex-direction: row"> <div id="categoria-orcamento">' + catToString[orcamentoMensal[i].idCategoria] + '</div> <div id="valor-orcamento">' + 'R$' + orcamentoMensal[i].valor.toFixed(2) + '</div> <div id="box-progresso"><div id="barra-progresso'+id+'" class"barra"><script>progressBar()</script></div></div></div></div>  </section> </div>');
+        id++;
     }
 }
 
@@ -199,8 +201,6 @@ function exibeSemOrcamento() {
         `<option id="orcmnt-educacao"    value="4"> Educação    </option>`,
         `<option id="orcmnt-lazer"       value="5"> Lazer       </option>`];
 
-        console.log(categoriasInseridas);
-
         if(categoriasInseridas.length > 0){
         for(let i = 0; i < categoriasInseridas.length; i++)
         {                 
@@ -247,7 +247,8 @@ function progressBar(){
 
     let despesas = db.filter(x => x.categoria != null);
     let progresso = 0;
-    
+    let id = 0;
+
     for(i=0; i<orcamentos.length; i++){
         
         let categoriaOrcamento = despesas.filter(x => x.categoria == orcamentos[i].idCategoria);
@@ -257,14 +258,17 @@ function progressBar(){
             orcamento = orcamentos[i].valor;
             progresso += (categoriaOrcamento[j].valor*100)/(orcamento);
         }
-        
+        let barra = ('barra-progresso'+ id).toString();
+
         if(progresso > 85){
             if(progresso > 100){
                 progresso = 100;
             }
-            document.getElementById('barra-progresso').style.backgroundImage = 'linear-gradient(to-right, #6cf596,#efe946, #ff000094)';
+            document.getElementById(barra).style.backgroundImage = 'linear-gradient(to-right, #6cf596,#efe946, #ff000094)';
         }
-        document.getElementById('barra-progresso').style.width = progresso+'%';
+
+        document.getElementById(barra).style.width = progresso+'%';
         progresso = 0;
+        id++;
     }
 }
