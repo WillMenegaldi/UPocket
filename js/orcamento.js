@@ -272,11 +272,11 @@ function progressBar(){
         progresso = orcamento[i].valor;
         progresso = (despesas[i].valor*100)/(progresso);
 
-        if(progresso>85){
-            if(progresso>100){
+        if(progresso > 85){
+            if(progresso > 100){
                 progresso = 100;
             }
-            document.getElementById('barra-progresso').style.backgroundImage = 'gray';
+            document.getElementById('barra-progresso').style.backgroundImage = 'linear-gradient(to-right, #6cf596,#efe946, #ff000094)';
         }
         
     document.getElementById('barra-progresso').style.width = progresso+'%';
