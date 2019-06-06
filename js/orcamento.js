@@ -176,60 +176,36 @@ function budgetsMapping(data) {
     }
 }
 
+
 function exibeSemOrcamento() {
-    let orcamentos = [];
-    let qntd = 0;
-    let check = [0, 0, 0, 0, 0];
-    let categoria = [];
+    let categoriasInseridas =  orcamentosDataBase.filter( data => data.mes == mes);
+    let arrayOrcamento      = [0,0,0,0,0]; 
+    let vetorSelect         = ["","","","","",""];
+    let vetorOptions        = [
+        `<option id="orcmnt-alimentacao" value="1"> Alimentação </option>`,
+        `<option id="orcmnt-transporte"  value="2"> Transporte  </option>`,
+        `<option id="orcmnt-vestuario"   value="3"> Vestuário   </option>`,
+        `<option id="orcmnt-educacao"    value="4"> Educação    </option>`,
+        `<option id="orcmnt-lazer"       value="5"> Lazer       </option>`];
 
-    for (i = 0; i < orcamentosDataBase.length; i++) {
-            orcamentos[qntd] = orcamentosDataBase[i];
-            qntd += 1;
-    }
-    
-    for (i = 0; i < qntd; i++) {
-        for (j = 1; j < 6; j++) {
-            if (orcamentos[i].idCategoria == j) {
-                categoria[j] = orcamentos[i].idCategoria;
-            }
+    if(categoriasInseridas.length > 0){
+        for(let i = 0; i < categoriasInseridas.length; i++)
+        {                 
+            arrayOrcamento[orcamentosDataBase[i].idCategoria-1] = orcamentosDataBase[i].idCategoria;                
         }
     }
-    if (categoria[1]) {
-        if (check[0] == 0) {
-            document.getElementById("orcmnt-alimentacao").style.display = 'none';
-            document.getElementById("orcmnt-alimentacao").innerHTML = 'Selecione uma categoria';
-            check[0] = 1;
-        }
-    }
-
-    if (categoria[2]) {
-        if (check[1] == 0) {
-            document.getElementById("orcmnt-transporte").style.display = "none";
-            document.getElementById("orcmnt-transporte").innerHTML = 'Selecione uma categoria';
-            check[1] = 1;
-        }
-    }
-    if (categoria[3]) {
-        if (check[2] == 0) {
-            document.getElementById("orcmnt-vestuario").style.display = "none";
-            document.getElementById("orcmnt-vestuario").innerHTML = 'Selecione uma categoria';
-            check[2] = 1;
-        }
-    }
-    if (categoria[4]) {
-        if (check[3] == 0) {
-            document.getElementById("orcmnt-educacao").style.display = "none";
-            document.getElementById("orcmnt-educacao").innerHTML = 'Selecione uma categoria';
-            check[3] = 1;
-        }
-    }
-    if (categoria[5]) {
-        if (check[4] == 0) {
-            document.getElementById("orcmnt-lazer").style.display = "none";
-            document.getElementById("orcmnt-lazer").innerHTML = 'Todas as categorias de orçamento para esse mês foi preenchida';
-            check[4] = 1;
-        }
-    }
+    if( arrayOrcamento.filter( data => data != 0).length == 5 ){
+        vetorSelect += `<option  value="0" hidden > Todas as categorias foram preenchidas </option>` ;
+    }else{
+        for(let i = 0; i < arrayOrcamento.length; i++){        
+            if(arrayOrcamento[i] != " " ){
+                vetorSelect[i] += " ";
+            }else{
+                vetorSelect[i] += vetorOptions[i];
+            }             
+        }  
+    }   
+    document.getElementById("modal-form-categoria-orcamento").innerHTML = vetorSelect;       
 }
 
 function validaInsercao(data) {
