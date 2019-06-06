@@ -52,7 +52,7 @@ function preencheCards()
 
     cardReceita.innerHTML = 'R$ ' + totalReceita + ',00';
     cardDespesa.innerHTML = 'R$ ' + totalOrcamento + ',00';
-    cardSaldo.innerHTML = 'R$ ' + (receitaMensal - totalOrcamento) + ',00';
+    cardSaldo.innerHTML = 'R$ ' + (totalReceita - totalOrcamento) + ',00';
 }
 
 function inicializaDashboardDB() {
@@ -242,22 +242,29 @@ function mesOrcamento(){
 }
 
 function progressBar(){
-    let orcamento = orcamentosDataBase;
-    let despesas = database;
-    let progresso = 0;
-    console.log(orcamento);
-    for(i=0;i<orcamento.length;i++){
-        progresso = orcamento[i].valor;
-        progresso = (despesas[i].valor*100)/(progresso);
+    let orcamentos = inicializaDB();
+    let db = inicializaDashboardDB();
 
+    let despesas = db.filter(x => x.categoria != null);
+    let progresso = 0;
+    
+    for(i=0; i<orcamentos.length; i++){
+        
+        let categoriaOrcamento = despesas.filter(x => x.categoria == orcamentos[i].idCategoria);
+        
+        for(j=0; j<categoriaOrcamento.length; j++)
+        {
+            orcamento = orcamentos[i].valor;
+            progresso += (categoriaOrcamento[j].valor*100)/(orcamento);
+        }
+        
         if(progresso > 85){
             if(progresso > 100){
                 progresso = 100;
             }
             document.getElementById('barra-progresso').style.backgroundImage = 'linear-gradient(to-right, #6cf596,#efe946, #ff000094)';
         }
-        
-    document.getElementById('barra-progresso').style.width = progresso+'%';//escreve a porcentagem do valor acumulado e coloca a porcentagem
-    //não sei, porem acredito que seja alguma variavel, ou indice, ou até mesmo que tenha que criar um elemento separado dessa linha de orçamentos.
+        document.getElementById('barra-progresso').style.width = progresso+'%';
+        progresso = 0;
     }
 }
