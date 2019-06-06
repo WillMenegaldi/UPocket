@@ -82,6 +82,7 @@
     height: 20%;
     margin: 0 auto;
     border-radius: 10px;
+    box-shadow: 4px 4px 12px 0px rgba(20,20,20, 0.5);
 }
 
 .lista-orcamento {
@@ -160,8 +161,20 @@ progress::-webkit-progress-bar {
 #barra-progresso{
     width: 1%;
     height: 100%;
-    background-color: #4CAF50;
+    background: #6cf596;
     text-align: center;
     line-height: 32px;
     color: black;
+    max-width: 100%;
+}
+
+#receita-mensal{
+    background-image: linear-gradient(to bottom, rgb(245, 245, 245), #c0ffce 400%);
+}
+
+#despesas-planejadas{
+    background-image: linear-gradient(to bottom, rgb(245, 245, 245), #ff8181 400%);
+}
+#saldo-total{
+    background-image: linear-gradient(to bottom, rgb(245, 245, 245), #c0ceff 300%);
 }

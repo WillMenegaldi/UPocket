@@ -24,6 +24,7 @@ document.querySelector("#mes-posterior").addEventListener("click", function () {
 var mes = new Date().getMonth() + 1;
 var orcamentosDataBase = inicializaDB();
 var database = inicializaDashboardDB();
+var cont = 0;
 
 function preencheCards()
 {
@@ -116,11 +117,12 @@ function selecionarMes(botao) {
 
 function listarOrcamentos() {
     let orcamentoMensal = orcamentosDataBase.filter(orcamento => orcamento.mes == mes);
+    let catToString = ['','Alimentação','Transporte','Vestuário','Educação','Lazer'];
     
     $('#orcamento-lat').html('');
     
     for (var i = 0; i < orcamentoMensal.length; i++) {
-        $('#orcamento-lat').append('<div> <section id="lista-orcamento"> <div id="orcamentos" style="display: flex; flex-direction: row"> <div id="categoria-orcamento">' + orcamentoMensal[i].idCategoria + '</div> <div id="valor-orcamento">' + 'R$' + orcamentoMensal[i].valor.toFixed(2) + '</div> <div id="box-progresso"><div id="barra-progresso"></div></div></div></div>  </section> </div>');
+        $('#orcamento-lat').append('<div> <section id="lista-orcamento"> <div id="orcamentos" style="display: flex; flex-direction: row"> <div id="categoria-orcamento">' + catToString[orcamentoMensal[i].idCategoria] + '</div> <div id="valor-orcamento">' + 'R$' + orcamentoMensal[i].valor.toFixed(2) + '</div> <div id="box-progresso"><div id="barra-progresso"><script>progressBar()</script></div></div></div></div>  </section> </div>');
     }
 }
 
@@ -259,4 +261,24 @@ function mesOrcamento(){
     let mes = 0;
     mes = calendario.getMonth();
     return mes;
+}
+
+function progressBar(){
+    let orcamento = orcamentosDataBase;
+    let despesas = database;
+    let progresso = 0;
+    console.log(orcamento);
+    for(i=0;i<orcamento.length;i++){
+        progresso = orcamento[i].valor;
+        progresso = (despesas[i].valor*100)/(progresso);
+
+        if(progresso>85){
+            if(progresso>100){
+                progresso = 100;
+            }
+            document.getElementById('barra-progresso').style.backgroundImage = 'gray';
+        }
+        
+    document.getElementById('barra-progresso').style.width = progresso+'%';
+    }
 }
