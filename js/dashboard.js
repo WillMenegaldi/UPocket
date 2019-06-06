@@ -333,6 +333,7 @@ function abreModal(card) {
             }
         }
     }
+
     inputModal[0].value = null;
     inputModal[1].value = null;
     inputModal[2].value = new Date().toISOString().slice(0, 10);

@@ -275,8 +275,6 @@ function progressBar(){
         let categoriaDespesa = despesas.filter(x => x.categoria == orcamentoMensal[i].idCategoria);
         categoriaDespesa = categoriaDespesa.filter(x => x.data.split("-")[1]  == mes);
 
-        console.log(categoriaDespesa);
-        
         for(j=0; j<categoriaDespesa.length; j++)
         {
             orcamento = orcamentoMensal[i].valor;
@@ -288,7 +286,7 @@ function progressBar(){
             if(progresso > 100){
                 progresso = 100;
             }
-            document.getElementById(barra).style.backgroundImage = 'linear-gradient(to-right, #6cf596,#efe946, #ff000094)';
+            //document.getElementById(barra).style["background-image"] = 'linear-gradient(to-right, #6cf596,#efe946, #ff000094)';
         }
 
         document.getElementById(barra).style.width = progresso+'%';
