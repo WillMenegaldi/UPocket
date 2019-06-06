@@ -191,7 +191,7 @@ function exibeSemOrcamento() {
     if(categoriasInseridas.length > 0){
         for(let i = 0; i < categoriasInseridas.length; i++)
         {                 
-                arrayOrcamento[orcamentosDataBase[i].idCategoria-1] = orcamentosDataBase[i].idCategoria;                
+            arrayOrcamento[orcamentosDataBase[i].idCategoria-1] = orcamentosDataBase[i].idCategoria;                
         }
     }
     if( arrayOrcamento.filter( data => data != 0).length == 5 ){
