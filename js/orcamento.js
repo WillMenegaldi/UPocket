@@ -279,6 +279,7 @@ function progressBar(){
             document.getElementById('barra-progresso').style.backgroundImage = 'linear-gradient(to-right, #6cf596,#efe946, #ff000094)';
         }
         
-    document.getElementById('barra-progresso').style.width = progresso+'%';
+    document.getElementById('barra-progresso').style.width = progresso+'%';//escreve a porcentagem do valor acumulado e coloca a porcentagem
+    //não sei, porem acredito que seja alguma variavel, ou indice, ou até mesmo que tenha que criar um elemento separado dessa linha de orçamentos.
     }
 }
