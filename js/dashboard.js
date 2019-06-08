@@ -75,7 +75,7 @@ function atualizaCards() {
 
     setaCardReceitas(cardReceita, database);
     setaCardDespesas(cardDespesa, database);
-    setaCardSaldoTotal(cardSaldo, cardReceita, cardDespesa);
+    setaCardSaldoTotal(cardSaldo,database);
 }
 
 function atualizaGrafico() {
@@ -213,8 +213,25 @@ function setaCardDespesas(card) {
     card.innerHTML = total.toFixed(2).replace(".", ",");
 }
 
-function setaCardSaldoTotal(card, receitas, despesas) {
-    card.innerHTML = (parseFloat(receitas.innerHTML) - parseFloat(despesas.innerHTML)).toFixed(2).replace(".", ",");
+function setaCardSaldoTotal(card, db) {
+    let totalReceita, totalDespesa, saldo, dados;
+    totalReceita = 0;
+    totalDespesa = 0;
+    dados        = database.filter(data =>  data.data.split("-")[1] <= mes);
+
+    for(let i = 0; i < dados.length; i ++)
+    { 
+        if(dados[i].categoria == null )
+        {
+            totalReceita += dados[i].valor;
+        }else
+        {
+            totalDespesa +=  dados[i].valor;
+        }
+    }
+    saldo = totalReceita - totalDespesa;   
+
+    card.innerHTML = (parseFloat(saldo)).toFixed(2).replace(".", ",");
 }
 
 function limpaCampos(campos) {
