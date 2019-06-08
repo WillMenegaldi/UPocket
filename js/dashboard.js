@@ -490,7 +490,7 @@ function dadosOrçamento(tipo){
 function controiGraficoOrcamento(ctx) {
     let graph = new Chart(ctx,
         {
-            type: 'line',
+            type: 'bar',
             options: {
                 responsive: false,
                 tooltips: {
