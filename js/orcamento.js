@@ -117,6 +117,7 @@ function selecionarMes(botao) {
 
 function listarOrcamentos() {
     let orcamentoMensal = orcamentosDataBase.filter(orcamento => orcamento.mes == mes);
+    let gastoMensal = database.filter(despesa => despesa.categoria !=null);
     let catToString = ['','Alimentação','Transporte','Vestuário','Educação','Lazer'];
     let id = 0;
     
@@ -215,10 +216,10 @@ function exibeSemOrcamento() {
     let vetorSelect         = ["","","","","",""];
     let vetorOptions        = [
         `<option id="orcmnt-alimentacao" value="1"> Alimentação </option>`,
-        `<option id="orcmnt-transporte"  value="2"> Transporte  </option>`,
-        `<option id="orcmnt-vestuario"   value="3"> Vestuário   </option>`,
-        `<option id="orcmnt-educacao"    value="4"> Educação    </option>`,
-        `<option id="orcmnt-lazer"       value="5"> Lazer       </option>`];
+        `<option id="orcmnt-transporte"  value="2"> Educação  </option>`,
+        `<option id="orcmnt-vestuario"   value="3"> Lazer   </option>`,
+        `<option id="orcmnt-educacao"    value="4"> Transporte    </option>`,
+        `<option id="orcmnt-lazer"       value="5"> Vestuário      </option>`];
 
         if(categoriasInseridas.length > 0){
         for(let i = 0; i < categoriasInseridas.length; i++)
