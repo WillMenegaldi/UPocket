@@ -525,13 +525,13 @@ function controiGraficoOrcamento(ctx) {
                         pointRadius: 2,
                         data: dadosOrçamento(2),
                         borderColor: "#0c8e10",
-                        backgroundColor: 'rgba(32,130,19,0.5)',
+                        backgroundColor: 'rgba(32,130,19,0.8)',
                         label: 'Orçamento'
                     },
                     {
                         label: 'Gastos',
                         data: dadosOrçamento(3),
-                        backgroundColor: 'rgba(145,33,33,0.4)',
+                        backgroundColor: 'rgba(145,33,33,0.8)',
                         borderColor: "#991c09"
                     }
                 ]
