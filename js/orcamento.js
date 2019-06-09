@@ -30,7 +30,6 @@ document.querySelector("#mes-posterior").addEventListener("click", function () {
 var mes = new Date().getMonth() + 1;
 var orcamentosDataBase = inicializaDB();
 var database = inicializaDashboardDB();
-var id = 0;
 
 
 function preencheCards()
@@ -203,9 +202,10 @@ function anulaCampos(campos) {
 
 function budgetsMapping(data) {
     let valor = validaInsercao(data);
+    let id = inicializaDB();
     if (valor) {
         let dataset = {
-            id: id+=1,
+            idOrcamento: id.length+1,
             valor: parseFloat(data[0].value),
             idCategoria: parseInt(data[1].value),
             mes: mes,
