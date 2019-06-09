@@ -288,7 +288,6 @@ function progressBar(){
 
         let categoriaDespesa = despesas.filter(x => x.categoria == orcamentoMensal[i].idCategoria);
         categoriaDespesa = categoriaDespesa.filter(x => x.data.split("-")[1]  == mes);
-
         for(j=0; j<categoriaDespesa.length; j++)
         {
             orcamento = orcamentoMensal[i].valor;
