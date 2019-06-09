@@ -118,20 +118,23 @@ function selecionarMes(botao) {
 function listarOrcamentos() {
     let orcamentoMensal = orcamentosDataBase.filter(orcamento => orcamento.mes == mes);
     let catToString = ['','Alimentação','Educação','Lazer','Transporte','Vestuário'];
+    console.log(orcamentoMensal);
+    let orcamentos = ordenar(orcamentoMensal);
+    console.log(orcamentos);
     let id = 0;
     
     $('#orcamento-lat').html('');
     
-    for (var i = 0; i < orcamentoMensal.length; i++) {
+    for (var i = 0; i < orcamentos.length; i++) {
         $('#orcamento-lat').append(
             `<div> 
                 <section id="lista-orcamento"> 
                     <div id="orcamentos" style="display: flex; flex-direction: row"> 
                         <div id="categoria-orcamento">
-                            ${catToString[orcamentoMensal[i].idCategoria]} 
+                            ${catToString[orcamentos[i].idCategoria]} 
                         </div> 
                         <div id="valor-orcamento">
-                            R$ ${orcamentoMensal[i].valor.toFixed(2)} 
+                            R$ ${orcamentos[i].valor.toFixed(2)} 
                         </div> 
                         <div id="box-progresso">
                             <div id="barra-progresso${id}">
@@ -294,4 +297,21 @@ function progressBar(){
         progresso = 0;
         id++;
     }
+}
+
+function ordenar(vetor){
+    let qntd = vetor.length;
+    let aux = 0;
+    let i = 0;
+
+    while(qntd>1){
+        for(i=0;i<qntd-1;i++){
+        if(vetor[i].idCategoria >   vetor[i+1].idCategoria){
+            aux = vetor[i];
+            vetor[i] = vetor[i+1];
+            vetor[i+1] = aux;
+        }}
+        qntd-=1;
+    }
+    return vetor;
 }
