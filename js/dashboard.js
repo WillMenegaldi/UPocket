@@ -146,38 +146,47 @@ function selecionarMes(botao) {
     var mesSelecionado = document.getElementById('mes-selecionado');
     let meses = ['', 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
     let mesDash ;
+    
+
     for (let i = 1; i < meses.length; i++) {
         if (mesSelecionado.innerHTML == meses[i]) {
             mesDash = i;
         }
     }    
-    if (botao == 1) {
+    if (botao == 1) 
+    {
         mes = mesDash - 1;
-        if (mes > 0) {
+        if (mes > 0) 
+        {
             mesSelecionado.innerHTML = meses[mes];
             if (mes == 1) {
-                document.getElementById('mes-anterior').innerHTML = `<img src="assets/assets/front-white-button" alt="">`;            
+                document.getElementById('mes-anterior').innerHTML   = `<img src="assets/back-white-button.png" alt="">`;            
             } else {
-                document.getElementById('mes-anterior').innerHTML = `<img src="assets/back-black-button.png" alt="">`;
-                document.getElementById('mes-posterior').innerHTML = `<img src="assets/front-black-button.png" alt="">`;
+                document.getElementById('mes-anterior').innerHTML   = `<img src="assets/back-black-button.png" alt="">`;
+                document.getElementById('mes-posterior').innerHTML  = `<img src="assets/front-black-button.png" alt="">`;
 
             }
+            atualizaCards();
+            atualizaGrafico();
         }
-    } else {
+    } else 
+    {
         mes = mesDash + 1;
-        if (mes <= 12) {
+        if (mes <= 12) 
+        {
             mesSelecionado.innerHTML = meses[mes];
             if (mes == 12) {
-                document.getElementById('mes-posterior').innerHTML = `<img src="assets/front-white-button" alt="">`;
+                document.getElementById('mes-posterior').innerHTML = `<img src="assets/front-white-button.png" alt="">`;
             } else {
                 document.getElementById('mes-anterior').innerHTML = `<img src="assets/back-black-button.png" alt="">`;
                 document.getElementById('mes-posterior').innerHTML = `<img src="assets/front-black-button.png" alt="">`;
             }
+            
+            atualizaCards();
+            atualizaGrafico();
         }
     }
     
-    atualizaCards();
-    atualizaGrafico();
 }
 
 function mesAtual(meses) {
@@ -525,13 +534,13 @@ function controiGraficoOrcamento(ctx) {
                         pointRadius: 2,
                         data: dadosOrçamento(2),
                         borderColor: "#0c8e10",
-                        backgroundColor: 'rgba(32,130,19,0.5)',
+                        backgroundColor: 'rgba(32,130,19,0.8)',
                         label: 'Orçamento'
                     },
                     {
                         label: 'Gastos',
                         data: dadosOrçamento(3),
-                        backgroundColor: 'rgba(145,33,33,0.4)',
+                        backgroundColor: 'rgba(145,33,33,0.8)',
                         borderColor: "#991c09"
                     }
                 ]
