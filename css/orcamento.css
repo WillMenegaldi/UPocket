@@ -44,7 +44,7 @@
     padding: 5% 5% 0%;
     display: flex;
     flex-flow: row;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .header-mes {
@@ -88,7 +88,6 @@
 .lista-orcamento {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     border-radius: 20px;
     background: #e6e6e6;
     width: 80%;
@@ -101,7 +100,7 @@
 
 
 .valores-orcamento{
-    height:100%;
+    height:50%;
     display: flex;
     flex-direction: column;
     align-content: space-around;
@@ -134,15 +133,16 @@
     border-radius: 0 0 20px 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
+    margin-bottom: 7%;
 }
 
 #orcamentos{
     background-color: white;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
     border-radius: 10px;
+    justify-content: space-between;
 }
 
 progress::-webkit-progress-bar {
@@ -227,4 +227,39 @@ progress::-webkit-progress-bar {
 }
 #saldo-total{
     background: lightblue;
+}
+
+#delete img{
+    width: 40%;
+    justify-content: center;
+}
+
+#edit img{
+    width: 80%;
+}
+
+#edit{
+    margin-right: -12%;
+}
+
+#gast{
+    margin-right: 34%;
+}
+#categoria-orcamento0{
+    margin-right: 6%;
+}
+#categoria-orcamento1{
+    margin-right: 9.5%;
+}
+#categoria-orcamento2{
+    margin-right: 14%;
+}
+#categoria-orcamento3{
+    margin-right: 7.5%;
+}
+#categoria-orcamento4{
+    margin-right: 9%;
+}
+.del{
+    margin-right: -2%;
 }

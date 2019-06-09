@@ -135,17 +135,22 @@ function listarOrcamentos() {
             `<div> 
                 <section id="lista-orcamento"> 
                     <div id="orcamentos" style="display: flex; flex-direction: row"> 
-                        <div id="categoria-orcamento">
+                        <div id="categoria-orcamento${id}">
                             ${catToString[orcamentos[i].idCategoria]} 
                         </div> 
                         <div id="valor-orcamento">
                             R$ ${orcamentos[i].valor.toFixed(2)} 
-                        </div> 
-                        <div id="box-progresso">
+                        </div>
+                        <div id="valor-gasto">R$ 0,00</div> 
+                        <div id="box-progresso" style="margin-left: -10%;">
                             <div id="barra-progresso${id}">
                                 <script>progressBar()
                                 </script>
                             </div>
+                        </div>
+                        <div id="edit"><img src="assets/editar.webp"></div>
+                        <div id="delete" class="del" onclick(crud())>
+                            <img src="assets/delete.webp">
                         </div>
                     </div>
                 </section> 
@@ -319,4 +324,8 @@ function ordenar(vetor){
         qntd-=1;
     }
     return vetor;
+}
+
+function crud(){
+    return 0;
 }
