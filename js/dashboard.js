@@ -455,7 +455,7 @@ function receberDadosOrcamento(){
 }
 
 function dadosOrçamento(tipo){ 
-    let categorias = ['Alimentação', 'Transporte' , 'Vestuário', 'Educacao' , 'Lazer'];
+    let categorias = ['Alimentação', 'Educação' , 'Lazer', 'Transporte' , 'Vestuário'];
   
     let orçamentos = receberDadosOrcamento().filter(data => data.mes == mes ); 
     orçamentos     = orçamentos.filter(data => data.valor != 0 ); 
@@ -560,7 +560,7 @@ function constroiGraficoCategoria(context, dadosGrafico) {
     };
 
     let dados = {
-        labels: ['Alimentação', 'Transporte', 'Vestuário', 'Educação', 'Lazer'],
+        labels: ['Alimentação', 'Educação', 'Lazer', 'Transporte', 'Vestuário'],
         datasets: [
             {
                 borderWidth: 0.5,
@@ -591,22 +591,22 @@ function insertBoxCategorias(data) {
             cor: '#006600'
         },
         {
-            nomeCategoria: "Transporte",
+            nomeCategoria: "Educação",
             valorCategoria: data[1],
             cor: '#cc00cc'
         },
         {
-            nomeCategoria: "Roupas",
+            nomeCategoria: "Lazer",
             valorCategoria: data[2],
             cor: '#dd0000'
         },
         {
-            nomeCategoria: "Educação",
+            nomeCategoria: "Transporte",
             valorCategoria: data[3],
             cor: '#f4c430'
         },
         {
-            nomeCategoria: "Lazer",
+            nomeCategoria: "Vestuário",
             valorCategoria: data[4],
             cor: '#0000bb'
         }
