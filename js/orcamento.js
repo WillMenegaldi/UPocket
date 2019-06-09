@@ -135,7 +135,7 @@ function listarOrcamentos() {
             `<div> 
                 <section id="lista-orcamento"> 
                     <div id="orcamentos" style="display: flex; flex-direction: row; margin-bottom: 3%;"> 
-                        <div id="categoria-orcamento${id}">
+                        <div id="categoria-orcamento" style="max-width:125px; width:125px">
                             ${catToString[orcamentos[i].idCategoria]} 
                         </div> 
                         <div id="valor-orcamento">

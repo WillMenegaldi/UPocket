@@ -252,20 +252,8 @@ progress::-webkit-progress-bar {
 #gast{
     margin-right: 34%;
 }
-#categoria-orcamento0{
-    margin-right: 6%;
-}
-#categoria-orcamento1{
-    margin-right: 9.5%;
-}
-#categoria-orcamento2{
-    margin-right: 14%;
-}
-#categoria-orcamento3{
-    margin-right: 8%;
-}
-#categoria-orcamento4{
-    margin-right: 9%;
+#categoria-orcamento{
+    margin-right: 4%;
 }
 .del{
     margin-right: -2%;
