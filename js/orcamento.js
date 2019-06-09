@@ -30,7 +30,7 @@ document.querySelector("#mes-posterior").addEventListener("click", function () {
 var mes = new Date().getMonth() + 1;
 var orcamentosDataBase = inicializaDB();
 var database = inicializaDashboardDB();
-var cont = 0;
+var id = 0;
 
 
 function preencheCards()
@@ -134,7 +134,7 @@ function listarOrcamentos() {
         $('#orcamento-lat').append(
             `<div> 
                 <section id="lista-orcamento"> 
-                    <div id="orcamentos" style="display: flex; flex-direction: row"> 
+                    <div id="orcamentos" style="display: flex; flex-direction: row; margin-bottom: 3%;"> 
                         <div id="categoria-orcamento${id}">
                             ${catToString[orcamentos[i].idCategoria]} 
                         </div> 
@@ -205,6 +205,7 @@ function budgetsMapping(data) {
     let valor = validaInsercao(data);
     if (valor) {
         let dataset = {
+            id: id+=1,
             valor: parseFloat(data[0].value),
             idCategoria: parseInt(data[1].value),
             mes: mes,
