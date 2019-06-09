@@ -32,6 +32,7 @@ var orcamentosDataBase = inicializaDB();
 var database = inicializaDashboardDB();
 var cont = 0;
 
+
 function preencheCards()
 {
     let totalOrcamento  = 0;
