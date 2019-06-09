@@ -117,8 +117,7 @@ function selecionarMes(botao) {
 
 function listarOrcamentos() {
     let orcamentoMensal = orcamentosDataBase.filter(orcamento => orcamento.mes == mes);
-    let gastoMensal = database.filter(despesa => despesa.categoria !=null);
-    let catToString = ['','Alimentação','Transporte','Vestuário','Educação','Lazer'];
+    let catToString = ['','Alimentação','Educação','Lazer','Transporte','Vestuário'];
     let id = 0;
     
     $('#orcamento-lat').html('');
