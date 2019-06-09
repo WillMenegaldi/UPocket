@@ -2,6 +2,12 @@ window.addEventListener('load', listarOrcamentos);
 window.addEventListener('load', mostrarMesAtual);
 window.addEventListener('load', preencheCards);
 
+$(document).ready(function() {
+    $("#input-orcamento").keyup(function() {
+        $("#input-orcamento").val(this.value.match(/[0-9]*/));
+    });
+});
+
 document.querySelector("#add-orcamento").addEventListener('click', function(){
     orcamentoModal();
 })

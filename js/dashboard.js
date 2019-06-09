@@ -2,6 +2,12 @@ window.addEventListener('load', atualizaCards);
 window.addEventListener('load', atualizaGrafico);
 window.addEventListener('load', mostrarMesAtual);
 
+$(document).ready(function() {
+    $("#input-despesa").keyup(function() {
+        $("#input-despesa").val(this.value.match(/[0-9]*/));
+    });
+});
+
 document.querySelector('#grafico-rosquinha').addEventListener("click", function () {
     abreModalGrafico();
 });
