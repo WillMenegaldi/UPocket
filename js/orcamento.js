@@ -30,7 +30,7 @@ document.querySelector("#mes-posterior").addEventListener("click", function () {
 var mes = new Date().getMonth() + 1;
 var orcamentosDataBase = inicializaDB();
 var database = inicializaDashboardDB();
-var cont = 0;
+var id = 0;
 
 
 function preencheCards()
@@ -134,18 +134,23 @@ function listarOrcamentos() {
         $('#orcamento-lat').append(
             `<div> 
                 <section id="lista-orcamento"> 
-                    <div id="orcamentos" style="display: flex; flex-direction: row"> 
-                        <div id="categoria-orcamento">
+                    <div id="orcamentos" style="display: flex; flex-direction: row; margin-bottom: 3%;"> 
+                        <div id="categoria-orcamento" style="max-width:125px; width:125px">
                             ${catToString[orcamentos[i].idCategoria]} 
                         </div> 
                         <div id="valor-orcamento">
                             R$ ${orcamentos[i].valor.toFixed(2)} 
-                        </div> 
-                        <div id="box-progresso">
+                        </div>
+                        <div id="valor-gasto">R$ 0,00</div> 
+                        <div id="box-progresso" style="margin-left: -10%;">
                             <div id="barra-progresso${id}">
                                 <script>progressBar()
                                 </script>
                             </div>
+                        </div>
+                        <div id="edit"><img src="assets/editar.webp"></div>
+                        <div id="delete" class="del" onclick(crud())>
+                            <img src="assets/delete.webp">
                         </div>
                     </div>
                 </section> 
@@ -200,6 +205,7 @@ function budgetsMapping(data) {
     let valor = validaInsercao(data);
     if (valor) {
         let dataset = {
+            id: id+=1,
             valor: parseFloat(data[0].value),
             idCategoria: parseInt(data[1].value),
             mes: mes,
@@ -319,4 +325,8 @@ function ordenar(vetor){
         qntd-=1;
     }
     return vetor;
+}
+
+function crud(){
+    return 0;
 }
