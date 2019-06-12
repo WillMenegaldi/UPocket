@@ -282,7 +282,6 @@ function progressBar(){
     let progresso = 0;
     let somaDespesa = 0;
     let id = 0;
-    console.log(somaDespesa);
 
     let orcamentoMensal = orcamentos.filter(x => x.mes == mes);
 
@@ -290,9 +289,9 @@ function progressBar(){
 
         let categoriaDespesa = despesas.filter(x => x.categoria == orcamentoMensal[i].idCategoria);
         categoriaDespesa = categoriaDespesa.filter(x => x.data.split("-")[1]  == mes);
+        categoriaDespesa = ordenar(categoriaDespesa);
         for(j=0; j<categoriaDespesa.length; j++)
         {
-            console.log(categoriaDespesa);
             orcamento = orcamentoMensal[i].valor;
             progresso += (categoriaDespesa[j].valor*100)/(orcamento);
             somaDespesa = categoriaDespesa[j].valor;
@@ -301,13 +300,22 @@ function progressBar(){
         }
         let barra = ('barra-progresso'+ id).toString();
 
-        if(progresso > 85){
+        if(progresso > 59){
+            document.getElementById(barra).style.backgroundColor = '#ffff30';
+        }
+
+        if(progresso > 79){
+            document.getElementById(barra).style.backgroundColor = '#ff7734';
+        }
+
+        if(progresso > 89){
             if(progresso > 100){
                 progresso = 100;
             }
-            //document.getElementById(barra).style["background-image"] = 'linear-gradient(to-right, #6cf596,#efe946, #ff000094)';
+            document.getElementById(barra).style.backgroundColor = '#f55b5b';
         }
         document.getElementById(barra).style.width = progresso+'%';
+        document.getElementById(barra).innerHTML = '<div class="porcentagem">'+progresso.toFixed(2)+'%</div>';
 
         
         progresso = 0;
