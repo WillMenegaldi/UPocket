@@ -300,8 +300,10 @@ function progressBar(){
         }
         let barra = ('barra-progresso'+ id).toString();
 
+        document.getElementById(barra).innerHTML = '<div class="porcentagem">'+progresso.toFixed(2)+'%</div>';
+
         if(progresso > 59){
-            document.getElementById(barra).style.backgroundColor = '#ffff30';
+            document.getElementById(barra).style.backgroundColor = '#fbf390';
         }
 
         if(progresso > 79){
@@ -315,7 +317,7 @@ function progressBar(){
             document.getElementById(barra).style.backgroundColor = '#f55b5b';
         }
         document.getElementById(barra).style.width = progresso+'%';
-        document.getElementById(barra).innerHTML = '<div class="porcentagem">'+progresso.toFixed(2)+'%</div>';
+
 
         
         progresso = 0;
