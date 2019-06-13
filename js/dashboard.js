@@ -572,7 +572,7 @@ function constroiGraficoCategoria(context, dadosGrafico) {
                 borderWidth: 0.5,
                 label: 'Categorias',
                 data: dadosGrafico,
-                backgroundColor: ['#006600', '#cc00cc', '#dd0000', '#f4c430', '#0000bb']
+                backgroundColor: ['#ed145b', '#fdb784', '#15c1f1', '#fbf390', '#a6d48c']
             }
         ]
     };
@@ -594,27 +594,27 @@ function insertBoxCategorias(data) {
         {
             nomeCategoria: "Alimentação",
             valorCategoria: data[0],
-            cor: '#006600'
+            cor: '#ed145b'
         },
         {
             nomeCategoria: "Educação",
             valorCategoria: data[1],
-            cor: '#cc00cc'
+            cor: '#fdb784'
         },
         {
             nomeCategoria: "Lazer",
             valorCategoria: data[2],
-            cor: '#dd0000'
+            cor: '#15c1f1'
         },
         {
             nomeCategoria: "Transporte",
             valorCategoria: data[3],
-            cor: '#f4c430'
+            cor: '#fbf390'
         },
         {
             nomeCategoria: "Vestuário",
             valorCategoria: data[4],
-            cor: '#0000bb'
+            cor: '#a6d48c'
         }
     ]
 

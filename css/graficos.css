@@ -9,25 +9,22 @@
     justify-content: space-around;
 }
 .blocografico .bloco { 
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    width:88%;
-    height:40%;
-    border-radius: 30px;
+    width: 88%;
+    height: 40%;
     background: linear-gradient(to bottom, rgb(250, 250, 250), #f1ceb0 200%);
-    margin:0 auto;
+    margin: 0 auto;
     box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
 }
 div.bloco>#descricao {
     letter-spacing: .8px;
-    padding-top:2%;
-    border-radius: 30px 30px 0px 0px ;
+    padding-top: 1%;
     font-size: 1.3em;
     width: 100%;
     height: 11.5%;
-    text-align: center;
-    color:white;
+    color: white;
     background-color: rgb(00, 40, 40);
 }
 .blocografico .bloco main {
@@ -120,11 +117,9 @@ div.bloco>#descricao {
         margin:0 auto;
     }
     .blocografico div{ 
-        align-items: center;
-        display:flex;
-        flex-direction: row; 
-        width:30%;
-        height:30%;
+    display: flex;
+    height: 30%;
+    margin-left: 8%;
     }
     .blocografico .bloco{
         width: 35%;
