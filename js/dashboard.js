@@ -159,11 +159,12 @@ function selecionarMes(botao) {
             mesDash = i;
         }
     }    
+
     if (botao == 1) 
     {
-        mes = mesDash - 1;
-        if (mes > 0) 
+        if (mes > 1) 
         {
+            mes = mesDash - 1
             mesSelecionado.innerHTML = meses[mes];
             if (mes == 1) {
                 document.getElementById('mes-anterior').innerHTML   = `<img src="assets/back-white-button.png" alt="">`;            
@@ -177,9 +178,9 @@ function selecionarMes(botao) {
         }
     } else 
     {
-        mes = mesDash + 1;
-        if (mes <= 12) 
-        {
+        if (mes < 12) 
+        {            
+            mes = mesDash + 1;
             mesSelecionado.innerHTML = meses[mes];
             if (mes == 12) {
                 document.getElementById('mes-posterior').innerHTML = `<img src="assets/front-white-button.png" alt="">`;
@@ -191,22 +192,8 @@ function selecionarMes(botao) {
             atualizaCards();
             atualizaGrafico();
         }
-    }
-    
-}
-
-function mesAtual(meses) {
-    let selected = document.querySelector("#mes-selecionado");
-    for (let i = 1; i < meses.length; i++) {
-        if (selected.innerHTML == meses[i]) {
-            return i;
-        }
-    }
-}
-
-function checkData(dados, mes) {
-    return dados.filter(dados => dados.data.split("-")[1] == mes);
-}    
+    }    
+} 
 
 function setaCardReceitas(card) {
     let total = 0;
@@ -368,8 +355,26 @@ function abreModal(card) {
 
     inputModal[0].value = null;
     inputModal[1].value = null;
-    inputModal[2].value = new Date().toISOString().slice(0, 10);
+    inputModal[2].value = dataAtualFormatada();
+} 
+
+function dataAtualFormatada(){
+    let dia, mesDash, ano;
+    let data = new Date();
+
+    if((data.getMonth() + 1) == mes)
+    {
+        dia  = data.getDate().toString().padStart(2, '0');
+    }else
+    {
+        dia  = '01';
+    }
+    mesDash = mes.toString().padStart(2, '0'); 
+    ano     = data.getFullYear().toString();
+
+    return ano + "-" + mesDash + "-" + dia;
 }
+
 
 function fechaModal() {
     var modal = document.getElementById('container-modal');

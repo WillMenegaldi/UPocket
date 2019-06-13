@@ -1,0 +1,110 @@
+section.objetivos {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+section.objetivos>header.header-pagina {
+    height: 10%;
+    width: 100%;
+    background-color: rgb(4, 119, 100);
+    color: rgb(235, 235, 235);
+    font-size: 1.5em;
+    text-align: center;
+}
+
+section.objetivos>header.header-pagina>div.header-title {
+    margin: 1%;
+}
+
+section.objetivos>main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+section.objetivos>main>article#box-objetivo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgb(240,247, 247);
+    width: 35%;
+    height: 40%;
+    border-radius:10px;
+    border: .5px solid rgba(5, 117, 117, 0.1);
+    box-shadow: 4px 5px 6px rgba(30,30,30,.5);
+}
+section.objetivos>main>article#box-objetivo>section{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;    
+    width: 100%;
+    height: 100%;
+}
+section.objetivos>main>article#box-objetivo>section:nth-child(1){
+   
+    width: 100%;
+    height: 60%;
+}
+section.objetivos>main>article#box-objetivo>section:nth-child(1)>div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;    
+    width: 100%;
+    height: 100%;
+}
+section.objetivos>main>article#box-objetivo>section:nth-child(1)>div>img{
+    width: 40%;
+    height: 70%;
+}
+section.objetivos>main>article#box-objetivo>section:nth-child(2){
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;    
+    width: 100%;
+    height: 20%;
+}
+section.objetivos>main>article#box-objetivo>section:nth-child(2)>div#box-progresso{
+    width: 80%;
+    background-color:rgba(210, 210, 210);
+    height: 0.5em;
+    margin: 1% 0;
+}
+
+section.objetivos>main>article#box-objetivo>section:nth-child(2)>div#box-progresso>div#barra-progresso{
+    width: 80%;
+    height: 100%;
+    background: #6cf596;
+    text-align: center;
+    line-height: 32px;
+    color: black;
+    max-width: 100%;
+}
+section.objetivos>main>article#box-objetivo>section:nth-child(2)>div#valores{
+    width: 80%;
+    height: 100%;
+
+}
+
+section.objetivos>main>article#box-objetivo>section:nth-child(3){
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: 20%;
+}
+section.objetivos>main>article#box-objetivo>section:nth-child(3)>img{
+    margin: 2%;
+}
+
+
