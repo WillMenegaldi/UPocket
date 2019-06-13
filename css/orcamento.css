@@ -246,7 +246,7 @@ progress::-webkit-progress-bar {
 }
 
 #edit{
-    margin-right:-9%
+    margin-right:-8%
 }
 
 #gast{
@@ -257,4 +257,12 @@ progress::-webkit-progress-bar {
 }
 .del{
     margin-right: -2%;
+}
+
+.porcentagem{
+    position: absolute;
+    color: #000000a3;
+    font-size: 0.6em;
+    margin: -0.8% 8.4%;
+    font-weight: bolder;
 }

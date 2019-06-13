@@ -134,13 +134,13 @@ function listarOrcamentos() {
             `<div> 
                 <section id="lista-orcamento"> 
                     <div id="orcamentos" style="display: flex; flex-direction: row; margin-bottom: 3%;"> 
-                        <div id="categoria-orcamento" style="max-width:125px; width:125px">
+                        <div id="categoria-orcamento" style="max-width:125px; width:125px; margin-left: 3%">
                             ${catToString[orcamentos[i].idCategoria]} 
                         </div> 
                         <div id="valor-orcamento">
                             R$ ${orcamentos[i].valor.toFixed(2)} 
                         </div>
-                        <div id="valor-gasto">R$ 0,00</div> 
+                        <div id="valor-gasto${id}" style="max-width:125px; width:125px">R$ 0,00</div> 
                         <div id="box-progresso" style="margin-left: -10%;">
                             <div id="barra-progresso${id}">
                                 <script>progressBar()
@@ -280,6 +280,7 @@ function progressBar(){
 
     let despesas = db.filter(x => x.categoria != null);
     let progresso = 0;
+    let somaDespesa = 0;
     let id = 0;
 
     let orcamentoMensal = orcamentos.filter(x => x.mes == mes);
@@ -288,21 +289,36 @@ function progressBar(){
 
         let categoriaDespesa = despesas.filter(x => x.categoria == orcamentoMensal[i].idCategoria);
         categoriaDespesa = categoriaDespesa.filter(x => x.data.split("-")[1]  == mes);
+        categoriaDespesa = ordenar(categoriaDespesa);
         for(j=0; j<categoriaDespesa.length; j++)
         {
             orcamento = orcamentoMensal[i].valor;
             progresso += (categoriaDespesa[j].valor*100)/(orcamento);
+            somaDespesa = categoriaDespesa[j].valor;
+            let valor = ('valor-gasto'+ id).toString();
+            document.getElementById(valor).innerHTML = 'R$ '+somaDespesa;
         }
         let barra = ('barra-progresso'+ id).toString();
 
-        if(progresso > 85){
+        document.getElementById(barra).innerHTML = '<div class="porcentagem">'+progresso.toFixed(2)+'%</div>';
+
+        if(progresso > 59){
+            document.getElementById(barra).style.backgroundColor = '#fbf390';
+        }
+
+        if(progresso > 79){
+            document.getElementById(barra).style.backgroundColor = '#ff7734';
+        }
+
+        if(progresso > 89){
             if(progresso > 100){
                 progresso = 100;
             }
-            //document.getElementById(barra).style["background-image"] = 'linear-gradient(to-right, #6cf596,#efe946, #ff000094)';
+            document.getElementById(barra).style.backgroundColor = '#f55b5b';
         }
-
         document.getElementById(barra).style.width = progresso+'%';
+
+
         
         progresso = 0;
         id++;
