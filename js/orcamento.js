@@ -121,6 +121,18 @@ function selecionarMes(botao) {
     preencheCards();
 }
 
+
+function retornaTotalCategoria( categoria) { 
+    let soma = 0;
+    let db = database.filter(data =>  data.data.split("-")[1] == mes);
+
+    for (x = 0; x < db.length; x++) {
+        var data = db[x].categoria == categoria && db[x].valor;
+        soma += data;
+    }
+    return soma;
+}
+
 function listarOrcamentos() {
     let orcamentoMensal = orcamentosDataBase.filter(orcamento => orcamento.mes == mes);
     let catToString = ['','Alimentação','Educação','Lazer','Transporte','Vestuário'];
@@ -140,7 +152,9 @@ function listarOrcamentos() {
                         <div id="valor-orcamento">
                             R$ ${orcamentos[i].valor.toFixed(2)} 
                         </div>
-                        <div id="valor-gasto${id}" style="max-width:125px; width:125px">R$ 0,00</div> 
+                        <div id="valor-gasto${id}" style="max-width:125px; width:125px">
+                            R$ ${retornaTotalCategoria(orcamentos[i].idCategoria).toFixed(2)} 
+                        </div> 
                         <div id="box-progresso" style="margin-left: -10%;">
                             <div id="barra-progresso${id}">
                                 <script>progressBar()
@@ -276,28 +290,15 @@ function mesOrcamento(){
 
 function progressBar(){
     let orcamentos = inicializaDB();
-    let db = inicializaDashboardDB();
-
-    let despesas = db.filter(x => x.categoria != null);
     let progresso = 0;
-    let somaDespesa = 0;
     let id = 0;
 
     let orcamentoMensal = orcamentos.filter(x => x.mes == mes);
+    orcamentoMensal     = ordenar(orcamentoMensal);
 
-    for(i=0; i<orcamentoMensal.length; i++){
-
-        let categoriaDespesa = despesas.filter(x => x.categoria == orcamentoMensal[i].idCategoria);
-        categoriaDespesa = categoriaDespesa.filter(x => x.data.split("-")[1]  == mes);
-        categoriaDespesa = ordenar(categoriaDespesa);
-        for(j=0; j<categoriaDespesa.length; j++)
-        {
-            orcamento = orcamentoMensal[i].valor;
-            progresso += (categoriaDespesa[j].valor*100)/(orcamento);
-            somaDespesa = categoriaDespesa[j].valor;
-            let valor = ('valor-gasto'+ id).toString();
-            document.getElementById(valor).innerHTML = 'R$ '+somaDespesa;
-        }
+    for(i=0; i < orcamentoMensal.length; i++){
+        orcamento = orcamentoMensal[i].valor;
+        progresso = (retornaTotalCategoria(orcamentoMensal[i].idCategoria)*100)/(orcamento);        
         let barra = ('barra-progresso'+ id).toString();
 
         document.getElementById(barra).innerHTML = '<div class="porcentagem">'+progresso.toFixed(2)+'%</div>';
@@ -317,8 +318,6 @@ function progressBar(){
             document.getElementById(barra).style.backgroundColor = '#f55b5b';
         }
         document.getElementById(barra).style.width = progresso+'%';
-
-
         
         progresso = 0;
         id++;
