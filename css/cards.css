@@ -1,13 +1,15 @@
 .indice-mes{
     padding: 1.2%;
-    margin: 0 auto;
     height: 1%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color: #e91e63;
+    background-color: #de2866;
+}
+.lista-orcamento>.indice-mes{
+    height: 5%;
 }
 .indice-mes>span{
     color: rgba(10,10,10,.9);
