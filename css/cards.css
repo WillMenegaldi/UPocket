@@ -1,19 +1,19 @@
 .indice-mes{
-    width: 45%;
-    padding: 2%;
-    margin: 0 auto;
+    padding: 1.2%;
     height: 1%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     text-align: center;
+    background-color: #de2866;
+}
+.lista-orcamento>.indice-mes{
+    height: 5%;
 }
 .indice-mes>span{
-    width:20%;
-    padding:0 10%;
-    font-size:3em;
-    color:rgba(10,10,10,.9);
+    color: rgba(10,10,10,.9);
+    margin-top: 0.3%;
 }
 .indice-mes>span:hover{
     opacity: .8;
@@ -21,11 +21,13 @@
 }
 
 .indice-mes>h3{    
-    width: 50%;
     padding: 0 10%;
     font-size: 1.5em;
     z-index: 99;
     text-align: center;
+    width: 10%;
+    max-width: 10%;
+    color: #fff900b5;
 }
 .flex-container {
     display: flex;
