@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="Description" content="UPocket">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#002828">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="#002828">
+    <meta name="theme-color" content="#002828">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/orcamento.css">
+    <link rel="stylesheet" type="text/css" href="css/floating.css">
+    <link rel="stylesheet" type="text/css" href="css/cards.css">
+    <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="css/css_modal.css">
+    <link rel="stylesheet" type="text/css" href="css/objetivos.css">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="assets/UPOCKET4.webp">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icon-iphone.webp">
+    <link rel="apple-touch-startup-image" href="assets/UPOCKET4.webp">
+    <script src="libs/jquery-min.js"></script>
+    <script src="libs/chartjs-min.js"></script>
+    <title>UPocket</title>
+</head>
+
+<body>
+    <div id="container-modal-graph-line">
+        <div id="box-modal-linha">
+            <header>
+                <span id="btn-close-line-graph">&times;</span>
+                <span id="header-box-modal-linha">Adicionar orçamento</span>
+            </header>
+            <main class="box-modal-orcamento">
+                <form class="orcamento-modal-form">
+                    <input required placeholder="Valor do orçamento:" id="input-orcamento" class="modal-form-input"
+                        type="text" name="orcamento" maxlength="6" style="border-bottom: 3px solid rgb(36, 38, 153);">
+                    <select required name="categoria" id="modal-form-categoria-orcamento" name="type">
+
+                    </select>
+                    <button id="modal-orcamento-form-submit" type="button"
+                        style="background-color: rgb(53, 53, 128)">Salvar</button>
+                </form>
+            </main>
+        </div>
+    </div>
+    <header class="header">
+        <div class="logo">
+            <a href="index.html"><img src="assets/upocket2.webp" alt="Upocket Logo"></a>
+        </div>
+        <div class="box-user">
+            <div class="box-username">
+                <a href="#">Nome usuário </a>
+            </div>
+            <div>
+                <a href="#"><img src="assets/profile.webp" alt="Foto do Usuário"></a>
+            </div>
+        </div>
+    </header>
+    <main id="flex-main">
+        <nav id="display-imagem" class="nav_lateral">
+            <section class="section_dashboard">
+                <div class="dash">
+                    <a href="index.html">
+                        <div class="home_icon">
+                            <img src="assets/home.webp" alt="página inicial">
+                        </div>
+                        <div class="home_text">
+                            Home
+                        </div>
+                    </a>
+                </div>
+                <div class="bills">
+                    <a href="#">
+                        <div class="bills_icon">
+                            <img src="assets/flow.webp" alt="Movimentações">
+                        </div>
+                        <div class="bills_text">
+                            Movimentações
+                        </div>
+                    </a>
+                </div>
+                <div class="budgets">
+                    <a href="#">
+                        <div class="budgets_icon">
+                            <img src="assets/notes.webp" alt="Orçamento">
+                        </div>
+                        <div class="budgets_text">
+                            Orçamento
+                        </div>
+                    </a>
+                </div>
+                <div class="historic">
+                    <a href="objetivos.html">
+                        <div class="historic_icon">
+                            <img src="assets/goals.webp" alt="Objetivos">
+                        </div>
+                        <div class="historic_text">
+                            Objetivos
+                        </div>
+                    </a>
+                </div>
+                <div class="reports">
+                    <a href="#">
+                        <div class="reports_icon">
+                            <img src="assets/receipt.webp" alt="Relatório">
+                        </div>
+                        <div class="reports_text">
+                            Relatórios
+                        </div>
+                    </a>
+                </div>
+                <div>
+                </div>
+                <div>
+                </div>
+                <div>
+                </div>
+            </section>
+        </nav>
+        <section class="objetivos">
+            <header class="header-pagina">
+                <div class="header-title">Objetivos</div>
+            </header>
+            <main>
+                <article class="box-objetivo" id="obj1">
+                    <section>
+                        <div> <img src="assets/car.png" alt=""></div>
+                        <div>   
+                            <h2>Carro</h2>
+                            <h4>Data objetivo: 24/12/2019 </h4>
+                        </div>
+                    </section>
+                    <section>
+                        <div id="box-progresso">
+                            <div id="barra-progresso">
+                                <script>progressBar()
+                                </script>
+                            </div>
+                        </div>
+
+                        <div id="valores">
+                            R$ 3000,00 de R$ 10.000,00
+                        </div>
+
+                    </section>
+                    <section>
+                        <img src="assets/plus.png" alt="">
+                        <img src="assets/success.png" alt="">
+                        <img src="assets/error.png" alt="">
+                        <img src="assets/edit.png" alt="">
+                    </section>
+                </article>
+                <article class="box-objetivo">
+                    <section>
+                        <div> <img src="assets/gamepad.png" alt=""></div>
+                        <div>
+                            <h2>Carro</h2>
+                            <h4>Data objetivo: 24/12/2019 </h4>
+                        </div>
+                    </section>
+                    <section>
+                        <div id="box-progresso">
+                            <div id="barra-progresso">
+                                <script>progressBar()
+                                </script>
+                            </div>
+                        </div>
+
+                        <div id="valores">
+                            R$ 3000,00 de R$ 10.000,00
+                        </div>
+
+                    </section>
+                    <section>
+                        <img src="assets/plus.png" alt="">
+                        <img src="assets/success.png" alt="">
+                        <img src="assets/error.png" alt="">
+                        <img src="assets/edit.png" alt="">
+                    </section>
+                </article>
+                <article class="box-objetivo">
+                    <section>
+                        <div> <img src="assets/travel.png" alt=""></div>
+                        <div>
+                            <h2>Carro</h2>
+                            <h4>Data objetivo: 24/12/2019 </h4>
+                        </div>
+                    </section>
+                    <section>
+                        <div id="box-progresso">
+                            <div id="barra-progresso">
+                                <script>progressBar()
+                                </script>
+                            </div>
+                        </div>
+
+                        <div id="valores">
+                            R$ 3000,00 de R$ 10.000,00
+                        </div>
+
+                    </section>
+                    <section>
+                        <img src="assets/plus.png" alt="">
+                        <img src="assets/success.png" alt="">
+                        <img src="assets/error.png" alt="">
+                        <img src="assets/edit.png" alt="">
+                    </section>
+                </article>
+                <article class="box-objetivo">
+                    <section>
+                        <div> <img src="assets/couple.png" alt=""></div>
+                        <div>
+                            <h2>Carro</h2>
+                            <h4>Data objetivo: 24/12/2019 </h4>
+                        </div>
+                    </section>
+                    <section>
+                        <div id="box-progresso">
+                            <div id="barra-progresso">
+                                <script>progressBar()
+                                </script>
+                            </div>
+                        </div>
+
+                        <div id="valores">
+                            R$ 3000,00 de R$ 10.000,00
+                        </div>
+
+                    </section>
+                    <section>
+                        <img src="assets/plus.png" alt="">
+                        <img src="assets/success.png" alt="">
+                        <img src="assets/error.png" alt="">
+                        <img src="assets/edit.png" alt="">
+                    </section>
+                </article>
+            </main>
+        </section>
+    </main>
+    <div id="container-modal" >
+            <div id="box-modal">
+                <header id="header-box-modal">
+                    <span id="header-box-modal-title"> Detalhamento Objetivo </span>
+                    <span id="btn-close">&times;</span>
+                </header>
+                <main id="main-box-modal">
+                    <section>
+                        <div>
+                            
+                        </div>
+                        <div>
+
+                        </div>
+                    </section>    
+                    <section>
+                        <article>
+                            <div>
+
+                            </div>
+                            <div></div>
+                        </article>
+                        
+                        <article>
+                            <canvas>   </canvas>
+                        </article>                        
+                    </section>                
+                </main>
+            </div>
+    </div>
+    <footer>
+        UPocket 2019
+    </footer>
+    <script src="js/objetivos.js"></script>
+</body>
+
+</html>

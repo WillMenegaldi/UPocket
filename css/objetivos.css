@@ -1,0 +1,172 @@
+section.objetivos {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+section.objetivos>header.header-pagina {
+    height: 10%;
+    width: 100%;
+    background-color: rgb(4, 119, 100);
+    color: rgb(235, 235, 235);
+    font-size: 1.5em;
+    text-align: center;
+}
+
+section.objetivos>header.header-pagina>div.header-title {
+    margin: 1%;
+}
+
+section.objetivos>main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+section.objetivos>main>article.box-objetivo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgb(162, 212, 210, .84);
+    width: 34%;
+    height: 40%;
+    margin: 0 1%;
+    border-radius:10px;
+    border: .5px solid rgba(5, 117, 117, 0.1);
+    box-shadow: 4px 5px 6px rgba(30,30,30,.5);
+}
+section.objetivos>main>article.box-objetivo>section{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;    
+    width: 100%;
+    height: 100%;
+}
+section.objetivos>main>article.box-objetivo>section:nth-child(1){
+   
+    width: 100%;
+    height: 60%;
+}
+section.objetivos>main>article.box-objetivo>section:nth-child(1)>div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;    
+    width: 100%;
+    height: 100%;
+}
+section.objetivos>main>article.box-objetivo>section:nth-child(1)>div>img{
+    width: 40%;
+    height: 70%;
+}
+section.objetivos>main>article.box-objetivo>section:nth-child(2){
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;    
+    width: 100%;
+    height: 20%;
+}
+section.objetivos>main>article.box-objetivo>section:nth-child(2)>div#box-progresso{
+    width: 80%;
+    background-color:rgba(210, 210, 210);
+    height: 0.5em;
+    margin: 1% 0;
+}
+
+section.objetivos>main>article.box-objetivo>section:nth-child(2)>div#box-progresso>div#barra-progresso{
+    width: 80%;
+    height: 100%;
+    background: #6cf596;
+    text-align: center;
+    line-height: 32px;
+    color: black;
+    max-width: 100%;
+}
+section.objetivos>main>article.box-objetivo>section:nth-child(2)>div#valores{
+    width: 80%;
+    height: 100%;
+
+}
+
+section.objetivos>main>article.box-objetivo>section:nth-child(3){
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: 20%;
+}
+section.objetivos>main>article.box-objetivo>section:nth-child(3)>img{
+    margin: 2%;
+}
+
+
+/*------------ modal objetivo -------------*/
+div#container-modal>div#box-modal>header#header-box-modal{
+    border-radius: 20px 20px 0px 0px;
+    background:rgb(4, 119, 100,.8);
+    width:92.1%;
+    height:12%;
+    padding-top: 2%;
+    padding-left:8%;
+    text-align: left;
+    color:rgb(250, 250, 250);
+    font-size: 2em; 
+}
+div#container-modal>div#box-modal>header#header-box-modal>span:nth-child(2){
+    margin-top:-1%;
+}
+div#container-modal>div#box-modal>main#main-box-modal{    
+    background:rgba(210, 210, 210,.2);
+    border-radius: 0px 0px 20px 20px;
+    width:100%;
+    height:85%;
+    display: flex;
+    flex-direction: column;
+}
+div#container-modal>div#box-modal>main#main-box-modal>section{    
+    width: 100%;
+    height: 100%;
+}
+div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(1){    
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-direction: row; 
+    background: #6cf515;
+}
+div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(1)>div:nth-child(1){    
+    width: 40%;
+    height: 100%;
+    background: #6cf596;
+}
+div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(1)>div:nth-child(2){    
+    width: 60%;
+    height: 100%;
+    background:#6cf515;
+}
+div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(2){    
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: row; 
+    background:blue;
+}
+div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(2)>article:nth-child(1){    
+    width: 50%;
+    height: 100%;
+    background:red;
+}
+div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(2)>article:nth-child(2){    
+    width: 50%;
+    height: 100%;
+    background:yellow;
+}
