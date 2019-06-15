@@ -110,6 +110,12 @@ section.objetivos>main>article.box-objetivo>section:nth-child(3)>img{
 
 
 /*------------ modal objetivo -------------*/
+
+div#container-modal>div#box-modal{
+    margin-top: 10%;
+    width:40%;
+    height:52.5%;
+}
 div#container-modal>div#box-modal>header#header-box-modal{
     border-radius: 20px 20px 0px 0px;
     background:rgb(4, 119, 100,.8);
@@ -128,7 +134,7 @@ div#container-modal>div#box-modal>main#main-box-modal{
     background:rgba(210, 210, 210,.2);
     border-radius: 0px 0px 20px 20px;
     width:100%;
-    height:85%;
+    height:83.5%;
     display: flex;
     flex-direction: column;
 }
@@ -141,32 +147,114 @@ div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(1){
     height: 30%;
     display: flex;
     flex-direction: row; 
-    background: #6cf515;
 }
 div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(1)>div:nth-child(1){    
-    width: 40%;
+    width: 100%;
     height: 100%;
-    background: #6cf596;
+    display:flex;
+    flex-direction: row;
+    align-items: center ;
+    justify-content: center;
+
 }
-div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(1)>div:nth-child(2){    
-    width: 60%;
+div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(1)>div:nth-child(1)>img{
+    margin-left:20%;    
+    width: 14%;
+    height: 80%;
+    
+}
+div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(1)>div:nth-child(1)>span{
+
+    margin: 7% 0% 0% 5%;        
+    width: 50%;
     height: 100%;
-    background:#6cf515;
+    font-size: 2.5em;
 }
+
+
+/* section secundaria*/ 
+
 div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(2){    
     width: 100%;
     height: 70%;
     display: flex;
-    flex-direction: row; 
-    background:blue;
+    flex-direction: row;
 }
 div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(2)>article:nth-child(1){    
-    width: 50%;
+    width: 60%;
     height: 100%;
-    background:red;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+
 }
+div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(2)>article:nth-child(1)>div:nth-child(1){    
+    width: 100%;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+    font-size:1.3em;
+
+}
+div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(2)>article:nth-child(1)>div:nth-child(2){    
+    width: 80%;
+    height: 100%;
+    text-align:center;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size:.8em;
+}
+
+
+
 div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(2)>article:nth-child(2){    
-    width: 50%;
+    width: 40%;
     height: 100%;
-    background:yellow;
+    position:relative;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
 }
+
+div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(2)>article:nth-child(2)>span{
+    position:absolute ;
+    font-weight: bold;
+    font-size: 2em;
+}
+div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(2)>article:nth-child(2)>canvas#grafico-objetivo{
+    width: 120%;
+    height: 70%;
+}
+
+
+
+/* new objetivo*/ 
+article#new-goal{
+    background: rgba(20, 20, 20,.4)
+}
+div#label-objetivo{
+    font-size: 1.7em;
+    font-weight: bold;
+}
+select#modal-form-objetivo{
+    background: rgb(4, 119, 100);
+}
+form.modal-form input{
+    border-bottom: 3px solid rgb(4, 119, 100);
+}
+form.modal-form button{
+    background: rgb(4, 119, 100);
+    width:40%;
+    height:5%;
+    padding-bottom:5%;
+}
+
+
