@@ -1,0 +1,125 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+main{
+    width: 100vw;
+    height: 100vh;
+    background-image: url(../assets/background-login.jpg);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: white;
+    overflow: auto;
+}
+
+#logo ::before{
+    transition-duration: 166ms;
+}
+
+#option{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size: 1em;
+}
+
+header{
+    text-align: center;
+    font-size: 1em;
+    filter: drop-shadow(2px 2px 6px black);
+    -webkit-filter: drop-shadow(2px 2px 6px black);
+    margin-top: 2%;
+}
+
+container{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    justify-content: space-around;
+}
+
+.button{
+    background-color: #36373869;
+    border: none;
+    font-size: 2em;
+    color: white;
+    box-shadow: black;
+    box-sizing: border-box;
+    border: 0.5em solid #82849200;
+}
+
+.box{
+    display: none;
+    flex-direction: column;
+    background-color: white;
+    color: #000000a4;
+    width: 30vw;
+    height: 60vh;
+    margin: auto;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    justify-content: space-around;
+    padding: 10% 3% 10% 3%;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    font-size: 1em;
+    padding: 1% 1% 6% 1%;
+}
+form > input {
+    height: 4vh;
+    font-size: 1em;
+    border: solid #16161671;
+    border-top-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 1px;
+    margin: 3% 7%;
+}
+
+.title{
+    font-size: 2em;
+    text-align: center;
+    background-color: #f44747;
+    color: white;
+    padding: 3%;
+}
+
+.title img{
+    width: 7%;
+    float: left;
+    margin: 3% 0%;
+}
+
+.buttons{
+    width: 6em;
+}
+
+input[id='confirm']{
+    margin-bottom: 16%;
+}
+input[id="password"]{
+    margin-bottom: 30%;
+}
+
+button[type='button']{
+    background-color: #1e538d;
+    width: 4em;
+    margin: auto;
+    color: white;
+    padding: 1.5%;
+    border: none;
+    font-size: 1.2em;
+}
