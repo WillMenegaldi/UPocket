@@ -17,9 +17,6 @@ main{
     overflow: auto;
 }
 
-#logo ::before{
-    transition-duration: 166ms;
-}
 
 #option{
     display: flex;
