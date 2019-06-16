@@ -5,10 +5,6 @@ document.getElementById('login').addEventListener('click', function () {
     showform(2);
 });
 
-document.getElementById('back-button').addEventListener('click', function () {
-    document.getElementById('boxes').style.display = 'none';
-    document.getElementById('option').style.display = 'flex';
-});
 
 function startDB(nome) {
     let database = localStorage.getItem(nome);
@@ -20,23 +16,26 @@ function startDB(nome) {
 
 function showform(op) {
     document.getElementById('option').style.display = 'none';
+
     if (op == 1) {
         document.getElementById('box-registro').style.display = 'flex';
         document.getElementById('submit0').addEventListener('click', function () {
             validUser(document.querySelector(".formulario0"), 1);
         })
     }
+
     if (op == 2) {
         document.getElementById('box-login').style.display = 'flex';
         document.getElementById('submit1').addEventListener('click', function () {
             validUser(document.querySelector(".formulario1"), 2);
         })
     }
+
 }
 
 function validUser(data, op) {
+    
     let valid = dataWorker(data, op);
-    console.log(valid)
     if (valid) {
         localStorage.setItem(valid.email, JSON.stringify(valid));
         window.location.href = "login.html";
@@ -56,7 +55,7 @@ function dataWorker(data, op) {
         }
 
         if (!dataSet.password) {
-            if (!dataSet.user || !dataSet.email) {
+            if (!dataSet.user && !dataSet.email) {
                 mensagemErro(3);
             }
             else {
@@ -92,7 +91,7 @@ function dataWorker(data, op) {
             mensagemErro(1);
         }
 
-        else if(email && pass){
+        else if (email && pass) {
             window.location.href = "index.html"
         }
     }
@@ -101,18 +100,14 @@ function dataWorker(data, op) {
 
 function check(prevInsert, newInsert, funcao) {
 
-    console.log(prevInsert.length);
-
-    if(prevInsert.length < 6){
-        prevInsert = 0;
-        if(prevInsert == newInsert){
-            return false;
-        }
+    if (prevInsert.length < 6) {
+        return false;
     }
 
-    else if(funcao == 0 && prevInsert == newInsert || funcao == 1 && prevInsert != newInsert) {
+    else if (funcao == 0 && prevInsert == newInsert || funcao == 1 && prevInsert != newInsert) {
         return prevInsert;
     }
+
     else {
         return false;
     }
@@ -120,17 +115,20 @@ function check(prevInsert, newInsert, funcao) {
 
 
 function mensagemErro(codigo) {
-    if (codigo == 1) {
-        alert("Senha inválida");
-    }
-    else if (codigo == 2) {
-        alert("Email não encontrado");
-    }
-    else if (codigo == 3) {
-        alert("Todos os campos devem ser preenchidos corretamente!")
-    }
-    else if (codigo == 4) {
-        alert("Email já foi cadastrado");
+
+    switch (codigo) {
+        case 1:
+            alert("Senha inválida");
+            break;
+        case 2:
+            alert("Email não encontrado");
+            break;
+        case 3:
+            alert("Todos os campos devem ser preenchidos corretamente!");
+            break;
+        case 4:
+            alert("Email já cadastrado");
+            break;
     }
 }
 
