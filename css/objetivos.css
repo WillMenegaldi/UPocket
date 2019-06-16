@@ -29,7 +29,7 @@ section.objetivos>main {
 }
 
 section.objetivos>main>article.box-objetivo {
-    display: flex;
+    display:flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -50,23 +50,35 @@ section.objetivos>main>article.box-objetivo>section{
     height: 100%;
 }
 section.objetivos>main>article.box-objetivo>section:nth-child(1){
-   
     width: 100%;
-    height: 60%;
-}
-section.objetivos>main>article.box-objetivo>section:nth-child(1)>div{
+    height: 80%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: space-around;   
+}
+section.objetivos>main>article.box-objetivo>section:nth-child(1)>section:nth-child(1){
+    display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;    
     width: 100%;
     height: 100%;
 }
-section.objetivos>main>article.box-objetivo>section:nth-child(1)>div>img{
-    width: 40%;
+
+section.objetivos>main>article.box-objetivo>section:nth-child(1)>section:nth-child(1)>div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;    
+    width: 80%;
+    height: 90%;
+}
+section.objetivos>main>article.box-objetivo>section:nth-child(1)>section:nth-child(1)>div>img{
+    width: 50%;
     height: 70%;
 }
-section.objetivos>main>article.box-objetivo>section:nth-child(2){
+section.objetivos>main>article.box-objetivo>section:nth-child(1)>section:nth-child(2){
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -74,14 +86,14 @@ section.objetivos>main>article.box-objetivo>section:nth-child(2){
     width: 100%;
     height: 20%;
 }
-section.objetivos>main>article.box-objetivo>section:nth-child(2)>div#box-progresso{
+section.objetivos>main>article.box-objetivo>section:nth-child(1)>section:nth-child(2)>div#box-progresso{
     width: 80%;
     background-color:rgba(210, 210, 210);
     height: 0.5em;
     margin: 1% 0;
 }
 
-section.objetivos>main>article.box-objetivo>section:nth-child(2)>div#box-progresso>div#barra-progresso{
+section.objetivos>main>article.box-objetivo>section:nth-child(1)>section:nth-child(2)>div#box-progresso>div#barra-progresso{
     width: 80%;
     height: 100%;
     background: #6cf596;
@@ -90,13 +102,19 @@ section.objetivos>main>article.box-objetivo>section:nth-child(2)>div#box-progres
     color: black;
     max-width: 100%;
 }
-section.objetivos>main>article.box-objetivo>section:nth-child(2)>div#valores{
+section.objetivos>main>article.box-objetivo>section:nth-child(1)>section:nth-child(2)>div#valores{
     width: 80%;
     height: 100%;
 
 }
 
-section.objetivos>main>article.box-objetivo>section:nth-child(3){
+section.objetivos>main>article.box-objetivo>section:nth-child(2){
+    display: flex;
+    flex-direction:row;
+    width: 100%;
+    height: 20%;
+}
+section.objetivos>main>article.box-objetivo>section:nth-child(2){
     display: flex;
     flex-direction: row-reverse;
     align-items: flex-start;
@@ -104,8 +122,37 @@ section.objetivos>main>article.box-objetivo>section:nth-child(3){
     width: 100%;
     height: 20%;
 }
-section.objetivos>main>article.box-objetivo>section:nth-child(3)>img{
+section.objetivos>main>article.box-objetivo>section:nth-child(2)>img{
     margin: 2%;
+}
+section.objetivos>main>article.box-objetivo>section:nth-child(2)>img{
+    margin: 2%;
+}
+section.objetivos>main>article.box-objetivo>section.add-money{
+    display: none;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: 20%;
+}
+section.objetivos>main>article.box-objetivo>section.add-money>form{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 90%;
+    height: 100%;
+    padding:2% 5% 0% 5%;
+}
+section.objetivos>main>article.box-objetivo>section.add-money>form>input:nth-child(1){
+    width: 60%;
+    height: 50%;
+    margin-right:5%;
+}
+section.objetivos>main>article.box-objetivo>section.add-money>form>input:nth-child(2){
+    width: 30%;
+    height: 50%;
+    margin-right:5%;
 }
 
 
@@ -227,7 +274,7 @@ div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(2)>artic
 div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(2)>article:nth-child(2)>span{
     position:absolute ;
     font-weight: bold;
-    font-size: 2em;
+    font-size: 1.6em;
 }
 div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(2)>article:nth-child(2)>canvas#grafico-objetivo{
     width: 120%;

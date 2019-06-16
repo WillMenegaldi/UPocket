@@ -10,7 +10,7 @@ $(document).ready(function() {
 
 document.querySelector("#add-orcamento").addEventListener('click', function(){
     orcamentoModal();
-})
+});
 
 document.querySelector("#modal-orcamento-form-submit").addEventListener("click", function () {
     insertbudgets(document.querySelector(".orcamento-modal-form"));
@@ -222,7 +222,7 @@ function budgetsMapping(data) {
             idOrcamento: id.length+1,
             valor: parseFloat(data[0].value),
             idCategoria: parseInt(data[1].value),
-            mes: mes,
+            mes: mes
         };
 
         orcamentosDataBase.push(dataset);
