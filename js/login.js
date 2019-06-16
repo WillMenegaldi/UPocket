@@ -24,7 +24,7 @@ function showform(op) {
         })
     }
 
-    if (op == 2) {
+    else if (op == 2) {
         document.getElementById('box-login').style.display = 'flex';
         document.getElementById('submit1').addEventListener('click', function () {
             validUser(document.querySelector(".formulario1"), 2);
@@ -55,16 +55,19 @@ function dataWorker(data, op) {
         }
 
         if (!dataSet.password) {
-            if (!dataSet.user && !dataSet.email) {
+            if (!dataSet.user && !dataSet.email || !dataSet.user || !dataSet.email) {
                 mensagemErro(3);
+                return false;
             }
             else {
                 mensagemErro(1);
+                return false;
             }
         }
 
         else if (!dataSet.email && dataSet.user) {
             mensagemErro(4);
+            return false;
         }
 
         else {
@@ -72,7 +75,7 @@ function dataWorker(data, op) {
         }
     }
 
-    if (op == 2) {
+    else if (op == 2) {
         let dataSet = {
             email: data[0].value,
             password: data[1].value
