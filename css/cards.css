@@ -6,7 +6,6 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color: #de2866;
 }
 .lista-orcamento>.indice-mes{
     height: 5%;
@@ -27,7 +26,6 @@
     text-align: center;
     width: 10%;
     max-width: 10%;
-    color: #fff900b5;
 }
 .flex-container {
     display: flex;
