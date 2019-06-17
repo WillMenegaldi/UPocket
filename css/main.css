@@ -66,7 +66,7 @@ main#flex-main {
     text-decoration: none;
     padding:5%;
     font-size:1.25em;
-    color:rgb(10, 10, 10,.5);
+    color:rgb(100, 100, 100);
 }
 .box-user>div{
     width: 100%;
@@ -91,7 +91,7 @@ main#flex-main {
     }
     .header {
         height: 8.5vh;
-        background-color: rgba(50, 80, 80, 0.1);
+        background:rgb(246, 258, 249);
         display: flex;
         flex-direction:row;
     }
