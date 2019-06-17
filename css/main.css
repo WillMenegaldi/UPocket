@@ -27,7 +27,7 @@ footer {
     position: relative;
 }
 .header>div.logo {   
-    width: 100%;
+    width: 80%;
     height:99.5%;
 }
 .header>div.logo>a img {
@@ -46,15 +46,22 @@ main#flex-main {
 .box-user{  
     display:flex;
     flex-direction:row;  
-    width:30%;
+    width:20%;
     height:100%;
     flex-shrink: 6;
 }
 .box-username{
     text-decoration: none;
-    padding-top: 4.8%;
+    padding-top: 7.5%;
+    text-align: right;
+    width: 80%;
     color:rgb(50, 50, 50,.5);
 }
+
+#box-picture {
+    width: 30%;
+}
+
 .box-username a{
     text-decoration: none;
     padding:5%;
@@ -66,9 +73,9 @@ main#flex-main {
     height:100%;
 }
 .box-user>div img{
-    margin-top: 12%;
+    margin-top: 8%;
     width: 70%;
-    height:70%;
+    height: 80%;
 }
 .main_box {
     width: 100%;

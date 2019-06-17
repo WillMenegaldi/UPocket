@@ -34,10 +34,10 @@
         </div>
         <div class="box-user">
             <div class="box-username">
-                <a href="#">Nome usuário </a>
+                <a href="#">Olá, Usuário! </a>
             </div>
-            <div>
-                <a href="#"><img src="assets/profile.webp" alt="Foto do Usuário"></a>
+            <div id="box-picture"> 
+                <a href="#"><img src="assets/user.png" alt="Foto do Usuário"></a>
             </div>
         </div>
         <div class="mobile_menu">
@@ -139,44 +139,49 @@
                 <span id="mes-anterior"> </span> <h3 id="mes-selecionado"> </h3> <span id="mes-posterior"> </span> 
             </section>
             <section class="flex-container">
-                <div id="income-card" class="flex-card cards income">
+                <div id="income-card" class="flex-card cards income column">
                     <div class="card_title">
                         <div id="title">
-                            RECEITAS
-                        </div>
-                        <div class="cards-values">
-                            <span>R$ </span><span id="valor-receita">00</span>
+                            Receitas
                         </div>
                     </div>
-                    <div id="display-imagem" class="image-flex">
-                        <img class="card_icon" src="assets/icon-green-bag.webp"></a>
+                    <div id="display-imagem" class="image-flex row">
+                        <div class="valor-cards">
+                            <span class="fonte-cards" id="valor-receita">00</span>    
+                        </div>
+                        <div class="icone-cards">
+                            <img class="card_icon" src="assets/icon-green-bag.webp"></a>
+                        </div>
                     </div>
                 </div>
-                <div id="budget-card" class="cards budget flex-card">
+                <div id="budget-card" class="flex-card cards budget column">
                     <div class="card_title">
-                        <div id="title">
-                            DESPESAS
-                        </div>
-                        <div class="cards-values">
-                            <span>R$ </span><span id="valor-despesa">00</span>
+                        <div style="background-color: rgb(195, 0, 0);" id="title">
+                            Despesas
                         </div>
                     </div>
-                    <div id="display-imagem" class="image-flex">
-                        <img class="card_icon" src="assets/icon-debt.webp"></a>
+                    <div id="display-imagem" class="image-flex row">
+                        <div class="valor-cards">
+                            <span class="fonte-cards" id="valor-despesa">00</span>    
+                        </div>
+                        <div class="icone-cards">
+                            <img class="card_icon" src="assets/icon-debt.webp"></a>
+                        </div>
                     </div>
-
                 </div>
-                <div class="cards balance flex-card">
+                <div id="budget-card" class="flex-card cards balance column">
                     <div class="card_title">
-                        <div id="title">
-                            SALDO TOTAL
-                        </div>
-                        <div class="cards-values">
-                            <span>R$ </span><span id="valor-saldo">00</span>
+                        <div style="background-color: navy" id="title">
+                            Salto Total
                         </div>
                     </div>
-                    <div id="display-imagem" class="image-flex">
-                        <img class="card_icon" src="assets/icon-pocket.webp"></a>
+                    <div id="display-imagem" class="image-flex row">
+                        <div class="valor-cards">
+                            <span class="fonte-cards" id="valor-saldo">00</span>    
+                        </div>
+                        <div class="icone-cards">
+                            <img class="card_icon" src="assets/icon-pocket.webp"></a>
+                        </div>
                     </div>
                 </div>
             </section>
