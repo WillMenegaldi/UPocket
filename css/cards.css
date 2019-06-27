@@ -1,12 +1,13 @@
 .indice-mes{
-    padding: 1.2%;
+    padding: 1.5%;
     height: 1%;
+    box-shadow: 0px 2.5px 3.5px rgba(141, 187, 137);
     display: flex;
+    color: #002828;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color: #de2866;
 }
 .lista-orcamento>.indice-mes{
     height: 5%;
@@ -27,7 +28,6 @@
     text-align: center;
     width: 10%;
     max-width: 10%;
-    color: #fff900b5;
 }
 .flex-container {
     display: flex;
@@ -137,7 +137,7 @@ section.flex-container{
 
     }
     .flex-card>.image-flex {
-        width: 30%;
+        width: 100%;
         height: 100%;    
     }
     .card_icon {
@@ -191,8 +191,8 @@ section.flex-container{
     .flex-container {
         display: flex;
         justify-content: space-around;
-        height: 18%;
-        margin-top:3%;
+        height: 21%;
+        margin-top:2.2%;
         width: 94%;
         padding: 0 3%;
     }
@@ -206,23 +206,21 @@ section.flex-container{
         flex-wrap: nowrap;
     }
     .card_title {
-        margin: 0 auto; 
-        height: 100%;
-        width: 80%;
-        padding-left: 10%;
-        padding-top: 1%;
+        margin: 0 auto;
+        height: 50%;
+        width: 100%;
         text-align: left;
-    
     }
+
     .flex-card>.image-flex {
-        width: 30%;
+        width: 100%;
         height: 100%;    
     }
     .card_icon {
-        width: 80%;
+        width: 87.5%;
         border-radius: 0px 0px 20px 0px;
-        margin: 50% auto 0;
-        height: 55%;
+        height: 80%;
+        margin: 7.5% auto 0;
     }
     .nav_lateral {
         height: 100%;
@@ -231,16 +229,14 @@ section.flex-container{
     }
     .cards {
         background-color: rgb(230, 230, 230);
-        border-radius: 20px;
     }
     #title {
-        color: rgb(130, 130, 130);
+        background-color: green;
+        color: rgb(245, 245, 245);
         margin:0;
         width:90%;
-        border-bottom: 1px solid rgb(50, 50,50,.5);
-        margin-top:7%;
+        padding:2% 5%;
         font-size:1.5em;
-        color: rgb(80, 80, 80);
     }
     .cards-values{
         padding-top:10%;
@@ -248,23 +244,44 @@ section.flex-container{
     }
     .income {
         color: green;
-        background-image: linear-gradient(to bottom, rgb(245, 245, 245), #c0ffce 400%);
+        background-image: linear-gradient(to bottom, rgb(250, 250, 250), #c0ffce 400%);
         width: 25%;
         height: 100%;
     }
     .budget {
-        color: red;
+        color: rgb(195, 0, 0);
         background-image: linear-gradient(to bottom, rgb(245, 245, 245), #ff8181 400%);
         box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
         width: 25%;
         height: 100%;
     }
     .balance {
-        color: blue;
+        color: navy;
         background-image: linear-gradient(to bottom, rgb(245, 245, 245), #c0ceff 300%);
         box-shadow: 4px 4px 6px rgba(100, 100, 100, 0.5);
         width: 25%;
         height: 100%;
+    }
+
+    .fonte-cards {
+        font-size: 2em;
+    }
+    .row {
+        flex-direction: row;
+    }
+
+    .column {
+        flex-direction: column;
+    }
+
+    .valor-cards {
+        width: 70%;
+        height: 100%;
+        padding: 7% 5%;
+    }
+
+    .icone-cards {
+        width: 30%;
     }
 }
 @media (min-width:450px) and (max-width:700px) {

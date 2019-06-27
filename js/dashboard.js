@@ -202,7 +202,7 @@ function setaCardReceitas(card) {
     for (var i = 0; i < receitas.length; i++) {
         total += receitas[i].valor;
     }
-    card.innerHTML = total.toFixed(2).replace(".", ",");
+    card.innerHTML = 'R$ ' + total.toFixed(2).replace(".", ",");
 }
 
 function setaCardDespesas(card) {
@@ -212,7 +212,7 @@ function setaCardDespesas(card) {
     for (var i = 0; i < despesas.length; i++) {
         total += despesas[i].valor;
     }
-    card.innerHTML = total.toFixed(2).replace(".", ",");
+    card.innerHTML = 'R$ ' +  total.toFixed(2).replace(".", ",");
 }
 
 function setaCardSaldoTotal(card, db) {
@@ -233,7 +233,7 @@ function setaCardSaldoTotal(card, db) {
     }
     saldo = totalReceita - totalDespesa;   
 
-    card.innerHTML = (parseFloat(saldo)).toFixed(2).replace(".", ",");
+    card.innerHTML =  'R$ ' +  (parseFloat(saldo)).toFixed(2).replace(".", ",");
 }
 
 function limpaCampos(campos) {

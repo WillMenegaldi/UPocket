@@ -305,3 +305,34 @@ form.modal-form button{
 }
 
 
+/* Adicionar money*/
+
+section.add-money{
+}
+section.add-money>form{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+section.add-money>form>input{    
+    width:40%;
+    height:100%;
+}
+section.add-money>form>button{    
+    background: rgb(4, 119, 100);
+    color:white;
+    width:20%;
+    height:55%;
+}
+
+section.add-money>form>span{   
+    margin-left: 10%; 
+    margin-top: -1.2%; 
+    width:10%;
+    font-weight: bold;
+    font-size: 2em;
+}
+section.add-money>form>span:hover{ 
+    color:rgb(4, 119, 100);
+}
