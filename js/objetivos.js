@@ -108,7 +108,7 @@ function abrirModal(tipo, obj) {
                     <input required id="input-valor-objetivo" class="modal-form-input" type="number"  value="${(data[obj].valorAtual).toString()}" maxlength="6" hidden>
                     <input required class="modal-form-input" type="date" name="date" value="${data[obj].data}">
                 </div>
-                    <select required name="objetivo" id="modal-form-objetivo" name="type" value=" ${(obj).toString()}">
+                    <select name="objetivo" id="modal-form-objetivo">
                         <option value="1"> Diversão </option>
                         <option value="2"> Família </option>
                         <option value="3"> Moradia </option>
@@ -121,6 +121,7 @@ function abrirModal(tipo, obj) {
                     <button id="modal-form-submit" type="button">Salvar</button>
             </form>       
         `);
+        $("#modal-form-objetivo").val(data[obj].categoria); 
         document.querySelector("#modal-form-submit").addEventListener('click', function () { editGoals(document.querySelector(".modal-form"),obj) });
 
     }
@@ -240,7 +241,8 @@ function showGoals() {
         let set      = '';
         
         $('#main-objetivos').html('');
-        for (let i = 0; i < database.length; i++) {
+        for (let i = 0; i < database.length; i++) 
+        {
             set +=
                 `
                 <article class="box-objetivo" >
@@ -284,7 +286,8 @@ function showGoals() {
             `;
 
         }
-        if(database.length < 4){
+        if(database.length < 4)
+        {
             set+=
             `
             <article class="box-objetivo" id="new-goal">
@@ -300,7 +303,8 @@ function showGoals() {
         }
         $('#main-objetivos').prepend(set);
     }
-    if (database.length == 4) {
+    if (database.length == 4) 
+    {
         $('#new-goal').hide();
     }
 }
