@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="Description" content="UPocket">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#002828">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="#002828">
+    <meta name="theme-color" content="#002828">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/orcamento.css">
+    <link rel="stylesheet" type="text/css" href="css/floating.css">
+    <link rel="stylesheet" type="text/css" href="css/cards.css">
+    <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="css/css_modal.css">
+    <link rel="stylesheet" type="text/css" href="css/objetivos.css">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="assets/UPOCKET4.webp">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icon-iphone.webp">
+    <link rel="apple-touch-startup-image" href="assets/UPOCKET4.webp">
+    <script src="libs/jquery-min.js"></script>
+    <script src="libs/chartjs-min.js"></script>
+    <title>UPocket</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="index.html"><img src="assets/logo.png" alt="Upocket Logo"></a>
+        </div>
+        <div class="box-user">
+            <div class="box-username">
+                <a href="#">Olá, Usuário!  </a>
+            </div>
+            <div id="box-picture"> 
+                <a href="#"><img src="assets/user.png" alt="Foto do Usuário"></a>
+            </div>
+        </div>
+    </header>
+    <main id="flex-main">
+        <nav id="display-imagem" class="nav_lateral">
+            <section class="section_dashboard">
+                <div class="dash">
+                    <a href="index.html">
+                        <div class="home_icon">
+                            <img src="assets/home.webp" alt="página inicial">
+                        </div>
+                        <div class="home_text">
+                            Home
+                        </div>
+                    </a>
+                </div>
+                <div class="bills">
+                    <a href="#">
+                        <div class="bills_icon">
+                            <img src="assets/flow.webp" alt="Movimentações">
+                        </div>
+                        <div class="bills_text">
+                            Movimentações
+                        </div>
+                    </a>
+                </div>
+                <div class="budgets">
+                    <a href="orcamento.html">
+                        <div class="budgets_icon">
+                            <img src="assets/notes.webp" alt="Orçamento">
+                        </div>
+                        <div class="budgets_text">
+                            Orçamento
+                        </div>
+                    </a>
+                </div>
+                <div class="historic">
+                    <a href="objetivos.html">
+                        <div class="historic_icon">
+                            <img src="assets/goals.webp" alt="Objetivos">
+                        </div>
+                        <div class="historic_text">
+                            Objetivos
+                        </div>
+                    </a>
+                </div>
+                <div>
+                </div>
+                <div>
+                </div>
+                <div>
+                </div>
+            </section>
+        </nav>
+        <section class="objetivos">
+            <header class="header-pagina">
+                <div class="header-title">Objetivos</div>
+            </header>
+            <main id="main-objetivos">                
+                
+
+                <article class="box-objetivo" id="new-goal" >
+                    <div> <img src="assets/add.webp" alt=""></div>
+
+                    <div id="label-objetivo">
+                        Novo Objetivo
+                    </div>
+
+                </article>
+            </main>
+        </section>
+    </main>
+    <div id="container-modal" display="none">
+        <div id="box-modal">
+            <header id="header-box-modal">
+                <span id="header-box-modal-title"> Detalhamento Objetivo </span>
+                <span id="btn-close" class = "btn-close-modal">&times;</span>
+            </header>
+            <main id="main-box-modal">
+
+            </main>
+        </div>
+    </div>
+    <footer>
+        UPocket 2019
+    </footer>
+    <script src="js/objetivos.js"></script>
+</body>
+
+</html>
