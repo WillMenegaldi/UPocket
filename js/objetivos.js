@@ -1,43 +1,48 @@
 window.addEventListener('load', showGoals);
-$(".btn-close-modal").click(fecharModal);
+
+//status : 1 ativo / 0 cancelado  / 2 concluido
+
+
+$(".btn-close-modal").click(closeModal);
+
 $(document).on('click', '.conteudo', function(){ 
     let id = $(this).attr('id',);
-    abrirModal(1, id);    
+    openModal(1, id);    
 });
-$(document).on('click','#new-goal', function(){     
-    abrirModal(2, 0);  
+$(document).on('click', '#new-goal', function(){     
+    openModal(2, 0);  
 });
 
-$(document).on('click','.btn-adicionar',function(){
+$(document).on('click', '.btn-adicionar', function(){
     let id = $(this).attr('id',);
     $('#options'   + id).hide();
     $('#add-money' + id).show();   
-});
-$(document).on('click','.btn-editar',function(){ 
+}); 
+$(document).on('click', '.btn-editar'   , function(){ 
     let id = $(this).attr('id',);
-    abrirModal(3, id);    
+    openModal(3, id);    
 });
-$(document).on('click', '.btn-close', function(){ 
+$(document).on('click', '.add-valor'    , function(){
+    let id = $(this).attr('id',);
+    addGoalsValue(document.querySelector("#form-add-valor" + id), id);
+});
+$(document).on('click', '.btn-close'    , function(){ 
     let id = $(this).attr('id',);
     $('#add-money' + id).hide();
     $('#options'   + id).show();   
 });
 
-$(document).on('click', '.add-valor', function(){
-    let id = $(this).attr('id',);
-    addValor(document.querySelector("#form-add-valor" + id), id);
-});
 
 
-function inicializarDB() {
+function startDB() {
     let database = localStorage.getItem("DBGoals");
     database = !database ? [] : JSON.parse(database);
     return database;
 }
 
-function abrirModal(tipo, obj) {
+function openModal(tipo, obj) {
     $('#main-box-modal').html(' ');
-    let data     = inicializarDB();
+    let data     = startDB();
     let arrayImg = ['', 'gamepad.png', 'couple.png', 'house.png', 'car.png', 'travel.png', 'piggy-bank.png'];
 
     if (tipo == 1) 
@@ -56,10 +61,10 @@ function abrirModal(tipo, obj) {
             <article>
                 <div>
                     <h3>R$  ${data[obj].valorAtual} / R$ ${data[obj].valorPrevisto} </h3>
-                    <h4> Data:  ${formatarData(data[obj].data)} </h4>
+                    <h4> Data:  ${formatDate(data[obj].data)} </h4>
                 </div>
                 <div>
-                    <h4> Você vai precisar poupar R$ ${previsaoMensal(obj).toFixed(2)} por mês</h4>
+                    <h4> Você vai precisar poupar R$ ${monthlyForecast(obj).toFixed(2)} por mês</h4>
                 </div>
             </article>
             
@@ -71,7 +76,7 @@ function abrirModal(tipo, obj) {
         `);
 
         let context = document.getElementById('grafico-objetivo').getContext('2d');
-        constroiGraficoCategoria(context,data[obj].valorPrevisto,data[obj].valorAtual);
+        buildGoalsGraph(context,data[obj].valorPrevisto,data[obj].valorAtual);
     }
     else if (tipo == 2) 
     {
@@ -81,7 +86,7 @@ function abrirModal(tipo, obj) {
                 <input required placeholder="Descrição objetivo:" class="modal-form-input" type="text" name="name">
                 <div>
                     <input required placeholder= "Valor necessário :" id="input-valor-objetivo" class="modal-form-input" type="number"  name="value" maxlength="6">
-                    <input required placeholder="Data" class="modal-form-input" type="date" value="${dataAtualFormatada()}" name="date">
+                    <input required placeholder="Data" class="modal-form-input" type="date" value="${formatCurrentDate()}" name="date">
                 </div>
                     <select required name="objetivo" id="modal-form-objetivo" name="type">
                         <option value="1"> Diversão </option>
@@ -94,7 +99,7 @@ function abrirModal(tipo, obj) {
                     <button id="modal-form-submit" type="button">Salvar</button>
             </form>       
         `);
-        document.querySelector("#modal-form-submit").addEventListener('click', function () { insertGoal(document.querySelector(".modal-form")) });
+        document.querySelector("#modal-form-submit").addEventListener('click', function () { insertGoals(document.querySelector(".modal-form")) });
 
     }
     else if (tipo == 3) 
@@ -129,7 +134,7 @@ function abrirModal(tipo, obj) {
     modalGraph.style.display = 'block';
 };
 
-function fecharModal() {
+function closeModal() {
     let modalLineGraph           = document.getElementById('container-modal');
     modalLineGraph.style.display = 'none';
     window.onclick = function () {
@@ -139,7 +144,7 @@ function fecharModal() {
     }
 }
 
-function constroiGraficoCategoria(context, valorP, valorA) {
+function buildGoalsGraph(context, valorP, valorA) {
     let settings = {
         legend: {
             display: false
@@ -169,8 +174,16 @@ function constroiGraficoCategoria(context, valorP, valorA) {
     return graficoObjetivo;
 }
 
+function insertGoals(form) {
+    if (goalsMapping(form)) 
+    {
+        closeModal();
+        showGoals();
+    }
+}
+
 function goalsMapping(form) {
-    let database = inicializarDB();
+    let database = startDB();
     let dados    = form;
     if (dados) 
     {
@@ -192,17 +205,94 @@ function goalsMapping(form) {
     }
 }
 
-function insertGoal(form) {
-    if (goalsMapping(form)) 
+function showGoals() {
+    let database = startDB();
+
+    if (database.length > 0) {
+        let arrayImg = ['', 'gamepad.png', 'couple.png', 'house.png', 'car.png', 'travel.png', 'piggy-bank.png'];
+        let set      = '';
+        
+        $('#main-objetivos').html('');
+        for (let i = 0; i < database.length; i++) 
+        {
+            set +=
+                `
+                <article class="box-objetivo">
+                    <section class ="conteudo " id="${i}">
+                        <section >
+                            <div> <img src="assets/${arrayImg[database[i].categoria]}" alt=""></div>
+                            <div>   
+                                <h2>${database[i].descricao}</h2>
+                                <h4 id="data-objetivo${i}">Data objetivo: ${formatDate(database[i].data)} </h4>
+                            </div>
+                        </section>
+                        <section>
+                            <div id="box-progresso">
+                                <div id="barra-progresso${i}">
+                                    <script>
+                                    progressBar();
+                                    </script>
+                                </div>
+                            </div>
+
+                            <div id="valores">
+                                R$  ${(database[i].valorAtual).toFixed(2)} de R$ ${(database[i].valorPrevisto).toFixed(2)}
+                            </div>
+
+                        </section>            
+                    </section>
+                    <section class="options" id="options${i}">
+                        <img  class="btn-adicionar" id="${i}" src="assets/plus.png" alt="">
+                        <img  class="btn-concluir"  id="${i}" src="assets/success.png" alt="">
+                        <img  class="btn-excluir"   id="${i}" src="assets/error.png" alt="">
+                        <img  class="btn-editar"    id="${i}" src="assets/edit.png" alt="">
+                    </section>
+                    <section class="add-money"  id ="add-money${i}" display="none">
+                            <form id="form-add-valor${i}">
+                                <input type="number" name="valor">
+                                <button class = "add-valor" id="${i}" type="button" name="salvar">Salvar </button>
+                                <span class="btn-close"  id="${i}">&times;</span>
+                            </form>
+                    </section>
+                </article>                            
+            `;
+        }
+
+        if(database.length < 4)
+        {
+            set+=
+            `
+            <article class="box-objetivo" id="new-goal">
+                <div> <img src="assets/add.webp" alt=""></div>
+
+                <div id="label-objetivo">
+                    Novo Objetivo
+                </div>
+
+                </section>
+            </article>
+            `        
+        }
+
+        $('#main-objetivos').prepend(set);
+
+        for (let i = 0; i < database.length; i++) 
+        {
+            if(database[i].status == 2){
+                $("article.box-objetivo:nth-child("+(i+1)+")").css("background-color", "#147180");
+                $("h4#data-objetivo"+i).html("Concluido");
+            }
+        }
+    }
+    if (database.length == 4) 
     {
-        fecharModal();
-        showGoals();
+        $('#new-goal').hide();
     }
 }
 
 function progressBar(){
     let objetivo, previsto, atual, progresso;
-    objetivo = inicializarDB();
+    objetivo = startDB();
     id       = 0;    
     for(i=0; i < objetivo.length; i++)
     {
@@ -233,84 +323,8 @@ function progressBar(){
     }
 }
 
-function showGoals() {
-    let database = inicializarDB();
-
-    if (database.length > 0) {
-        let arrayImg = ['', 'gamepad.png', 'couple.png', 'house.png', 'car.png', 'travel.png', 'piggy-bank.png'];
-        let set      = '';
-        
-        $('#main-objetivos').html('');
-        for (let i = 0; i < database.length; i++) 
-        {
-            set +=
-                `
-                <article class="box-objetivo" >
-                    <section class ="conteudo " id="${i}">
-                        <section >
-                            <div> <img src="assets/${arrayImg[database[i].categoria]}" alt=""></div>
-                            <div>   
-                                <h2>${database[i].descricao}</h2>
-                                <h4>Data objetivo: ${formatarData(database[i].data)} </h4>
-                            </div>
-                        </section>
-                        <section>
-                            <div id="box-progresso">
-                                <div id="barra-progresso${i}">
-                                    <script>
-                                    progressBar();
-                                    </script>
-                                </div>
-                            </div>
-
-                            <div id="valores">
-                                R$  ${(database[i].valorAtual).toFixed(2)} de R$ ${(database[i].valorPrevisto).toFixed(2)}
-                            </div>
-
-                        </section>            
-                    </section>
-                    <section class="options" id="options${i}">
-                        <img  class="btn-adicionar" id="${i}" src="assets/plus.png" alt="">
-                        <img  class="btn-completar" id="${i}" src="assets/success.png" alt="">
-                        <img  class="btn-excluir"   id="${i}" src="assets/error.png" alt="">
-                        <img  class="btn-editar"    id="${i}" src="assets/edit.png" alt="">
-                    </section>
-                    <section class="add-money"  id ="add-money${i}" display="none">
-                            <form id="form-add-valor${i}">
-                                <input type="number" name="valor">
-                                <button class = "add-valor" id="${i}" type="button" name="salvar">Salvar </button>
-                                <span class="btn-close"  id="${i}">&times;</span>
-                            </form>
-                    </section>
-                </article>                            
-            `;
-
-        }
-        if(database.length < 4)
-        {
-            set+=
-            `
-            <article class="box-objetivo" id="new-goal">
-                <div> <img src="assets/add.webp" alt=""></div>
-
-                <div id="label-objetivo">
-                    Novo Objetivo
-                </div>
-
-                </section>
-            </article>
-            `        
-        }
-        $('#main-objetivos').prepend(set);
-    }
-    if (database.length == 4) 
-    {
-        $('#new-goal').hide();
-    }
-}
-
-function previsaoMensal(obj){    
-    let database    = inicializarDB();    
+function monthlyForecast(obj){    
+    let database    = startDB();    
     let mesAtual    =  new Date().getMonth() + 1;
     let mesPrevisto = (database[obj].data).split("-")[1];
     let valorMensal = database[obj].valorPrevisto/(mesPrevisto - mesAtual);
@@ -318,7 +332,7 @@ function previsaoMensal(obj){
 }
 
 function editGoals(form,obj) {
-    let database = inicializarDB();
+    let database = startDB();
     let dados    = form;
     if (dados) 
     {
@@ -334,7 +348,7 @@ function editGoals(form,obj) {
 
         database[obj] = data;
         localStorage.setItem("DBGoals", JSON.stringify(database));   
-        fecharModal();
+        closeModal();
         showGoals();
         return true;
     }else 
@@ -343,8 +357,8 @@ function editGoals(form,obj) {
     }
 }
 
-function addValor(form, obj){
-    let database = inicializarDB();
+function addGoalsValue(form, obj){
+    let database = startDB();
     let soma     = parseFloat(database[obj].valorAtual) + parseFloat(form[0].value);
     database[obj] = (
     {
@@ -359,13 +373,15 @@ function addValor(form, obj){
     showGoals();
 }
 
-function dataAtualFormatada(){
+
+
+function formatCurrentDate(){
     var dNow      = new Date();
     var localdate =  dNow.getFullYear().toString() + '-' + (dNow.getMonth()+1).toString().padStart(2, '0') + '-' +  dNow.getDate().toString().padStart(2, '0');
     return localdate;
 }
 
-function formatarData(data){
+function formatDate(data){
     let dia, mes, ano;
     dia = data.split("-")[2];
     mes = data.split("-")[1];
