@@ -22,6 +22,19 @@ $(document).on('click', '.btn-editar'   , function(){
     let id = $(this).attr('id',);
     openModal(3, id);    
 });
+$(document).on('click', '.btn-concluir' , function(){
+    let id = $(this).attr('id',);
+    let database    = startDB();    
+    if(database[id].status == 2){
+        changeStatus(id, 1);
+    }else{
+        changeStatus(id, 2);
+    }
+});
+$(document).on('click', '.btn-excluir'  , function(){
+    let id = $(this).attr('id',);
+    changeStatus(id, 0);
+});
 $(document).on('click', '.add-valor'    , function(){
     let id = $(this).attr('id',);
     addGoalsValue(document.querySelector("#form-add-valor" + id), id);
@@ -373,7 +386,20 @@ function addGoalsValue(form, obj){
     showGoals();
 }
 
-
+function changeStatus(obj, value){
+    let database = startDB();
+    database[obj] = (
+    {
+        descricao     : database[obj].descricao,
+        valorPrevisto : parseFloat(database[obj].valorPrevisto),
+        valorAtual    : parseFloat(database[obj].valorAtual),
+        data          : database[obj].data,
+        categoria     : parseInt(database[obj].categoria),
+        status        : value
+    });
+    localStorage.setItem("DBGoals", JSON.stringify(database));
+    showGoals();
+}
 
 function formatCurrentDate(){
     var dNow      = new Date();
