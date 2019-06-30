@@ -37,7 +37,7 @@ $(document).on('click', '.btn-excluir'  , function(){
 });
 $(document).on('click', '.add-valor'    , function(){
     let id = $(this).attr('id',);
-    addGoalsValue(document.querySelector("#form-add-valor" + id), id);
+    validForm(document.querySelector("#form-add-valor" + id), 0, id);
 });
 $(document).on('click', '.btn-close'    , function(){ 
     let id = $(this).attr('id',);
@@ -112,7 +112,7 @@ function openModal(tipo, obj) {
                     <button id="modal-form-submit" type="button">Salvar</button>
             </form>       
         `);
-        document.querySelector("#modal-form-submit").addEventListener('click', function () { insertGoals(document.querySelector(".modal-form")) });
+        document.querySelector("#modal-form-submit").addEventListener('click', function () { validForm(document.querySelector(".modal-form"), 1, 0) });
 
     }
     else if (tipo == 3) 
@@ -140,7 +140,7 @@ function openModal(tipo, obj) {
             </form>       
         `);
         $("#modal-form-objetivo").val(data[obj].categoria); 
-        document.querySelector("#modal-form-submit").addEventListener('click', function () { editGoals(document.querySelector(".modal-form"),obj) });
+        document.querySelector("#modal-form-submit").addEventListener('click', function () { validForm(document.querySelector(".modal-form"), 2, obj) });
 
     }
     let modalGraph           = document.getElementById('container-modal');
@@ -187,11 +187,46 @@ function buildGoalsGraph(context, valorP, valorA) {
     return graficoObjetivo;
 }
 
-function insertGoals(form) {
-    if (goalsMapping(form)) 
+function validForm(form, tipo, obj){
+    if(tipo > 0)
     {
-        closeModal();
-        showGoals();
+        if(form[0].value == false || form[1].value == false )
+        {
+            alert("Preencha todos os campos!");
+        }else if(form[1].value < 0)
+        {
+            alert("Apenas valores maiores que 0!");
+        }else{
+            if(tipo == 1){
+                if (goalsMapping(form)) 
+                {
+                    alert("Inserido com sucesso!");
+                    closeModal();
+                    showGoals();
+                }
+            }else{
+                if (editGoals(form,obj)) 
+                {
+                    alert("Editado com sucesso!");
+                    closeModal();
+                    showGoals();
+                }
+            }
+        }
+
+    }else
+    {
+        if(form[0].value == false)
+        {
+            alert("Preencha o campo!");
+        }else if(form[0].value < 0)
+        {
+            alert("Apenas valores maiores que 0!");
+        }else{
+            addGoalsValue(form, obj);
+            alert("Inserido com sucesso!");
+            showGoals(); 
+        }
     }
 }
 
@@ -372,8 +407,6 @@ function editGoals(form,obj) {
 
         database[obj] = data;
         localStorage.setItem("DBGoals", JSON.stringify(database));   
-        closeModal();
-        showGoals();
         return true;
     }else 
     {
@@ -394,7 +427,6 @@ function addGoalsValue(form, obj){
         status        : parseInt(database[obj].status)
     });
     localStorage.setItem("DBGoals", JSON.stringify(database));
-    showGoals();
 }
 
 function changeStatus(obj, value){
