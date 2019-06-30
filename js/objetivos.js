@@ -219,8 +219,7 @@ function goalsMapping(form) {
 }
 
 function showGoals() {
-    let database = startDB();
-
+    let database = startDB();    
     if (database.length > 0) {
         let arrayImg = ['', 'gamepad.png', 'couple.png', 'house.png', 'car.png', 'travel.png', 'piggy-bank.png'];
         let set      = '';
@@ -255,10 +254,10 @@ function showGoals() {
                         </section>            
                     </section>
                     <section class="options" id="options${i}">
-                        <img  class="btn-adicionar" id="${i}" src="assets/plus.png" alt="">
-                        <img  class="btn-concluir"  id="${i}" src="assets/success.png" alt="">
-                        <img  class="btn-excluir"   id="${i}" src="assets/error.png" alt="">
-                        <img  class="btn-editar"    id="${i}" src="assets/edit.png" alt="">
+                        <img  class="btn-adicionar" id="${i}" src="assets/plus.png"    alt="Adicionar" title = "Adicionar valor ao objetivo">
+                        <img  class="btn-concluir"  id="${i}" src="assets/success.png" alt="Concluir"  title = "Concluir objetivo">
+                        <img  class="btn-excluir"   id="${i}" src="assets/error.png"   alt="Excluir"   title = "Excluir objetivo">
+                        <img  class="btn-editar"    id="${i}" src="assets/edit.png"    alt="Editar"    title = "Editar objetivo">
                     </section>
                     <section class="add-money"  id ="add-money${i}" display="none">
                             <form id="form-add-valor${i}">
@@ -337,10 +336,22 @@ function progressBar(){
 }
 
 function monthlyForecast(obj){    
-    let database    = startDB();    
-    let mesAtual    =  new Date().getMonth() + 1;
-    let mesPrevisto = (database[obj].data).split("-")[1];
-    let valorMensal = database[obj].valorPrevisto/(mesPrevisto - mesAtual);
+    let database, mesAtual, anoAtual, mesPrevisto , anoPrevisto, valorMensal;
+    database    = startDB();    
+    mesAtual    = new Date().getMonth() + 1;    
+    anoAtual    = new Date().getFullYear();
+    mesPrevisto = parseInt((database[obj].data).split("-")[1]);
+    anoPrevisto = parseInt((database[obj].data).split("-")[0])  ;
+    if(anoPrevisto == anoAtual)
+    {
+        valorMensal = database[obj].valorPrevisto/(mesPrevisto - mesAtual);
+    }else if(anoPrevisto == (anoAtual + 1))
+    {
+        valorMensal = database[obj].valorPrevisto/((12 - mesAtual) + mesPrevisto);
+    }else if(anoPrevisto  >  (anoAtual + 1))
+    {
+        valorMensal = database[obj].valorPrevisto/((12 - mesAtual) + mesPrevisto + (12*((anoPrevisto - anoAtual) - 1 )));
+    }
     return valorMensal;
 }
 
