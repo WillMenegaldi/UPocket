@@ -200,14 +200,12 @@ function validForm(form, tipo, obj){
             if(tipo == 1){
                 if (goalsMapping(form)) 
                 {
-                    alert("Inserido com sucesso!");
                     closeModal();
                     showGoals();
                 }
             }else{
                 if (editGoals(form,obj)) 
                 {
-                    alert("Editado com sucesso!");
                     closeModal();
                     showGoals();
                 }
@@ -224,7 +222,6 @@ function validForm(form, tipo, obj){
             alert("Apenas valores maiores que 0!");
         }else{
             addGoalsValue(form, obj);
-            alert("Inserido com sucesso!");
             showGoals(); 
         }
     }
