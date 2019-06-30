@@ -324,7 +324,8 @@ function showGoals() {
         {
             if(database[i].status == 2){
                 $("article.box-objetivo:nth-child("+(i+1)+")").css("background-color", "#147180");
-                $("h4#data-objetivo"+i).html("Concluido");
+                $("article.box-objetivo:nth-child("+(i+1)+")").css("color", "white");
+                $("h4#data-objetivo"+i).html("Concluído");
             }
         }
     }
