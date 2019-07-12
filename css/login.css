@@ -15,6 +15,7 @@ main{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: white;
     overflow: auto;
+    background-size: cover;
 }
 
 
@@ -119,4 +120,49 @@ button[type='button']{
     padding: 1.5%;
     border: none;
     font-size: 1.2em;
+}
+
+@media(max-width: 490px){
+    #option{
+        flex-direction: column;
+        margin-top: 20vh;
+        flex-grow: 0.3;
+        text-align: center;
+    }
+    .box{
+        width: 90vw;
+    }
+    .title img{
+        margin: 6% 0%;
+        width: 1.5em;
+    }
+    .title{
+        font-size: 1.5em;
+    }
+    form > input{
+        margin: 4% 7%;
+    }
+    button[type="button"]{
+        margin-top: 3vh;
+    }
+    main{
+        background-position-x: -30vh;
+    }
+}
+
+@media(min-width:490px) and (max-width:640px){
+    #option{
+        font-size: 0.8em;
+    }
+}
+
+@media(min-width: 490px) and (max-width: 768px){
+    .box{
+        width: 60vw;
+    }
+}
+
+@media(min-width: 768px) and (max-width:1024px){
+    .box{width: 40vw;
+    }
 }
