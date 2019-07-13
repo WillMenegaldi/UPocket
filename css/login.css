@@ -183,4 +183,7 @@ button[type='button']{
     container{
         height: 94vh;
     }
+    input[id="password"] {
+        margin-bottom: 10%;
+    }
 }
