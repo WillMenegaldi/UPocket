@@ -166,3 +166,21 @@ button[type='button']{
     .box{width: 40vw;
     }
 }
+
+@media only screen and (min-width : 320px) and (max-width : 823px) and (orientation : landscape){
+    #logo img{
+        width: 4em;
+    }
+    .title{
+        font-size: 1.7em;
+    }
+    .box{
+        height: 72vh;
+    }
+    form > input {
+        font-size: 0.9em;
+    }
+    container{
+        height: 94vh;
+    }
+}
