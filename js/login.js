@@ -9,7 +9,7 @@ document.getElementById('login').addEventListener('click', function () {
 function startDB(nome) {
     let database = localStorage.getItem(nome);
 
-    database = !database ? [] : JSON.parse(database);
+    database = !database ? false : JSON.parse(database);
 
     return database;
 }
@@ -37,7 +37,7 @@ function validUser(data, op) {
 
     let valid = dataWorker(data, op);
     if (valid) {
-        localStorage.setItem(valid.email, JSON.stringify(valid));
+        localStorage.setItem(valid.data.email, JSON.stringify(valid));
         window.location.href = "login.html";
     }
 }
@@ -47,13 +47,16 @@ function dataWorker(data, op) {
     if (op == 1) {
         let email = data[1].value.toLowerCase();
         let locStor = startDB(email);
-        locStor = locStor.email;
-        let dataSet = {
-            user: data[0].value,
-            email: check(email, locStor, 1),
-            password: check(data[2].value, data[3].value, 0)
+        if(locStor){locStor = locStor.data.email;}
+        let dataSets = {
+            data: {
+                user: data[0].value,
+                email: check(email, locStor, 1),
+                password: check(data[2].value, data[3].value, 0),
+                token: 0
+            }
         }
-
+        dataSet = dataSets.data;
         if (!dataSet.password) {
             if (!dataSet.user && !dataSet.email || !dataSet.user || !dataSet.email) {
                 mensagemErro(3);
@@ -78,32 +81,37 @@ function dataWorker(data, op) {
 
 
         else {
-            return dataSet;
+            return dataSets;
         }
     }
 
     else if (op == 2) {
+        let inputEmail = data[0].value.toLowerCase();
         let dataSet = {
-            email: data[0].value.toLowerCase(),
+            email: inputEmail,
             password: data[1].value
         }
-        let dados = startDB(dataSet.email);
-        let email = dados.email;
-        let pass = dados.password
-        pass = check(dataSet.password, pass, 0);
-        email = check(dataSet.email, email, 0);
 
-        if (!email) {
+        let dataBase = startDB(dataSet.email);
+        if (dataBase) {
+            let dados = dataBase.data;
+            let email = dados.email;
+            let pass = dados.password
+            pass = check(dataSet.password, pass, 0);
+
+            if (!pass) {
+                mensagemErro(1);
+            }
+
+            else {
+                dataBase.data.token = 1;
+                localStorage.setItem(email, JSON.stringify(dataBase));
+                window.location.href = "index.html"
+            }
+        }
+
+        else {
             mensagemErro(2);
-        }
-
-
-        else if (!pass) {
-            mensagemErro(1);
-        }
-
-        else if (email && pass) {
-            window.location.href = "index.html"
         }
     }
 }
@@ -136,12 +144,11 @@ function emailCheck(email) {
     let findDot = 0;
     let size = email.length;
     let i = 0;
-    
 
     do {
 
         if (email[i] == "@" || email[i] == ".") {
-            
+
             if (email[i] == "@") {
                 findAt += 1;
             }
