@@ -134,7 +134,8 @@ button[type='button']{
     }
     .title img{
         margin: 6% 0%;
-        width: 1.5em;
+        width: 1.3em;
+        margin-right: -9%;
     }
     .title{
         font-size: 1.5em;
@@ -147,6 +148,19 @@ button[type='button']{
     }
     main{
         background-position-x: -30vh;
+    }
+    .text-header{
+        font-size: 0.96em;
+        padding: 0.5em 0;
+    }
+}
+
+@media(max-width:321px){
+    .text-header{
+        font-size: 0.8em;
+    }
+    .title img{
+        width: 1em;
     }
 }
 
