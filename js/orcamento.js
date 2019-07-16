@@ -27,13 +27,18 @@ document.querySelector("#mes-posterior").addEventListener("click", function () {
     selecionarMes(2);
 });
 
+
+
+
 var mes = new Date().getMonth() + 1;
-var orcamentosDataBase = inicializaDB();
-var database = inicializaDashboardDB();
+document.addEventListener('click', function(x){detectarID(x)});
+
 
 
 function preencheCards()
 {
+    let database = inicializaDashboardDB();
+    let orcamentosDataBase = inicializaDB();
     let totalOrcamento  = 0;
     let totalReceita    = 0;
     let receitaMensal   = 0;
@@ -122,7 +127,8 @@ function selecionarMes(botao) {
 }
 
 
-function retornaTotalCategoria( categoria) { 
+function retornaTotalCategoria( categoria) {
+    let database = inicializaDashboardDB(); 
     let soma = 0;
     let db = database.filter(data =>  data.data.split("-")[1] == mes);
 
@@ -134,6 +140,7 @@ function retornaTotalCategoria( categoria) {
 }
 
 function listarOrcamentos() {
+    let orcamentosDataBase = inicializaDB();
     let orcamentoMensal = orcamentosDataBase.filter(orcamento => orcamento.mes == mes);
     let catToString = ['','Alimentação','Educação','Lazer','Transporte','Vestuário'];
     let orcamentos = ordenar(orcamentoMensal);
@@ -142,41 +149,60 @@ function listarOrcamentos() {
     $('#orcamento-lat').html('');
     
     for (var i = 0; i < orcamentos.length; i++) {
-        $('#orcamento-lat').append(
-            `<div> 
-                <section id="lista-orcamento"> 
-                    <div id="orcamentos" style="display: flex; flex-direction: row; margin-bottom: 3%;"> 
-                        <div id="categoria-orcamento" style="max-width:125px; width:125px; margin-left: 3%">
-                            ${catToString[orcamentos[i].idCategoria]} 
-                        </div> 
-                        <div id="valor-orcamento">
-                            R$ ${orcamentos[i].valor.toFixed(2)} 
-                        </div>
-                        <div id="valor-gasto${id}" style="max-width:125px; width:125px">
-                            R$ ${retornaTotalCategoria(orcamentos[i].idCategoria).toFixed(2)} 
-                        </div> 
-                        <div id="box-progresso" style="margin-left: -10%;">
+        if(orcamentos[i].idOrcamento != -1){
+            $('#orcamento-lat').append(
+                `<div> 
+                    <section id="lista-orcamento"> 
+                        <div id="orcamentos" style="display: flex; flex-direction: row; margin-bottom: 3%;"> 
+                            <div id="categoria-orcamento" style="max-width:125px; width:125px; margin-left: 3%">
+                                ${catToString[orcamentos[i].idCategoria]} 
+                            </div> 
+                            <div id="valor-orcamento">
+                                R$ ${orcamentos[i].valor.toFixed(2)} 
+                            </div>
+                            <div id="valor-gasto${id}" style="max-width:125px; width:125px">
+                                R$ ${retornaTotalCategoria(orcamentos[i].idCategoria).toFixed(2)} 
+                            </div> 
+                            <div id="box-progresso" style="margin-left: -10%;">
                             <div id="barra-progresso${id}">
                                 <script>progressBar()
                                 </script>
                             </div>
                         </div>
-                        <div id="edit"><img src="assets/editar.webp"></div>
-                        <div id="delete" class="del" onclick(crud())>
-                            <img src="assets/delete.webp">
+                        <div  class="edit"><img src="assets/editar.webp" id="${orcamentos[i].idOrcamento}" class="edit"></div>
+                        <div  class="del">
+                            <img src="assets/delete.webp" id="${orcamentos[i].idOrcamento}" class="del">
                         </div>
                     </div>
                 </section> 
             </div>`
             );
-        id++;
+            id++;
+        }
     }
+ 
 }
 
 function orcamentoModal() {
+    let orcamentosDataBase = inicializaDB();
     let categoriasInseridas =  orcamentosDataBase.filter( data => data.mes == mes);
+    let i;
+    let del = 0;
+    console.log(categoriasInseridas);
+    if(categoriasInseridas.length > 0){
+        for(i=0; i < categoriasInseridas.length; i++){
+            console.log(i);
+            console.log("id orcamento = " + categoriasInseridas[i].idOrcamento);
+            if(categoriasInseridas[i].idOrcamento == -1){
+                break;
+            }
+        }
+    }
+    if( i != categoriasInseridas.length -1 ){
+        del = 1;
+    }
 
-    if(categoriasInseridas.length == 5)
+    if(categoriasInseridas.length == 5 && del == 0)
     {
         alert("Todos os orçamentos referentes à este mês foram inseridos!");
         return false;
@@ -215,6 +241,7 @@ function anulaCampos(campos) {
 }
 
 function budgetsMapping(data) {
+    let orcamentosDataBase = inicializaDB();
     let valor = validaInsercao(data);
     let id = inicializaDB();
     if (valor) {
@@ -225,7 +252,20 @@ function budgetsMapping(data) {
             mes: mes
         };
 
+        let indice = searchDeleted();
+
+        if(indice == -1 ){
+
+        console.log(orcamentosDataBase)
+
         orcamentosDataBase.push(dataset);
+        }
+        else{
+            orcamentosDataBase[indice].idOrcamento = dataset.idOrcamento;
+            orcamentosDataBase[indice].valor = dataset.valor;
+            orcamentosDataBase[indice].idCategoria = dataset.idCategoria;
+            orcamentosDataBase[indice].mes = dataset.mes
+        }
 
         localStorage.setItem("BudgetsDataBase", JSON.stringify(orcamentosDataBase));
 
@@ -238,6 +278,7 @@ function budgetsMapping(data) {
 
 
 function exibeSemOrcamento() {
+    let orcamentosDataBase = inicializaDB();
     let categoriasInseridas =  orcamentosDataBase.filter( data => data.mes == mes);
     let arrayOrcamento      = [0,0,0,0,0]; 
     let vetorSelect         = ["","","","","",""];
@@ -269,6 +310,7 @@ function exibeSemOrcamento() {
 }
 
 function validaInsercao(data) {
+    let orcamentosDataBase = inicializaDB();
     let categoriasInseridas =  orcamentosDataBase.filter( data => data.mes == mes);
     if (data[0].value <= 0)
     {
@@ -298,7 +340,12 @@ function progressBar(){
 
     for(i=0; i < orcamentoMensal.length; i++){
         orcamento = orcamentoMensal[i].valor;
-        progresso = (retornaTotalCategoria(orcamentoMensal[i].idCategoria)*100)/(orcamento);        
+
+        if(orcamentoMensal[i].idCategoria != 0){
+
+            progresso = (retornaTotalCategoria(orcamentoMensal[i].idCategoria)*100)/(orcamento);
+        }
+
         let barra = ('barra-progresso'+ id).toString();
 
         document.getElementById(barra).innerHTML = '<div class="porcentagem">'+progresso.toFixed(2)+'%</div>';
@@ -341,6 +388,60 @@ function ordenar(vetor){
     return vetor;
 }
 
-function crud(){
-    return 0;
+function detectarID(x){
+    let localId = x.target.id;
+    localId = localId.replace(/\D/g,'');
+    localId = parseInt(localId);
+    if (isNaN(localId)) {
+        return 0;
+    }
+    else if (typeof localId == "number") {
+
+        let estrutura = {
+                id: x.target.id,
+                funcao: x.target.className
+            }
+        if(estrutura.funcao == "del"){
+            crud(1, estrutura.id);
+        }
+        else{
+            crud(2,estrutura.id);
+        }
+
+    }
 }
+
+function crud(op, id){
+    
+    if(op == 1){
+        deleteBudget(id);
+    }
+    else{
+        editBudget(id);
+    }
+}
+
+function deleteBudget(id){
+    let db = inicializaDB();
+    let i;
+    for(i=0; id != db[i].idOrcamento; i++){};
+    db[i].idOrcamento = -1;
+    db[i].valor = 0;
+    db[i].idCategoria = 0;
+
+    localStorage.setItem("BudgetsDataBase", JSON.stringify(db));
+    listarOrcamentos();
+    preencheCards();
+}
+
+function searchDeleted(){
+    let db = inicializaDB();
+    let i;
+    for(i= 0; i < db.length; i++){
+        if(db[i].idOrcamento == -1){
+            return i;
+        }
+    }
+    return -1;
+}
+
