@@ -73,7 +73,7 @@
     padding:2%;    
     box-sizing:border-box;
 }
-#modal-form-submit, button#modal-orcamento-form-submit{
+#modal-form-submit, .submit{
     padding:1%;    
     border-radius:5px;
     line-height: 24px; 
@@ -86,7 +86,7 @@
     font-weight: bold;
     cursor:pointer; 
 }
-#modal-form-submit:hover, #modal-orcamento-form-submit:hover{
+#modal-form-submit:hover, .submit{
     animation-name:bounce;
     animation-duration: 1s;
 }

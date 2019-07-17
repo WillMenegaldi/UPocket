@@ -31,6 +31,7 @@ document.querySelector("#mes-posterior").addEventListener("click", function () {
 
 
 var mes = new Date().getMonth() + 1;
+var pos;
 document.addEventListener('click', function(x){detectarID(x)});
 
 
@@ -188,12 +189,11 @@ function orcamentoModal() {
     let categoriasInseridas =  orcamentosDataBase.filter( data => data.mes == mes);
     let i;
     let del = 0;
-    console.log(categoriasInseridas);
-    if(categoriasInseridas.length > 0){
-        for(i=0; i < categoriasInseridas.length; i++){
-            console.log(i);
-            console.log("id orcamento = " + categoriasInseridas[i].idOrcamento);
-            if(categoriasInseridas[i].idOrcamento == -1){
+
+    if( categoriasInseridas.length > 0 ){
+        for( i=0; i < categoriasInseridas.length; i++ ){
+
+            if( categoriasInseridas[i].idOrcamento == -1 ){
                 break;
             }
         }
@@ -210,6 +210,10 @@ function orcamentoModal() {
     {        
         exibeSemOrcamento();
         let modalGraph = document.getElementById('container-modal-graph-line');
+        let submitEdit = document.getElementById('modal-orcamento-form-submit-edit');
+        let submitNew  = document.getElementById('modal-orcamento-form-submit');
+        submitNew.style.display  = 'block';
+        submitEdit.style.display = 'none';
         modalGraph.style.display = 'block';
     }
    
@@ -243,20 +247,18 @@ function anulaCampos(campos) {
 function budgetsMapping(data) {
     let orcamentosDataBase = inicializaDB();
     let valor = validaInsercao(data);
-    let id = inicializaDB();
+    let dataset;
     if (valor) {
-        let dataset = {
-            idOrcamento: id.length+1,
-            valor: parseFloat(data[0].value),
-            idCategoria: parseInt(data[1].value),
-            mes: mes
-        };
+            dataset = {
+                idOrcamento: createNewID(),
+                valor: parseFloat(data[0].value),
+                idCategoria: parseInt(data[1].value),
+                mes: mes
+            };
 
         let indice = searchDeleted();
 
         if(indice == -1 ){
-
-        console.log(orcamentosDataBase)
 
         orcamentosDataBase.push(dataset);
         }
@@ -291,8 +293,8 @@ function exibeSemOrcamento() {
 
         if(categoriasInseridas.length > 0){
         for(let i = 0; i < categoriasInseridas.length; i++)
-        {                 
-            arrayOrcamento[categoriasInseridas[i].idCategoria-1] = orcamentosDataBase[i].idCategoria;                
+        {              
+            arrayOrcamento[categoriasInseridas[i].idCategoria-1] = categoriasInseridas[i].idCategoria;                
         }
     }
     if( arrayOrcamento.filter( data => data != 0).length == 5 ){
@@ -341,33 +343,34 @@ function progressBar(){
     for(i=0; i < orcamentoMensal.length; i++){
         orcamento = orcamentoMensal[i].valor;
 
-        if(orcamentoMensal[i].idCategoria != 0){
+        if(orcamentoMensal[i].idCategoria != 0 && orcamentoMensal[i].idOrcamento != -1){
 
             progresso = (retornaTotalCategoria(orcamentoMensal[i].idCategoria)*100)/(orcamento);
-        }
 
-        let barra = ('barra-progresso'+ id).toString();
+            let barra = ('barra-progresso'+ id).toString();
 
-        document.getElementById(barra).innerHTML = '<div class="porcentagem">'+progresso.toFixed(2)+'%</div>';
-
-        if(progresso > 59){
-            document.getElementById(barra).style.backgroundColor = '#fbf390';
-        }
-
-        if(progresso > 79){
-            document.getElementById(barra).style.backgroundColor = '#ff7734';
-        }
-
-        if(progresso > 89){
-            if(progresso > 100){
-                progresso = 100;
+            document.getElementById(barra).innerHTML = '<div class="porcentagem">'+progresso.toFixed(2)+'%</div>';
+    
+            if(progresso > 59){
+                document.getElementById(barra).style.backgroundColor = '#fbf390';
             }
-            document.getElementById(barra).style.backgroundColor = '#f55b5b';
+    
+            if(progresso > 79){
+                document.getElementById(barra).style.backgroundColor = '#ff7734';
+            }
+    
+            if(progresso > 89){
+                if(progresso > 100){
+                    progresso = 100;
+                }
+                document.getElementById(barra).style.backgroundColor = '#f55b5b';
+            }
+            document.getElementById(barra).style.width = progresso+'%';
+            
+            progresso = 0;
+            id += 1;
         }
-        document.getElementById(barra).style.width = progresso+'%';
-        
-        progresso = 0;
-        id++;
+
     }
 }
 
@@ -398,14 +401,13 @@ function detectarID(x){
     else if (typeof localId == "number") {
 
         let estrutura = {
-                id: x.target.id,
                 funcao: x.target.className
             }
         if(estrutura.funcao == "del"){
-            crud(1, estrutura.id);
+            crud(1, localId);
         }
         else{
-            crud(2,estrutura.id);
+            crud(2,localId);
         }
 
     }
@@ -445,3 +447,90 @@ function searchDeleted(){
     return -1;
 }
 
+function editBudget(id){
+    let db = inicializaDB();
+    let i;
+    let data;
+    for(i=0; id != db[i].idOrcamento; i++){};
+    editBudgetModal(db[i].idCategoria);
+    pos = i;
+    document.querySelector("#modal-orcamento-form-submit-edit").addEventListener("click", function () {
+
+        data = document.querySelector(".orcamento-modal-form");
+
+        let valor = parseFloat(data[0].value);
+        let valid = check(valor);
+        let db = inicializaDB();
+
+        if (valid){        
+            db[pos].valor = valor;
+            localStorage.setItem("BudgetsDataBase", JSON.stringify(db));
+            fechaModalLineGraph();
+            anulaCampos(data);
+            listarOrcamentos();
+            preencheCards();            
+        }
+    });
+}
+
+function editBudgetModal(idCat){
+    let modalGraph = document.getElementById('container-modal-graph-line');
+    let submitNew = document.getElementById('modal-orcamento-form-submit');
+    let submitEdit  = document.getElementById('modal-orcamento-form-submit-edit');
+    submitNew.style.display  = 'none';
+    submitEdit.style.display =  'block';
+    modalGraph.style.display = 'block';
+    let vetorOptions         = [
+        `<option id="orcmnt-alimentacao" value="1"> Alimentação </option>`,
+        `<option id="orcmnt-transporte"  value="2"> Educação  </option>`,
+        `<option id="orcmnt-vestuario"   value="3"> Lazer   </option>`,
+        `<option id="orcmnt-educacao"    value="4"> Transporte    </option>`,
+        `<option id="orcmnt-lazer"       value="5"> Vestuário      </option>`];
+    document.getElementById("modal-form-categoria-orcamento").innerHTML = vetorOptions[idCat-1];
+    document.getElementById("header-box-modal-linha").innerHTML = "Editar orçamento";
+}
+
+function createNewID(){
+    let db = inicializaDB();
+    let i;
+    let tam = db.length;
+    let id = 1;
+    if(tam >= 1 && db[0].idOrcamento != -1){
+        if(tam == 1){
+            id += 1
+            return id;
+        }
+        else{
+            let greater = db[tam-1].idOrcamento
+
+            for (i = 1 ; db[i].idOrcamento < tam ;i++) {
+                if(greater < db[i].idOrcamento){
+
+                    greater = db[i].idOrcamento
+
+                }
+                else if(db[i].idOrcamento == -1){
+                    i = i+1
+                    return i;
+                }
+            }
+            greater += 1;
+            return greater;
+
+        }
+    }
+    else{
+        return 1;
+    }
+}
+
+function check(valor){        
+    if (valor <= 0)
+    {
+        alert("O valor do orçamento deve ser preenchido corretamente!");
+        return false;
+    }
+    else{
+        return valor;
+    }
+}
