@@ -482,10 +482,10 @@ function editBudgetModal(idCat){
     modalGraph.style.display = 'block';
     let vetorOptions         = [
         `<option id="orcmnt-alimentacao" value="1"> Alimentação </option>`,
-        `<option id="orcmnt-transporte"  value="2"> Educação  </option>`,
-        `<option id="orcmnt-vestuario"   value="3"> Lazer   </option>`,
-        `<option id="orcmnt-educacao"    value="4"> Transporte    </option>`,
-        `<option id="orcmnt-lazer"       value="5"> Vestuário      </option>`];
+        `<option id="orcmnt-educacao"  value="2"> Educação  </option>`,
+        `<option id="orcmnt-lazer"   value="3"> Lazer   </option>`,
+        `<option id="orcmnt-transporte"    value="4"> Transporte    </option>`,
+        `<option id="orcmnt-vestuario"       value="5"> Vestuário      </option>`];
     document.getElementById("modal-form-categoria-orcamento").innerHTML = vetorOptions[idCat-1];
     document.getElementById("header-box-modal-linha").innerHTML = "Editar orçamento";
 }
