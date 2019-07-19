@@ -9,7 +9,7 @@ document.getElementById('login').addEventListener('click', function () {
 function startDB(nome) {
     let database = localStorage.getItem(nome);
 
-    database = !database ? [] : JSON.parse(database);
+    database = !database ? false : JSON.parse(database);
 
     return database;
 }
@@ -34,10 +34,10 @@ function showform(op) {
 }
 
 function validUser(data, op) {
-    
+
     let valid = dataWorker(data, op);
     if (valid) {
-        localStorage.setItem(valid.email, JSON.stringify(valid));
+        localStorage.setItem(valid.data.email, JSON.stringify(valid));
         window.location.href = "login.html";
     }
 }
@@ -45,15 +45,18 @@ function validUser(data, op) {
 function dataWorker(data, op) {
 
     if (op == 1) {
-        let email = data[1].value;
+        let email = data[1].value.toLowerCase();
         let locStor = startDB(email);
-        locStor = locStor.email;
-        let dataSet = {
-            user: data[0].value,
-            email: check(data[1].value, locStor, 1),
-            password: check(data[2].value, data[3].value, 0)
+        if(locStor){locStor = locStor.data.email;}
+        let dataSets = {
+            data: {
+                user: data[0].value,
+                email: check(email, locStor, 1),
+                password: check(data[2].value, data[3].value, 0),
+                token: 0
+            }
         }
-
+        dataSet = dataSets.data;
         if (!dataSet.password) {
             if (!dataSet.user && !dataSet.email || !dataSet.user || !dataSet.email) {
                 mensagemErro(3);
@@ -70,32 +73,45 @@ function dataWorker(data, op) {
             return false;
         }
 
+
+        if (dataSet.email == -1) {
+            mensagemErro(5);
+            return false;
+        }
+
+
         else {
-            return dataSet;
+            return dataSets;
         }
     }
 
     else if (op == 2) {
+        let inputEmail = data[0].value.toLowerCase();
         let dataSet = {
-            email: data[0].value,
+            email: inputEmail,
             password: data[1].value
         }
-        let dados = startDB(dataSet.email);
-        let email = dados.email;
-        let pass = dados.password
-        pass = check(dataSet.password, pass, 0);
-        email = check(dataSet.email, email, 0);
 
-        if (!email) {
+        let dataBase = startDB(dataSet.email);
+        if (dataBase) {
+            let dados = dataBase.data;
+            let email = dados.email;
+            let pass = dados.password
+            pass = check(dataSet.password, pass, 0);
+
+            if (!pass) {
+                mensagemErro(1);
+            }
+
+            else {
+                dataBase.data.token = 1;
+                localStorage.setItem(email, JSON.stringify(dataBase));
+                window.location.href = "index.html"
+            }
+        }
+
+        else {
             mensagemErro(2);
-        }
-
-        else if (!pass) {
-            mensagemErro(1);
-        }
-
-        else if (email && pass) {
-            window.location.href = "index.html"
         }
     }
 }
@@ -108,12 +124,48 @@ function check(prevInsert, newInsert, funcao) {
     }
 
     else if (funcao == 0 && prevInsert == newInsert || funcao == 1 && prevInsert != newInsert) {
+        if (funcao == 1) {
+
+            let email = emailCheck(prevInsert);
+
+            return email;
+        }
+
         return prevInsert;
     }
 
     else {
         return false;
     }
+}
+
+function emailCheck(email) {
+    let findAt = 0;
+    let findDot = 0;
+    let size = email.length;
+    let i = 0;
+
+    do {
+
+        if (email[i] == "@" || email[i] == ".") {
+
+            if (email[i] == "@") {
+                findAt += 1;
+            }
+            else if (email[i] == ".") {
+                findDot += 1;
+            }
+
+            if (findAt == 1 && findDot >= 1) {
+                return email;
+            }
+        }
+        i += 1;
+
+    } while (size > i)
+
+    return -1;
+
 }
 
 
@@ -131,6 +183,9 @@ function mensagemErro(codigo) {
             break;
         case 4:
             alert("Email já cadastrado");
+            break;
+        case 5:
+            alert("Email não é válido");
             break;
     }
 }
