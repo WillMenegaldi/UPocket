@@ -267,7 +267,7 @@ function showGoals() {
                             <div> <img src="assets/${arrayImg[database[i].categoria]}" alt=""></div>
                             <div>   
                                 <h2>${database[i].descricao}</h2>
-                                <h4 id="data-objetivo${i}">Data objetivo: ${formatDate(database[i].data)} </h4>
+                                <h4 id="data-objetivo${i}">Data: ${formatDate(database[i].data)} </h4>
                             </div>
                         </section>
                         <section>
