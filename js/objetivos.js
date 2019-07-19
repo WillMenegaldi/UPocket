@@ -77,7 +77,7 @@ function openModal(tipo, obj) {
                     <h4> Data:  ${formatDate(data[obj].data)} </h4>
                 </div>
                 <div>
-                    <h4> Você vai precisar poupar R$ ${monthlyForecast(obj).toFixed(2)} por mês</h4>
+                    <h4> Você vai precisar economizar R$ ${monthlyForecast(obj).toFixed(2)} por mês</h4>
                 </div>
             </article>
             
@@ -324,8 +324,7 @@ function showGoals() {
         {
             if(database[i].status == 2){
                 $("article.box-objetivo:nth-child("+(i+1)+")").css("background-color", "#147180");
-                $("article.box-objetivo:nth-child("+(i+1)+")").css("color", "white");
-                $("h4#data-objetivo"+i).html("Concluído");
+                $("h4#data-objetivo"+i).html("Concluido");
             }
         }
     }
@@ -377,7 +376,12 @@ function monthlyForecast(obj){
     anoPrevisto = parseInt((database[obj].data).split("-")[0])  ;
     if(anoPrevisto == anoAtual)
     {
-        valorMensal = database[obj].valorPrevisto/(mesPrevisto - mesAtual);
+        if(mesPrevisto <= mesAtual ){
+            valorMensal = database[obj].valorPrevisto/(1);
+        }else
+        {
+            valorMensal = database[obj].valorPrevisto/(mesPrevisto - mesAtual);
+        }
     }else if(anoPrevisto == (anoAtual + 1))
     {
         valorMensal = database[obj].valorPrevisto/((12 - mesAtual) + mesPrevisto);
