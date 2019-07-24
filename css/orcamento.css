@@ -255,9 +255,6 @@ progress::-webkit-progress-bar {
 #categoria-orcamento{
     margin-right: 4%;
 }
-.del{
-    margin-right: -2%;
-}
 
 .porcentagem{
     position: absolute;
@@ -265,4 +262,8 @@ progress::-webkit-progress-bar {
     font-size: 0.6em;
     margin: -0.8% 8.4%;
     font-weight: bolder;
+}
+
+.edit{
+    margin-right: -1em;
 }
