@@ -233,8 +233,9 @@ function validForm(form, tipo, obj){
 function goalsMapping(form) {
     let database, cancelados; 
     database = startDB();
-    if(database.length == 4){
-            cancelados =  database.filter(data=>data.status == 0);
+    if(database.length == 4)
+    {
+        cancelados =  database.filter(data=>data.status == 0);
         if (form) 
         {
             let data =
@@ -247,10 +248,8 @@ function goalsMapping(form) {
                 categoria     : parseInt(form[3].value),
                 status        : 1
             };
-
             database[cancelados[0].id] = data;              
             localStorage.setItem("DBGoals", JSON.stringify(database));   
-
             return true;
         }else 
         {
