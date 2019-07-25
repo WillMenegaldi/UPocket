@@ -27,13 +27,19 @@ document.querySelector("#mes-posterior").addEventListener("click", function () {
     selecionarMes(2);
 });
 
+
+
+
 var mes = new Date().getMonth() + 1;
-var orcamentosDataBase = inicializaDB();
-var database = inicializaDashboardDB();
+var pos;
+document.addEventListener('click', function(x){detectarID(x)});
+
 
 
 function preencheCards()
 {
+    let database = inicializaDashboardDB();
+    let orcamentosDataBase = inicializaDB();
     let totalOrcamento  = 0;
     let totalReceita    = 0;
     let receitaMensal   = 0;
@@ -122,7 +128,8 @@ function selecionarMes(botao) {
 }
 
 
-function retornaTotalCategoria( categoria) { 
+function retornaTotalCategoria( categoria) {
+    let database = inicializaDashboardDB(); 
     let soma = 0;
     let db = database.filter(data =>  data.data.split("-")[1] == mes);
 
@@ -134,6 +141,7 @@ function retornaTotalCategoria( categoria) {
 }
 
 function listarOrcamentos() {
+    let orcamentosDataBase = inicializaDB();
     let orcamentoMensal = orcamentosDataBase.filter(orcamento => orcamento.mes == mes);
     let catToString = ['','Alimentação','Educação','Lazer','Transporte','Vestuário'];
     let orcamentos = ordenar(orcamentoMensal);
@@ -142,41 +150,59 @@ function listarOrcamentos() {
     $('#orcamento-lat').html('');
     
     for (var i = 0; i < orcamentos.length; i++) {
-        $('#orcamento-lat').append(
-            `<div> 
-                <section id="lista-orcamento"> 
-                    <div id="orcamentos" style="display: flex; flex-direction: row; margin-bottom: 3%;"> 
-                        <div id="categoria-orcamento" style="max-width:125px; width:125px; margin-left: 3%">
-                            ${catToString[orcamentos[i].idCategoria]} 
-                        </div> 
-                        <div id="valor-orcamento">
-                            R$ ${orcamentos[i].valor.toFixed(2)} 
-                        </div>
-                        <div id="valor-gasto${id}" style="max-width:125px; width:125px">
-                            R$ ${retornaTotalCategoria(orcamentos[i].idCategoria).toFixed(2)} 
-                        </div> 
-                        <div id="box-progresso" style="margin-left: -10%;">
+        if(orcamentos[i].idOrcamento != -1){
+            $('#orcamento-lat').append(
+                `<div> 
+                    <section id="lista-orcamento"> 
+                        <div id="orcamentos" style="display: flex; flex-direction: row; margin-bottom: 3%;"> 
+                            <div id="categoria-orcamento" style="max-width:125px; width:125px; margin-left: 3%">
+                                ${catToString[orcamentos[i].idCategoria]} 
+                            </div> 
+                            <div id="valor-orcamento">
+                                R$ ${orcamentos[i].valor.toFixed(2)} 
+                            </div>
+                            <div id="valor-gasto${id}" style="max-width:125px; width:125px">
+                                R$ ${retornaTotalCategoria(orcamentos[i].idCategoria).toFixed(2)} 
+                            </div> 
+                            <div id="box-progresso" style="margin-left: -10%;">
                             <div id="barra-progresso${id}">
                                 <script>progressBar()
                                 </script>
                             </div>
                         </div>
-                        <div id="edit"><img src="assets/editar.webp"></div>
-                        <div id="delete" class="del" onclick(crud())>
-                            <img src="assets/delete.webp">
+                        <div  class="edit"><img src="assets/editar.webp" id="${orcamentos[i].idOrcamento}" class="edit"></div>
+                        <div  class="del">
+                            <img src="assets/delete.webp" id="${orcamentos[i].idOrcamento}" class="del">
                         </div>
                     </div>
                 </section> 
             </div>`
             );
-        id++;
+            id++;
+        }
     }
+ 
 }
 
 function orcamentoModal() {
+    let orcamentosDataBase = inicializaDB();
     let categoriasInseridas =  orcamentosDataBase.filter( data => data.mes == mes);
+    let i;
+    let del = 0;
 
-    if(categoriasInseridas.length == 5)
+    if( categoriasInseridas.length > 0 ){
+        for( i=0; i < categoriasInseridas.length; i++ ){
+
+            if( categoriasInseridas[i].idOrcamento == -1 ){
+                break;
+            }
+        }
+    }
+    if( i != categoriasInseridas.length -1 ){
+        del = 1;
+    }
+
+    if(categoriasInseridas.length == 5 && del == 0)
     {
         alert("Todos os orçamentos referentes à este mês foram inseridos!");
         return false;
@@ -184,6 +210,10 @@ function orcamentoModal() {
     {        
         exibeSemOrcamento();
         let modalGraph = document.getElementById('container-modal-graph-line');
+        let submitEdit = document.getElementById('modal-orcamento-form-submit-edit');
+        let submitNew  = document.getElementById('modal-orcamento-form-submit');
+        submitNew.style.display  = 'block';
+        submitEdit.style.display = 'none';
         modalGraph.style.display = 'block';
     }
    
@@ -215,17 +245,29 @@ function anulaCampos(campos) {
 }
 
 function budgetsMapping(data) {
+    let orcamentosDataBase = inicializaDB();
     let valor = validaInsercao(data);
-    let id = inicializaDB();
+    let dataset;
     if (valor) {
-        let dataset = {
-            idOrcamento: id.length+1,
-            valor: parseFloat(data[0].value),
-            idCategoria: parseInt(data[1].value),
-            mes: mes
-        };
+            dataset = {
+                idOrcamento: createNewID(),
+                valor: parseFloat(data[0].value),
+                idCategoria: parseInt(data[1].value),
+                mes: mes
+            };
+
+        let indice = searchDeleted();
+
+        if(indice == -1 ){
 
         orcamentosDataBase.push(dataset);
+        }
+        else{
+            orcamentosDataBase[indice].idOrcamento = dataset.idOrcamento;
+            orcamentosDataBase[indice].valor = dataset.valor;
+            orcamentosDataBase[indice].idCategoria = dataset.idCategoria;
+            orcamentosDataBase[indice].mes = dataset.mes
+        }
 
         localStorage.setItem("BudgetsDataBase", JSON.stringify(orcamentosDataBase));
 
@@ -238,6 +280,7 @@ function budgetsMapping(data) {
 
 
 function exibeSemOrcamento() {
+    let orcamentosDataBase = inicializaDB();
     let categoriasInseridas =  orcamentosDataBase.filter( data => data.mes == mes);
     let arrayOrcamento      = [0,0,0,0,0]; 
     let vetorSelect         = ["","","","","",""];
@@ -250,8 +293,8 @@ function exibeSemOrcamento() {
 
         if(categoriasInseridas.length > 0){
         for(let i = 0; i < categoriasInseridas.length; i++)
-        {                 
-            arrayOrcamento[categoriasInseridas[i].idCategoria-1] = orcamentosDataBase[i].idCategoria;                
+        {              
+            arrayOrcamento[categoriasInseridas[i].idCategoria-1] = categoriasInseridas[i].idCategoria;                
         }
     }
     if( arrayOrcamento.filter( data => data != 0).length == 5 ){
@@ -269,6 +312,7 @@ function exibeSemOrcamento() {
 }
 
 function validaInsercao(data) {
+    let orcamentosDataBase = inicializaDB();
     let categoriasInseridas =  orcamentosDataBase.filter( data => data.mes == mes);
     if (data[0].value <= 0)
     {
@@ -298,29 +342,35 @@ function progressBar(){
 
     for(i=0; i < orcamentoMensal.length; i++){
         orcamento = orcamentoMensal[i].valor;
-        progresso = (retornaTotalCategoria(orcamentoMensal[i].idCategoria)*100)/(orcamento);        
-        let barra = ('barra-progresso'+ id).toString();
 
-        document.getElementById(barra).innerHTML = '<div class="porcentagem">'+progresso.toFixed(2)+'%</div>';
+        if(orcamentoMensal[i].idCategoria != 0 && orcamentoMensal[i].idOrcamento != -1){
 
-        if(progresso > 59){
-            document.getElementById(barra).style.backgroundColor = '#fbf390';
-        }
+            progresso = (retornaTotalCategoria(orcamentoMensal[i].idCategoria)*100)/(orcamento);
 
-        if(progresso > 79){
-            document.getElementById(barra).style.backgroundColor = '#ff7734';
-        }
+            let barra = ('barra-progresso'+ id).toString();
 
-        if(progresso > 89){
-            if(progresso > 100){
-                progresso = 100;
+            document.getElementById(barra).innerHTML = '<div class="porcentagem">'+progresso.toFixed(2)+'%</div>';
+    
+            if(progresso > 59){
+                document.getElementById(barra).style.backgroundColor = '#fbf390';
             }
-            document.getElementById(barra).style.backgroundColor = '#f55b5b';
+    
+            if(progresso > 79){
+                document.getElementById(barra).style.backgroundColor = '#ff7734';
+            }
+    
+            if(progresso > 89){
+                if(progresso > 100){
+                    progresso = 100;
+                }
+                document.getElementById(barra).style.backgroundColor = '#f55b5b';
+            }
+            document.getElementById(barra).style.width = progresso+'%';
+            
+            progresso = 0;
+            id += 1;
         }
-        document.getElementById(barra).style.width = progresso+'%';
-        
-        progresso = 0;
-        id++;
+
     }
 }
 
@@ -341,6 +391,146 @@ function ordenar(vetor){
     return vetor;
 }
 
-function crud(){
-    return 0;
+function detectarID(x){
+    let localId = x.target.id;
+    localId = localId.replace(/\D/g,'');
+    localId = parseInt(localId);
+    if (isNaN(localId)) {
+        return 0;
+    }
+    else if (typeof localId == "number") {
+
+        let estrutura = {
+                funcao: x.target.className
+            }
+        if(estrutura.funcao == "del"){
+            crud(1, localId);
+        }
+        else{
+            crud(2,localId);
+        }
+
+    }
+}
+
+function crud(op, id){
+    
+    if(op == 1){
+        deleteBudget(id);
+    }
+    else{
+        editBudget(id);
+    }
+}
+
+function deleteBudget(id){
+    let db = inicializaDB();
+    let i;
+    for(i=0; id != db[i].idOrcamento; i++){};
+    db[i].idOrcamento = -1;
+    db[i].valor = 0;
+    db[i].idCategoria = 0;
+
+    localStorage.setItem("BudgetsDataBase", JSON.stringify(db));
+    listarOrcamentos();
+    preencheCards();
+}
+
+function searchDeleted(){
+    let db = inicializaDB();
+    let i;
+    for(i= 0; i < db.length; i++){
+        if(db[i].idOrcamento == -1){
+            return i;
+        }
+    }
+    return -1;
+}
+
+function editBudget(id){
+    let db = inicializaDB();
+    let i;
+    let data;
+    for(i=0; id != db[i].idOrcamento; i++){};
+    editBudgetModal(db[i].idCategoria);
+    pos = i;
+    document.querySelector("#modal-orcamento-form-submit-edit").addEventListener("click", function () {
+
+        data = document.querySelector(".orcamento-modal-form");
+
+        let valor = parseFloat(data[0].value);
+        let valid = check(valor);
+        let db = inicializaDB();
+
+        if (valid){        
+            db[pos].valor = valor;
+            localStorage.setItem("BudgetsDataBase", JSON.stringify(db));
+            fechaModalLineGraph();
+            anulaCampos(data);
+            listarOrcamentos();
+            preencheCards();            
+        }
+    });
+}
+
+function editBudgetModal(idCat){
+    let modalGraph = document.getElementById('container-modal-graph-line');
+    let submitNew = document.getElementById('modal-orcamento-form-submit');
+    let submitEdit  = document.getElementById('modal-orcamento-form-submit-edit');
+    submitNew.style.display  = 'none';
+    submitEdit.style.display =  'block';
+    modalGraph.style.display = 'block';
+    let vetorOptions         = [
+        `<option id="orcmnt-alimentacao" value="1"> Alimentação </option>`,
+        `<option id="orcmnt-educacao"  value="2"> Educação  </option>`,
+        `<option id="orcmnt-lazer"   value="3"> Lazer   </option>`,
+        `<option id="orcmnt-transporte"    value="4"> Transporte    </option>`,
+        `<option id="orcmnt-vestuario"       value="5"> Vestuário      </option>`];
+    document.getElementById("modal-form-categoria-orcamento").innerHTML = vetorOptions[idCat-1];
+    document.getElementById("header-box-modal-linha").innerHTML = "Editar orçamento";
+}
+
+function createNewID(){
+    let db = inicializaDB();
+    let i;
+    let tam = db.length;
+    let id = 1;
+    if(tam >= 1 && db[0].idOrcamento != -1){
+        if(tam == 1){
+            id += 1
+            return id;
+        }
+        else{
+            let greater = db[tam-1].idOrcamento
+
+            for (i = 1 ; db[i].idOrcamento < tam ;i++) {
+                if(greater < db[i].idOrcamento){
+
+                    greater = db[i].idOrcamento
+
+                }
+                else if(db[i].idOrcamento == -1){
+                    i = i+1
+                    return i;
+                }
+            }
+            greater += 1;
+            return greater;
+
+        }
+    }
+    else{
+        return 1;
+    }
+}
+
+function check(valor){        
+    if (valor <= 0)
+    {
+        alert("O valor do orçamento deve ser preenchido corretamente!");
+        return false;
+    }
+    else{
+        return valor;
+    }
 }
