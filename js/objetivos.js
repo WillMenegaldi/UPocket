@@ -1,7 +1,5 @@
 window.addEventListener('load', showGoals);
 
-//status : 1 ativo / 0 cancelado  / 2 concluido
-
 
 $(".btn-close-modal").click(closeModal);
 
@@ -282,7 +280,7 @@ function goalsMapping(form) {
 function showGoals() {
     let database;   
     database = startDB();   
-    database = database.filter(data=>data.status != 0); //filtrando pra aparecer somente os ativos
+    database = database.filter(data=>data.status != 0); 
     if (database.length > 0) {
         let arrayImg = ['', 'gamepad.png', 'couple.png', 'house.png', 'car.png', 'travel.png', 'piggy-bank.png'];
         let set      = '';
