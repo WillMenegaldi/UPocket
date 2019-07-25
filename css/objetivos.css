@@ -366,7 +366,7 @@ section.add-money>form>span:hover{
         margin-top:-4%;
         font-size: 2em;
     }
-    /* modal doetalhament*/
+    /* modal detalhamento*/
     
     div#container-modal>div#box-modal{
         margin-top: 45%;
@@ -398,7 +398,7 @@ section.add-money>form>span:hover{
         height: 70%;
     }
     div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(2)>article:nth-child(1){    
-        width: 50%;
+        width: 55%;
         height: 100%;
     }
     div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(2)>article:nth-child(1)>div:nth-child(1){    
@@ -409,16 +409,15 @@ section.add-money>form>span:hover{
         height: 100%;
         font-size:.8em;
     }
-
     div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(2)>article:nth-child(2)>span{
         font-size: 1.6em;
-        margin-left:20%;
+        margin-left:10%;
     }
     div#container-modal>div#box-modal>main#main-box-modal>section:nth-child(2)>article:nth-child(2)>canvas#grafico-objetivo{
         width: 200% !important;
-        height: 80% !important;
+        height: 75% !important;
         padding: 0;
-        margin-left:30%;
+        margin-left:15%;
     }
 
 }

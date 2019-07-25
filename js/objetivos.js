@@ -112,7 +112,13 @@ function openModal(tipo, obj) {
                     <button id="modal-form-submit" type="button">Salvar</button>
             </form>       
         `);
-        document.querySelector("#modal-form-submit").addEventListener('click', function () { validForm(document.querySelector(".modal-form"), 1, 0) });
+        document.querySelector("#modal-form-submit").addEventListener('click', function () { 
+            if(validForm(document.querySelector(".modal-form"), 1, 0) == 1){
+                goalsMapping(document.querySelector(".modal-form"));                
+                closeModal();
+                showGoals();
+            }
+        });
 
     }
     else if (tipo == 3) 
@@ -135,6 +141,7 @@ function openModal(tipo, obj) {
                         <option value="6"> Outros </option>
                     </select>
                     <input required hidden class="modal-form-input" type="number" value="${(data[obj].status).toString()}" >
+                    <input hidden  name="id" value="${data[obj].id}">
 
                     <button id="modal-form-submit" type="button">Salvar</button>
             </form>       
@@ -198,11 +205,7 @@ function validForm(form, tipo, obj){
             alert("Apenas valores maiores que 0!");
         }else{
             if(tipo == 1){
-                if (goalsMapping(form)) 
-                {
-                    closeModal();
-                    showGoals();
-                }
+                return 1 ;
             }else{
                 if (editGoals(form,obj)) 
                 {
@@ -228,30 +231,59 @@ function validForm(form, tipo, obj){
 }
 
 function goalsMapping(form) {
-    let database = startDB();
-    let dados    = form;
-    if (dados) 
-    {
-        let data =
+    let database, cancelados; 
+    database = startDB();
+    if(database.length == 4){
+            cancelados =  database.filter(data=>data.status == 0);
+        if (form) 
         {
-            descricao     : dados[0].value,
-            valorPrevisto : parseFloat(dados[1].value),
-            valorAtual    : 0,
-            data          : dados[2].value,
-            categoria     : parseInt(dados[3].value),
-            status        : 1
-        };
-        database.push(data);
-        localStorage.setItem("DBGoals", JSON.stringify(database));
-        return true;        
-    } else 
-    {
-        return false;
+            let data =
+            {
+                id            : cancelados[0].id,
+                descricao     : form[0].value,
+                valorPrevisto : parseFloat(form[1].value),
+                valorAtual    : 0,
+                data          : form[2].value,
+                categoria     : parseInt(form[3].value),
+                status        : 1
+            };
+
+            database[cancelados[0].id] = data;              
+            localStorage.setItem("DBGoals", JSON.stringify(database));   
+
+            return true;
+        }else 
+        {
+            return false;
+        }
+    }else{
+        if (form) 
+        {
+            let data =
+            {
+                id            : database.length,
+                descricao     : form[0].value,
+                valorPrevisto : parseFloat(form[1].value),
+                valorAtual    : 0,
+                data          : form[2].value,
+                categoria     : parseInt(form[3].value),
+                status        : 1
+            };
+            database.push(data);
+            localStorage.setItem("DBGoals", JSON.stringify(database));
+            return true;        
+        } else 
+        {
+            return false;
+        }
     }
+    
 }
 
 function showGoals() {
-    let database = startDB();    
+    let database;   
+    database = startDB();   
+    database = database.filter(data=>data.status != 0); //filtrando pra aparecer somente os ativos
     if (database.length > 0) {
         let arrayImg = ['', 'gamepad.png', 'couple.png', 'house.png', 'car.png', 'travel.png', 'piggy-bank.png'];
         let set      = '';
@@ -262,7 +294,7 @@ function showGoals() {
             set +=
                 `
                 <article class="box-objetivo">
-                    <section class ="conteudo " id="${i}">
+                    <section class ="conteudo " id="${database[i].id}">
                         <section >
                             <div> <img src="assets/${arrayImg[database[i].categoria]}" alt=""></div>
                             <div>   
@@ -272,7 +304,7 @@ function showGoals() {
                         </section>
                         <section>
                             <div id="box-progresso">
-                                <div id="barra-progresso${i}">
+                                <div id="barra-progresso${database[i].id}">
                                     <script>
                                     progressBar();
                                     </script>
@@ -285,17 +317,17 @@ function showGoals() {
 
                         </section>            
                     </section>
-                    <section class="options" id="options${i}">
-                        <img  class="btn-adicionar" id="${i}" src="assets/plus.png"    alt="Adicionar" title = "Adicionar valor ao objetivo">
-                        <img  class="btn-concluir"  id="${i}" src="assets/success.png" alt="Concluir"  title = "Concluir objetivo">
-                        <img  class="btn-excluir"   id="${i}" src="assets/error.png"   alt="Excluir"   title = "Excluir objetivo">
-                        <img  class="btn-editar"    id="${i}" src="assets/edit.png"    alt="Editar"    title = "Editar objetivo">
+                    <section class="options" id="options${database[i].id}">
+                        <img  class="btn-adicionar" id="${database[i].id}" src="assets/plus.png"    alt="Adicionar" title = "Adicionar valor ao objetivo">
+                        <img  class="btn-concluir"  id="${database[i].id}" src="assets/success.png" alt="Concluir"  title = "Concluir objetivo">
+                        <img  class="btn-excluir"   id="${database[i].id}" src="assets/error.png"   alt="Excluir"   title = "Excluir objetivo">
+                        <img  class="btn-editar"    id="${database[i].id}" src="assets/edit.png"    alt="Editar"    title = "Editar objetivo">
                     </section>
-                    <section class="add-money"  id ="add-money${i}" display="none">
-                            <form id="form-add-valor${i}">
+                    <section class="add-money"  id ="add-money${database[i].id}" display="none">
+                            <form id="form-add-valor${database[i].id}">
                                 <input type="number" name="valor">
-                                <button class = "add-valor" id="${i}" type="button" name="salvar">Salvar </button>
-                                <span class="btn-close"  id="${i}">&times;</span>
+                                <button class = "add-valor" id="${database[i].id}" type="button" name="salvar">Salvar </button>
+                                <span class="btn-close"  id="${database[i].id}">&times;</span>
                             </form>
                     </section>
                 </article>                            
@@ -337,34 +369,38 @@ function showGoals() {
 function progressBar(){
     let objetivo, previsto, atual, progresso;
     objetivo = startDB();
-    id       = 0;    
-    for(i=0; i < objetivo.length; i++)
-    {
-        previsto  = objetivo[i].valorPrevisto;
-        atual     = objetivo[i].valorAtual;
-        progresso = (atual/previsto)*100;  
-        let barra = ('barra-progresso'+id).toString();
+    id       = 0; 
+    if(objetivo.length > 0 ){
+        for(i=0; i < objetivo.length; i++)
+        {
+            previsto  = objetivo[i].valorPrevisto;
+            atual     = objetivo[i].valorAtual;
+            progresso = (atual/previsto)*100;  
+            let barra = ('barra-progresso'+id).toString();
 
-        if(progresso < 50)
-        {
-            document.getElementById(barra).style.backgroundColor = '#ff7734';
-        }
-        if(progresso >= 50 )
-        {
-            document.getElementById(barra).style.backgroundColor = '#fbf390';
-        }
-        if(progresso > 89)
-        {
-            if(progresso > 100)
+            if(progresso < 50)
             {
-                progresso = 100;
+                document.getElementById(barra).style.backgroundColor = '#ff7734';
             }
-            document.getElementById(barra).style.backgroundColor = '#6cf596';
+            if(progresso >= 50 )
+            {
+                document.getElementById(barra).style.backgroundColor = '#fbf390';
+            }
+            if(progresso > 89)
+            {
+                if(progresso > 100)
+                {
+                    progresso = 100;
+                }
+                document.getElementById(barra).style.backgroundColor = '#6cf596';
+            }
+            document.getElementById(barra).style.width = progresso+'%';        
+            progresso = 0;
+            id++
         }
-        document.getElementById(barra).style.width = progresso+'%';        
-        progresso = 0;
-        id++
-    }
+
+    }   
+    
 }
 
 function monthlyForecast(obj){    
@@ -399,6 +435,7 @@ function editGoals(form,obj) {
     {
         let data =
         {
+            id            : parseInt(dados[6].value),
             descricao     : dados[0].value,
             valorPrevisto : parseFloat(dados[1].value),
             valorAtual    : parseFloat(dados[2].value),
@@ -421,6 +458,7 @@ function addGoalsValue(form, obj){
     let soma     = parseFloat(database[obj].valorAtual) + parseFloat(form[0].value);
     database[obj] = (
     {
+        id            : database[obj].id,
         descricao     : database[obj].descricao,
         valorPrevisto : parseFloat(database[obj].valorPrevisto),
         valorAtual    : parseFloat(soma),
@@ -435,6 +473,7 @@ function changeStatus(obj, value){
     let database = startDB();
     database[obj] = (
     {
+        id            : database[obj].id,
         descricao     : database[obj].descricao,
         valorPrevisto : parseFloat(database[obj].valorPrevisto),
         valorAtual    : parseFloat(database[obj].valorAtual),
