@@ -508,55 +508,58 @@ function dadosOrçamento(tipo){
 
 
 function controiGraficoOrcamento(ctx) {
+    let tipo     = 'bar';
+    let settings   = {
+        responsive: false,
+        tooltips: {
+            mode: 'index'
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontSize: 9
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontSize: 9
+                }
+            }]
+        },
+        legend: {
+            display: false,
+            position: 'bottom',
+            labels: {
+                usePointStyle: true,
+                fontSize: 1,
+                pointStyle: 'circle',
+            }
+        }
+    };
+    let dados     = {
+        labels: dadosOrçamento(1),
+        datasets: [
+            {
+                pointRadius: 2,
+                data: dadosOrçamento(2),
+                borderColor: "#0c8e10",
+                backgroundColor: 'rgba(32,130,19,0.8)',
+                label: 'Orçamento'
+            },
+            {
+                label: 'Gastos',
+                data: dadosOrçamento(3),
+                backgroundColor: 'rgba(145,33,33,0.8)',
+                borderColor: "#991c09"
+            }
+            ]
+        } ; 
+
     let graph = new Chart(ctx,
         {
-            type: 'bar',
-            options: {
-                responsive: false,
-                tooltips: {
-                    mode: 'index'
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            fontSize: 9
-                        }
-                    }],
-                    xAxes: [{
-                        ticks: {
-                            fontSize: 9
-                        }
-                    }]
-                },
-                legend: {
-                    display: false,
-                    position: 'bottom',
-                    labels: {
-                        usePointStyle: true,
-                        fontSize: 1,
-                        pointStyle: 'circle',
-                    }
-                }
-            },
-            data: {
-                labels: dadosOrçamento(1),
-                datasets: [
-                    {
-                        pointRadius: 2,
-                        data: dadosOrçamento(2),
-                        borderColor: "#0c8e10",
-                        backgroundColor: 'rgba(32,130,19,0.8)',
-                        label: 'Orçamento'
-                    },
-                    {
-                        label: 'Gastos',
-                        data: dadosOrçamento(3),
-                        backgroundColor: 'rgba(145,33,33,0.8)',
-                        borderColor: "#991c09"
-                    }
-                ]
-            }
-
+            type: tipo,
+            options: settings,
+            data: dados  
         });
     return graph;
 }
