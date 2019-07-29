@@ -1,43 +1,59 @@
 window.addEventListener('load', showGoals);
-$(".btn-close-modal").click(fecharModal);
+
+
+$(".btn-close-modal").click(closeModal);
+
 $(document).on('click', '.conteudo', function(){ 
     let id = $(this).attr('id',);
-    abrirModal(1, id);    
+    openModal(1, id);    
 });
-$(document).on('click','#new-goal', function(){     
-    abrirModal(2, 0);  
+$(document).on('click', '#new-goal', function(){     
+    openModal(2, 0);  
 });
 
-$(document).on('click','.btn-adicionar',function(){
+$(document).on('click', '.btn-adicionar', function(){
     let id = $(this).attr('id',);
     $('#options'   + id).hide();
     $('#add-money' + id).show();   
-});
-$(document).on('click','.btn-editar',function(){ 
+}); 
+$(document).on('click', '.btn-editar'   , function(){ 
     let id = $(this).attr('id',);
-    abrirModal(3, id);    
+    openModal(3, id);    
 });
-$(document).on('click', '.btn-close', function(){ 
+$(document).on('click', '.btn-concluir' , function(){
+    let id = $(this).attr('id',);
+    let database    = startDB();    
+    if(database[id].status == 2){
+        changeStatus(id, 1);
+    }else{
+        changeStatus(id, 2);
+    }
+});
+$(document).on('click', '.btn-excluir'  , function(){
+    let id = $(this).attr('id',);
+    changeStatus(id, 0);
+});
+$(document).on('click', '.add-valor'    , function(){
+    let id = $(this).attr('id',);
+    validForm(document.querySelector("#form-add-valor" + id), 0, id);
+});
+$(document).on('click', '.btn-close'    , function(){ 
     let id = $(this).attr('id',);
     $('#add-money' + id).hide();
     $('#options'   + id).show();   
 });
 
-$(document).on('click', '.add-valor', function(){
-    let id = $(this).attr('id',);
-    addValor(document.querySelector("#form-add-valor" + id), id);
-});
 
 
-function inicializarDB() {
+function startDB() {
     let database = localStorage.getItem("DBGoals");
     database = !database ? [] : JSON.parse(database);
     return database;
 }
 
-function abrirModal(tipo, obj) {
+function openModal(tipo, obj) {
     $('#main-box-modal').html(' ');
-    let data     = inicializarDB();
+    let data     = startDB();
     let arrayImg = ['', 'gamepad.png', 'couple.png', 'house.png', 'car.png', 'travel.png', 'piggy-bank.png'];
 
     if (tipo == 1) 
@@ -56,10 +72,10 @@ function abrirModal(tipo, obj) {
             <article>
                 <div>
                     <h3>R$  ${data[obj].valorAtual} / R$ ${data[obj].valorPrevisto} </h3>
-                    <h4> Data:  ${formatarData(data[obj].data)} </h4>
+                    <h4> Data:  ${formatDate(data[obj].data)} </h4>
                 </div>
                 <div>
-                    <h4> Você vai precisar poupar R$ ${previsaoMensal(obj).toFixed(2)} por mês</h4>
+                    <h4> Você vai precisar economizar R$ ${monthlyForecast(obj).toFixed(2)} por mês</h4>
                 </div>
             </article>
             
@@ -71,7 +87,7 @@ function abrirModal(tipo, obj) {
         `);
 
         let context = document.getElementById('grafico-objetivo').getContext('2d');
-        constroiGraficoCategoria(context,data[obj].valorPrevisto,data[obj].valorAtual);
+        buildGoalsGraph(context,data[obj].valorPrevisto,data[obj].valorAtual);
     }
     else if (tipo == 2) 
     {
@@ -81,7 +97,7 @@ function abrirModal(tipo, obj) {
                 <input required placeholder="Descrição objetivo:" class="modal-form-input" type="text" name="name">
                 <div>
                     <input required placeholder= "Valor necessário :" id="input-valor-objetivo" class="modal-form-input" type="number"  name="value" maxlength="6">
-                    <input required placeholder="Data" class="modal-form-input" type="date" value="${dataAtualFormatada()}" name="date">
+                    <input required placeholder="Data" class="modal-form-input" type="date" value="${formatCurrentDate()}" name="date">
                 </div>
                     <select required name="objetivo" id="modal-form-objetivo" name="type">
                         <option value="1"> Diversão </option>
@@ -94,7 +110,13 @@ function abrirModal(tipo, obj) {
                     <button id="modal-form-submit" type="button">Salvar</button>
             </form>       
         `);
-        document.querySelector("#modal-form-submit").addEventListener('click', function () { insertGoal(document.querySelector(".modal-form")) });
+        document.querySelector("#modal-form-submit").addEventListener('click', function () { 
+            if(validForm(document.querySelector(".modal-form"), 1, 0) == 1){
+                goalsMapping(document.querySelector(".modal-form"));                
+                closeModal();
+                showGoals();
+            }
+        });
 
     }
     else if (tipo == 3) 
@@ -117,19 +139,20 @@ function abrirModal(tipo, obj) {
                         <option value="6"> Outros </option>
                     </select>
                     <input required hidden class="modal-form-input" type="number" value="${(data[obj].status).toString()}" >
+                    <input hidden  name="id" value="${data[obj].id}">
 
                     <button id="modal-form-submit" type="button">Salvar</button>
             </form>       
         `);
         $("#modal-form-objetivo").val(data[obj].categoria); 
-        document.querySelector("#modal-form-submit").addEventListener('click', function () { editGoals(document.querySelector(".modal-form"),obj) });
+        document.querySelector("#modal-form-submit").addEventListener('click', function () { validForm(document.querySelector(".modal-form"), 2, obj) });
 
     }
     let modalGraph           = document.getElementById('container-modal');
     modalGraph.style.display = 'block';
 };
 
-function fecharModal() {
+function closeModal() {
     let modalLineGraph           = document.getElementById('container-modal');
     modalLineGraph.style.display = 'none';
     window.onclick = function () {
@@ -139,7 +162,7 @@ function fecharModal() {
     }
 }
 
-function constroiGraficoCategoria(context, valorP, valorA) {
+function buildGoalsGraph(context, valorP, valorA) {
     let settings = {
         legend: {
             display: false
@@ -169,73 +192,95 @@ function constroiGraficoCategoria(context, valorP, valorA) {
     return graficoObjetivo;
 }
 
-function goalsMapping(form) {
-    let database = inicializarDB();
-    let dados    = form;
-    if (dados) 
+function validForm(form, tipo, obj){
+    if(tipo > 0)
     {
-        let data =
+        if(form[0].value == false || form[1].value == false )
         {
-            descricao     : dados[0].value,
-            valorPrevisto : parseFloat(dados[1].value),
-            valorAtual    : 0,
-            data          : dados[2].value,
-            categoria     : parseInt(dados[3].value),
-            status        : 1
-        };
-        database.push(data);
-        localStorage.setItem("DBGoals", JSON.stringify(database));
-        return true;        
-    } else 
-    {
-        return false;
-    }
-}
-
-function insertGoal(form) {
-    if (goalsMapping(form)) 
-    {
-        fecharModal();
-        showGoals();
-    }
-}
-
-function progressBar(){
-    let objetivo, previsto, atual, progresso;
-    objetivo = inicializarDB();
-    id       = 0;    
-    for(i=0; i < objetivo.length; i++)
-    {
-        previsto  = objetivo[i].valorPrevisto;
-        atual     = objetivo[i].valorAtual;
-        progresso = (atual/previsto)*100;  
-        let barra = ('barra-progresso'+id).toString();
-
-        if(progresso < 50)
+            alert("Preencha todos os campos!");
+        }else if(form[1].value < 0)
         {
-            document.getElementById(barra).style.backgroundColor = '#ff7734';
-        }
-        if(progresso >= 50 )
-        {
-            document.getElementById(barra).style.backgroundColor = '#fbf390';
-        }
-        if(progresso > 89)
-        {
-            if(progresso > 100)
-            {
-                progresso = 100;
+            alert("Apenas valores maiores que 0!");
+        }else{
+            if(tipo == 1){
+                return 1 ;
+            }else{
+                if (editGoals(form,obj)) 
+                {
+                    closeModal();
+                    showGoals();
+                }
             }
-            document.getElementById(barra).style.backgroundColor = '#6cf596';
         }
-        document.getElementById(barra).style.width = progresso+'%';        
-        progresso = 0;
-        id++
+
+    }else
+    {
+        if(form[0].value == false)
+        {
+            alert("Preencha o campo!");
+        }else if(form[0].value < 0)
+        {
+            alert("Apenas valores maiores que 0!");
+        }else{
+            addGoalsValue(form, obj);
+            showGoals(); 
+        }
     }
+}
+
+function goalsMapping(form) {
+    let database, cancelados; 
+    database = startDB();
+    if(database.length == 4)
+    {
+        cancelados =  database.filter(data=>data.status == 0);
+        if (form) 
+        {
+            let data =
+            {
+                id            : cancelados[0].id,
+                descricao     : form[0].value,
+                valorPrevisto : parseFloat(form[1].value),
+                valorAtual    : 0,
+                data          : form[2].value,
+                categoria     : parseInt(form[3].value),
+                status        : 1
+            };
+            database[cancelados[0].id] = data;              
+            localStorage.setItem("DBGoals", JSON.stringify(database));   
+            return true;
+        }else 
+        {
+            return false;
+        }
+    }else{
+        if (form) 
+        {
+            let data =
+            {
+                id            : database.length,
+                descricao     : form[0].value,
+                valorPrevisto : parseFloat(form[1].value),
+                valorAtual    : 0,
+                data          : form[2].value,
+                categoria     : parseInt(form[3].value),
+                status        : 1
+            };
+            database.push(data);
+            localStorage.setItem("DBGoals", JSON.stringify(database));
+            return true;        
+        } else 
+        {
+            return false;
+        }
+    }
+    
 }
 
 function showGoals() {
-    let database = inicializarDB();
-
+    let database;   
+    database = startDB();   
+    database = database.filter(data=>data.status != 0); 
     if (database.length > 0) {
         let arrayImg = ['', 'gamepad.png', 'couple.png', 'house.png', 'car.png', 'travel.png', 'piggy-bank.png'];
         let set      = '';
@@ -245,18 +290,18 @@ function showGoals() {
         {
             set +=
                 `
-                <article class="box-objetivo" >
-                    <section class ="conteudo " id="${i}">
+                <article class="box-objetivo">
+                    <section class ="conteudo " id="${database[i].id}">
                         <section >
                             <div> <img src="assets/${arrayImg[database[i].categoria]}" alt=""></div>
                             <div>   
                                 <h2>${database[i].descricao}</h2>
-                                <h4>Data objetivo: ${formatarData(database[i].data)} </h4>
+                                <h4 id="data-objetivo${i}">Data: ${formatDate(database[i].data)} </h4>
                             </div>
                         </section>
                         <section>
                             <div id="box-progresso">
-                                <div id="barra-progresso${i}">
+                                <div id="barra-progresso${database[i].id}">
                                     <script>
                                     progressBar();
                                     </script>
@@ -269,23 +314,23 @@ function showGoals() {
 
                         </section>            
                     </section>
-                    <section class="options" id="options${i}">
-                        <img  class="btn-adicionar" id="${i}" src="assets/plus.png" alt="">
-                        <img  class="btn-completar" id="${i}" src="assets/success.png" alt="">
-                        <img  class="btn-excluir"   id="${i}" src="assets/error.png" alt="">
-                        <img  class="btn-editar"    id="${i}" src="assets/edit.png" alt="">
+                    <section class="options" id="options${database[i].id}">
+                        <img  class="btn-adicionar" id="${database[i].id}" src="assets/plus.png"    alt="Adicionar" title = "Adicionar valor ao objetivo">
+                        <img  class="btn-concluir"  id="${database[i].id}" src="assets/success.png" alt="Concluir"  title = "Concluir objetivo">
+                        <img  class="btn-excluir"   id="${database[i].id}" src="assets/error.png"   alt="Excluir"   title = "Excluir objetivo">
+                        <img  class="btn-editar"    id="${database[i].id}" src="assets/edit.png"    alt="Editar"    title = "Editar objetivo">
                     </section>
-                    <section class="add-money"  id ="add-money${i}" display="none">
-                            <form id="form-add-valor${i}">
+                    <section class="add-money"  id ="add-money${database[i].id}" display="none">
+                            <form id="form-add-valor${database[i].id}">
                                 <input type="number" name="valor">
-                                <button class = "add-valor" id="${i}" type="button" name="salvar">Salvar </button>
-                                <span class="btn-close"  id="${i}">&times;</span>
+                                <button class = "add-valor" id="${database[i].id}" type="button" name="salvar">Salvar </button>
+                                <span class="btn-close"  id="${database[i].id}">&times;</span>
                             </form>
                     </section>
                 </article>                            
             `;
-
         }
+
         if(database.length < 4)
         {
             set+=
@@ -301,7 +346,16 @@ function showGoals() {
             </article>
             `        
         }
+
         $('#main-objetivos').prepend(set);
+
+        for (let i = 0; i < database.length; i++) 
+        {
+            if(database[i].status == 2){
+                $("article.box-objetivo:nth-child("+(i+1)+")").css("background-color", "#147180");
+                $("h4#data-objetivo"+i).html("Concluido");
+            }
+        }
     }
     if (database.length == 4) 
     {
@@ -309,21 +363,76 @@ function showGoals() {
     }
 }
 
-function previsaoMensal(obj){    
-    let database    = inicializarDB();    
-    let mesAtual    =  new Date().getMonth() + 1;
-    let mesPrevisto = (database[obj].data).split("-")[1];
-    let valorMensal = database[obj].valorPrevisto/(mesPrevisto - mesAtual);
+function progressBar(){
+    let objetivo, previsto, atual, progresso;
+    objetivo = startDB();
+    id       = 0; 
+    if(objetivo.length > 0 ){
+        for(i=0; i < objetivo.length; i++)
+        {
+            previsto  = objetivo[i].valorPrevisto;
+            atual     = objetivo[i].valorAtual;
+            progresso = (atual/previsto)*100;  
+            let barra = ('barra-progresso'+id).toString();
+
+            if(progresso < 50)
+            {
+                document.getElementById(barra).style.backgroundColor = '#ff7734';
+            }
+            if(progresso >= 50 )
+            {
+                document.getElementById(barra).style.backgroundColor = '#fbf390';
+            }
+            if(progresso > 89)
+            {
+                if(progresso > 100)
+                {
+                    progresso = 100;
+                }
+                document.getElementById(barra).style.backgroundColor = '#6cf596';
+            }
+            document.getElementById(barra).style.width = progresso+'%';        
+            progresso = 0;
+            id++
+        }
+
+    }   
+    
+}
+
+function monthlyForecast(obj){    
+    let database, mesAtual, anoAtual, mesPrevisto , anoPrevisto, valorMensal;
+    database    = startDB();    
+    mesAtual    = new Date().getMonth() + 1;    
+    anoAtual    = new Date().getFullYear();
+    mesPrevisto = parseInt((database[obj].data).split("-")[1]);
+    anoPrevisto = parseInt((database[obj].data).split("-")[0])  ;
+    if(anoPrevisto == anoAtual)
+    {
+        if(mesPrevisto <= mesAtual ){
+            valorMensal = database[obj].valorPrevisto/(1);
+        }else
+        {
+            valorMensal = database[obj].valorPrevisto/(mesPrevisto - mesAtual);
+        }
+    }else if(anoPrevisto == (anoAtual + 1))
+    {
+        valorMensal = database[obj].valorPrevisto/((12 - mesAtual) + mesPrevisto);
+    }else if(anoPrevisto  >  (anoAtual + 1))
+    {
+        valorMensal = database[obj].valorPrevisto/((12 - mesAtual) + mesPrevisto + (12*((anoPrevisto - anoAtual) - 1 )));
+    }
     return valorMensal;
 }
 
 function editGoals(form,obj) {
-    let database = inicializarDB();
+    let database = startDB();
     let dados    = form;
     if (dados) 
     {
         let data =
         {
+            id            : parseInt(dados[6].value),
             descricao     : dados[0].value,
             valorPrevisto : parseFloat(dados[1].value),
             valorAtual    : parseFloat(dados[2].value),
@@ -334,8 +443,6 @@ function editGoals(form,obj) {
 
         database[obj] = data;
         localStorage.setItem("DBGoals", JSON.stringify(database));   
-        fecharModal();
-        showGoals();
         return true;
     }else 
     {
@@ -343,11 +450,12 @@ function editGoals(form,obj) {
     }
 }
 
-function addValor(form, obj){
-    let database = inicializarDB();
+function addGoalsValue(form, obj){
+    let database = startDB();
     let soma     = parseFloat(database[obj].valorAtual) + parseFloat(form[0].value);
     database[obj] = (
     {
+        id            : database[obj].id,
         descricao     : database[obj].descricao,
         valorPrevisto : parseFloat(database[obj].valorPrevisto),
         valorAtual    : parseFloat(soma),
@@ -356,16 +464,31 @@ function addValor(form, obj){
         status        : parseInt(database[obj].status)
     });
     localStorage.setItem("DBGoals", JSON.stringify(database));
+}
+
+function changeStatus(obj, value){
+    let database = startDB();
+    database[obj] = (
+    {
+        id            : database[obj].id,
+        descricao     : database[obj].descricao,
+        valorPrevisto : parseFloat(database[obj].valorPrevisto),
+        valorAtual    : parseFloat(database[obj].valorAtual),
+        data          : database[obj].data,
+        categoria     : parseInt(database[obj].categoria),
+        status        : value
+    });
+    localStorage.setItem("DBGoals", JSON.stringify(database));
     showGoals();
 }
 
-function dataAtualFormatada(){
+function formatCurrentDate(){
     var dNow      = new Date();
     var localdate =  dNow.getFullYear().toString() + '-' + (dNow.getMonth()+1).toString().padStart(2, '0') + '-' +  dNow.getDate().toString().padStart(2, '0');
     return localdate;
 }
 
-function formatarData(data){
+function formatDate(data){
     let dia, mes, ano;
     dia = data.split("-")[2];
     mes = data.split("-")[1];
