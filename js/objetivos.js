@@ -150,7 +150,7 @@ function openModal(tipo, obj) {
     }
     let modalGraph = document.getElementById('container-modal');
     modalGraph.style.display = 'block';
-};
+}
 
 function closeModal() {
     let modalLineGraph = document.getElementById('container-modal');
@@ -379,7 +379,7 @@ function showGoals() {
         $('.input-economia').mask('#.##0,00', { reverse: true });
 
         for (let i = 0; i < database.length; i++) {
-            if (database[i].status == 2) {
+            if (database[i].status == 2 || database[i].valorAtual >= database[i].valorPrevisto) {
                 $("article.box-objetivo:nth-child(" + (i + 1) + ")").css("background-color", "#147180");
                 $("h4#data-objetivo" + i).html("Concluido");
             }
