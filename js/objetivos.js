@@ -70,11 +70,11 @@ function openModal(tipo, obj) {
         <section>
             <article>
                 <div>
-                    <h3>R$  ${formatMoney(data[obj].valorAtual, 2)} / R$ ${formatMoney(data[obj].valorPrevisto, 2)} </h3>
+                    <h3> ${formatMoney(data[obj].valorAtual, 2)} / ${formatMoney(data[obj].valorPrevisto, 2)} </h3>
                     <h4> Data:  ${formatDate(data[obj].data)} </h4>
                 </div>
                 <div>
-                    <h4> Você vai precisar economizar R$ ${formatMoney(monthlyForecast(obj),2)} por mês</h4>
+                    <h4> Você vai precisar economizar ${formatMoney(monthlyForecast(obj),2)} por mês</h4>
                 </div>
             </article>
             
@@ -329,9 +329,9 @@ function showGoals() {
                         </section>
                         <section>
                             <div id="box-progresso">
-                                <div id="barra-progresso${database[i].id}">
+                                <div id = "barra-progresso${database[i].id}">
                                     <script>
-                                    progressBar();
+                                        progressBar();
                                     </script>
                                 </div>
                             </div>
@@ -391,15 +391,15 @@ function showGoals() {
 }
 
 function progressBar() {
-    let objetivo, previsto, atual, progresso;
+    let objetivo, objetivosAtivos, previsto, atual, progresso;
     objetivo = startDB();
-    id = 0;
-    if (objetivo.length > 0) {
-        for (i = 0; i < objetivo.length; i++) {
-            previsto = objetivo[i].valorPrevisto;
-            atual = objetivo[i].valorAtual;
+    objetivosAtivos = objetivo.filter(data=>data.status != 0);
+    if (objetivosAtivos.length > 0) {
+        for (i = 0; i < objetivosAtivos.length; i++) {
+            previsto  = objetivo[objetivosAtivos[i].id].valorPrevisto;
+            atual     = objetivo[objetivosAtivos[i].id].valorAtual;
             progresso = (atual / previsto) * 100;
-            let barra = ('barra-progresso' + id).toString();
+            let barra = ('barra-progresso' + objetivosAtivos[i].id).toString();
 
             if (progresso < 50) {
                 document.getElementById(barra).style.backgroundColor = '#ff7734';
@@ -415,7 +415,6 @@ function progressBar() {
             }
             document.getElementById(barra).style.width = progresso + '%';
             progresso = 0;
-            id++
         }
 
     }
