@@ -221,16 +221,17 @@ function validForm(form, tipo, obj) {
     }
 }
 
-function formatMoney(strMoney, action) {// 1 para com virgula para float e 2 para float para com virgula
+function formatMoney(strMoney, action) {
     let moldeMoney;
-    if (action == 1) {
+    if (action == 1) 
+    {
         let reais, moedas, parte1, parte2, parte3;
-        reais = (strMoney).split(",")[0];
+        reais  = (strMoney).split(",")[0];
         moedas = (strMoney).split(",")[1];
         parte1 = reais.split(".")[0];
         parte2 = reais.split(".")[1];
         parte3 = reais.split(".")[2];
-        let moldeMoney;
+
         if (reais.split(".").length == 1) 
         {
             moldeMoney = parseFloat(parte1) + (parseFloat(moedas) / 100);
@@ -242,17 +243,16 @@ function formatMoney(strMoney, action) {// 1 para com virgula para float e 2 par
             moldeMoney = (parseFloat(parte1) * 1000000) + (parseFloat(parte2) * 1000) + parseFloat(parte3) + (parseFloat(moedas) / 100);
         }
         return moldeMoney;
-    }else if(action == 2){
-        console.log(strMoney);
-
+    }else if(action == 2)
+    {
         let formatter;
-        formatter = new Intl.NumberFormat('pt-BR', {
+        formatter = new Intl.NumberFormat('pt-BR', 
+        {
             style: 'currency',
             currency: 'BRL',
             minimumFractionDigits: 2
         });
-        moldeMoney = formatter.format(strMoney);
-        
+        moldeMoney = formatter.format(strMoney);        
         return moldeMoney;
     }
 }
@@ -350,8 +350,8 @@ function showGoals() {
                     </section>
                     <section class="add-money"  id ="add-money${database[i].id}" display="none">
                             <form id="form-add-valor${database[i].id}">
-                                <input type="number" name="valor">
-                                <button class = "add-valor" id="${database[i].id}" type="button" name="salvar">Salvar </button>
+                                <input type="text" class="input-economia" name="valor" maxlength="12">
+                                <button class = "add-valor" id="${database[i].id}"  type="button" name="salvar">Salvar </button>
                                 <span class="btn-close"  id="${database[i].id}">&times;</span>
                             </form>
                     </section>
@@ -375,6 +375,8 @@ function showGoals() {
         }
 
         $('#main-objetivos').prepend(set);
+
+        $('.input-economia').mask('#.##0,00', { reverse: true });
 
         for (let i = 0; i < database.length; i++) {
             if (database[i].status == 2) {
@@ -466,13 +468,13 @@ function editGoals(form, obj) {
 
 function addGoalsValue(form, obj) {
     let database = startDB();
-    let soma = parseFloat(database[obj].valorAtual) + parseFloat(form[0].value);
+    let soma = parseFloat(database[obj].valorAtual) + formatMoney(form[0].value, 1);
     database[obj] = (
         {
             id: database[obj].id,
             descricao: database[obj].descricao,
             valorPrevisto: parseFloat(database[obj].valorPrevisto),
-            valorAtual: parseFloat(soma),
+            valorAtual: (soma),
             data: database[obj].data,
             categoria: parseInt(database[obj].categoria),
             status: parseInt(database[obj].status)
