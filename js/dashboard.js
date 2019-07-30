@@ -161,16 +161,15 @@ function montaGraficoOrcamentoVazio() {
         scales: {
             yAxes: [{
                 ticks: {
-                    fontSize: 9
+                    fontSize: 9,
                 }
             }],
             xAxes: [{
-                stacked: false,
                 barThickness: 999,
                 maxBarThickness: 50,
                 minBarLength: 2,
                 ticks: {
-                    fontSize: 2
+                    fontSize: 2,
                 }
             }]
         },
@@ -561,7 +560,7 @@ function controiGraficoOrcamento(ctx) {
         scales: {
             yAxes: [{
                 ticks: {
-                    fontSize: 9
+                    fontSize: 9,
                 }
             }],
             xAxes: [{
