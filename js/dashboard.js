@@ -2,8 +2,8 @@ window.addEventListener('load', atualizaCards);
 window.addEventListener('load', atualizaGrafico);
 window.addEventListener('load', mostrarMesAtual);
 
-$(document).ready(function() {
-    $("#input-despesa").keyup(function() {
+$(document).ready(function () {
+    $("#input-despesa").keyup(function () {
         $("#input-despesa").val(this.value.match(/[0-9]*/));
     });
 });
@@ -27,7 +27,7 @@ document.querySelector("#add-receita").addEventListener("click", function () {
 document.querySelector("#btn-close").addEventListener("click", function () {
     fechaModal();
 });
-document.querySelector("#btn-close-line-graph").addEventListener("click", function(){
+document.querySelector("#btn-close-line-graph").addEventListener("click", function () {
     fechaModal();
 });
 
@@ -81,14 +81,19 @@ function atualizaCards() {
 
     setaCardReceitas(cardReceita, database);
     setaCardDespesas(cardDespesa, database);
-    setaCardSaldoTotal(cardSaldo,database);
+    setaCardSaldoTotal(cardSaldo, database);
 }
 
 function atualizaGrafico() {
-    let data = retornaDados();
-    let total = 0;
+    let data, total, orcamentoDB, despesas, orcamentos;
+    orcamentoDB = receberDadosOrcamento();
+    data = retornaDados();
+    total = 0;
+    despesas = database.filter(data => data.categoria != null && data.data.split("-")[1] == mes);
+    orcamentoDB = orcamentoDB.filter(data => data.mes == mes);
 
-    let despesas = database.filter(data => data.categoria != null && data.data.split("-")[1] == mes);
+
+
 
     for (var i = 0; i < despesas.length; i++) {
         total += despesas[i].valor;
@@ -96,12 +101,17 @@ function atualizaGrafico() {
 
     if (total == 0) {
         montaGraficoVazio();
-        graficoLinha = document.getElementById('linegraph').getContext('2d');
-        controiGraficoOrcamento(graficoLinha);
+        if (orcamentoDB.length == 0) {
+            montaGraficoOrcamentoVazio();
+        } else {
+            ctx = document.getElementById('linegraph').getContext('2d');
+            controiGraficoOrcamento(ctx);
+        }
     }
     else {
         preencheGraficos(data);
     }
+
 }
 
 function montaGraficoVazio() {
@@ -111,8 +121,8 @@ function montaGraficoVazio() {
             enabled: false
         },
         legend: {
-            display: true,
-            position: 'bottom'
+                display: true,
+                position: 'bottom'
         },
         responsive: false,
         cutoutPercentage: 68
@@ -140,46 +150,93 @@ function montaGraficoVazio() {
     return grafico;
 }
 
-function mostrarMesAtual(){
+function montaGraficoOrcamentoVazio() {
+    let ctx = document.getElementById('linegraph').getContext('2d');
+    let tipo = 'bar';
+    let settings = {
+        responsive: false,
+        tooltips: {
+            enabled: false
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontSize: 9,
+                }
+            }],
+            xAxes: [{
+                barThickness: 999,
+                maxBarThickness: 50,
+                minBarLength: 2,
+                ticks: {
+                    fontSize: 2,
+                }
+            }]
+        },
+        legend: {
+            display: true,
+            position: 'bottom',
+        }
+    };
+    let dados = {
+        label:['Sem Dados'],
+        datasets: [
+            {                
+                label:['Sem Dados'],
+                color:['#BBB'],
+                fontSize:4,
+                borderWidth: 0,
+                data: [1],
+                backgroundColor: ['#BBB']
+            }
+        ]
+    };
+
+    let graph = new Chart(ctx,
+        {
+            type: tipo,
+            options: settings,
+            data: dados
+        });
+    return graph;
+}
+
+function mostrarMesAtual() {
     let meses = ['', 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
     document.getElementById('mes-anterior').innerHTML = `<img src="assets/back-black-button.png" alt="">`;
     document.getElementById('mes-posterior').innerHTML = `<img src="assets/front-black-button.png" alt="">`;
-    document.getElementById('mes-selecionado').innerHTML = meses[mes];    
+    document.getElementById('mes-selecionado').innerHTML = meses[mes];
 }
 
 function selecionarMes(botao) {
     var mesSelecionado = document.getElementById('mes-selecionado');
     let meses = ['', 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-    let mesDash ;
-    
+    let mesDash;
+
 
     for (let i = 1; i < meses.length; i++) {
         if (mesSelecionado.innerHTML == meses[i]) {
             mesDash = i;
         }
-    }    
+    }
 
-    if (botao == 1) 
-    {
-        if (mes > 1) 
-        {
+    if (botao == 1) {
+        if (mes > 1) {
             mes = mesDash - 1
             mesSelecionado.innerHTML = meses[mes];
             if (mes == 1) {
-                document.getElementById('mes-anterior').innerHTML   = `<img src="assets/back-white-button.png" alt="">`;            
+                document.getElementById('mes-anterior').innerHTML = `<img src="assets/back-white-button.png" alt="">`;
             } else {
-                document.getElementById('mes-anterior').innerHTML   = `<img src="assets/back-black-button.png" alt="">`;
-                document.getElementById('mes-posterior').innerHTML  = `<img src="assets/front-black-button.png" alt="">`;
+                document.getElementById('mes-anterior').innerHTML = `<img src="assets/back-black-button.png" alt="">`;
+                document.getElementById('mes-posterior').innerHTML = `<img src="assets/front-black-button.png" alt="">`;
 
             }
             atualizaCards();
             atualizaGrafico();
         }
-    } else 
-    {
-        if (mes < 12) 
-        {            
+    } else {
+        if (mes < 12) {
             mes = mesDash + 1;
             mesSelecionado.innerHTML = meses[mes];
             if (mes == 12) {
@@ -188,12 +245,12 @@ function selecionarMes(botao) {
                 document.getElementById('mes-anterior').innerHTML = `<img src="assets/back-black-button.png" alt="">`;
                 document.getElementById('mes-posterior').innerHTML = `<img src="assets/front-black-button.png" alt="">`;
             }
-            
+
             atualizaCards();
             atualizaGrafico();
         }
-    }    
-} 
+    }
+}
 
 function setaCardReceitas(card) {
     let total = 0;
@@ -212,28 +269,25 @@ function setaCardDespesas(card) {
     for (var i = 0; i < despesas.length; i++) {
         total += despesas[i].valor;
     }
-    card.innerHTML = 'R$ ' +  total.toFixed(2).replace(".", ",");
+    card.innerHTML = 'R$ ' + total.toFixed(2).replace(".", ",");
 }
 
 function setaCardSaldoTotal(card, db) {
     let totalReceita, totalDespesa, saldo, dados;
     totalReceita = 0;
     totalDespesa = 0;
-    dados        = database.filter(data =>  data.data.split("-")[1] <= mes);
+    dados = database.filter(data => data.data.split("-")[1] <= mes);
 
-    for(let i = 0; i < dados.length; i ++)
-    { 
-        if(dados[i].categoria == null )
-        {
+    for (let i = 0; i < dados.length; i++) {
+        if (dados[i].categoria == null) {
             totalReceita += dados[i].valor;
-        }else
-        {
-            totalDespesa +=  dados[i].valor;
+        } else {
+            totalDespesa += dados[i].valor;
         }
     }
-    saldo = totalReceita - totalDespesa;   
+    saldo = totalReceita - totalDespesa;
 
-    card.innerHTML =  'R$ ' +  (parseFloat(saldo)).toFixed(2).replace(".", ",");
+    card.innerHTML = 'R$ ' + (parseFloat(saldo)).toFixed(2).replace(".", ",");
 }
 
 function limpaCampos(campos) {
@@ -274,12 +328,12 @@ function budgetsMapping(data) {
             data: parseFloat(data[1].value),
             categoria: parseInt(data[2].value)
         };
-    
-    database.push(dataset);
 
-    localStorage.setItem("UPocketDataBase", JSON.stringify(database));
+        database.push(dataset);
 
-    return true;
+        localStorage.setItem("UPocketDataBase", JSON.stringify(database));
+
+        return true;
     }
     else {
         return false;
@@ -356,21 +410,19 @@ function abreModal(card) {
     inputModal[0].value = null;
     inputModal[1].value = null;
     inputModal[2].value = dataAtualFormatada();
-} 
+}
 
-function dataAtualFormatada(){
+function dataAtualFormatada() {
     let dia, mesDash, ano;
     let data = new Date();
 
-    if((data.getMonth() + 1) == mes)
-    {
-        dia  = data.getDate().toString().padStart(2, '0');
-    }else
-    {
-        dia  = '01';
+    if ((data.getMonth() + 1) == mes) {
+        dia = data.getDate().toString().padStart(2, '0');
+    } else {
+        dia = '01';
     }
-    mesDash = mes.toString().padStart(2, '0'); 
-    ano     = data.getFullYear().toString();
+    mesDash = mes.toString().padStart(2, '0');
+    ano = data.getFullYear().toString();
 
     return ano + "-" + mesDash + "-" + dia;
 }
@@ -408,7 +460,7 @@ function retornaDados() {
 
 function retornaTotalCategoria(db, categoria) {
     let soma = 0
-    db = db.filter(data =>  data.data.split("-")[1] == mes);
+    db = db.filter(data => data.data.split("-")[1] == mes);
 
     for (x = 0; x < db.length; x++) {
         var database = db[x].categoria == categoria && db[x].valor;
@@ -421,30 +473,27 @@ function retornaTotalCategoria(db, categoria) {
 function redirectPara(pagina, db) {
     let dados = db;
 
-    if (pagina == 'in-movimentacoes') 
-    {
+    if (pagina == 'in-movimentacoes') {
         dados = dados.filter(data => data.categoria == null);
-        for (i=0;i<dados.length;i++){
+        for (i = 0; i < dados.length; i++) {
             nome = dados[i].nome;
             valor = dados[i].valor;
             data = dados[i].data;
         }
     }
-    else if (pagina == 'out-movimentacoes') 
-    {
+    else if (pagina == 'out-movimentacoes') {
         dados = dados.filter(data => data.categoria == !null);
-    
-        for(i = 0; i < dados.length; i++)
-        {
+
+        for (i = 0; i < dados.length; i++) {
             nome = dados[i].nome;
             valor = dados[i].valor;
             categoria = dador[i].categoria;
             data = dados[i].data;
         }
-        window.location.href="#";
+        window.location.href = "#";
     }
     else if (pagina == 'orcamento') {
-        window.location.href="orcamento.html";
+        window.location.href = "orcamento.html";
     };
 }
 
@@ -459,104 +508,102 @@ function preencheGraficos(data) {
     constroiGraficoCategoria(graficoCategoria, data);
 }
 
-function receberDadosOrcamento(){ 
+function receberDadosOrcamento() {
     let db = localStorage.getItem("BudgetsDataBase");
-    db = !db ? [] : JSON.parse(db);    
+    db = !db ? [] : JSON.parse(db);
     return db;
 }
 
-function dadosOrçamento(tipo){ 
-    let categorias = ['Alimentação', 'Educação' , 'Lazer', 'Transporte' , 'Vestuário'];
-  
-    let orçamentos = receberDadosOrcamento().filter(data => data.mes == mes ); 
-    orçamentos     = orçamentos.filter(data => data.valor != 0 ); 
-    despesas       = retornaDados(); 
-    
-    let arrayOrçamento  = [0,0,0,0,0]; 
-    let vetor      = []; 
-    let indices    = []; 
+function dadosOrçamento(tipo) {
+    let categorias = ['Alimentação', 'Educação', 'Lazer', 'Transporte', 'Vestuário'];
 
-    for(let i = 0; i < orçamentos.length; i++)
-    { 
+    let orçamentos = receberDadosOrcamento().filter(data => data.mes == mes);
+    orçamentos = orçamentos.filter(data => data.valor != 0);
+    despesas = retornaDados();
+
+    let arrayOrçamento = [0, 0, 0, 0, 0];
+    let vetor = [];
+    let indices = [];
+
+    for (let i = 0; i < orçamentos.length; i++) {
         arrayOrçamento[orçamentos[i].idCategoria - 1] = orçamentos[i].valor;
     }
-    for(let i = 0; i< 5; i++)
-    { 
-        if(arrayOrçamento[i] != 0 || despesas[i] != 0 ){
+    for (let i = 0; i < 5; i++) {
+        if (arrayOrçamento[i] != 0 || despesas[i] != 0) {
             indices[i] = i;
         }
-    }    
-    indices = indices.filter(data => data != null);   
+    }
+    indices = indices.filter(data => data != null);
 
-    for(let i = 0 ; i < indices.length; i++ )
-    { 
-        if(tipo == 1)
-        { 
+    for (let i = 0; i < indices.length; i++) {
+        if (tipo == 1) {
             vetor[i] = categorias[indices[i]];
         }
-        else if(tipo == 2)
-        { 
+        else if (tipo == 2) {
             vetor[i] = arrayOrçamento[indices[i]];
         }
-        else if(tipo == 3)
-        { 
+        else if (tipo == 3) {
             vetor[i] = despesas[indices[i]];
-        }   
-    }     
+        }
+    }
     return vetor;
 }
 
 
 function controiGraficoOrcamento(ctx) {
+    let tipo = 'bar';
+    let settings = {
+        responsive: false,
+        tooltips: {
+            mode: 'index'
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontSize: 9,
+                    beginAtZero:true
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontSize: 9
+                }
+            }]
+        },
+        legend: {
+            display: false,
+            position: 'bottom',
+            labels: {
+                usePointStyle: true,
+                fontSize: 1,
+                pointStyle: 'circle',
+            }
+        }
+    };
+    let dados = {
+        labels: dadosOrçamento(1),
+        datasets: [
+            {
+                pointRadius: 2,
+                data: dadosOrçamento(2),
+                borderColor: "#0c8e10",
+                backgroundColor: 'rgba(32,130,19,0.8)',
+                label: 'Orçamento'
+            },
+            {
+                label: 'Gastos',
+                data: dadosOrçamento(3),
+                backgroundColor: 'rgba(145,33,33,0.8)',
+                borderColor: "#991c09"
+            }
+        ]
+    };
+
     let graph = new Chart(ctx,
         {
-            type: 'bar',
-            options: {
-                responsive: false,
-                tooltips: {
-                    mode: 'index'
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            fontSize: 9
-                        }
-                    }],
-                    xAxes: [{
-                        ticks: {
-                            fontSize: 9
-                        }
-                    }]
-                },
-                legend: {
-                    display: false,
-                    position: 'bottom',
-                    labels: {
-                        usePointStyle: true,
-                        fontSize: 1,
-                        pointStyle: 'circle',
-                    }
-                }
-            },
-            data: {
-                labels: dadosOrçamento(1),
-                datasets: [
-                    {
-                        pointRadius: 2,
-                        data: dadosOrçamento(2),
-                        borderColor: "#0c8e10",
-                        backgroundColor: 'rgba(32,130,19,0.8)',
-                        label: 'Orçamento'
-                    },
-                    {
-                        label: 'Gastos',
-                        data: dadosOrçamento(3),
-                        backgroundColor: 'rgba(145,33,33,0.8)',
-                        borderColor: "#991c09"
-                    }
-                ]
-            }
-
+            type: tipo,
+            options: settings,
+            data: dados
         });
     return graph;
 }
