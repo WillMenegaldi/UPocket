@@ -561,6 +561,7 @@ function controiGraficoOrcamento(ctx) {
             yAxes: [{
                 ticks: {
                     fontSize: 9,
+                    beginAtZero:true
                 }
             }],
             xAxes: [{
