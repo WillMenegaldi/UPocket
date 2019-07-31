@@ -193,27 +193,37 @@ function buildGoalsGraph(context, valorP, valorA) {
 }
 
 function validForm(form, tipo, obj) {
+    let anoAtual = new Date().getFullYear();
     if (tipo > 0) {
         if (form[0].value == false || form[1].value == false) {
             alert("Preencha todos os campos!");
-        } else if (form[1].value < 0) {
+        } else if (form[1].value < 0) 
+        {
             alert("Apenas valores maiores que 0!");
-        } else {
-            if (tipo == 1) {
-                let anoAtual = new Date().getFullYear();
-                if((form[2].value).split("-")[0] == anoAtual)
+        }else 
+        {
+            if (tipo == 1) 
+            {
+                if((form[2].value).split("-")[0] < anoAtual)
                 {
-                    return 1;
+                    alert("Adicionar objetivos apenas em anos posteriores ao atual!");
                 }else
                 {
-                    alert("Não se pode adicionar em anos anteriores!");
-                    return 0;
+                    return 1;
                 }
-            } else {
-                if (editGoals(form, obj)) {
-                    closeModal();
-                    showGoals();
-                }
+            } else 
+            {
+                if((form[3].value).split("-")[0] < anoAtual)
+                {
+                    alert("Adicionar objetivos apenas em anos posteriores ao atual!");
+                }else
+                {
+                    if (editGoals(form, obj)) 
+                    {
+                        closeModal();
+                        showGoals();
+                    }
+                }                
             }
         }
 
