@@ -2,12 +2,6 @@ window.addEventListener('load', listarOrcamentos);
 window.addEventListener('load', mostrarMesAtual);
 window.addEventListener('load', preencheCards);
 
-$(document).ready(function() {
-    $("#input-orcamento").keyup(function() {
-        $("#input-orcamento").val(this.value.match(/[0-9]*/));
-    });
-});
-
 document.querySelector("#add-orcamento").addEventListener('click', function(){
     orcamentoModal();
 });
@@ -62,9 +56,9 @@ function preencheCards()
         totalOrcamento += orcamentoMensal[i].valor;
     }
 
-    cardReceita.innerHTML = 'R$ ' + totalReceita + ',00';
-    cardDespesa.innerHTML = 'R$ ' + totalOrcamento + ',00';
-    cardSaldo.innerHTML = 'R$ ' + (totalReceita - totalOrcamento) + ',00';
+    cardReceita.innerHTML = formatMoney(totalReceita, 2) ;
+    cardDespesa.innerHTML = formatMoney(totalOrcamento, 2);
+    cardSaldo.innerHTML   = formatMoney((totalReceita - totalOrcamento), 2);
 }
 
 function inicializaDashboardDB() {
@@ -159,10 +153,10 @@ function listarOrcamentos() {
                                 ${catToString[orcamentos[i].idCategoria]} 
                             </div> 
                             <div id="valor-orcamento">
-                                R$ ${orcamentos[i].valor.toFixed(2)} 
+                                ${formatMoney(orcamentos[i].valor, 2)} 
                             </div>
                             <div id="valor-gasto${id}" style="max-width:125px; width:125px">
-                                R$ ${retornaTotalCategoria(orcamentos[i].idCategoria).toFixed(2)} 
+                                ${formatMoney(retornaTotalCategoria(orcamentos[i].idCategoria), 2)} 
                             </div> 
                             <div id="box-progresso" style="margin-left: -10%;">
                             <div id="barra-progresso${id}">
@@ -216,6 +210,8 @@ function orcamentoModal() {
         submitEdit.style.display = 'none';
         modalGraph.style.display = 'block';
     }
+
+    $('#input-orcamento').mask('#.##0,00', { reverse: true });
    
 };
 
@@ -251,7 +247,7 @@ function budgetsMapping(data) {
     if (valor) {
             dataset = {
                 idOrcamento: createNewID(),
-                valor: parseFloat(data[0].value),
+                valor: formatMoney(data[0].value, 1),
                 idCategoria: parseInt(data[1].value),
                 mes: mes
             };
@@ -458,7 +454,7 @@ function editBudget(id){
 
         data = document.querySelector(".orcamento-modal-form");
 
-        let valor = parseFloat(data[0].value);
+        let valor = formatMoney(data[0].value, 1);
         let valid = check(valor);
         let db = inicializaDB();
 
@@ -488,6 +484,7 @@ function editBudgetModal(idCat){
         `<option id="orcmnt-vestuario"       value="5"> Vestuário      </option>`];
     document.getElementById("modal-form-categoria-orcamento").innerHTML = vetorOptions[idCat-1];
     document.getElementById("header-box-modal-linha").innerHTML = "Editar orçamento";
+    $('#input-orcamento').mask('#.##0,00', { reverse: true });
 }
 
 function createNewID(){
@@ -532,5 +529,41 @@ function check(valor){
     }
     else{
         return valor;
+    }
+}
+
+function formatMoney(strMoney, action) {
+    let moldeMoney;
+    if (action == 1) 
+    {
+        let reais, moedas, parte1, parte2, parte3;
+        reais  = (strMoney).split(",")[0];
+        moedas = (strMoney).split(",")[1];
+        parte1 = reais.split(".")[0];
+        parte2 = reais.split(".")[1];
+        parte3 = reais.split(".")[2];
+
+        if (reais.split(".").length == 1) 
+        {
+            moldeMoney = parseFloat(parte1) + (parseFloat(moedas) / 100);
+        }else if (reais.split(".").length == 2) 
+        {
+            moldeMoney = (parseFloat(parte1) * 1000) + parseFloat(parte2) + (parseFloat(moedas) / 100);
+        }else if (reais.split(".").length == 3) 
+        {
+            moldeMoney = (parseFloat(parte1) * 1000000) + (parseFloat(parte2) * 1000) + parseFloat(parte3) + (parseFloat(moedas) / 100);
+        }
+        return moldeMoney;
+    }else if(action == 2)
+    {
+        let formatter;
+        formatter = new Intl.NumberFormat('pt-BR', 
+        {
+            style: 'currency',
+            currency: 'BRL',
+            minimumFractionDigits: 2
+        });
+        moldeMoney = formatter.format(strMoney);        
+        return moldeMoney;
     }
 }
