@@ -429,15 +429,21 @@ function monthlyForecast(obj) {
     mesPrevisto = parseInt((database[obj].data).split("-")[1]);
     anoPrevisto = parseInt((database[obj].data).split("-")[0]);
     if (anoPrevisto == anoAtual) {
-        if (mesPrevisto <= mesAtual) {
+        if (mesPrevisto <= mesAtual) 
+        {
             valorMensal = database[obj].valorPrevisto / (1);
-        } else {
+        }else 
+        {
             valorMensal = database[obj].valorPrevisto / (mesPrevisto - mesAtual);
         }
-    } else if (anoPrevisto == (anoAtual + 1)) {
+    } else if (anoPrevisto == (anoAtual + 1)) 
+    {
         valorMensal = database[obj].valorPrevisto / ((12 - mesAtual) + mesPrevisto);
-    } else if (anoPrevisto > (anoAtual + 1)) {
+    } else if (anoPrevisto > (anoAtual + 1)) 
+    {
         valorMensal = database[obj].valorPrevisto / ((12 - mesAtual) + mesPrevisto + (12 * ((anoPrevisto - anoAtual) - 1)));
+    }else if(anoPrevisto < anoAtual ){
+        valorMensal = database[obj].valorPrevisto / (1);
     }
     return valorMensal;
 }
