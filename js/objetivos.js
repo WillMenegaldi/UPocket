@@ -200,7 +200,15 @@ function validForm(form, tipo, obj) {
             alert("Apenas valores maiores que 0!");
         } else {
             if (tipo == 1) {
-                return 1;
+                let anoAtual = new Date().getFullYear();
+                if((form[2].value).split("-")[0] == anoAtual)
+                {
+                    return 1;
+                }else
+                {
+                    alert("Não se pode adicionar em anos anteriores!");
+                    return 0;
+                }
             } else {
                 if (editGoals(form, obj)) {
                     closeModal();
