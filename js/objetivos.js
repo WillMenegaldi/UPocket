@@ -193,19 +193,37 @@ function buildGoalsGraph(context, valorP, valorA) {
 }
 
 function validForm(form, tipo, obj) {
+    let anoAtual = new Date().getFullYear();
     if (tipo > 0) {
         if (form[0].value == false || form[1].value == false) {
             alert("Preencha todos os campos!");
-        } else if (form[1].value < 0) {
+        } else if (form[1].value < 0) 
+        {
             alert("Apenas valores maiores que 0!");
-        } else {
-            if (tipo == 1) {
-                return 1;
-            } else {
-                if (editGoals(form, obj)) {
-                    closeModal();
-                    showGoals();
+        }else 
+        {
+            if (tipo == 1) 
+            {
+                if((form[2].value).split("-")[0] < anoAtual)
+                {
+                    alert("Adicionar objetivos apenas em anos posteriores ao atual!");
+                }else
+                {
+                    return 1;
                 }
+            } else 
+            {
+                if((form[3].value).split("-")[0] < anoAtual)
+                {
+                    alert("Adicionar objetivos apenas em anos posteriores ao atual!");
+                }else
+                {
+                    if (editGoals(form, obj)) 
+                    {
+                        closeModal();
+                        showGoals();
+                    }
+                }                
             }
         }
 
@@ -429,15 +447,21 @@ function monthlyForecast(obj) {
     mesPrevisto = parseInt((database[obj].data).split("-")[1]);
     anoPrevisto = parseInt((database[obj].data).split("-")[0]);
     if (anoPrevisto == anoAtual) {
-        if (mesPrevisto <= mesAtual) {
+        if (mesPrevisto <= mesAtual) 
+        {
             valorMensal = database[obj].valorPrevisto / (1);
-        } else {
+        }else 
+        {
             valorMensal = database[obj].valorPrevisto / (mesPrevisto - mesAtual);
         }
-    } else if (anoPrevisto == (anoAtual + 1)) {
+    } else if (anoPrevisto == (anoAtual + 1)) 
+    {
         valorMensal = database[obj].valorPrevisto / ((12 - mesAtual) + mesPrevisto);
-    } else if (anoPrevisto > (anoAtual + 1)) {
+    } else if (anoPrevisto > (anoAtual + 1)) 
+    {
         valorMensal = database[obj].valorPrevisto / ((12 - mesAtual) + mesPrevisto + (12 * ((anoPrevisto - anoAtual) - 1)));
+    }else if(anoPrevisto < anoAtual ){
+        valorMensal = database[obj].valorPrevisto / (1);
     }
     return valorMensal;
 }

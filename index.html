@@ -24,6 +24,7 @@
     <link rel="apple-touch-startup-image" href="assets/UPOCKET4.webp">
     <script src="libs/jquery-min.js"></script>
     <script src="libs/chartjs-min.js"></script>
+    <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>          
     <title>UPocket</title>
 </head>
 
@@ -181,11 +182,9 @@
             </header>
             <main class="main-box-modal">
                 <form class="modal-form">
-                    <input required placeholder="Descrição da despesa:" class="modal-form-input" type="text"
-                        name="name">
+                    <input required placeholder="Descrição da despesa:" class="modal-form-input" type="text" name="name" >
                     <div>
-                        <input required placeholder="Valor da despesa:" id="input-despesa" class="modal-form-input" type="text"
-                            name="value" maxlength="6">
+                        <input placeholder="Valor da despesa:" id="input-despesa" class="modal-form-input input-valor" name="value" type="text" maxlength="12">
                         <input required placeholder="Data" class="modal-form-input" type="date" name="date">
                     </div>
                     <select required name="categoria" id="modal-form-categoria" name="type">
