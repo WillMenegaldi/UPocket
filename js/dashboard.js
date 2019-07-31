@@ -2,11 +2,6 @@ window.addEventListener('load', atualizaCards);
 window.addEventListener('load', atualizaGrafico);
 window.addEventListener('load', mostrarMesAtual);
 
-$(document).ready(function () {
-    $("#input-despesa").keyup(function () {
-        $("#input-despesa").val(this.value.match(/[0-9]*/));
-    });
-});
 
 document.querySelector('#grafico-rosquinha').addEventListener("click", function () {
     abreModalGrafico();
@@ -259,7 +254,7 @@ function setaCardReceitas(card) {
     for (var i = 0; i < receitas.length; i++) {
         total += receitas[i].valor;
     }
-    card.innerHTML = 'R$ ' + total.toFixed(2).replace(".", ",");
+    card.innerHTML = formatMoney(total, 2);
 }
 
 function setaCardDespesas(card) {
@@ -269,7 +264,7 @@ function setaCardDespesas(card) {
     for (var i = 0; i < despesas.length; i++) {
         total += despesas[i].valor;
     }
-    card.innerHTML = 'R$ ' + total.toFixed(2).replace(".", ",");
+    card.innerHTML = formatMoney(total, 2);
 }
 
 function setaCardSaldoTotal(card, db) {
@@ -287,7 +282,7 @@ function setaCardSaldoTotal(card, db) {
     }
     saldo = totalReceita - totalDespesa;
 
-    card.innerHTML = 'R$ ' + (parseFloat(saldo)).toFixed(2).replace(".", ",");
+    card.innerHTML =  formatMoney(saldo, 2);
 }
 
 function limpaCampos(campos) {
@@ -298,12 +293,11 @@ function limpaCampos(campos) {
 }
 
 function datasetMapping(data) {
-    let valor = validaInsercao(data);
-
+    let valor = validaInsercao(data);    
     if (valor) {
         let dataset = {
             nome: data[0].value,
-            valor: parseFloat(data[1].value),
+            valor: formatMoney(data[1].value, 1),
             data: data[2].value,
             categoria: parseInt(data[3].value) || null,
         };
@@ -347,8 +341,7 @@ function validaInsercao(data) {
         if (valor <= 0) {
             alert("Deve ser inserido um valor válido.");
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
@@ -359,13 +352,16 @@ function validaInsercao(data) {
 }
 
 function abreModal(card) {
+    $('#input-despesa').mask('#.##0,00', { reverse: true });
     var modal = document.getElementById('container-modal');
     modal.style.display = 'block';
+
+
 
     var headerModal = document.getElementById("header-box-modal");
     var categoriaModal = document.getElementById("modal-form-categoria");
     var enviarModal = document.getElementById("modal-form-submit");
-    var inputModal = document.getElementsByClassName("modal-form-input");
+    var inputModal  = document.getElementsByClassName("modal-form-input");
     var headerTitle = document.getElementById('header-box-modal-title');
 
     if (card == 'receita') {
@@ -376,7 +372,7 @@ function abreModal(card) {
         categoriaModal.value = null;
         enviarModal.style.backgroundColor = 'rgb(21, 76, 10)';
 
-        for (var i = 0; i < inputModal.length; i++) {
+        for (let i = 0; i < inputModal.length; i++) {
             inputModal[i].style["border-bottom"] = '3px solid rgb(21, 76, 10)';
             if (i == 0) {
                 inputModal[i].placeholder = "Descrição da Receita:";
@@ -395,7 +391,7 @@ function abreModal(card) {
         categoriaModal.value = 1;
         enviarModal.style.backgroundColor = 'rgb(153, 36, 42)';
 
-        for (var i = 0; i < inputModal.length; i++) {
+        for (let i = 0; i < inputModal.length; i++) {
             inputModal[i].style["border-bottom"] = '3px solid rgb(153, 36, 42)';
 
             if (i == 0) {
@@ -410,6 +406,8 @@ function abreModal(card) {
     inputModal[0].value = null;
     inputModal[1].value = null;
     inputModal[2].value = dataAtualFormatada();
+
+
 }
 
 function dataAtualFormatada() {
@@ -678,7 +676,7 @@ function insertBoxCategorias(data) {
             let valorTotal = (data[0] + data[1] + data[2] + data[3] + data[4]).toFixed(2);
             let percentualCategoria = ((categorias[i].valorCategoria / valorTotal) * 100).toFixed(2);
 
-            $('#categorias-lat').append('<div class="box-categoria">  <section class="box-categoria-img"></section><section class="box-categoria-txt">   <div class="box-categoria-info"> <div id="nome-categoria">' + categorias[i].nomeCategoria + '</div> <div id="valor-categoria">' + 'R$' + categorias[i].valorCategoria.toFixed(2) + '</div > </div>  <div class="box-categoria-info percentual"><div>Percentual</div> <div id="percent-categoria">' + percentualCategoria + '% </div></div> </section></div>');
+            $('#categorias-lat').append('<div class="box-categoria">  <section class="box-categoria-img"></section><section class="box-categoria-txt">   <div class="box-categoria-info"> <div id="nome-categoria">' + categorias[i].nomeCategoria + '</div> <div id="valor-categoria">' +  formatMoney(categorias[i].valorCategoria, 2)  + '</div > </div>  <div class="box-categoria-info percentual"><div>Percentual</div> <div id="percent-categoria">' + percentualCategoria + '% </div></div> </section></div>');
             detalheCor = document.getElementsByClassName('box-categoria-img');
             detalheCor[j].style["background"] = categorias[i].cor;
             j++;
@@ -718,5 +716,41 @@ function fechaModalGraph() {
         if (event.target == modalGraph) {
             modalGraph.style.display = 'none';
         }
+    }
+}
+
+function formatMoney(strMoney, action) {
+    let moldeMoney;
+    if (action == 1) 
+    {
+        let reais, moedas, parte1, parte2, parte3;
+        reais  = (strMoney).split(",")[0];
+        moedas = (strMoney).split(",")[1];
+        parte1 = reais.split(".")[0];
+        parte2 = reais.split(".")[1];
+        parte3 = reais.split(".")[2];
+
+        if (reais.split(".").length == 1) 
+        {
+            moldeMoney = parseFloat(parte1) + (parseFloat(moedas) / 100);
+        }else if (reais.split(".").length == 2) 
+        {
+            moldeMoney = (parseFloat(parte1) * 1000) + parseFloat(parte2) + (parseFloat(moedas) / 100);
+        }else if (reais.split(".").length == 3) 
+        {
+            moldeMoney = (parseFloat(parte1) * 1000000) + (parseFloat(parte2) * 1000) + parseFloat(parte3) + (parseFloat(moedas) / 100);
+        }
+        return moldeMoney;
+    }else if(action == 2)
+    {
+        let formatter;
+        formatter = new Intl.NumberFormat('pt-BR', 
+        {
+            style: 'currency',
+            currency: 'BRL',
+            minimumFractionDigits: 2
+        });
+        moldeMoney = formatter.format(strMoney);        
+        return moldeMoney;
     }
 }
